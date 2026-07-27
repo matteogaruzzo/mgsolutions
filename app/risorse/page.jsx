@@ -33,7 +33,7 @@ export default function Risorse() {
 
   return (
     <section className="max-w-edge mx-auto px-6 pt-32 pb-24">
-      <p className="eyebrow">MG://risorse</p>
+      <p className="eyebrow">Risorse</p>
       <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">
         Contenuti digitali in arrivo.
       </h1>

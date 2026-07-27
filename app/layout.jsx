@@ -1,22 +1,16 @@
 import './globals.css';
-import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import QuizFloatingButton from '@/components/QuizFloatingButton';
+import QuizPopup from '@/components/QuizPopup';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
 
-const display = Fraunces({
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-});
-const body = Inter({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-});
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
+  weight: ['400', '600', '700'],
+  variable: '--font-poppins',
   display: 'swap',
 });
 
@@ -26,34 +20,60 @@ export const metadata = {
     default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
   },
-  description:
-    'MG Solutions realizza software e agenti AI, e-commerce Shopify e siti web performanti per PMI. Davanti Matteo Garuzzo, dietro un team. Più vendite, lead e fiducia.',
+  description: site.positioning,
   keywords: [
-    'agenti AI',
+    'agribusiness',
+    'cantine',
+    'oleifici',
+    'agriturismi',
+    'e-commerce Shopify vino',
+    'wine hospitality',
     'software su misura',
-    'Shopify',
-    'e-commerce',
-    'siti web',
-    'automazioni AI',
     'Matteo Garuzzo',
   ],
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
-    description:
-      'Software e agenti AI, e-commerce Shopify e siti web performanti per PMI.',
+    description: site.positioning,
     type: 'website',
     locale: 'it_IT',
   },
   robots: { index: true, follow: true },
 };
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: 'https://www.matteogaruzzo.com',
+  founder: { '@type': 'Person', name: site.founder },
+  description: site.positioning,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.province,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  sameAs: [site.social.linkedin, site.social.instagram],
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="it" className={poppins.variable}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Nav />
         <main>{children}</main>
         <Footer />
+        <QuizFloatingButton />
+        <QuizPopup />
+        <CookieConsentBanner />
       </body>
     </html>
   );

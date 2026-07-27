@@ -1,38 +1,38 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useState } from 'react';
+import { GrapeIcon } from '@/components/icons/WineIcons';
+import SocialIcons from '@/components/SocialIcons';
 
 const links = [
-  { href: '/chi-sono', label: 'Chi sono' },
-  { href: '/servizi', label: 'Servizi' },
+  { href: '/chi-sono', label: 'Chi Sono' },
+  { href: '/servizi', label: 'Cosa Facciamo' },
+  { href: '/settori', label: 'I Tre Settori' },
+  { href: '/metodo', label: 'Metodo' },
   { href: '/software', label: 'Software' },
-  { href: '/settori', label: 'Settori' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
+  { href: '/contatti', label: 'Contatti' },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-paper/90 backdrop-blur border-b border-line' : 'bg-transparent'
-      }`}
-    >
+    <header className="fixed top-0 inset-x-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
       <div className="max-w-edge mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-mono text-sm tracking-[0.15em] font-medium">
-          MG<span className="text-brass">/</span>SOLUTIONS
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image src="/images/brand/mg-logo-mark.png" alt="" width={36} height={36} priority className="w-9 h-9" />
+            <span className="text-sm font-semibold tracking-[0.15em] text-ink">
+              MG SOLUTIONS
+            </span>
+          </Link>
+          <span className="hidden sm:block w-px h-5 bg-line" aria-hidden="true" />
+          <SocialIcons className="hidden sm:flex text-ink [&_svg]:w-[18px] [&_svg]:h-[18px]" />
+        </div>
 
         <nav className="hidden md:flex items-center gap-7">
           {links.map((l) => (
@@ -45,6 +45,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link href="/prenota-call" className="btn-solid text-[13px] py-2">
+            <GrapeIcon className="w-4 h-4" />
             Prenota una call
           </Link>
         </nav>
@@ -76,8 +77,10 @@ export default function Nav() {
               onClick={() => setOpen(false)}
               className="btn-solid justify-center mt-2"
             >
+              <GrapeIcon className="w-4 h-4" />
               Prenota una call
             </Link>
+            <SocialIcons className="text-ink mt-2 [&_svg]:w-5 [&_svg]:h-5" />
           </div>
         </div>
       )}

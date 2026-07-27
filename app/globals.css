@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-poppins: 'Poppins', system-ui, sans-serif;
+  /* alias storici: tutto il markup esistente che referenzia questi utility
+     font-* ora risolve su Poppins (vedi tailwind.config.js) */
+  --font-display: var(--font-poppins);
+  --font-body: var(--font-poppins);
+  --font-mono: var(--font-poppins);
+
+  /* colore divisore attivo per settore, sovrascritto per pagina */
+  --sector-divider: #D4A574;
 }
 
 * {
@@ -19,22 +25,32 @@ html {
 }
 
 body {
-  background: #ECEAE3;
-  color: #17160F;
-  font-family: var(--font-body);
+  background: #FFFFFF;
+  color: #1a1a1a;
+  font-family: var(--font-poppins);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
 }
 
+/* elimina parole orfane/vedove: titoli distribuiti in modo bilanciato,
+   paragrafi con a-capo scelti in modo leggibile (fallback silenzioso nei
+   browser che non supportano ancora questi valori) */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
 @layer components {
-  /* eyebrow / etichetta stile "sistema" in monospace */
+  /* eyebrow / etichetta di sezione */
   .eyebrow {
-    @apply font-mono text-xs tracking-[0.2em] uppercase text-forest/70;
+    @apply font-semibold text-xs tracking-[0.2em] uppercase text-forest/70;
   }
 
   .btn {
-    @apply inline-flex items-center gap-2 font-mono text-sm tracking-wide px-6 py-3 rounded-full transition-all duration-300;
+    @apply inline-flex items-center gap-2 font-semibold text-sm tracking-wide px-6 py-3 rounded-full transition-all duration-300 leading-[1.4];
   }
   .btn-solid {
     @apply btn bg-forest text-paper hover:bg-forest-deep;
@@ -44,11 +60,78 @@ body {
   }
 
   .display {
-    @apply font-display font-light tracking-tight;
+    @apply font-display font-bold tracking-tight leading-[1.2];
+  }
+
+  .h2 {
+    @apply font-display font-semibold tracking-tight leading-[1.2];
+  }
+  .h3 {
+    @apply font-display font-semibold tracking-tight leading-[1.2];
+  }
+  .body-strong {
+    @apply font-semibold leading-[1.6];
   }
 
   .rule {
     @apply border-t border-line;
+  }
+
+  /* bordo superiore decorativo con pattern foglia, per le card settore */
+  .card-leaf-top {
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: var(--sector-divider);
+    position: relative;
+  }
+
+  /* linea decorativa sotto i titoli di sezione */
+  .section-divider {
+    display: block;
+    width: 3.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--sector-divider);
+  }
+
+  /* texture di sfondo sottili (opacity bassa, tileable, no immagini esterne) */
+  .bg-texture-wood {
+    background-image: repeating-linear-gradient(
+      100deg,
+      rgba(139, 105, 20, 0.05) 0px,
+      rgba(139, 105, 20, 0.05) 2px,
+      transparent 2px,
+      transparent 14px
+    );
+  }
+  .bg-texture-vine {
+    background-image: radial-gradient(circle at 20% 30%, rgba(107, 61, 111, 0.05) 0, transparent 40%),
+      radial-gradient(circle at 70% 65%, rgba(107, 61, 111, 0.04) 0, transparent 45%);
+  }
+  .bg-texture-linen {
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(26, 26, 26, 0.03) 0px,
+        rgba(26, 26, 26, 0.03) 1px,
+        transparent 1px,
+        transparent 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(26, 26, 26, 0.03) 0px,
+        rgba(26, 26, 26, 0.03) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+  }
+  .bg-texture-paper {
+    background-image: radial-gradient(rgba(26, 26, 26, 0.04) 0.5px, transparent 0.5px);
+    background-size: 6px 6px;
+  }
+  .bg-texture-leaf {
+    background-image: radial-gradient(circle at 15% 20%, rgba(0, 139, 71, 0.05) 0, transparent 30%),
+      radial-gradient(circle at 80% 10%, rgba(0, 139, 71, 0.04) 0, transparent 25%),
+      radial-gradient(circle at 50% 80%, rgba(0, 139, 71, 0.05) 0, transparent 30%);
   }
 }
 
@@ -73,6 +156,6 @@ body {
 }
 
 ::selection {
-  background: #103D2C;
-  color: #ECEAE3;
+  background: #008b47;
+  color: #FFFFFF;
 }

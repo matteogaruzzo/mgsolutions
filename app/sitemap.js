@@ -1,4 +1,4 @@
-import { posts, sectors } from '@/lib/data';
+import { posts, sectors, caseStudies, metodoSteps, servizi, softwareFamilies } from '@/lib/data';
 
 const base = 'https://www.matteogaruzzo.com';
 
@@ -7,12 +7,17 @@ export default function sitemap() {
     '',
     '/chi-sono',
     '/servizi',
-    '/software',
     '/settori',
+    '/metodo',
+    '/software',
     '/portfolio',
     '/blog',
     '/risorse',
     '/prenota-call',
+    '/contatti',
+    '/privacy-policy',
+    '/cookie-policy',
+    '/termini-e-condizioni',
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
@@ -23,10 +28,38 @@ export default function sitemap() {
     lastModified: new Date(),
   }));
 
+  const caseStudyRoutes = caseStudies.map((c) => ({
+    url: `${base}/portfolio/${c.slug}`,
+    lastModified: new Date(),
+  }));
+
+  const metodoRoutes = metodoSteps.map((s) => ({
+    url: `${base}/metodo/${s.slug}`,
+    lastModified: new Date(),
+  }));
+
+  const servizioRoutes = servizi.map((s) => ({
+    url: `${base}/servizi/${s.slug}`,
+    lastModified: new Date(),
+  }));
+
+  const softwareRoutes = softwareFamilies.map((f) => ({
+    url: `${base}/software/${f.slug}`,
+    lastModified: new Date(),
+  }));
+
   const postRoutes = posts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
     lastModified: new Date(p.date),
   }));
 
-  return [...staticRoutes, ...sectorRoutes, ...postRoutes];
+  return [
+    ...staticRoutes,
+    ...sectorRoutes,
+    ...caseStudyRoutes,
+    ...metodoRoutes,
+    ...servizioRoutes,
+    ...softwareRoutes,
+    ...postRoutes,
+  ];
 }

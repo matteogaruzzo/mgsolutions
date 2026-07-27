@@ -1,49 +1,117 @@
+'use client';
+
 import Link from 'next/link';
 import { site } from '@/lib/data';
+import { GrapeIcon } from '@/components/icons/WineIcons';
+import SocialIcons from '@/components/SocialIcons';
+import NewsletterFooter from '@/components/NewsletterFooter';
+import { reopenConsentBanner } from '@/lib/consent';
+
+const serviziLinks = [
+  { href: '/chi-sono', label: 'Chi Sono' },
+  { href: '/servizi', label: 'Cosa Facciamo' },
+  { href: '/settori', label: 'I Tre Settori' },
+  { href: '/metodo', label: 'Metodo' },
+  { href: '/portfolio', label: 'Portfolio' },
+];
+
+const risorseLinks = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/software', label: 'Software' },
+  { href: '/risorse', label: 'Risorse' },
+  { href: '/quiz', label: 'Genera una proposta' },
+  { href: '/contatti', label: 'Contatti' },
+];
+
+const legalLinks = [
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/cookie-policy', label: 'Cookie Policy' },
+  { href: '/termini-e-condizioni', label: 'Termini e Condizioni' },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-paper">
+    <footer className="bg-paper-dim">
+      <NewsletterFooter />
+
       <div className="max-w-edge mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <p className="font-mono text-sm tracking-[0.15em]">
-              MG<span className="text-brass">/</span>SOLUTIONS
-            </p>
-            <p className="display text-3xl mt-4 max-w-sm leading-tight">
-              {site.tagline}
-            </p>
-            <Link href="/prenota-call" className="btn-solid mt-6 bg-brass text-ink hover:bg-paper">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div>
+            <p className="font-semibold text-sm tracking-[0.15em] text-ink">MG SOLUTIONS</p>
+            <p className="mt-4 text-ink/70 leading-relaxed max-w-xs">{site.tagline}</p>
+            <SocialIcons className="mt-5 text-ink" />
+            <ul className="mt-5 space-y-2 font-mono text-sm text-ink/70">
+              <li>
+                <a href={`mailto:${site.email}`} className="hover:text-forest transition-colors">
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="hover:text-forest transition-colors">
+                  {site.phone}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="eyebrow">Servizi</p>
+            <ul className="mt-4 space-y-2 text-sm text-ink/70">
+              {serviziLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-forest transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="eyebrow">Risorse</p>
+            <ul className="mt-4 space-y-2 text-sm text-ink/70">
+              {risorseLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-forest transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="eyebrow">Azienda</p>
+            <ul className="mt-4 space-y-2 text-sm text-ink/70">
+              {legalLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-forest transition-colors">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={reopenConsentBanner}
+                  className="hover:text-forest transition-colors underline-offset-2 hover:underline"
+                >
+                  Preferenze cookie
+                </button>
+              </li>
+            </ul>
+            <Link href="/prenota-call" className="btn-solid mt-6 text-[13px] py-2">
+              <GrapeIcon className="w-4 h-4" />
               Prenota una call →
             </Link>
           </div>
-
-          <div>
-            <p className="eyebrow text-paper/50">Naviga</p>
-            <ul className="mt-4 space-y-2 font-mono text-sm text-paper/80">
-              <li><Link href="/chi-sono" className="hover:text-brass">Chi sono</Link></li>
-              <li><Link href="/servizi" className="hover:text-brass">Servizi</Link></li>
-              <li><Link href="/software" className="hover:text-brass">Software</Link></li>
-              <li><Link href="/settori" className="hover:text-brass">Settori</Link></li>
-              <li><Link href="/portfolio" className="hover:text-brass">Portfolio</Link></li>
-              <li><Link href="/blog" className="hover:text-brass">Blog</Link></li>
-              <li><Link href="/risorse" className="hover:text-brass">Risorse</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="eyebrow text-paper/50">Contatti</p>
-            <ul className="mt-4 space-y-2 font-mono text-sm text-paper/80">
-              <li><a href={`mailto:${site.email}`} className="hover:text-brass">{site.email}</a></li>
-              <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} className="hover:text-brass">{site.phone}</a></li>
-              <li className="text-paper/60 leading-relaxed">{site.location}</li>
-            </ul>
-          </div>
         </div>
+      </div>
 
-        <div className="rule border-paper/15 mt-14 pt-6 flex flex-col md:flex-row justify-between gap-3 font-mono text-xs text-paper/50">
-          <span>© {new Date().getFullYear()} {site.founder}. Tutti i diritti riservati.</span>
-          <span>P.IVA IT04006460549</span>
+      <div className="bg-ink text-paper">
+        <div className="max-w-edge mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 font-mono text-xs text-paper/60">
+          <span>© {new Date().getFullYear()} MG Solutions | P.IVA IT04006460549</span>
+          <span>Made with ❤️ by {site.founder}</span>
         </div>
       </div>
     </footer>
