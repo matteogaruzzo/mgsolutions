@@ -12,6 +12,12 @@ import {
 import { AIIcon, CompassIcon, GearIcon, TargetIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
+import PricingTiers from '@/components/pricing/PricingTiers';
+import PricingComparison from '@/components/pricing/PricingComparison';
+import SoftwareConfigurator from '@/components/pricing/SoftwareConfigurator';
+import PricingSupportTier from '@/components/pricing/PricingSupportTier';
+import PricingFAQ from '@/components/pricing/PricingFAQ';
+import PricingCTA from '@/components/pricing/PricingCTA';
 
 const PAGE = {
   title: "Agenti AI e software di automazione per l'agroalimentare",
@@ -34,10 +40,6 @@ export const metadata = pageMetadata({
 const iconMap = { ai: AIIcon, compass: CompassIcon, gear: GearIcon, target: TargetIcon };
 
 const softwareFaqs = [
-  {
-    q: 'Quanto costa?',
-    a: 'Non pubblichiamo un listino fisso perché dipende dal processo: quante persone lo usano, quante conversazioni gestisce, quali strumenti va a collegare. Lo capiamo insieme in una call gratuita, prima di qualsiasi proposta.',
-  },
   {
     q: 'Come si aggiorna? Devo scaricare qualcosa?',
     a: 'No. Il software vive online, come Gmail o WhatsApp — non come un programma da installare sul computer. Quando facciamo un aggiornamento lo ricevi automaticamente, senza fare nulla.',
@@ -139,10 +141,43 @@ export default function Software() {
         </div>
 
         <p className="mt-8 text-xs text-ink/50 max-w-2xl">
-          * Nessuna famiglia è acquistabile tramite checkout automatico. Ogni attivazione parte da
-          un’analisi del processo in call.
+          * Il checkout automatico via Stripe è in arrivo: per attivare un piano oggi, prenota una
+          call.
         </p>
       </section>
+
+      {/* ---------- PRICING ---------- */}
+      <section id="pricing" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
+        <Reveal>
+          <p className="eyebrow">Piani</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Scegli il tuo piano.</h2>
+          <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+            Niente setup fisso, solo quello che usi. Fatturazione mensile.
+          </p>
+        </Reveal>
+
+        <div className="mt-14">
+          <PricingTiers />
+        </div>
+
+        <div className="mt-20">
+          <PricingComparison />
+        </div>
+
+        <div className="mt-20">
+          <SoftwareConfigurator />
+        </div>
+
+        <div className="mt-16">
+          <PricingSupportTier />
+        </div>
+
+        <div className="mt-20">
+          <PricingFAQ />
+        </div>
+      </section>
+
+      <PricingCTA />
 
       {/* ---------- FAQ ---------- */}
       <section className="bg-paper-dim">
@@ -204,7 +239,7 @@ export default function Software() {
 
       <CTA
         title="Pronto a parlarne?"
-        sub="Valutazione gratuita del tuo processo. Ti diciamo con onestà cosa possiamo configurare oggi e cosa richiede sviluppo — nessun listino a sorpresa."
+        sub="Valutazione gratuita del tuo processo. Ti diciamo con onestà cosa possiamo configurare oggi, cosa richiede sviluppo su misura e quale piano si adatta meglio."
       />
     </>
   );
