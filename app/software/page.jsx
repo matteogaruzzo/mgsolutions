@@ -11,12 +11,25 @@ import {
 } from '@/lib/data';
 import { AIIcon, CompassIcon, GearIcon, TargetIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Software',
+const PAGE = {
+  title: "Agenti AI e software di automazione per l'agroalimentare",
   description:
-    'Software e agenti AI su misura per i processi aziendali: come funzionano, spiegato in modo semplice, senza prezzi o date inventate.',
+    'Agenti AI che rispondono ai clienti, automatizzano preventivi, gestiscono reputation. Software costruiti su processi reali, non su template.',
+  path: '/software',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'software agroalimentare',
+    'agenti ai commerciali',
+    'automazione processi business',
+    'knowledge base ai',
+    'software preventivi',
+  ],
+});
 
 const iconMap = { ai: AIIcon, compass: CompassIcon, gear: GearIcon, target: TargetIcon };
 
@@ -42,6 +55,10 @@ const relevantTestimonials = testimonials.filter((t) =>
 export default function Software() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-14">
         <p className="eyebrow">Prodotti · Software</p>

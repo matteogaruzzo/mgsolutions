@@ -6,12 +6,24 @@ import FAQAccordion from '@/components/FAQAccordion';
 import { site, team, testimonials } from '@/lib/data';
 import { ClockIcon, ChatIcon, CompassIcon, ChartIcon, TargetIcon, BookIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Prenota una call',
+const PAGE = {
+  title: 'Prenota una call consultativa gratuita (30 minuti)',
   description:
-    '30 minuti gratuiti con Matteo Garuzzo. Scegli lo slot dal calendario, zero impegno, risposta e proposta scritta se ha senso proseguire.',
+    '30 minuti con Matteo. Analizziamo la vostra situazione, identifichiamo il blocco reale, vi diciamo se possiamo aiutare. Zero impegno.',
+  path: '/prenota-call',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'consulenza gratuita web',
+    'call con web agency',
+    'consulenza digitale agroalimentare',
+    'prenotare consulenza digitale',
+  ],
+});
 
 const trustMini = [
   { Icon: ClockIcon, label: '24 ore', sub: 'Risposta garantita' },
@@ -45,6 +57,10 @@ const featuredTestimonials = testimonials.slice(0, 4);
 export default function PrenotaCall() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO MINI ---------- */}
       <section
         className="relative bg-fixed bg-cover bg-center text-paper"

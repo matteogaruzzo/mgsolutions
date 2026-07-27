@@ -13,12 +13,24 @@ import {
 } from '@/lib/data';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Cosa Facciamo',
+const PAGE = {
+  title: "Servizi web & AI per l'agroalimentare",
   description:
-    'Software e agenti AI, e-commerce Shopify, siti web, restyling, AI integration e consulenza strategica. Ogni servizio ha una pagina di approfondimento dedicata.',
+    'E-commerce, automazione, AI agents, CRM, booking engine. Tutto quello che serve per vendere online e automatizzare il tuo business agroalimentare.',
+  path: '/servizi',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'servizi web agency agroalimentare',
+    'sviluppo e-commerce vino',
+    'consulenza digitale agriturismo',
+    'software automation cantina',
+  ],
+});
 
 const iconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
 
@@ -45,6 +57,10 @@ const monteverdi = getCaseStudy('tenuta-monteverdi');
 export default function Servizi() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO ---------- */}
       <section
         className="relative bg-fixed bg-cover bg-center text-paper"

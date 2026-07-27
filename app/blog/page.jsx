@@ -1,16 +1,33 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import { posts } from '@/lib/data';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Blog',
+const PAGE = {
+  title: 'Blog: strategie reali per scalare il tuo agroalimentare',
   description:
-    'Approfondimenti su AI per le aziende, Shopify, e-commerce, SEO e GEO. Contenuti utili per far crescere il tuo business online.',
+    'E-commerce, AI, SEO, marketing. Articoli che risolvono problemi concreti di cantine, agriturismo, frantoi. Niente fuffa, solo cose che funzionano.',
+  path: '/blog',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'blog agribusiness',
+    'strategie digitali agroalimentare',
+    'articoli e-commerce vino',
+    'guide automazione aziendale',
+  ],
+});
 
 export default function Blog() {
   return (
-    <section className="max-w-edge mx-auto px-6 pt-32 pb-24">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <section className="max-w-edge mx-auto px-6 pt-32 pb-24">
       <p className="eyebrow">Blog</p>
       <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">
         Idee chiare su AI, vendite online e crescita.
@@ -52,5 +69,6 @@ export default function Blog() {
         ))}
       </div>
     </section>
+    </>
   );
 }

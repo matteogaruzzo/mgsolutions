@@ -7,12 +7,25 @@ import CountUp from '@/components/CountUp';
 import { team } from '@/lib/data';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 import { ClockIcon, LockIcon, TargetIcon } from '@/components/icons/ServiceIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Chi sono',
+const PAGE = {
+  title: 'Matteo Garuzzo, specialista digitale agroalimentare',
   description:
-    'Matteo Garuzzo: developer specializzato in siti, e-commerce e software per cantine, oleifici e agriturismi. Il percorso, il metodo, il team dietro MG Solutions.',
+    '6 anni specializzato in e-commerce, AI e crescita per vino, agriturismo, oleificio. Fondatore di MG Solutions. Scopri come scalare il tuo business.',
+  path: '/chi-sono',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'chi è Matteo Garuzzo',
+    'fondatore MG Solutions',
+    'consulente digitale Umbria',
+    'specialista e-commerce vino',
+    'freelance web Perugia',
+  ],
+});
 
 const perks = [
   {
@@ -130,6 +143,10 @@ const notForWho = [
 export default function ChiSono() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-20">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center">

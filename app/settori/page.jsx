@@ -3,6 +3,7 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import { sectors, caseStudies } from '@/lib/data';
 import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const clientArchetypes = [
   {
@@ -38,11 +39,21 @@ const processSteps = [
 
 const latestSlugs = ['tenuta-monteverdi', 'frantoi-san-lorenzo', 'podere-la-vite'];
 
-export const metadata = {
-  title: 'I Tre Settori',
+const PAGE = {
+  title: 'Soluzioni web per vino, agriturismo, oleificio',
   description:
-    'I tre settori in cui MG Solutions è specializzata: Wine & Viticulture, Oleifici & Food Tech, Wine Hospitality & Agriturismi.',
+    'Strategie digitali costruite sul tuo settore. E-commerce per cantine, booking per agriturismi, B2B per frantoi. Crescita reale, non generica.',
+  path: '/settori',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'soluzioni digitali agroalimentare',
+    'settori vino agriturismo oleificio',
+    'digitalizzazione filiera agroalimentare Umbria',
+  ],
+});
 
 // Classi Tailwind letterali per settore (Tailwind non può risolvere classi
 // costruite dinamicamente da stringhe in lib/data.js).
@@ -73,6 +84,10 @@ const theme = {
 export default function Settori() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">I tre settori</p>
         <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">

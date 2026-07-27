@@ -2,12 +2,24 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { caseStudies, testimonials } from '@/lib/data';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Portfolio',
+const PAGE = {
+  title: 'Portfolio: 6 case study nel settore agroalimentare',
   description:
-    'Case study di MG Solutions per cantine, oleifici e agriturismi: e-commerce Shopify, siti immersivi e software su misura.',
+    'Case study reali: cantine, agriturismo, frantoi. Scopri come abbiamo fatto scalare business veri con strategie digitali specifiche per settore.',
+  path: '/portfolio',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'portfolio web agency agroalimentare',
+    'case study e-commerce vino',
+    'risultati clienti reali',
+    'quanto costa un sito e-commerce',
+  ],
+});
 
 const stats = [
   ['6', 'Case study'],
@@ -21,6 +33,10 @@ const featuredTestimonial = testimonials.find((t) => t.caseStudySlug === 'tenuta
 export default function Portfolio() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">Portfolio · Progetti realizzati</p>
         <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">

@@ -1,9 +1,13 @@
 import { site } from '@/lib/data';
 import ReopenConsentButton from '@/components/ReopenConsentButton';
+import { pageMetadata } from '@/lib/seo';
 
 export const metadata = {
-  title: 'Cookie Policy',
-  description: 'Informativa sui cookie e sulle tecnologie simili utilizzate dal sito, ai sensi del GDPR e delle linee guida del Garante Privacy.',
+  ...pageMetadata({
+    title: 'Cookie Policy',
+    description: 'Informativa sui cookie e sulle tecnologie simili utilizzate dal sito, ai sensi del GDPR e delle linee guida del Garante Privacy.',
+    path: '/cookie-policy',
+  }),
   robots: { index: true, follow: true },
 };
 

@@ -5,6 +5,7 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import StatNumber from '@/components/StatNumber';
 import { caseStudies, getCaseStudy, testimonials, metodoSteps, techRationale } from '@/lib/data';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 import {
   AIIcon,
   CartIcon,
@@ -138,7 +139,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const c = getCaseStudy(params.slug);
   if (!c) return {};
-  return { title: c.title, description: c.tagline };
+  return pageMetadata({ title: c.title, description: c.tagline, path: `/portfolio/${c.slug}` });
 }
 
 export default function CaseStudyPage({ params }) {
@@ -153,6 +154,14 @@ export default function CaseStudyPage({ params }) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            webPageSchema({ title: c.title, description: c.tagline, path: `/portfolio/${c.slug}` })
+          ),
+        }}
+      />
       {/* ---------- HERO CINEMATICO ---------- */}
       <section className="relative h-[92vh] min-h-[560px] flex items-end overflow-hidden">
         <div

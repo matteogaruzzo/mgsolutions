@@ -5,12 +5,24 @@ import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import { metodoSteps, whyMG, getCaseStudy } from '@/lib/data';
 import { ChartIcon, CompassIcon, PaletteIcon, CodeIcon } from '@/components/icons/ServiceIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Il Metodo',
+const PAGE = {
+  title: 'Il nostro metodo: zero fuffa, solo crescita reale',
   description:
-    'Il metodo di lavoro di MG Solutions in 4 fasi: analisi, strategia di settore, design e sviluppo. Ogni fase ha una pagina di approfondimento dedicata.',
+    'Niente template generici. Analisi, strategia, esecuzione: come costruiamo siti che vendono davvero per il tuo business agroalimentare.',
+  path: '/metodo',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'come lavora una web agency',
+    'metodologia web development',
+    'processo costruzione sito',
+    'consulenza pre-progetto',
+  ],
+});
 
 const iconMap = { chart: ChartIcon, compass: CompassIcon, palette: PaletteIcon, code: CodeIcon };
 
@@ -43,6 +55,10 @@ const walkthrough = [
 export default function MetodoPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">Il Metodo</p>

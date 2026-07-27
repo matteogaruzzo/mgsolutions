@@ -1,8 +1,12 @@
 import { site } from '@/lib/data';
+import { pageMetadata } from '@/lib/seo';
 
 export const metadata = {
-  title: 'Privacy Policy',
-  description: 'Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).',
+  ...pageMetadata({
+    title: 'Privacy Policy',
+    description: 'Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).',
+    path: '/privacy-policy',
+  }),
   robots: { index: true, follow: true },
 };
 

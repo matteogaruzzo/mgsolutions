@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CTA from '@/components/CTA';
 import { posts, getPost, site } from '@/lib/data';
+import { pageMetadata } from '@/lib/seo';
 
 function slugifyHeading(text) {
   return text
@@ -19,18 +20,14 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const p = getPost(params.slug);
   if (!p) return {};
-  return {
-    title: p.title,
+  return pageMetadata({
+    title: p.seoTitle || p.title,
     description: p.excerpt,
     keywords: p.keywords,
-    openGraph: {
-      title: p.title,
-      description: p.excerpt,
-      type: 'article',
-      publishedTime: p.date,
-    },
-    alternates: { canonical: `/blog/${p.slug}` },
-  };
+    path: `/blog/${p.slug}`,
+    type: 'article',
+    publishedTime: p.date,
+  });
 }
 
 export default function Post({ params }) {

@@ -6,6 +6,7 @@ import BookingForm from '@/components/BookingForm';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import {
+  site,
   servizi,
   sectors,
   caseStudies,
@@ -18,6 +19,31 @@ import {
 } from '@/lib/data';
 import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
+
+const PAGE = {
+  title: "Digitalizziamo l'eccellenza agroalimentare",
+  description:
+    "E-commerce, AI agents, automazione per vino, agriturismo, oleificio. Scalate il vostro business con strategie digitali costruite sul vostro processo reale.",
+  path: '/',
+};
+
+export const metadata = {
+  // La root page condivide il segmento con app/layout.jsx: il title.template
+  // lì definito non si applica qui, quindi il suffisso va aggiunto a mano
+  // (altrove ci pensa il template automaticamente).
+  ...pageMetadata({
+    ...PAGE,
+    keywords: [
+      'web agency agroalimentare',
+      'e-commerce vino',
+      'automazione agribusiness',
+      'software per cantina',
+      'digitalizzazione Umbria',
+    ],
+  }),
+  title: `${PAGE.title} · ${site.name}`,
+};
 
 const sectorTheme = {
   'wine-viticulture': { icon: GrapeIcon, accent: 'text-wine-accent', border: 'hover:border-wine-accent' },
@@ -41,6 +67,10 @@ const serviceIcon = {
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       {/* ---------- HERO ---------- */}
       <section
         className="relative overflow-hidden pt-16 min-h-[90vh] flex items-center bg-cover bg-center"

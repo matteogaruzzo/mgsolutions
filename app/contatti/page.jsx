@@ -7,12 +7,15 @@ import FAQAccordion from '@/components/FAQAccordion';
 import { site, team, testimonials } from '@/lib/data';
 import { ClockIcon, LockIcon, ChatIcon, CompassIcon, CalendarIcon, BookIcon, TargetIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Contatti',
   description:
     'Contatta MG Solutions: telefono, email o WhatsApp. Prima consulenza gratuita, risposta entro 24 ore, zero impegno. Perugia, Italia.',
-};
+  path: '/contatti',
+  keywords: ['contatti web agency agroalimentare', 'consulenza digitale Perugia', 'contattare Matteo Garuzzo'],
+});
 
 const contactFaqs = [
   { q: 'Qual è il modo migliore per contattarvi?', a: 'Se è urgente, telefono o WhatsApp. Se non è urgente, email: rispondo personalmente, non un bot o un call center.' },

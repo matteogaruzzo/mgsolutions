@@ -3,14 +3,27 @@ import SectorPageTemplate from '@/components/SectorPageTemplate';
 import HospitalityExperience from '@/components/HospitalityExperience';
 import { getSector, sectorPageContent } from '@/lib/data';
 import { FarmhouseDoorIcon } from '@/components/icons/WineIcons';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const s = getSector('wine-hospitality-agriturismi');
 const content = sectorPageContent['wine-hospitality-agriturismi'];
 
-export const metadata = {
-  title: 'Wine Hospitality & Agriturismi',
-  description: content.heroSubtitle,
+const PAGE = {
+  title: 'Booking system e marketing per agriturismi',
+  description:
+    'Raddoppiate le prenotazioni: sistema booking integrato, automazione email, AI per risposte clienti. Da gestione manuale a scalabilità senza sforzo.',
+  path: '/settori/wine-hospitality-agriturismi',
 };
+
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'booking agriturismo',
+    'sistema prenotazioni agriturismo',
+    'aumentare prenotazioni agriturismo',
+    'agriturismo Umbria booking',
+  ],
+});
 
 const theme = {
   accentText: 'text-hospitality-accent',
@@ -75,12 +88,18 @@ function HospitalityExtras() {
 
 export default function WineHospitalityPage() {
   return (
-    <SectorPageTemplate
-      sectorNumber="03"
-      sector={s}
-      content={content}
-      theme={theme}
-      afterHero={<HospitalityExtras />}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <SectorPageTemplate
+        sectorNumber="03"
+        sector={s}
+        content={content}
+        theme={theme}
+        afterHero={<HospitalityExtras />}
+      />
+    </>
   );
 }

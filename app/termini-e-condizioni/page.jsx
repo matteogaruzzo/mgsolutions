@@ -1,8 +1,12 @@
 import { site } from '@/lib/data';
+import { pageMetadata } from '@/lib/seo';
 
 export const metadata = {
-  title: 'Termini e Condizioni',
-  description: 'Termini e condizioni di utilizzo del sito MG Solutions.',
+  ...pageMetadata({
+    title: 'Termini e Condizioni',
+    description: 'Termini e condizioni di utilizzo del sito MG Solutions.',
+    path: '/termini-e-condizioni',
+  }),
   robots: { index: true, follow: true },
 };
 
