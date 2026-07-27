@@ -63,6 +63,10 @@ const organizationSchema = {
 export default function RootLayout({ children }) {
   return (
     <html lang="it" className={poppins.variable}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body>
         <script
           type="application/ld+json"
