@@ -18,6 +18,11 @@ export async function POST(request) {
     return NextResponse.json({ success: false, message: 'Email non valida' }, { status: 400 });
   }
 
+  if (!supabaseServer) {
+    console.error('[newsletter/subscribe] Supabase non configurato');
+    return NextResponse.json({ success: false, message: 'Servizio non disponibile' }, { status: 500 });
+  }
+
   const { error } = await supabaseServer
     .from('newsletter_subscribers')
     .insert([{ email, source }]);

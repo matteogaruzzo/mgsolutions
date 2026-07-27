@@ -57,24 +57,32 @@ export async function POST(request) {
   // Log grezzo su Supabase, in parallelo a Prisma (fonte dati primaria).
   // Non deve mai bloccare né far fallire la risposta al client.
   const siteAnalysis = sanitized.responses.siteAnalysis;
-  const { error: supabaseError } = await supabaseServer.from('quiz_responses').insert([
-    {
-      name: sanitized.nome,
-      email: sanitized.email,
-      phone: sanitized.telefono,
-      company: sanitized.azienda,
-      activities: sanitized.responses.businesses,
-      tools: sanitized.responses.existingTools,
-      goal: sanitized.responses.objective,
-      urgency: sanitized.responses.urgency,
-      website: sanitized.responses.websiteUrl,
-      ai_platform: siteAnalysis?.platform || null,
-      ai_ecommerce: siteAnalysis?.hasEcommerce || false,
-      ai_notes: sanitized.responses.notes || null,
-    },
-  ]);
-  if (supabaseError) {
-    console.warn('[quiz/lead] Supabase backup failed (non-critical):', supabaseError);
+  if (supabaseServer) {
+    try {
+      const { error: supabaseError } = await supabaseServer.from('quiz_responses').insert([
+        {
+          name: sanitized.nome,
+          email: sanitized.email,
+          phone: sanitized.telefono,
+          company: sanitized.azienda,
+          activities: sanitized.responses.businesses,
+          tools: sanitized.responses.existingTools,
+          goal: sanitized.responses.objective,
+          urgency: sanitized.responses.urgency,
+          website: sanitized.responses.websiteUrl,
+          ai_platform: siteAnalysis?.platform || null,
+          ai_ecommerce: siteAnalysis?.hasEcommerce || false,
+          ai_notes: sanitized.responses.notes || null,
+        },
+      ]);
+      if (supabaseError) {
+        console.warn('[quiz/lead] Supabase backup failed (non-critical):', supabaseError);
+      }
+    } catch (err) {
+      console.warn('[quiz/lead] Supabase backup failed (non-critical):', err);
+    }
+  } else {
+    console.warn('[quiz/lead] Supabase non configurato: skip backup log.');
   }
 
   if (isEmailConfigured()) {
