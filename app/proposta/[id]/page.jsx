@@ -5,6 +5,8 @@ import { prisma } from '@/lib/db';
 import { site } from '@/lib/data';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'La tua proposta',
   robots: { index: false, follow: false },
