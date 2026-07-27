@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it" className={poppins.variable}>
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>
