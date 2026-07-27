@@ -1,4 +1,4 @@
-import { posts, sectors, caseStudies, metodoSteps, servizi, softwareFamilies } from '@/lib/data';
+import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules } from '@/lib/data';
 
 const base = 'https://www.matteogaruzzo.com';
 
@@ -10,6 +10,7 @@ export default function sitemap() {
     '/settori',
     '/metodo',
     '/software',
+    '/software/pricing',
     '/portfolio',
     '/blog',
     '/risorse',
@@ -43,8 +44,8 @@ export default function sitemap() {
     lastModified: new Date(),
   }));
 
-  const softwareRoutes = softwareFamilies.map((f) => ({
-    url: `${base}/software/${f.slug}`,
+  const softwareRoutes = businessSuiteModules.map((m) => ({
+    url: `${base}/software/${m.slug}`,
     lastModified: new Date(),
   }));
 

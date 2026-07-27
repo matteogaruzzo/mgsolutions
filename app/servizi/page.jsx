@@ -7,7 +7,7 @@ import {
   heroStats,
   referenceNumbers,
   whyMG,
-  softwareFamilies,
+  businessSuiteModules,
   softwareUpcoming,
   getCaseStudy,
 } from '@/lib/data';
@@ -276,10 +276,10 @@ export default function Servizi() {
             <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
           </Reveal>
           <div className="mt-10 grid sm:grid-cols-2 gap-4">
-            {softwareFamilies.map((f) => (
-              <div key={f.slug} className="border border-paper/15 rounded-xl p-5">
-                <p className="font-semibold">{f.name}</p>
-                <p className="mt-2 text-sm text-paper/60 leading-relaxed">{f.pitch}</p>
+            {businessSuiteModules.map((m) => (
+              <div key={m.slug} className="border border-paper/15 rounded-xl p-5">
+                <p className="font-semibold">{m.name}</p>
+                <p className="mt-2 text-sm text-paper/60 leading-relaxed">{m.tagline}</p>
               </div>
             ))}
           </div>

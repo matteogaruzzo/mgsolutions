@@ -4,6 +4,8 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 export default function CTA({
   title = 'Parliamo del tuo progetto.',
   sub = 'Prima call conoscitiva gratuita. Ti diciamo con onestà se e come possiamo aiutarti.',
+  href = '/prenota-call',
+  ctaLabel = 'Prenota una call',
 }) {
   return (
     <section className="bg-forest text-paper">
@@ -13,9 +15,9 @@ export default function CTA({
           {title}
         </h2>
         <p className="mt-5 text-paper/70 max-w-xl mx-auto">{sub}</p>
-        <Link href="/prenota-call" className="btn-solid bg-brass text-ink hover:bg-paper mt-9">
+        <Link href={href} className="btn-solid bg-brass text-ink hover:bg-paper mt-9">
           <GrapeIcon className="w-4 h-4" />
-          Prenota una call →
+          {ctaLabel} →
         </Link>
       </div>
     </section>

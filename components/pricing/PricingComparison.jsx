@@ -1,4 +1,4 @@
-import { pricingComparison } from '@/lib/data';
+import { businessSuiteComparison } from '@/lib/data';
 
 function Cell({ value }) {
   if (value === true) return <span className="text-primary text-lg" aria-label="Incluso">✓</span>;
@@ -13,23 +13,23 @@ export default function PricingComparison() {
         <thead>
           <tr className="border-b border-line">
             <th className="text-left py-4 pr-4 text-sm font-semibold text-gray-900">Caratteristica</th>
-            <th className="text-center py-4 px-4 text-sm font-semibold text-gray-900">Starter</th>
-            <th className="text-center py-4 px-4 text-sm font-semibold text-[#0066cc]">Business</th>
-            <th className="text-center py-4 px-4 text-sm font-semibold text-primary">Scale</th>
+            <th className="text-center py-4 px-4 text-sm font-semibold text-gray-900">Essenziale</th>
+            <th className="text-center py-4 px-4 text-sm font-semibold text-[#0066cc]">Crescita</th>
+            <th className="text-center py-4 px-4 text-sm font-semibold text-primary">Ecosistema</th>
           </tr>
         </thead>
         <tbody>
-          {pricingComparison.map((row) => (
+          {businessSuiteComparison.map((row) => (
             <tr key={row.feature} className="border-b border-line">
               <td className="py-4 pr-4 text-sm text-gray-700">{row.feature}</td>
               <td className="py-4 px-4 text-center">
-                <Cell value={row.starter} />
+                <Cell value={row.essenziale} />
               </td>
               <td className="py-4 px-4 text-center">
-                <Cell value={row.business} />
+                <Cell value={row.crescita} />
               </td>
               <td className="py-4 px-4 text-center">
-                <Cell value={row.scale} />
+                <Cell value={row.ecosistema} />
               </td>
             </tr>
           ))}

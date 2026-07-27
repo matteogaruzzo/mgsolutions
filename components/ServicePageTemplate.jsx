@@ -8,7 +8,7 @@ import {
   getCaseStudy,
   testimonials,
   investmentFactors,
-  softwareFamilies,
+  businessSuiteModules,
   softwareUpcoming,
 } from '@/lib/data';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
@@ -113,10 +113,10 @@ export default function ServicePageTemplate({ service }) {
             <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
           </Reveal>
           <div className="mt-10 grid sm:grid-cols-2 gap-4">
-            {softwareFamilies.map((f) => (
-              <div key={f.slug} className="border border-line rounded-xl p-5">
-                <p className="font-semibold text-ink">{f.name}</p>
-                <p className="mt-2 text-sm text-ink/60 leading-relaxed">{f.pitch}</p>
+            {businessSuiteModules.map((m) => (
+              <div key={m.slug} className="border border-line rounded-xl p-5">
+                <p className="font-semibold text-ink">{m.name}</p>
+                <p className="mt-2 text-sm text-ink/60 leading-relaxed">{m.tagline}</p>
               </div>
             ))}
           </div>

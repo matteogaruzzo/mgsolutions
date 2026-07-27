@@ -3,41 +3,30 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
-import {
-  softwareFamilies,
-  softwareUpcoming,
-  softwareOngoing,
-  testimonials,
-} from '@/lib/data';
-import { AIIcon, CompassIcon, GearIcon, TargetIcon } from '@/components/icons/ServiceIcons';
+import { businessSuiteModules, softwareOngoing, testimonials } from '@/lib/data';
+import { ChatIcon, TargetIcon, CalendarIcon, ClockIcon, ChartIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
-import PricingTiers from '@/components/pricing/PricingTiers';
-import PricingComparison from '@/components/pricing/PricingComparison';
-import SoftwareConfigurator from '@/components/pricing/SoftwareConfigurator';
-import PricingSupportTier from '@/components/pricing/PricingSupportTier';
-import PricingFAQ from '@/components/pricing/PricingFAQ';
-import PricingCTA from '@/components/pricing/PricingCTA';
 
 const PAGE = {
-  title: "Agenti AI e software di automazione per l'agroalimentare",
+  title: 'MG Business Suite: 5 moduli per il tuo agroalimentare',
   description:
-    'Agenti AI che rispondono ai clienti, automatizzano preventivi, gestiscono reputation. Software costruiti su processi reali, non su template.',
+    'Social AI, CRM, booking, operations e control tower in un unico ecosistema modulare. Attivi solo i moduli che ti servono, canone mensile trasparente.',
   path: '/software',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
   keywords: [
-    'software agroalimentare',
-    'agenti ai commerciali',
-    'automazione processi business',
-    'knowledge base ai',
-    'software preventivi',
+    'business suite agroalimentare',
+    'software modulare cantina',
+    'crm agriturismo',
+    'automazione social ai',
+    'dashboard direzionale agribusiness',
   ],
 });
 
-const iconMap = { ai: AIIcon, compass: CompassIcon, gear: GearIcon, target: TargetIcon };
+const iconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
 
 const softwareFaqs = [
   {
@@ -45,14 +34,16 @@ const softwareFaqs = [
     a: 'No. Il software vive online, come Gmail o WhatsApp — non come un programma da installare sul computer. Quando facciamo un aggiornamento lo ricevi automaticamente, senza fare nulla.',
   },
   {
-    q: 'Che differenza c’è tra le quattro famiglie?',
-    a: 'Coprono momenti diversi del rapporto con il cliente: primo contatto (Agente Commerciale), assistenza (Assistente Clienti), documenti e preventivi (Automazione Preventivi), post-vendita (Reputation e Follow-up). Puoi partire da una e aggiungerne altre nel tempo.',
+    q: 'Che differenza c’è tra i cinque moduli?',
+    a: 'Coprono reparti diversi dell’azienda: contenuti social (Social AI), contatti e vendite (Lead & Sales), prenotazioni ed esperienza cliente (Booking & Customer Experience), team e operatività (Staff & Operations), visione d’insieme (Control Tower). Puoi partire da uno e aggiungerne altri nel tempo.',
+  },
+  {
+    q: 'Quanto costa?',
+    a: 'Dipende da quanti moduli attivi: i 3 pacchetti (Essenziale, Crescita, Ecosistema) hanno canone e attivazione definiti, senza sorprese. Il dettaglio completo è su /software/pricing.',
   },
 ];
 
-const relevantTestimonials = testimonials.filter((t) =>
-  ['Andrea', 'Giulia'].includes(t.name)
-);
+const relevantTestimonials = testimonials.filter((t) => ['Andrea', 'Giulia'].includes(t.name));
 
 export default function Software() {
   return (
@@ -63,23 +54,23 @@ export default function Software() {
       />
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-14">
-        <p className="eyebrow">Prodotti · Software</p>
+        <p className="eyebrow">Prodotti · MG Business Suite</p>
         <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.05]">
-          Software che lavorano per te mentre dormi.
+          Un ecosistema digitale per l’agroalimentare.
         </h1>
         <p className="mt-8 text-lg text-ink/70 max-w-2xl leading-relaxed">
-          Non è un tool da imparare: è un agente virtuale che si occupa di compiti ripetitivi —
-          email, prenotazioni, preventivi, follow-up — senza sbagliare, 24 ore su 24. Configurato
-          sul tuo processo reale, non su un piano fisso.
+          5 moduli — social, vendite, prenotazioni, operatività, controllo direzionale — pensati per
+          cantine, oleifici e agriturismi. Attivi solo quello che ti serve, con un canone chiaro fin
+          dal primo giorno.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/prenota-call" className="btn-solid">
+          <Link href="/software/pricing" className="btn-solid">
             <GrapeIcon className="w-4 h-4" />
-            Richiedi una valutazione →
+            Scopri i pacchetti →
           </Link>
-          <Link href="#famiglie" className="btn-ghost">
-            Scopri i 4 software
+          <Link href="#moduli" className="btn-ghost">
+            Scopri i 5 moduli
           </Link>
         </div>
       </section>
@@ -93,44 +84,43 @@ export default function Software() {
               La semplicità dietro la complessità.
             </h2>
             <div className="mt-6 max-w-2xl space-y-4 text-ink/75 leading-relaxed">
-              <p>Immagina di assumere una persona nuova nel team.</p>
+              <p>Immagina di assumere una persona nuova nel team per ogni reparto.</p>
               <p>
-                Il primo giorno le spieghi: quali email ricevi, come rispondere, quali clienti sono
-                "buoni", come si prenota una call. Dopo il setup iniziale, questa persona lavora da
-                sola. 24 ore su 24. Senza ferie, senza errori di distrazione.
+                Una che gestisce i social, una che segue i contatti commerciali, una che si occupa
+                delle prenotazioni, una che coordina i turni, e una che tiene sott’occhio tutti i
+                numeri dell’azienda. Dopo il setup iniziale, lavorano da sole. 24 ore su 24.
               </p>
-              <p>Questo è, in pratica, un nostro software.</p>
+              <p>Questa è, in pratica, MG Business Suite.</p>
               <p>
-                Non è magia: è un agente AI collegato ai tuoi strumenti (email, calendario, CRM) e
-                configurato sui tuoi processi reali. Il modello AI è il "cervello", i tuoi strumenti
-                sono il "corpo".
+                Non è magia: sono moduli AI collegati ai tuoi strumenti (sito, calendario, social,
+                CRM) e configurati sui tuoi processi reali.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- I 4 SOFTWARE ---------- */}
-      <section id="famiglie" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
+      {/* ---------- I 5 MODULI ---------- */}
+      <section id="moduli" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
         <Reveal>
-          <p className="eyebrow">I 4 software</p>
+          <p className="eyebrow">I 5 moduli</p>
           <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-            Quale serve al tuo business?
+            Quale reparto vuoi automatizzare per primo?
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid sm:grid-cols-2 gap-6">
-          {softwareFamilies.map((f, i) => {
-            const Icon = iconMap[f.icon] || AIIcon;
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {businessSuiteModules.map((m, i) => {
+            const Icon = iconMap[m.icon] || TargetIcon;
             return (
-              <Reveal key={f.slug} delay={i * 60}>
+              <Reveal key={m.slug} delay={i * 60}>
                 <Link
-                  href={`/software/${f.slug}`}
+                  href={`/software/${m.slug}`}
                   className="group block h-full rounded-2xl p-7 border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
                   <Icon className="w-8 h-8 text-forest" />
-                  <h3 className="h3 text-xl mt-4 text-ink">{f.name}</h3>
-                  <p className="mt-3 text-sm text-ink/65 leading-relaxed">{f.pitch}</p>
+                  <h3 className="h3 text-xl mt-4 text-ink">{m.name}</h3>
+                  <p className="mt-3 text-sm text-ink/65 leading-relaxed">{m.tagline}</p>
                   <span className="mt-5 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
                     Scopri →
                   </span>
@@ -141,43 +131,28 @@ export default function Software() {
         </div>
 
         <p className="mt-8 text-xs text-ink/50 max-w-2xl">
-          * Il checkout automatico via Stripe è in arrivo: per attivare un piano oggi, prenota una
-          call.
+          * Il checkout automatico via Stripe è in arrivo: per attivare un pacchetto oggi, prenota
+          una call.
         </p>
       </section>
 
-      {/* ---------- PRICING ---------- */}
-      <section id="pricing" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
-        <Reveal>
-          <p className="eyebrow">Piani</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Scegli il tuo piano.</h2>
-          <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
-            Niente setup fisso, solo quello che usi. Fatturazione mensile.
-          </p>
-        </Reveal>
-
-        <div className="mt-14">
-          <PricingTiers />
-        </div>
-
-        <div className="mt-20">
-          <PricingComparison />
-        </div>
-
-        <div className="mt-20">
-          <SoftwareConfigurator />
-        </div>
-
-        <div className="mt-16">
-          <PricingSupportTier />
-        </div>
-
-        <div className="mt-20">
-          <PricingFAQ />
+      {/* ---------- SCEGLI IL TUO PERCORSO ---------- */}
+      <section className="bg-ink text-paper">
+        <div className="max-w-edge mx-auto px-6 py-24 text-center">
+          <Reveal>
+            <p className="eyebrow text-brass">Prezzi e pacchetti</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4">Scegli il tuo percorso.</h2>
+            <p className="mt-5 text-paper/70 max-w-xl mx-auto leading-relaxed">
+              1 modulo, 3 moduli o l’intera suite: 3 pacchetti con canone e attivazione definiti, più
+              Web Care per il sito e bundle sito+software.
+            </p>
+            <Link href="/software/pricing" className="btn-solid bg-brass text-ink hover:bg-paper mt-9">
+              <GrapeIcon className="w-4 h-4" />
+              Vedi pacchetti e prezzi →
+            </Link>
+          </Reveal>
         </div>
       </section>
-
-      <PricingCTA />
 
       {/* ---------- FAQ ---------- */}
       <section className="bg-paper-dim">
@@ -189,17 +164,6 @@ export default function Software() {
           <div className="mt-10">
             <FAQAccordion items={softwareFaqs} />
           </div>
-        </div>
-      </section>
-
-      {/* ---------- ROADMAP ---------- */}
-      <section className="bg-ink text-paper">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow text-brass">Non è finito, questo è l’inizio</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4">{softwareUpcoming.title}</h2>
-            <p className="mt-5 text-paper/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
-          </Reveal>
         </div>
       </section>
 
@@ -239,7 +203,7 @@ export default function Software() {
 
       <CTA
         title="Pronto a parlarne?"
-        sub="Valutazione gratuita del tuo processo. Ti diciamo con onestà cosa possiamo configurare oggi, cosa richiede sviluppo su misura e quale piano si adatta meglio."
+        sub="Consulenza gratuita: analizziamo il tuo processo e ti diciamo con onestà quale modulo (o pacchetto) ha senso attivare per primo."
       />
     </>
   );

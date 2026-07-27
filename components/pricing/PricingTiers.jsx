@@ -1,4 +1,4 @@
-import { pricingTiers } from '@/lib/data';
+import { businessSuitePackages } from '@/lib/data';
 
 // Bottoni volutamente disabled: il checkout Stripe non è ancora collegato.
 // Quando lo sarà, questo file andrà convertito in 'use client' per gestire
@@ -17,71 +17,52 @@ const buttonStyles = {
 export default function PricingTiers() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {pricingTiers.map((tier) => (
+      {businessSuitePackages.map((pkg) => (
         <div
-          key={tier.id}
+          key={pkg.id}
           className={`relative rounded-2xl border-2 p-8 flex flex-col ${
-            highlightStyles[tier.highlight] || 'border-line bg-paper'
+            highlightStyles[pkg.highlight] || 'border-line bg-paper'
           }`}
         >
-          {tier.badge && (
+          {pkg.badge && (
             <span className="absolute -top-3 left-8 bg-[#0066cc] text-white text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full">
-              {tier.badge}
+              {pkg.badge}
             </span>
           )}
 
-          <h3 className="text-2xl font-bold text-gray-900">{tier.name}</h3>
+          <h3 className="text-2xl font-bold text-gray-900">{pkg.name}</h3>
+          <p className="mt-1 text-sm text-gray-600">{pkg.tagline}</p>
 
           <div className="mt-4 flex items-baseline gap-2">
             <span
               className={`text-4xl font-bold ${
-                tier.highlight === 'blue' ? 'text-[#0066cc]' : tier.highlight === 'green' ? 'text-primary' : 'text-ink'
+                pkg.highlight === 'blue' ? 'text-[#0066cc]' : pkg.highlight === 'green' ? 'text-primary' : 'text-ink'
               }`}
             >
-              €{tier.price}
+              €{pkg.price}
             </span>
             <span className="text-base text-gray-600">/mese</span>
-            {tier.discountLabel && (
-              <span className="text-xs font-semibold text-primary bg-primary/10 rounded-full px-2 py-0.5">
-                {tier.discountLabel}
-              </span>
-            )}
           </div>
+          <p className="text-xs text-gray-500">+ €{pkg.activation} attivazione (una tantum)</p>
 
-          <ul className="mt-6 space-y-3 text-sm text-gray-700 flex-1">
-            <li>
-              <span className="font-semibold text-gray-900">Software: </span>
-              {tier.softwareIncluded.join(', ')}
-            </li>
-            <li>
-              <span className="font-semibold text-gray-900">Setup: </span>
-              {tier.setup}
-            </li>
-            <li>
-              <span className="font-semibold text-gray-900">Support: </span>
-              {tier.support}
-            </li>
-            {tier.customIntegrations && (
-              <li>
-                <span className="font-semibold text-gray-900">Integrazioni: </span>
-                {tier.customIntegrations}
+          <ul className="mt-6 space-y-2.5 text-sm text-gray-700 flex-1">
+            {pkg.features.map((f) => (
+              <li key={f} className="flex gap-2">
+                <span className="text-primary shrink-0">✓</span>
+                {f}
               </li>
-            )}
-            <li>
-              <span className="font-semibold text-gray-900">Prova: </span>
-              {tier.trialDays} giorni
-            </li>
+            ))}
           </ul>
 
           <button
             type="button"
             disabled
-            title="Prossimamente — Stripe integration"
+            title="Prossimamente — Integrazione Stripe in corso"
             className={`mt-8 w-full py-3 px-6 rounded-lg text-base font-bold opacity-50 cursor-not-allowed ${
-              buttonStyles[tier.highlight]
+              buttonStyles[pkg.highlight]
             }`}
           >
-            Abbonati a €{tier.price}
+            {pkg.cta}
           </button>
         </div>
       ))}
