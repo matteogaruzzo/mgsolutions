@@ -1,52 +1,10 @@
-import { webCare, webBundles, siteDevPricing } from '@/lib/data';
+import { webBundles, siteDevPricing } from '@/lib/data';
 
 export default function BundleSection() {
   return (
     <div>
-      {/* ---------- WEB CARE ---------- */}
-      <div>
-        <p className="eyebrow">Oltre il software</p>
-        <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Manutenzione sito.</h2>
-        <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">Il vostro sito deve stare in piedi 24/7.</p>
-
-        <div className="mt-8 max-w-2xl border border-line rounded-2xl p-8 bg-paper">
-          <div className="flex items-baseline gap-2">
-            <h3 className="text-2xl font-bold text-gray-900">{webCare.name}</h3>
-          </div>
-          <p className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-ink">€{webCare.price}</span>
-            <span className="text-sm text-gray-600">/mese</span>
-          </p>
-
-          <div className="mt-6 grid sm:grid-cols-2 gap-6">
-            <div>
-              <p className="text-xs font-semibold tracking-widest text-forest uppercase">Comprende</p>
-              <ul className="mt-3 space-y-1.5 text-sm text-gray-700">
-                {webCare.included.map((i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="text-primary shrink-0">✓</span>
-                    {i}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Non comprende</p>
-              <ul className="mt-3 space-y-1.5 text-sm text-gray-500">
-                {webCare.excluded.map((e) => (
-                  <li key={e} className="flex gap-2">
-                    <span className="text-gray-300 shrink-0">✗</span>
-                    {e}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* ---------- BUNDLE SITO + SOFTWARE ---------- */}
-      <div className="mt-20">
+      <div>
         <p className="eyebrow">Tutto insieme</p>
         <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Il pacchetto completo: sito + software.</h2>
         <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">

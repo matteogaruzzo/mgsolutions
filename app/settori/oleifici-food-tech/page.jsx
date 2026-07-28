@@ -1,7 +1,7 @@
 import SectorPageTemplate from '@/components/SectorPageTemplate';
 import { getSector, sectorPageContent } from '@/lib/data';
 import { OliveIcon } from '@/components/icons/WineIcons';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const s = getSector('oleifici-food-tech');
 const content = sectorPageContent['oleifici-food-tech'];
@@ -41,6 +41,24 @@ export default function OleificiFoodTechPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', path: '/' },
+              { name: 'Settori', path: '/settori' },
+              { name: PAGE.title, path: PAGE.path },
+            ])
+          ),
+        }}
+      />
+      {content.faqs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(content.faqs)) }}
+        />
+      )}
       <SectorPageTemplate sectorNumber="02" sector={s} content={content} theme={theme} />
     </>
   );

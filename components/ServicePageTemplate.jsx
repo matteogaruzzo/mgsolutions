@@ -10,6 +10,13 @@ import {
   investmentFactors,
   businessSuiteModules,
   softwareUpcoming,
+  webCare,
+  siteDevPricing,
+  ecommerceDevPricing,
+  ecommerceWebCare,
+  restylingPricing,
+  aiIntegrationPricing,
+  softwareCustomPricing,
 } from '@/lib/data';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
@@ -27,8 +34,20 @@ export default function ServicePageTemplate({ service }) {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="bg-forest text-paper">
-        <div className="max-w-edge mx-auto px-6 pt-32 pb-16">
+      <section
+        className="relative bg-forest text-paper bg-cover bg-center"
+        style={service.heroImage ? { backgroundImage: `url(${service.heroImage})` } : undefined}
+      >
+        {service.heroImage && (
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(180deg, rgba(0,59,30,0.88) 0%, rgba(0,59,30,0.82) 100%)',
+            }}
+            aria-hidden="true"
+          />
+        )}
+        <div className="relative max-w-edge mx-auto px-6 pt-32 pb-16">
           <Link href="/servizi" className="text-xs text-paper/70 hover:underline">
             ← Cosa facciamo
           </Link>
@@ -55,6 +74,25 @@ export default function ServicePageTemplate({ service }) {
             <div>
               <p className="eyebrow">Non è solo un servizio</p>
               <p className="mt-5 text-ink/75 leading-relaxed">{service.whatIsIt}</p>
+              {service.whatIsItMore && (
+                <div className="mt-4 space-y-4">
+                  {(Array.isArray(service.whatIsItMore) ? service.whatIsItMore : [service.whatIsItMore]).map((p) => (
+                    <p key={p} className="text-ink/75 leading-relaxed">
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              )}
+              {service.quickFacts && (
+                <dl className="mt-8 border-t border-line">
+                  {service.quickFacts.map((f) => (
+                    <div key={f.label} className="flex items-center justify-between gap-4 py-3 border-b border-line">
+                      <dt className="text-sm text-ink/55">{f.label}</dt>
+                      <dd className="text-sm font-semibold text-ink text-right">{f.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -114,10 +152,17 @@ export default function ServicePageTemplate({ service }) {
           </Reveal>
           <div className="mt-10 grid sm:grid-cols-2 gap-4">
             {businessSuiteModules.map((m) => (
-              <div key={m.slug} className="border border-line rounded-xl p-5">
+              <Link
+                key={m.slug}
+                href={`/software/${m.slug}`}
+                className="group block border border-line rounded-xl p-5 hover:shadow-lg transition-shadow"
+              >
                 <p className="font-semibold text-ink">{m.name}</p>
                 <p className="mt-2 text-sm text-ink/60 leading-relaxed">{m.tagline}</p>
-              </div>
+                <span className="mt-3 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
+                  Scopri il software →
+                </span>
+              </Link>
             ))}
           </div>
         </section>
@@ -181,24 +226,153 @@ export default function ServicePageTemplate({ service }) {
         </section>
       )}
 
-      {/* ---------- DA COSA DIPENDE L'INVESTIMENTO ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <Reveal>
-          <p className="eyebrow">Quanto costa</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Da cosa dipende l’investimento.</h2>
-          <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
-            Non pubblichiamo un listino perché il costo reale cambia in base a come il servizio
-            viene usato. Ne parliamo apertamente in call, prima di qualsiasi proposta.
-          </p>
-        </Reveal>
-        <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {investmentFactors.map((f) => (
-            <div key={f} className="border border-line rounded-xl px-5 py-4 text-sm text-ink/75">
-              {f}
+      {/* ---------- QUANTO COSTA ---------- */}
+      {(service.slug === 'siti-web-contatti' || service.slug === 'ecommerce-shopify') && (() => {
+        const devPricing = service.slug === 'ecommerce-shopify' ? ecommerceDevPricing : siteDevPricing;
+        const care = service.slug === 'ecommerce-shopify' ? ecommerceWebCare : webCare;
+        return (
+          <section className="max-w-edge mx-auto px-6 py-24">
+            <Reveal>
+              <p className="eyebrow">Quanto costa</p>
+              <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">
+                {service.slug === 'ecommerce-shopify' ? 'Sviluppo dello store e manutenzione.' : 'Sviluppo del sito e manutenzione.'}
+              </h2>
+              <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+                {service.slug === 'ecommerce-shopify'
+                  ? `La realizzazione dello store è sempre preventivata a parte, in base a cosa serve davvero. Una volta online, ${care.name} lo mantiene in piedi 24/7.`
+                  : `La realizzazione del sito è sempre preventivata a parte, in base a cosa serve davvero. Una volta online, ${care.name} lo mantiene in piedi 24/7.`}
+              </p>
+            </Reveal>
+
+            <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
+              {devPricing.map((s) => (
+                <div key={s.label} className="border border-line rounded-xl px-5 py-4 text-sm">
+                  <p className="text-ink/80">{s.label}</p>
+                  <p className="mt-1 font-semibold text-ink">{s.range}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+
+            <div className="mt-10 max-w-2xl border border-line rounded-2xl p-8 bg-paper-dim">
+              <h3 className="text-xl font-bold text-ink">{care.name}</h3>
+              <p className="mt-1 text-sm text-ink/60">{care.tagline}</p>
+              <p className="mt-3 flex items-baseline gap-2">
+                <span className="text-3xl font-bold text-ink">€{care.price}</span>
+                <span className="text-sm text-ink/60">/mese</span>
+              </p>
+              <p className="mt-1 text-xs text-ink/50">(€{care.price * 12}/anno)</p>
+              <div className="mt-6 grid sm:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-xs font-semibold tracking-widest text-forest uppercase">Comprende</p>
+                  <ul className="mt-3 space-y-1.5 text-sm text-ink/75">
+                    {care.included.map((i) => (
+                      <li key={i} className="flex gap-2">
+                        <span className="text-primary shrink-0">✓</span>
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold tracking-widest text-ink/40 uppercase">Non comprende</p>
+                  <ul className="mt-3 space-y-1.5 text-sm text-ink/50">
+                    {care.excluded.map((e) => (
+                      <li key={e} className="flex gap-2">
+                        <span className="text-ink/30 shrink-0">✗</span>
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-6 text-sm text-ink/60 max-w-2xl">
+              Vuoi anche uno o più software di MG Business Suite integrati {service.slug === 'ecommerce-shopify' ? 'nello store' : 'nel sito'}?{' '}
+              <Link href="/software/pricing" className="font-semibold text-forest hover:text-brass">
+                Guarda i bundle sito + software →
+              </Link>
+            </p>
+          </section>
+        );
+      })()}
+
+      {service.slug === 'software-ai-su-misura' && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Sviluppo su misura e canone di gestione.</h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{softwareCustomPricing.note}</p>
+          </Reveal>
+          <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
+            <div className="border border-line rounded-xl px-5 py-4 text-sm">
+              <p className="text-ink/80">Sviluppo (una tantum)</p>
+              <p className="mt-1 font-semibold text-ink">{softwareCustomPricing.devRange}</p>
+            </div>
+            <div className="border border-line rounded-xl px-5 py-4 text-sm">
+              <p className="text-ink/80">Canone successivo</p>
+              <p className="mt-1 font-semibold text-ink">{softwareCustomPricing.monthlyRange}/mese</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {service.slug === 'restyling-ottimizzazione' && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Un intervento una tantum.</h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{restylingPricing.note}</p>
+          </Reveal>
+          <div className="mt-8 max-w-xs border border-line rounded-xl px-5 py-4 text-sm">
+            <p className="text-ink/80">Restyling completo</p>
+            <p className="mt-1 font-semibold text-ink">{restylingPricing.range}</p>
+          </div>
+          <p className="mt-6 text-sm text-ink/60 max-w-2xl">
+            Dopo il restyling puoi aggiungere {webCare.name} (€{webCare.price}/mese) per mantenere il sito in piedi 24/7.{' '}
+            <Link href="/servizi/siti-web-contatti" className="font-semibold text-forest hover:text-brass">
+              Scopri {webCare.name} →
+            </Link>
+          </p>
+        </section>
+      )}
+
+      {service.slug === 'ai-integration' && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Prezzo per integrazione.</h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{aiIntegrationPricing.note}</p>
+          </Reveal>
+          <div className="mt-8 max-w-xs border border-line rounded-xl px-5 py-4 text-sm">
+            <p className="text-ink/80">Per integrazione</p>
+            <p className="mt-1 font-semibold text-ink">€{aiIntegrationPricing.perIntegration} una tantum</p>
+          </div>
+        </section>
+      )}
+
+      {(service.slug === 'consulenza-strategica' ||
+        !['siti-web-contatti', 'ecommerce-shopify', 'software-ai-su-misura', 'restyling-ottimizzazione', 'ai-integration'].includes(
+          service.slug
+        )) && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Da cosa dipende l’investimento.</h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+              Non pubblichiamo un listino perché il costo reale cambia in base a come il servizio
+              viene usato. Ne parliamo apertamente in call, prima di qualsiasi proposta.
+            </p>
+          </Reveal>
+          <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {investmentFactors.map((f) => (
+              <div key={f} className="border border-line rounded-xl px-5 py-4 text-sm text-ink/75">
+                {f}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ---------- FAQ ---------- */}
       <section className="bg-paper-dim">

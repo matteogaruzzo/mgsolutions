@@ -14,7 +14,6 @@ const softwareDropdown = [
   { href: '/software/staff-operations', label: 'Staff & Operations' },
   { href: '/software/control-tower', label: 'Control Tower' },
   { href: '/software/pricing', label: 'Pricing' },
-  { href: '/software/pricing#web-care', label: 'Manutenzione Sito (Web Care)' },
 ];
 
 const links = [

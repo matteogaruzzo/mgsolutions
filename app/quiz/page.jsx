@@ -1,15 +1,23 @@
 import { Suspense } from 'react';
 import QuizFlow from '@/components/Quiz/QuizFlow';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
 
-export const metadata = {
+const PAGE = {
   title: 'Scopri di cosa hai bisogno',
   description:
     'Rispondi a poche domande e ricevi una proposta preliminare personalizzata per la tua attività, senza impegno.',
+  path: '/quiz',
 };
+
+export const metadata = pageMetadata(PAGE);
 
 export default function QuizPage() {
   return (
     <section className="max-w-edge mx-auto px-6 pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       <div className="text-center mb-14">
         <p className="eyebrow">Quiz · Scopri di cosa hai bisogno</p>
         <h1 className="display text-4xl md:text-5xl mt-4 max-w-2xl mx-auto leading-tight">

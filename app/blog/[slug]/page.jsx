@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CTA from '@/components/CTA';
 import { posts, getPost, site } from '@/lib/data';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 
 function slugifyHeading(text) {
   return text
@@ -65,6 +65,18 @@ export default function Post({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', path: '/' },
+              { name: 'Blog', path: '/blog' },
+              { name: p.title, path: `/blog/${p.slug}` },
+            ])
+          ),
+        }}
       />
 
       <div className="max-w-edge mx-auto px-6 pt-32 pb-20 grid lg:grid-cols-[220px_1fr] gap-12">

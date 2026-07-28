@@ -5,7 +5,7 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import StatNumber from '@/components/StatNumber';
 import { caseStudies, getCaseStudy, testimonials, metodoSteps, techRationale } from '@/lib/data';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema } from '@/lib/seo';
 import {
   AIIcon,
   CartIcon,
@@ -159,6 +159,18 @@ export default function CaseStudyPage({ params }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             webPageSchema({ title: c.title, description: c.tagline, path: `/portfolio/${c.slug}` })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', path: '/' },
+              { name: 'Portfolio', path: '/portfolio' },
+              { name: c.title, path: `/portfolio/${c.slug}` },
+            ])
           ),
         }}
       />

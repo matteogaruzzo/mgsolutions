@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import ServicePageTemplate from '@/components/ServicePageTemplate';
 import { servizi, getServizio } from '@/lib/data';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 export function generateStaticParams() {
   return servizi.map((s) => ({ slug: s.slug }));
@@ -30,6 +30,24 @@ export default function ServizioPage({ params }) {
           ),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', path: '/' },
+              { name: 'Servizi', path: '/servizi' },
+              { name: service.title, path: `/servizi/${service.slug}` },
+            ])
+          ),
+        }}
+      />
+      {service.faqs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(service.faqs)) }}
+        />
+      )}
       <ServicePageTemplate service={service} />
     </>
   );

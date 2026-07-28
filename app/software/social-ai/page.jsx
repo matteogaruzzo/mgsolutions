@@ -1,6 +1,6 @@
 import ModuleTemplate from '@/components/ModuleTemplate';
 import { getBusinessSuiteModule } from '@/lib/data';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const mod = getBusinessSuiteModule('social-ai');
 
@@ -23,6 +23,24 @@ export default function SocialAIPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: 'Home', path: '/' },
+              { name: 'Software', path: '/software' },
+              { name: mod.name, path: PAGE.path },
+            ])
+          ),
+        }}
+      />
+      {mod.faqs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(mod.faqs)) }}
+        />
+      )}
       <ModuleTemplate module={mod} />
     </>
   );

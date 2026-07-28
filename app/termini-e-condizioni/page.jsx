@@ -1,12 +1,14 @@
 import { site } from '@/lib/data';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
+
+const PAGE = {
+  title: 'Termini e Condizioni',
+  description: 'Termini e condizioni di utilizzo del sito MG Solutions.',
+  path: '/termini-e-condizioni',
+};
 
 export const metadata = {
-  ...pageMetadata({
-    title: 'Termini e Condizioni',
-    description: 'Termini e condizioni di utilizzo del sito MG Solutions.',
-    path: '/termini-e-condizioni',
-  }),
+  ...pageMetadata(PAGE),
   robots: { index: true, follow: true },
 };
 
@@ -15,6 +17,10 @@ const lastUpdated = '27 luglio 2026';
 export default function TerminiCondizioniPage() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       <p className="eyebrow">Note legali</p>
       <h1 className="h2 text-3xl md:text-4xl mt-4 text-ink">Termini e Condizioni</h1>
       <p className="mt-3 text-sm text-ink/50">Ultimo aggiornamento: {lastUpdated}</p>

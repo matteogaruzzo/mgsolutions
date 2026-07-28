@@ -7,7 +7,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import { site, team, testimonials } from '@/lib/data';
 import { ClockIcon, LockIcon, ChatIcon, CompassIcon, CalendarIcon, BookIcon, TargetIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, faqPageSchema } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: 'Contatti',
@@ -87,6 +87,10 @@ export default function ContattiPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(contactFaqs)) }}
       />
 
       {/* ---------- HERO ---------- */}

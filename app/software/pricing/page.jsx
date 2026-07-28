@@ -5,12 +5,13 @@ import BundleSection from '@/components/pricing/BundleSection';
 import ExtrasSection from '@/components/pricing/ExtrasSection';
 import PricingFAQ from '@/components/pricing/PricingFAQ';
 import PricingCTA from '@/components/pricing/PricingCTA';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { businessSuiteFaqs } from '@/lib/data';
+import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'MG Business Suite: pacchetti, prezzi e bundle',
   description:
-    'Moduli scelti, attivazione rapida, crescita reale. Non paghi l’illimitato, paghi per quello che usi: 3 pacchetti, Web Care e bundle sito+software.',
+    'Software scelti, attivazione rapida, crescita reale. Non paghi l’illimitato, paghi per quello che usi: 3 pacchetti, Web Care e bundle sito+software.',
   path: '/software/pricing',
 };
 
@@ -26,6 +27,10 @@ export default function SoftwarePricingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(businessSuiteFaqs)) }}
+      />
 
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
@@ -35,7 +40,7 @@ export default function SoftwarePricingPage() {
             L’ecosistema completo per il tuo business.
           </h1>
           <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">
-            Moduli scelti, attivazione rapida, crescita reale. Non paghi l’“illimitato”, paghi per quello che usi.
+            Software scelti, attivazione rapida, crescita reale. Non paghi l’“illimitato”, paghi per quello che usi.
           </p>
         </Reveal>
       </section>
@@ -58,8 +63,8 @@ export default function SoftwarePricingPage() {
         </div>
       </section>
 
-      {/* ---------- WEB CARE + BUNDLE ---------- */}
-      <section id="web-care" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
+      {/* ---------- BUNDLE SITO + SOFTWARE ---------- */}
+      <section id="bundle" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
         <BundleSection />
       </section>
 

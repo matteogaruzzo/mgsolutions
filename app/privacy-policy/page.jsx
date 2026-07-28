@@ -1,12 +1,14 @@
 import { site } from '@/lib/data';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, webPageSchema } from '@/lib/seo';
+
+const PAGE = {
+  title: 'Privacy Policy',
+  description: 'Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).',
+  path: '/privacy-policy',
+};
 
 export const metadata = {
-  ...pageMetadata({
-    title: 'Privacy Policy',
-    description: 'Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).',
-    path: '/privacy-policy',
-  }),
+  ...pageMetadata(PAGE),
   robots: { index: true, follow: true },
 };
 
@@ -15,6 +17,10 @@ const lastUpdated = '27 luglio 2026';
 export default function PrivacyPolicyPage() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
       <p className="eyebrow">Informativa privacy</p>
       <h1 className="h2 text-3xl md:text-4xl mt-4 text-ink">Privacy Policy</h1>
       <p className="mt-3 text-sm text-ink/50">Ultimo aggiornamento: {lastUpdated}</p>

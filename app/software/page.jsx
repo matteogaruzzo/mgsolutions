@@ -3,15 +3,30 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
-import { businessSuiteModules, softwareOngoing, testimonials } from '@/lib/data';
-import { ChatIcon, TargetIcon, CalendarIcon, ClockIcon, ChartIcon } from '@/components/icons/ServiceIcons';
+import SuiteDashboardGraphic from '@/components/graphics/SuiteDashboardGraphic';
+import {
+  businessSuiteModules,
+  businessSuitePersonas,
+  businessSuitePackages,
+  softwareOngoing,
+  testimonials,
+} from '@/lib/data';
+import {
+  ChatIcon,
+  TargetIcon,
+  CalendarIcon,
+  ClockIcon,
+  ChartIcon,
+  CompassIcon,
+  GearIcon,
+} from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'MG Business Suite: 5 moduli per il tuo agroalimentare',
+  title: 'MG Business Suite: 5 software per il tuo agroalimentare',
   description:
-    'Social AI, CRM, booking, operations e control tower in un unico ecosistema modulare. Attivi solo i moduli che ti servono, canone mensile trasparente.',
+    'Una piattaforma, 5 software scelti da te: Social AI, CRM, booking, operations e control tower. Attivi solo quelli che ti servono, canone mensile trasparente.',
   path: '/software',
 };
 
@@ -28,22 +43,47 @@ export const metadata = pageMetadata({
 
 const iconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
 
+const howItWorksSteps = [
+  {
+    icon: CompassIcon,
+    title: 'Scegli',
+    duration: '1 clic',
+    body: 'Decidi quale area del tuo business automatizzare: social, vendite, prenotazioni, team o controllo direzionale.',
+  },
+  {
+    icon: GearIcon,
+    title: 'Attiviamo',
+    duration: '24-48 ore',
+    body: 'Il nostro team configura tutto secondo il tuo processo. Collegamenti, automazioni, utenti: zero complicazioni per te.',
+  },
+  {
+    icon: ChartIcon,
+    title: 'Tu lavori',
+    duration: '24/7',
+    body: 'Il software lavora mentre tu segui il tuo business. Clienti gestiti in automatico, report ogni settimana via email.',
+  },
+];
+
 const softwareFaqs = [
   {
     q: 'Come si aggiorna? Devo scaricare qualcosa?',
     a: 'No. Il software vive online, come Gmail o WhatsApp — non come un programma da installare sul computer. Quando facciamo un aggiornamento lo ricevi automaticamente, senza fare nulla.',
   },
   {
-    q: 'Che differenza c’è tra i cinque moduli?',
+    q: 'Che differenza c’è tra i cinque software?',
     a: 'Coprono reparti diversi dell’azienda: contenuti social (Social AI), contatti e vendite (Lead & Sales), prenotazioni ed esperienza cliente (Booking & Customer Experience), team e operatività (Staff & Operations), visione d’insieme (Control Tower). Puoi partire da uno e aggiungerne altri nel tempo.',
   },
   {
     q: 'Quanto costa?',
-    a: 'Dipende da quanti moduli attivi: i 3 pacchetti (Essenziale, Crescita, Ecosistema) hanno canone e attivazione definiti, senza sorprese. Il dettaglio completo è su /software/pricing.',
+    a: 'Dipende da quanti software attivi: i 3 pacchetti (Essenziale, Crescita, Ecosistema) hanno canone e attivazione definiti, senza sorprese. Il dettaglio completo è su /software/pricing.',
   },
 ];
 
 const relevantTestimonials = testimonials.filter((t) => ['Andrea', 'Giulia'].includes(t.name));
+
+function packageName(id) {
+  return businessSuitePackages.find((p) => p.id === id)?.name || id;
+}
 
 export default function Software() {
   return (
@@ -52,60 +92,79 @@ export default function Software() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(softwareFaqs)) }}
+      />
+
       {/* ---------- HERO ---------- */}
-      <section className="max-w-edge mx-auto px-6 pt-32 pb-14">
-        <p className="eyebrow">Prodotti · MG Business Suite</p>
-        <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.05]">
-          Un ecosistema digitale per l’agroalimentare.
-        </h1>
-        <p className="mt-8 text-lg text-ink/70 max-w-2xl leading-relaxed">
-          5 moduli — social, vendite, prenotazioni, operatività, controllo direzionale — pensati per
-          cantine, oleifici e agriturismi. Attivi solo quello che ti serve, con un canone chiaro fin
-          dal primo giorno.
-        </p>
-
-        <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/software/pricing" className="btn-solid">
-            <GrapeIcon className="w-4 h-4" />
-            Scopri i pacchetti →
-          </Link>
-          <Link href="#moduli" className="btn-ghost">
-            Scopri i 5 moduli
-          </Link>
-        </div>
-      </section>
-
-      {/* ---------- COME FUNZIONA DAVVERO ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-20">
+      <section className="max-w-edge mx-auto px-6 pt-32 pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <p className="eyebrow">Come funziona davvero</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-              La semplicità dietro la complessità.
-            </h2>
-            <div className="mt-6 max-w-2xl space-y-4 text-ink/75 leading-relaxed">
-              <p>Immagina di assumere una persona nuova nel team per ogni reparto.</p>
-              <p>
-                Una che gestisce i social, una che segue i contatti commerciali, una che si occupa
-                delle prenotazioni, una che coordina i turni, e una che tiene sott’occhio tutti i
-                numeri dell’azienda. Dopo il setup iniziale, lavorano da sole. 24 ore su 24.
+            <div>
+              <p className="eyebrow">Prodotti · MG Business Suite</p>
+              <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">
+                Una piattaforma, 5 software scelti da te.
+              </h1>
+              <p className="mt-6 text-lg text-ink/70 max-w-xl leading-relaxed">
+                MG Business Suite parte vuota: tu scegli quali software attivare dentro — social,
+                vendite, prenotazioni, team, controllo — e paghi solo per quello che usi, fin dal
+                primo giorno.
               </p>
-              <p>Questa è, in pratica, MG Business Suite.</p>
-              <p>
-                Non è magia: sono moduli AI collegati ai tuoi strumenti (sito, calendario, social,
-                CRM) e configurati sui tuoi processi reali.
-              </p>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <Link href="/software/pricing" className="btn-solid">
+                  <GrapeIcon className="w-4 h-4" />
+                  Scopri i pacchetti →
+                </Link>
+                <Link href="#software" className="btn-ghost">
+                  Scegli i 5 software
+                </Link>
+              </div>
             </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <SuiteDashboardGraphic />
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- I 5 MODULI ---------- */}
-      <section id="moduli" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
+      {/* ---------- COME FUNZIONA ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Come funziona</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
+              Non è complicato come sembra.
+            </h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+              Ecco come MG Business Suite semplifica il tuo lavoro.
+            </p>
+          </Reveal>
+
+          <div className="mt-14 grid sm:grid-cols-3 gap-6">
+            {howItWorksSteps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80}>
+                <div className="bg-paper border border-line rounded-2xl p-7 h-full">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <s.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <p className="mt-5 text-xs font-semibold tracking-widest text-forest uppercase">
+                    {i + 1}. {s.title} · {s.duration}
+                  </p>
+                  <p className="mt-3 text-sm text-ink/70 leading-relaxed">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- I 5 SOFTWARE ---------- */}
+      <section id="software" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
         <Reveal>
-          <p className="eyebrow">I 5 moduli</p>
+          <p className="eyebrow">I 5 software disponibili</p>
           <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-            Quale reparto vuoi automatizzare per primo?
+            Scegli quali software ti servono.
           </h2>
         </Reveal>
 
@@ -121,6 +180,13 @@ export default function Software() {
                   <Icon className="w-8 h-8 text-forest" />
                   <h3 className="h3 text-xl mt-4 text-ink">{m.name}</h3>
                   <p className="mt-3 text-sm text-ink/65 leading-relaxed">{m.tagline}</p>
+                  <ul className="mt-4 space-y-1.5">
+                    {m.features.slice(0, 3).map((f) => (
+                      <li key={f} className="flex gap-2 text-xs text-ink/60">
+                        <span className="text-primary shrink-0">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
                   <span className="mt-5 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
                     Scopri →
                   </span>
@@ -136,21 +202,43 @@ export default function Software() {
         </p>
       </section>
 
-      {/* ---------- SCEGLI IL TUO PERCORSO ---------- */}
+      {/* ---------- QUALE SOFTWARE SERVE A TE ---------- */}
       <section className="bg-ink text-paper">
-        <div className="max-w-edge mx-auto px-6 py-24 text-center">
+        <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-brass">Prezzi e pacchetti</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4">Scegli il tuo percorso.</h2>
-            <p className="mt-5 text-paper/70 max-w-xl mx-auto leading-relaxed">
-              1 modulo, 3 moduli o l’intera suite: 3 pacchetti con canone e attivazione definiti, più
-              Web Care per il sito e bundle sito+software.
-            </p>
-            <Link href="/software/pricing" className="btn-solid bg-brass text-ink hover:bg-paper mt-9">
-              <GrapeIcon className="w-4 h-4" />
-              Vedi pacchetti e prezzi →
-            </Link>
+            <p className="eyebrow text-brass">Trova il tuo percorso</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl">Quale software serve a te?</h2>
           </Reveal>
+
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {businessSuitePersonas.map((p, i) => (
+              <Reveal key={p.label} delay={i * 80}>
+                <div className="border border-paper/15 rounded-2xl p-7 h-full flex flex-col">
+                  <p className="font-semibold text-lg leading-snug">{p.label}</p>
+                  <p className="mt-4 text-xs font-semibold tracking-widest text-brass uppercase">Ti servono</p>
+                  <ul className="mt-2 space-y-1">
+                    {p.modules.map((slug) => {
+                      const mod = businessSuiteModules.find((m) => m.slug === slug);
+                      return (
+                        <li key={slug} className="text-sm text-paper/80">
+                          {mod?.name}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <p className="mt-4 text-xs text-paper/50">Pacchetto: {packageName(p.package)}</p>
+                  <p className="mt-4 text-sm text-paper/70 leading-relaxed flex-1">{p.benefit}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link href="/software/pricing" className="btn-solid bg-brass text-ink hover:bg-paper">
+              <GrapeIcon className="w-4 h-4" />
+              Scopri i pacchetti →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -202,8 +290,8 @@ export default function Software() {
       </section>
 
       <CTA
-        title="Pronto a parlarne?"
-        sub="Consulenza gratuita: analizziamo il tuo processo e ti diciamo con onestà quale modulo (o pacchetto) ha senso attivare per primo."
+        title="Pronto a lavorare meno e crescere di più?"
+        sub="Scegli il tuo pacchetto oppure prenota una call con il nostro team per capire esattamente come funziona per il tuo business."
       />
     </>
   );

@@ -5,7 +5,7 @@ import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import { metodoSteps, whyMG, getCaseStudy } from '@/lib/data';
 import { ChartIcon, CompassIcon, PaletteIcon, CodeIcon } from '@/components/icons/ServiceIcons';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'Il nostro metodo: zero fuffa, solo crescita reale',
@@ -58,6 +58,10 @@ export default function MetodoPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(methodFaqs)) }}
       />
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">

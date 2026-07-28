@@ -6,7 +6,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import { site, team, testimonials } from '@/lib/data';
 import { ClockIcon, ChatIcon, CompassIcon, ChartIcon, TargetIcon, BookIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-import { pageMetadata, webPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'Prenota una call consultativa gratuita (30 minuti)',
@@ -60,6 +60,10 @@ export default function PrenotaCall() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(miniFaqs)) }}
       />
       {/* ---------- HERO MINI ---------- */}
       <section

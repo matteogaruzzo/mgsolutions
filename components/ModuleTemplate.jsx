@@ -1,11 +1,44 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import FAQAccordion from '@/components/FAQAccordion';
 import { businessSuiteModules, businessSuitePackages, getBusinessSuiteModule } from '@/lib/data';
-import { ChatIcon, TargetIcon, CalendarIcon, ClockIcon, ChartIcon } from '@/components/icons/ServiceIcons';
+import {
+  ChatIcon,
+  TargetIcon,
+  CalendarIcon,
+  ClockIcon,
+  ChartIcon,
+  AIIcon,
+  PaletteIcon,
+  LockIcon,
+  CompassIcon,
+  RefreshIcon,
+  BookIcon,
+  CartIcon,
+  PinIcon,
+  GearIcon,
+} from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 
 const iconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
+
+const featureIconMap = {
+  ai: AIIcon,
+  calendar: CalendarIcon,
+  palette: PaletteIcon,
+  lock: LockIcon,
+  compass: CompassIcon,
+  chart: ChartIcon,
+  target: TargetIcon,
+  refresh: RefreshIcon,
+  book: BookIcon,
+  chat: ChatIcon,
+  cart: CartIcon,
+  pin: PinIcon,
+  gear: GearIcon,
+  clock: ClockIcon,
+};
 
 function packageName(id) {
   return businessSuitePackages.find((p) => p.id === id)?.name || id;
@@ -21,8 +54,14 @@ export default function ModuleTemplate({ module: mod }) {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="bg-ink text-paper">
-        <div className="max-w-edge mx-auto px-6 pt-32 pb-20">
+      <section
+        className="relative bg-ink text-paper bg-cover bg-center"
+        style={mod.heroImage ? { backgroundImage: `url(${mod.heroImage})` } : undefined}
+      >
+        {mod.heroImage && (
+          <div className="absolute inset-0 bg-ink/60" aria-hidden="true" />
+        )}
+        <div className="relative max-w-edge mx-auto px-6 pt-32 pb-20">
           <Link href="/software" className="text-xs text-paper/70 hover:underline">
             ← MG Business Suite
           </Link>
@@ -43,79 +82,122 @@ export default function ModuleTemplate({ module: mod }) {
         </div>
       </section>
 
-      {/* ---------- COSA FA ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <Reveal>
-          <p className="eyebrow">Cosa fa</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">{mod.whatItDoes}</h2>
-        </Reveal>
-
-        <div className="mt-12 grid sm:grid-cols-2 gap-4">
-          {mod.features.map((f) => (
-            <div key={f} className="flex gap-3 border border-line rounded-xl px-5 py-4 bg-paper">
-              <span className="text-primary shrink-0">✓</span>
-              <span className="text-sm text-ink/80 leading-relaxed">{f}</span>
-            </div>
-          ))}
-        </div>
-
-        {mod.channels && (
-          <div className="mt-8">
-            <p className="text-xs font-semibold tracking-widest text-forest uppercase">Canali supportati</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {mod.channels.map((c) => (
-                <span key={c} className="text-xs text-ink/70 border border-line rounded-full px-3 py-1.5">
-                  {c}
-                </span>
-              ))}
-            </div>
+      {/* ---------- NARRATIVA ---------- */}
+      {mod.narrative && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Cosa fa davvero</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">{mod.whatItDoes}</h2>
+          </Reveal>
+          <div className="mt-8 max-w-2xl space-y-5">
+            {mod.narrative.map((p, i) => (
+              <Reveal key={p} delay={i * 60}>
+                <p className="text-ink/75 leading-relaxed">{p}</p>
+              </Reveal>
+            ))}
           </div>
-        )}
-      </section>
 
-      {/* ---------- COME FUNZIONA ---------- */}
-      {(mod.keyFlow?.steps || mod.keyFlow?.note) && (
+          {mod.channels && (
+            <div className="mt-10">
+              <p className="text-xs font-semibold tracking-widest text-forest uppercase">Canali supportati</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {mod.channels.map((c) => (
+                  <span key={c} className="text-xs text-ink/70 border border-line rounded-full px-3 py-1.5">
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ---------- COSA COMPRENDE (feature cards) ---------- */}
+      {mod.featureCards && (
         <section className="bg-paper-dim">
           <div className="max-w-edge mx-auto px-6 py-24">
             <Reveal>
-              <p className="eyebrow">Come funziona</p>
-              <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Il flusso, passo dopo passo.</h2>
+              <p className="eyebrow">Cosa comprende</p>
+              <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Sei funzioni, un unico software.</h2>
             </Reveal>
-            {mod.keyFlow.steps && (
-              <div className="mt-10 flex flex-wrap gap-3">
-                {mod.keyFlow.steps.map((s, i) => (
-                  <div key={s} className="flex items-center gap-3">
-                    <div className="bg-paper border border-line rounded-xl px-5 py-3 text-sm text-ink/80">
-                      <span className="text-forest font-semibold mr-2">{i + 1}</span>
-                      {s}
+            <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {mod.featureCards.map((f, i) => {
+                const FIcon = featureIconMap[f.icon] || TargetIcon;
+                return (
+                  <Reveal key={f.title} delay={i * 60}>
+                    <div className="h-full border border-line rounded-xl p-6 bg-paper">
+                      <FIcon className="w-6 h-6 text-forest" />
+                      <h3 className="h3 text-base mt-4 text-ink">{f.title}</h3>
+                      <p className="mt-2 text-sm text-ink/65 leading-relaxed">{f.body}</p>
                     </div>
-                    {i < mod.keyFlow.steps.length - 1 && <span className="text-ink/30">→</span>}
-                  </div>
-                ))}
-              </div>
-            )}
-            {mod.keyFlow.note && (
-              <p className="mt-6 text-sm text-ink/70 max-w-2xl leading-relaxed italic">{mod.keyFlow.note}</p>
-            )}
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ---------- COME FUNZIONA ---------- */}
+      {mod.flow && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Come funziona</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Il flusso, passo dopo passo.</h2>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {mod.flow.map((s, i) => (
+              <Reveal key={s.title} delay={i * 60}>
+                <div className="relative h-full border border-line rounded-xl p-6 bg-paper">
+                  <span className="text-3xl font-bold text-brass/70">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="h3 text-base mt-3 text-ink">{s.title}</h3>
+                  <p className="mt-2 text-sm text-ink/65 leading-relaxed">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
       )}
 
       {/* ---------- VANTAGGI BUSINESS ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <Reveal>
-          <p className="eyebrow">Vantaggi business</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Perché conviene davvero.</h2>
-        </Reveal>
-        <div className="mt-12 grid sm:grid-cols-2 gap-6">
-          {mod.benefits.map((b) => (
-            <div key={b.title}>
-              <p className="font-semibold text-ink">{b.title}</p>
-              <p className="mt-1.5 text-sm text-ink/65 leading-relaxed">{b.body}</p>
-            </div>
-          ))}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Vantaggi business</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Perché conviene davvero.</h2>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 gap-6">
+            {mod.benefits.map((b) => (
+              <div key={b.title}>
+                <p className="font-semibold text-ink">{b.title}</p>
+                <p className="mt-1.5 text-sm text-ink/65 leading-relaxed">{b.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* ---------- CASE STUDY ---------- */}
+      {mod.caseStudy && (
+        <section className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Esempio illustrativo</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">{mod.caseStudy.title}</h2>
+            <p className="mt-5 text-ink/70 max-w-2xl leading-relaxed">{mod.caseStudy.narrative}</p>
+          </Reveal>
+          <div className="mt-8 grid sm:grid-cols-3 gap-4 max-w-2xl">
+            {mod.caseStudy.stats.map(([value, label]) => (
+              <div key={label} className="border border-line rounded-xl px-5 py-4 bg-paper-dim">
+                <p className="text-2xl font-bold text-forest">{value}</p>
+                <p className="mt-1 text-xs text-ink/60 leading-snug">{label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-xs italic text-ink/45">
+            Esempio illustrativo di utilizzo del software, non un cliente reale.
+          </p>
+        </section>
+      )}
 
       {/* ---------- CHI LO USA ---------- */}
       <section className="bg-paper-dim">
@@ -145,50 +227,63 @@ export default function ModuleTemplate({ module: mod }) {
         </section>
       )}
 
-      {/* ---------- PRICING ---------- */}
-      <section className={mod.excludedForCompliance ? 'bg-paper-dim' : 'max-w-edge mx-auto px-6 py-24'}>
-        <div className={mod.excludedForCompliance ? 'max-w-edge mx-auto px-6 py-24' : ''}>
-          <Reveal>
-            <p className="eyebrow">Pricing</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Quanto costa e cosa include.</h2>
-          </Reveal>
-          <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="border border-line rounded-xl px-5 py-4 bg-paper">
-              <p className="text-xs text-ink/50">Canone</p>
-              <p className="mt-1 font-semibold text-ink">
-                {mod.pricing.monthly
-                  ? `€${mod.pricing.monthly}/mese`
-                  : `Incluso in ${mod.pricing.includedInPackages.map(packageName).join(' e ')}`}
-              </p>
-            </div>
-            <div className="border border-line rounded-xl px-5 py-4 bg-paper">
-              <p className="text-xs text-ink/50">Attivazione</p>
-              <p className="mt-1 font-semibold text-ink">{mod.pricing.activation}</p>
-            </div>
-            <div className="border border-line rounded-xl px-5 py-4 bg-paper sm:col-span-2 md:col-span-2">
-              <p className="text-xs text-ink/50">Limiti inclusi</p>
-              <p className="mt-1 font-semibold text-ink">{mod.pricing.limits}</p>
+      {/* ---------- FAQ ---------- */}
+      {mod.faqs && (
+        <section className="bg-paper-dim">
+          <div className="max-w-edge mx-auto px-6 py-24">
+            <Reveal>
+              <p className="eyebrow">Domande su questo software</p>
+              <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">FAQ.</h2>
+            </Reveal>
+            <div className="mt-10">
+              <FAQAccordion items={mod.faqs} />
             </div>
           </div>
-          {mod.pricing.extras.length > 0 && (
-            <div className="mt-6">
-              <p className="text-xs font-semibold tracking-widest text-forest uppercase">Extra disponibili</p>
-              <ul className="mt-3 space-y-1.5">
-                {mod.pricing.extras.map((e) => (
-                  <li key={e} className="text-sm text-ink/70">
-                    {e}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        </section>
+      )}
+
+      {/* ---------- PRICING ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Pricing</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Quanto costa e cosa include.</h2>
+        </Reveal>
+        <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="border border-line rounded-xl px-5 py-4 bg-paper">
+            <p className="text-xs text-ink/50">Canone</p>
+            <p className="mt-1 font-semibold text-ink">
+              {mod.pricing.monthly
+                ? `€${mod.pricing.monthly}/mese`
+                : `Incluso in ${mod.pricing.includedInPackages.map(packageName).join(' e ')}`}
+            </p>
+          </div>
+          <div className="border border-line rounded-xl px-5 py-4 bg-paper">
+            <p className="text-xs text-ink/50">Attivazione</p>
+            <p className="mt-1 font-semibold text-ink">{mod.pricing.activation}</p>
+          </div>
+          <div className="border border-line rounded-xl px-5 py-4 bg-paper sm:col-span-2 md:col-span-2">
+            <p className="text-xs text-ink/50">Limiti inclusi</p>
+            <p className="mt-1 font-semibold text-ink">{mod.pricing.limits}</p>
+          </div>
         </div>
+        {mod.pricing.extras.length > 0 && (
+          <div className="mt-6">
+            <p className="text-xs font-semibold tracking-widest text-forest uppercase">Extra disponibili</p>
+            <ul className="mt-3 space-y-1.5">
+              {mod.pricing.extras.map((e) => (
+                <li key={e} className="text-sm text-ink/70">
+                  {e}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </section>
 
       {/* ---------- ALTRI MODULI ---------- */}
       {others.length > 0 && (
-        <section className={mod.excludedForCompliance ? 'max-w-edge mx-auto px-6 py-24' : 'bg-paper-dim'}>
-          <div className={mod.excludedForCompliance ? '' : 'max-w-edge mx-auto px-6 py-24'}>
+        <section className="bg-paper-dim">
+          <div className="max-w-edge mx-auto px-6 py-24">
             <Reveal>
               <p className="eyebrow">Si integra con</p>
               <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Funziona ancora meglio insieme.</h2>
@@ -220,7 +315,7 @@ export default function ModuleTemplate({ module: mod }) {
       <section className="max-w-edge mx-auto px-6 py-24">
         <Reveal>
           <p className="eyebrow">MG Business Suite</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Gli altri moduli.</h2>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Gli altri software.</h2>
         </Reveal>
         <div className="mt-10 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
           {otherModules

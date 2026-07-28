@@ -1,4 +1,4 @@
-import { businessSuitePackages } from '@/lib/data';
+import { businessSuitePackages, businessSuiteModules } from '@/lib/data';
 
 // Bottoni volutamente disabled: il checkout Stripe non è ancora collegato.
 // Quando lo sarà, questo file andrà convertito in 'use client' per gestire
@@ -12,6 +12,13 @@ const buttonStyles = {
   null: 'bg-ink text-paper',
   blue: 'bg-[#0066cc] text-white',
   green: 'bg-primary text-white',
+};
+
+// Quanti software si scelgono in ciascun pacchetto: usato per etichettare i chip dei 5 software.
+const moduleSlots = {
+  essenziale: { count: 1, label: 'Scegli 1 software tra i 5' },
+  crescita: { count: 3, label: 'Scegli 3 software tra i 5' },
+  ecosistema: { count: 5, label: 'Tutti e 5 i software inclusi' },
 };
 
 export default function PricingTiers() {
@@ -53,6 +60,30 @@ export default function PricingTiers() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-6 pt-6 border-t border-line/60">
+            <p className="text-xs font-semibold tracking-widest text-forest uppercase">
+              {moduleSlots[pkg.id].label}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {businessSuiteModules.map((m) => {
+                const isIncluded = pkg.id === 'ecosistema';
+                return (
+                  <span
+                    key={m.slug}
+                    className={`text-xs rounded-full px-2.5 py-1 border ${
+                      isIncluded
+                        ? 'border-primary/30 bg-primary/10 text-primary font-medium'
+                        : 'border-line text-gray-600'
+                    }`}
+                  >
+                    {isIncluded && '✓ '}
+                    {m.name.replace('MG ', '')}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
 
           <button
             type="button"
