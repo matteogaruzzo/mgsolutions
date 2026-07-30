@@ -20,6 +20,7 @@ const risorseLinks = [
   { href: '/software', label: 'Software' },
   { href: '/risorse', label: 'Risorse' },
   { href: '/quiz', label: 'Genera una proposta' },
+  { href: '/referral', label: 'Referral Program (€200)' },
   { href: '/contatti', label: 'Contatti' },
 ];
 

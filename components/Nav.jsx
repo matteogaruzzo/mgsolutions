@@ -24,6 +24,7 @@ const links = [
   { href: '/software', label: 'Software', dropdown: softwareDropdown },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
+  { href: '/referral', label: 'Referral' },
   { href: '/contatti', label: 'Contatti' },
 ];
 

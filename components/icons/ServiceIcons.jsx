@@ -156,3 +156,70 @@ export function CodeIcon({ className = 'w-6 h-6' }) {
     </svg>
   );
 }
+
+export function HandshakeIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <path d="M2 12.5 6 9l3.5 3-1 1a1.7 1.7 0 0 0 2.4 2.4l3.4-3.4 4.7 3.5" />
+      <path d="m11 8 2.3-2a2 2 0 0 1 2.7.1L18 8l4 3-3 3.5" />
+      <path d="M9.5 15.5 8 17a1.7 1.7 0 0 0 2.4 2.4l.6-.6" />
+    </svg>
+  );
+}
+
+export function GiftIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <rect x="3.5" y="9" width="17" height="4" rx="0.8" />
+      <path d="M5 13v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M12 9v12" />
+      <path d="M12 9C9 9 7.5 7.7 7.5 6a2.2 2.2 0 0 1 4.2-.9c.3.6.3 1.9.3 3ZM12 9c3 0 4.5-1.3 4.5-3a2.2 2.2 0 0 0-4.2-.9c-.3.6-.3 1.9-.3 3Z" />
+    </svg>
+  );
+}
+
+export function CheckCircleIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8.5 12.5 2.3 2.3L16 10" />
+    </svg>
+  );
+}
+
+export function BuildingIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <rect x="5" y="3" width="10" height="18" rx="1" />
+      <path d="M15 9h4v12H8" />
+      <path d="M8.3 7h1.4M8.3 10.5h1.4M8.3 14h1.4M10.6 7h1.4M10.6 10.5h1.4M10.6 14h1.4" />
+    </svg>
+  );
+}
+
+export function ScaleIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <path d="M12 3v18M8 21h8" />
+      <path d="M5 6h14M5 6 2.5 11a2.5 2.5 0 0 0 5 0L5 6ZM19 6l-2.5 5a2.5 2.5 0 0 0 5 0L19 6Z" />
+    </svg>
+  );
+}
+
+export function MegaphoneIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <path d="M3 11v2a1.5 1.5 0 0 0 1.5 1.5H6l1 5h2l-.8-5h1.1L18 18V6l-8.7 3.5H6A1.5 1.5 0 0 0 4.5 11H3Z" />
+      <path d="M20.5 9.5a4 4 0 0 1 0 5" />
+    </svg>
+  );
+}
+
+export function UsersIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+      <path d="M16 4.3a3.2 3.2 0 0 1 0 6.2M21 20c0-2.8-2-5.1-4.7-5.8" />
+    </svg>
+  );
+}
