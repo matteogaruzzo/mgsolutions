@@ -16,6 +16,12 @@ const softwareDropdown = [
   { href: '/software/pricing', label: 'Pricing' },
 ];
 
+const contattiDropdown = [
+  { href: '/contatti', label: 'Scrivici' },
+  { href: '/prenota-call', label: 'Prenota una call' },
+  { href: '/referral', label: 'Guadagna con noi' },
+];
+
 const links = [
   { href: '/chi-sono', label: 'Chi Sono' },
   { href: '/servizi', label: 'Cosa Facciamo' },
@@ -24,13 +30,12 @@ const links = [
   { href: '/software', label: 'Software', dropdown: softwareDropdown },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
-  { href: '/referral', label: 'Referral' },
-  { href: '/contatti', label: 'Contatti' },
+  { href: '/contatti', label: 'Contatti', dropdown: contattiDropdown },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [mobileSoftwareOpen, setMobileSoftwareOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
@@ -111,14 +116,16 @@ export default function Nav() {
                       {l.label}
                     </Link>
                     <button
-                      onClick={() => setMobileSoftwareOpen((v) => !v)}
-                      aria-label="Espandi Software"
+                      onClick={() =>
+                        setMobileDropdownOpen((v) => (v === l.href ? null : l.href))
+                      }
+                      aria-label={`Espandi ${l.label}`}
                       className="text-ink/50 font-mono text-xs px-2"
                     >
-                      {mobileSoftwareOpen ? '▴' : '▾'}
+                      {mobileDropdownOpen === l.href ? '▴' : '▾'}
                     </button>
                   </div>
-                  {mobileSoftwareOpen && (
+                  {mobileDropdownOpen === l.href && (
                     <div className="mt-3 ml-3 flex flex-col gap-3 border-l border-line pl-4">
                       {l.dropdown.map((d) => (
                         <Link

@@ -122,8 +122,11 @@ export default function ReferralPage() {
 
       {/* ---------- HERO ---------- */}
       <section
-        className="text-paper"
-        style={{ background: 'linear-gradient(135deg, #00713a 0%, #008b47 55%, #00c853 100%)' }}
+        className="relative bg-cover bg-center text-paper"
+        style={{
+          backgroundImage:
+            'linear-gradient(180deg, rgba(10,30,18,0.55) 0%, rgba(10,30,18,0.82) 100%), url(/images/hero/home-hero.png)',
+        }}
       >
         <div className="max-w-edge mx-auto px-6 pt-32 pb-20 text-center">
           <Reveal>
