@@ -63,13 +63,13 @@ export default function Nav() {
           <SocialIcons className="hidden sm:flex text-ink [&_svg]:w-[18px] [&_svg]:h-[18px]" />
         </div>
 
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-5">
           {links.map((l) =>
             l.mega ? (
-              <div key={l.href} className="relative group">
+              <div key={l.href} className="relative group shrink-0">
                 <Link
                   href={l.href}
-                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1"
+                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1 whitespace-nowrap"
                 >
                   {l.label}
                   <span className="text-[10px] text-ink/40" aria-hidden="true">▾</span>
@@ -81,7 +81,7 @@ export default function Nav() {
                         <Link
                           key={m.href}
                           href={m.href}
-                          className="flex gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                          className="flex gap-3 p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
                         >
                           <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
                             <m.Icon className="w-5 h-5" />
@@ -103,10 +103,10 @@ export default function Nav() {
                 </div>
               </div>
             ) : l.dropdown ? (
-              <div key={l.href} className="relative group">
+              <div key={l.href} className="relative group shrink-0">
                 <Link
                   href={l.href}
-                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1"
+                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1 whitespace-nowrap"
                 >
                   {l.label}
                   <span className="text-[10px] text-ink/40" aria-hidden="true">▾</span>
@@ -129,13 +129,13 @@ export default function Nav() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors"
+                className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors whitespace-nowrap shrink-0"
               >
                 {l.label}
               </Link>
             )
           )}
-          <Link href="/prenota-call" className="btn-solid text-[13px] py-2">
+          <Link href="/prenota-call" className="btn-solid text-[13px] py-2 whitespace-nowrap shrink-0">
             <GrapeIcon className="w-4 h-4" />
             Prenota una call
           </Link>
