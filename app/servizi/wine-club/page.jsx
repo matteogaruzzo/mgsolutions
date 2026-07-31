@@ -202,7 +202,7 @@ export default function WineClubPage() {
               <GlassIcon className="w-7 h-7" />
             </span>
             <p className="eyebrow text-brass mt-6">Wine Club</p>
-            <h1 className="display text-4xl md:text-5xl mt-4 max-w-2xl mx-auto leading-tight">
+            <h1 className="display text-3xl sm:text-4xl md:text-5xl mt-4 max-w-2xl mx-auto leading-[1.2] break-words">
               Fedeltà, comunità e nuove entrate ricorrenti.
             </h1>
             <p className="mt-5 text-lg text-paper/85 max-w-xl mx-auto leading-relaxed">

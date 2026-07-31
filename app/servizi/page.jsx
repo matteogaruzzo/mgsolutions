@@ -76,7 +76,7 @@ export default function Servizi() {
       >
         <div className="max-w-edge mx-auto px-6 pt-40 pb-24">
           <p className="text-xs font-medium tracking-wider uppercase text-brass">Cosa Facciamo</p>
-          <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">
+          <h1 className="display text-3xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.2] break-words">
             Tutto quello che serve per crescere online, in un unico posto.
           </h1>
           <p className="mt-8 text-lg text-paper/85 max-w-2xl leading-relaxed">

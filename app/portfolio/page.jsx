@@ -40,7 +40,7 @@ export default function Portfolio() {
       />
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">Portfolio · Progetti realizzati</p>
-        <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">
+        <h1 className="display text-3xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.2] break-words">
           Progetti costruiti per cantine, oleifici e agriturismi.
         </h1>
         <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">

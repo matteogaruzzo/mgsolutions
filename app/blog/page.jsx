@@ -30,7 +30,7 @@ export default function Blog() {
       />
       <section className="max-w-edge mx-auto px-6 pt-32 pb-24">
       <p className="eyebrow">Blog</p>
-      <h1 className="display text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02]">
+      <h1 className="display text-3xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.2] break-words">
         Idee chiare su AI, vendite online e crescita.
       </h1>
       <p className="mt-8 text-lg text-ink/70 max-w-2xl leading-relaxed">

@@ -137,7 +137,7 @@ export default function RegionePage({ params }) {
               <Link href="/" className="hover:text-paper">Home</Link> {'>'}{' '}
               <Link href="/geo" className="hover:text-paper">Dove lavoriamo</Link> {'>'} {region.name}
             </p>
-            <h1 className="display text-4xl md:text-5xl mt-5 max-w-2xl leading-tight">
+            <h1 className="display text-3xl sm:text-4xl md:text-5xl mt-5 max-w-2xl leading-[1.2] break-words">
               Soluzioni digitali per l’agroalimentare in {region.name}.
             </h1>
             <p className="mt-5 text-lg text-paper/85 max-w-xl leading-relaxed">

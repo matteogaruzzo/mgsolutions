@@ -63,7 +63,7 @@ export default function SectorPageTemplate({ sectorNumber, sector, content, them
             <span className="text-xs tracking-wider whitespace-nowrap">Settore {sectorNumber}</span>
             <span className="text-xs font-light tracking-wide opacity-80">· {sector.name}</span>
           </div>
-          <h1 className="display text-4xl md:text-6xl mt-4 max-w-3xl leading-[1.08]">
+          <h1 className="display text-3xl sm:text-4xl md:text-6xl mt-4 max-w-3xl leading-[1.15] break-words">
             {content.heroTitle}
           </h1>
           <p className="mt-6 text-lg text-paper/85 max-w-2xl leading-relaxed">{content.heroSubtitle}</p>

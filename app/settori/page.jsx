@@ -90,7 +90,7 @@ export default function Settori() {
       />
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">I tre settori</p>
-        <h1 className="display text-4xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.02] break-words">
+        <h1 className="display text-2xl sm:text-4xl md:text-6xl mt-5 max-w-3xl leading-[1.25] break-words">
           Agribusiness di eccellenza e hospitality premium. Non facciamo altro.
         </h1>
         <p className="mt-8 text-lg text-ink/70 max-w-2xl leading-relaxed">

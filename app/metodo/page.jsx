@@ -66,7 +66,7 @@ export default function MetodoPage() {
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <p className="eyebrow">Il Metodo</p>
-        <h1 className="display text-4xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.05] break-words">
+        <h1 className="display text-3xl sm:text-5xl md:text-6xl mt-5 max-w-3xl leading-[1.2] break-words">
           Come trasformiamo il tuo business digitale.
         </h1>
         <p className="mt-8 text-lg text-ink/70 max-w-2xl leading-relaxed">
