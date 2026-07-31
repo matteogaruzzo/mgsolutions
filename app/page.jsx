@@ -96,7 +96,7 @@ export default function Home() {
             <GrapeIcon className="w-4 h-4" /> Digital Architect · Wine & Agribusiness · Perugia
           </p>
 
-          <h1 className="display text-5xl md:text-6xl lg:text-7xl leading-[1.05] mt-6 max-w-3xl">
+          <h1 className="display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mt-6 max-w-3xl break-words">
             Digitalizziamo l’eccellenza agroalimentare.
           </h1>
 
@@ -382,8 +382,8 @@ export default function Home() {
           </Reveal>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-line border border-line rounded-2xl overflow-hidden">
             {referenceNumbers.map(([n, l, src]) => (
-              <div key={l} className="bg-paper p-7 text-center">
-                <p className="display text-3xl md:text-4xl text-forest">{n}</p>
+              <div key={l} className="bg-paper p-4 sm:p-7 text-center">
+                <p className="display text-xl sm:text-2xl md:text-4xl text-forest break-words">{n}</p>
                 <p className="text-xs text-ink/60 mt-2 leading-snug">{l}</p>
                 <p className="text-[11px] text-ink/40 mt-2 italic">{src}</p>
               </div>
