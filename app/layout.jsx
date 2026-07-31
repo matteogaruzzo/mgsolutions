@@ -46,6 +46,11 @@ export const metadata = {
     images: ['/images/og-image-default.png'],
   },
   robots: { index: true, follow: true },
+  verification: {
+    other: {
+      'msvalidate.01': '10DEF08EE1EB623FF967CEF5E9B73684',
+    },
+  },
 };
 
 const organizationSchema = {
