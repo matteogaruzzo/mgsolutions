@@ -12,7 +12,7 @@ import {
   MegaphoneIcon,
   UsersIcon,
 } from '@/components/icons/ServiceIcons';
-import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, faqPageSchema, howToSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'Referral Program: Guadagna €200 per ogni azienda',
@@ -28,6 +28,7 @@ export const metadata = pageMetadata({
     'guadagna segnalando clienti',
     'programma segnalazioni mg solutions',
   ],
+  image: '/referral/opengraph-image',
 });
 
 const steps = [
@@ -118,6 +119,18 @@ export default function ReferralPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(referralFaqs)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            howToSchema({
+              name: 'Come funziona il Referral Program di MG Solutions',
+              description: PAGE.description,
+              steps,
+            })
+          ),
+        }}
       />
 
       {/* ---------- HERO ---------- */}
