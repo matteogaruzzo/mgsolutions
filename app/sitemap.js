@@ -1,4 +1,4 @@
-import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules } from '@/lib/data';
+import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules, getAllTags } from '@/lib/data';
 import { regions } from '@/lib/geo-data';
 
 const base = 'https://matteogaruzzo.com';
@@ -63,6 +63,11 @@ export default function sitemap() {
     lastModified: new Date(),
   }));
 
+  const tagRoutes = getAllTags().map((t) => ({
+    url: `${base}/blog/tag/${t.slug}`,
+    lastModified: new Date(),
+  }));
+
   return [
     ...staticRoutes,
     ...sectorRoutes,
@@ -72,5 +77,6 @@ export default function sitemap() {
     ...softwareRoutes,
     ...postRoutes,
     ...geoRoutes,
+    ...tagRoutes,
   ];
 }
