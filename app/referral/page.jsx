@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
+import ServiceArea from '@/components/geo/ServiceArea';
 import { site } from '@/lib/data';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 import {
@@ -295,6 +296,8 @@ export default function ReferralPage() {
           </p>
         </div>
       </section>
+
+      <ServiceArea pageType="referral" />
     </>
   );
 }

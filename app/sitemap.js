@@ -1,4 +1,5 @@
 import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules } from '@/lib/data';
+import { regions } from '@/lib/geo-data';
 
 const base = 'https://matteogaruzzo.com';
 
@@ -8,6 +9,7 @@ export default function sitemap() {
     '/chi-sono',
     '/servizi',
     '/servizi/wine-club',
+    '/geo',
     '/settori',
     '/metodo',
     '/software',
@@ -56,6 +58,11 @@ export default function sitemap() {
     lastModified: new Date(p.date),
   }));
 
+  const geoRoutes = regions.map((r) => ({
+    url: `${base}/geo/${r.slug}`,
+    lastModified: new Date(),
+  }));
+
   return [
     ...staticRoutes,
     ...sectorRoutes,
@@ -64,5 +71,6 @@ export default function sitemap() {
     ...servizioRoutes,
     ...softwareRoutes,
     ...postRoutes,
+    ...geoRoutes,
   ];
 }

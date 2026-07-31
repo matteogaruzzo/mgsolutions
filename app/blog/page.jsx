@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import ServiceArea from '@/components/geo/ServiceArea';
 import { posts } from '@/lib/data';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
@@ -69,6 +70,8 @@ export default function Blog() {
         ))}
       </div>
     </section>
+
+      <ServiceArea pageType="blog" />
     </>
   );
 }

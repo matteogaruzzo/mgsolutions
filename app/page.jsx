@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import ServiceArea from '@/components/geo/ServiceArea';
 import BookingForm from '@/components/BookingForm';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
@@ -505,6 +506,7 @@ export default function Home() {
       </section>
 
       <CTA />
+      <ServiceArea pageType="homepage" />
     </>
   );
 }

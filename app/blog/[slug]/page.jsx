@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CTA from '@/components/CTA';
+import ServiceArea from '@/components/geo/ServiceArea';
 import { posts, getPost, site } from '@/lib/data';
 import { pageMetadata, breadcrumbSchema } from '@/lib/seo';
 
@@ -213,6 +214,8 @@ export default function Post({ params }) {
         title="Vuoi applicare tutto questo al tuo business?"
         sub="Ne parliamo in una call gratuita: capiamo insieme cosa ha senso per te."
       />
+
+      <ServiceArea pageType="blog" />
     </>
   );
 }

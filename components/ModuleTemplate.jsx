@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import FAQAccordion from '@/components/FAQAccordion';
+import ServiceArea from '@/components/geo/ServiceArea';
 import { businessSuiteModules, businessSuitePackages, getBusinessSuiteModule } from '@/lib/data';
 import {
   ChatIcon,
@@ -342,6 +343,8 @@ export default function ModuleTemplate({ module: mod }) {
         href="/software/pricing"
         ctaLabel="Scopri il tuo pacchetto"
       />
+
+      <ServiceArea pageType="software" />
     </>
   );
 }

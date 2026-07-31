@@ -1,5 +1,6 @@
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import ServiceArea from '@/components/geo/ServiceArea';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { caseStudies, testimonials } from '@/lib/data';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
@@ -86,6 +87,8 @@ export default function Portfolio() {
         title="Vuoi che trasformiamo il tuo business?"
         sub="Prima call conoscitiva gratuita. Ti diciamo con onestà se e come possiamo aiutarti."
       />
+
+      <ServiceArea pageType="portfolio" />
     </>
   );
 }

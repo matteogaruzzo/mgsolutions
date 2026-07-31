@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
+import ServiceArea from '@/components/geo/ServiceArea';
 import { site } from '@/lib/data';
 import { GrapeIcon, GlassIcon } from '@/components/icons/WineIcons';
 import {
@@ -434,6 +435,8 @@ export default function WineClubPage() {
           </p>
         </div>
       </section>
+
+      <ServiceArea pageType="servizi" />
     </>
   );
 }

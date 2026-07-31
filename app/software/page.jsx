@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import ServiceArea from '@/components/geo/ServiceArea';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import SuiteDashboardGraphic from '@/components/graphics/SuiteDashboardGraphic';
@@ -293,6 +294,8 @@ export default function Software() {
         title="Pronto a lavorare meno e crescere di più?"
         sub="Scegli il tuo pacchetto oppure prenota una call con il nostro team per capire esattamente come funziona per il tuo business."
       />
+
+      <ServiceArea pageType="software" />
     </>
   );
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import FAQAccordion from '@/components/FAQAccordion';
+import ServiceArea from '@/components/geo/ServiceArea';
 import {
   servizi,
   sectors,
@@ -420,6 +421,8 @@ export default function ServicePageTemplate({ service }) {
         title={`Pronto a far funzionare "${service.title}" per il tuo business?`}
         sub="Ti faccio domande sul tuo business specifico e ti mostro come potrebbe funzionare per te. Niente pressione, solo chiarezza."
       />
+
+      <ServiceArea pageType="servizi" />
     </>
   );
 }

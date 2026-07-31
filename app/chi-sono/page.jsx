@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import ServiceArea from '@/components/geo/ServiceArea';
 import BookingForm from '@/components/BookingForm';
 import CountUp from '@/components/CountUp';
 import { team } from '@/lib/data';
@@ -423,6 +424,7 @@ export default function ChiSono() {
       </section>
 
       <CTA />
+      <ServiceArea pageType="default" />
     </>
   );
 }

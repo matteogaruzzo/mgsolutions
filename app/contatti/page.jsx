@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import StatNumber from '@/components/StatNumber';
+import ServiceArea from '@/components/geo/ServiceArea';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import { site, team, testimonials } from '@/lib/data';
@@ -447,6 +448,8 @@ export default function ContattiPage() {
           </p>
         </div>
       </section>
+
+      <ServiceArea pageType="contatti" />
     </>
   );
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
+import ServiceArea from '@/components/geo/ServiceArea';
 import {
   servizi,
   heroStats,
@@ -382,6 +383,8 @@ export default function Servizi() {
           </div>
         </div>
       </section>
+
+      <ServiceArea pageType="servizi" />
     </>
   );
 }
