@@ -4,9 +4,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
-import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
+import {
+  AIIcon,
+  CartIcon,
+  ScreenIcon,
+  RefreshIcon,
+  GearIcon,
+  CompassIcon,
+  ChatIcon,
+  TargetIcon,
+  CalendarIcon,
+  ClockIcon,
+  ChartIcon,
+  GiftIcon,
+  CoinIcon,
+} from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
-import { servizi, sectors } from '@/lib/data';
+import { servizi, sectors, businessSuiteModules } from '@/lib/data';
 
 const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
 
@@ -32,20 +46,55 @@ const settoriMega = sectors.map((s) => ({
   Icon: settoriIconMap[s.slug] || GrapeIcon,
 }));
 
-const softwareDropdown = [
-  { href: '/software', label: 'MG Business Suite (overview)' },
-  { href: '/software/social-ai', label: 'Social AI' },
-  { href: '/software/lead-sales', label: 'Lead & Sales' },
-  { href: '/software/booking-experience', label: 'Booking & Customer Experience' },
-  { href: '/software/staff-operations', label: 'Staff & Operations' },
-  { href: '/software/control-tower', label: 'Control Tower' },
-  { href: '/software/pricing', label: 'Pricing' },
+const softwareBenefits = {
+  'social-ai': 'Da 40h a 5h/mese di gestione social',
+  'lead-sales': 'Prima risposta in ore, non giorni',
+  'booking-experience': '+40% prenotazioni dirette',
+  'staff-operations': 'Turni, task e documenti in un posto solo',
+  'control-tower': 'Tutti i dati in un unico sguardo',
+};
+
+const softwareIconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
+
+const softwareMega = [
+  ...businessSuiteModules.map((m) => ({
+    href: `/software/${m.slug}`,
+    title: m.name,
+    desc: m.whatItDoes,
+    benefit: softwareBenefits[m.slug],
+    Icon: softwareIconMap[m.icon] || GearIcon,
+  })),
+  {
+    href: '/software/pricing',
+    title: 'Pricing',
+    desc: 'Pacchetti pronti con canone e attivazione definiti, senza sorprese.',
+    benefit: 'Da €199/mese, nessun vincolo lungo',
+    Icon: CoinIcon,
+  },
 ];
 
-const contattiDropdown = [
-  { href: '/contatti', label: 'Scrivici' },
-  { href: '/prenota-call', label: 'Prenota una call' },
-  { href: '/referral', label: 'Guadagna con noi' },
+const contattiMega = [
+  {
+    href: '/contatti',
+    title: 'Scrivici',
+    desc: 'Una domanda, un progetto o solo per conoscerci.',
+    benefit: 'Risposta garantita entro 24 ore',
+    Icon: ChatIcon,
+  },
+  {
+    href: '/prenota-call',
+    title: 'Prenota una call',
+    desc: '30 minuti con Matteo per analizzare il tuo progetto.',
+    benefit: 'Gratuita, zero impegno',
+    Icon: CalendarIcon,
+  },
+  {
+    href: '/referral',
+    title: 'Guadagna con noi',
+    desc: 'Presenta una cantina, un oleificio o un agriturismo a MG Solutions.',
+    benefit: '€200 per ogni azienda, senza limite',
+    Icon: GiftIcon,
+  },
 ];
 
 const links = [
@@ -65,10 +114,24 @@ const links = [
     megaViewAll: { href: '/settori', label: 'Scopri tutti i settori →' },
   },
   { href: '/metodo', label: 'Metodo' },
-  { href: '/software', label: 'Software', dropdown: softwareDropdown },
+  {
+    href: '/software',
+    label: 'Software',
+    mega: softwareMega,
+    megaCols: 2,
+    megaAlign: 'right',
+    megaViewAll: { href: '/software', label: 'Vedi l’intera Business Suite →' },
+  },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },
-  { href: '/contatti', label: 'Contatti', dropdown: contattiDropdown },
+  {
+    href: '/contatti',
+    label: 'Contatti',
+    mega: contattiMega,
+    megaCols: 3,
+    megaAlign: 'right',
+    megaViewAll: { href: '/contatti', label: 'Tutti i modi per contattarci →' },
+  },
 ];
 
 export default function Nav() {
@@ -100,7 +163,9 @@ export default function Nav() {
                   {l.label}
                   <span className="text-[10px] text-ink/40" aria-hidden="true">▾</span>
                 </Link>
-                <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150">
+                <div
+                  className={`absolute ${l.megaAlign === 'right' ? 'right-0' : 'left-0'} top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150`}
+                >
                   <div className="w-[600px] bg-paper border border-line rounded-xl shadow-lg p-6">
                     <div className={`grid gap-4 ${l.megaCols === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       {l.mega.map((m) =>
@@ -143,29 +208,6 @@ export default function Nav() {
                   </div>
                 </div>
               </div>
-            ) : l.dropdown ? (
-              <div key={l.href} className="relative group shrink-0">
-                <Link
-                  href={l.href}
-                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1 whitespace-nowrap"
-                >
-                  {l.label}
-                  <span className="text-[10px] text-ink/40" aria-hidden="true">▾</span>
-                </Link>
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150">
-                  <div className="w-64 bg-paper border border-line rounded-xl shadow-lg py-2">
-                    {l.dropdown.map((d) => (
-                      <Link
-                        key={d.href}
-                        href={d.href}
-                        className="block px-4 py-2 text-[13px] text-ink/75 hover:text-ink hover:bg-paper-dim transition-colors"
-                      >
-                        {d.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
             ) : (
               <Link
                 key={l.href}
@@ -195,7 +237,7 @@ export default function Nav() {
         <div className="md:hidden bg-paper border-b border-line max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="px-6 py-6 flex flex-col gap-4">
             {links.map((l) =>
-              l.mega || l.dropdown ? (
+              l.mega ? (
                 <div key={l.href}>
                   <div className="flex items-center justify-between">
                     <Link
@@ -217,31 +259,20 @@ export default function Nav() {
                   </div>
                   {mobileDropdownOpen === l.href && (
                     <div className="mt-3 ml-3 flex flex-col gap-3 border-l border-line pl-4">
-                      {l.mega
-                        ? l.mega.map((m) => (
-                            <Link
-                              key={m.href}
-                              href={m.href}
-                              onClick={() => setOpen(false)}
-                              className="flex gap-3"
-                            >
-                              <m.Icon className="w-4 h-4 text-forest shrink-0 mt-0.5" />
-                              <span>
-                                <span className="block font-mono text-xs text-ink/80">{m.title}</span>
-                                <span className="block text-[11px] text-ink/50 mt-0.5 leading-snug">{m.benefit}</span>
-                              </span>
-                            </Link>
-                          ))
-                        : l.dropdown.map((d) => (
-                            <Link
-                              key={d.href}
-                              href={d.href}
-                              onClick={() => setOpen(false)}
-                              className="font-mono text-xs text-ink/65"
-                            >
-                              {d.label}
-                            </Link>
-                          ))}
+                      {l.mega.map((m) => (
+                        <Link
+                          key={m.href}
+                          href={m.href}
+                          onClick={() => setOpen(false)}
+                          className="flex gap-3"
+                        >
+                          <m.Icon className="w-4 h-4 text-forest shrink-0 mt-0.5" />
+                          <span>
+                            <span className="block font-mono text-xs text-ink/80">{m.title}</span>
+                            <span className="block text-[11px] text-ink/50 mt-0.5 leading-snug">{m.benefit}</span>
+                          </span>
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </div>
