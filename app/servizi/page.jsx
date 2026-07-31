@@ -17,7 +17,7 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: "Servizi web & AI per l'agroalimentare",
+  title: 'Servizi web & AI per l’agroalimentare',
   description:
     'E-commerce, automazione, AI agents, CRM, booking engine. Tutto quello che serve per vendere online e automatizzare il tuo business agroalimentare.',
   path: '/servizi',
