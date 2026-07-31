@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { GrapeIcon } from '@/components/icons/WineIcons';
+import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
-import { servizi } from '@/lib/data';
+import { servizi, sectors } from '@/lib/data';
 
 const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
 
@@ -16,6 +16,20 @@ const serviziMega = servizi.map((s) => ({
   desc: s.body,
   benefit: s.resultNote,
   Icon: serviziIconMap[s.icon] || AIIcon,
+}));
+
+const settoriIconMap = {
+  'wine-viticulture': GrapeIcon,
+  'oleifici-food-tech': OliveIcon,
+  'wine-hospitality-agriturismi': FarmhouseDoorIcon,
+};
+
+const settoriMega = sectors.map((s) => ({
+  href: `/settori/${s.slug}`,
+  title: s.name,
+  desc: s.lead,
+  benefit: s.result,
+  Icon: settoriIconMap[s.slug] || GrapeIcon,
 }));
 
 const softwareDropdown = [
@@ -36,8 +50,20 @@ const contattiDropdown = [
 
 const links = [
   { href: '/chi-sono', label: 'Chi Sono' },
-  { href: '/servizi', label: 'Cosa Facciamo', mega: serviziMega },
-  { href: '/settori', label: 'I Tre Settori' },
+  {
+    href: '/servizi',
+    label: 'Cosa Facciamo',
+    mega: serviziMega,
+    megaCols: 2,
+    megaViewAll: { href: '/servizi', label: 'Vedi tutti i servizi →' },
+  },
+  {
+    href: '/settori',
+    label: 'I Tre Settori',
+    mega: settoriMega,
+    megaCols: 3,
+    megaViewAll: { href: '/settori', label: 'Scopri tutti i settori →' },
+  },
   { href: '/metodo', label: 'Metodo' },
   { href: '/software', label: 'Software', dropdown: softwareDropdown },
   { href: '/portfolio', label: 'Portfolio' },
@@ -76,27 +102,42 @@ export default function Nav() {
                 </Link>
                 <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150">
                   <div className="w-[600px] bg-paper border border-line rounded-xl shadow-lg p-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      {l.mega.map((m) => (
-                        <Link
-                          key={m.href}
-                          href={m.href}
-                          className="flex gap-3 p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
-                        >
-                          <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
-                            <m.Icon className="w-5 h-5" />
-                          </span>
-                          <div className="min-w-0">
-                            <p className="text-[13px] font-semibold text-ink leading-snug">{m.title}</p>
+                    <div className={`grid gap-4 ${l.megaCols === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                      {l.mega.map((m) =>
+                        l.megaCols === 3 ? (
+                          <Link
+                            key={m.href}
+                            href={m.href}
+                            className="p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                          >
+                            <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
+                              <m.Icon className="w-5 h-5" />
+                            </span>
+                            <p className="text-[13px] font-semibold text-ink leading-snug mt-3">{m.title}</p>
                             <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
                             <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
-                          </div>
-                        </Link>
-                      ))}
+                          </Link>
+                        ) : (
+                          <Link
+                            key={m.href}
+                            href={m.href}
+                            className="flex gap-3 p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                          >
+                            <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
+                              <m.Icon className="w-5 h-5" />
+                            </span>
+                            <div className="min-w-0">
+                              <p className="text-[13px] font-semibold text-ink leading-snug">{m.title}</p>
+                              <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
+                              <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
+                            </div>
+                          </Link>
+                        )
+                      )}
                     </div>
                     <div className="mt-4 pt-4 border-t border-line">
-                      <Link href="/servizi" className="text-[13px] font-semibold text-forest hover:text-brass">
-                        Vedi tutti i servizi →
+                      <Link href={l.megaViewAll.href} className="text-[13px] font-semibold text-forest hover:text-brass">
+                        {l.megaViewAll.label}
                       </Link>
                     </div>
                   </div>
