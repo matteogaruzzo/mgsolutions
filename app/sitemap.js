@@ -1,6 +1,6 @@
 import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules } from '@/lib/data';
 
-const base = 'https://www.matteogaruzzo.com';
+const base = 'https://matteogaruzzo.com';
 
 export default function sitemap() {
   const staticRoutes = [

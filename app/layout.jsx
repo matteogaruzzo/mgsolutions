@@ -15,7 +15,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://www.matteogaruzzo.com'),
+  metadataBase: new URL('https://matteogaruzzo.com'),
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
@@ -52,7 +52,7 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: site.name,
-  url: 'https://www.matteogaruzzo.com',
+  url: 'https://matteogaruzzo.com',
   founder: { '@type': 'Person', name: site.founder },
   description: site.positioning,
   telephone: site.phone,
