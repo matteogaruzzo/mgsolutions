@@ -4,7 +4,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { GrapeIcon } from '@/components/icons/WineIcons';
+import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
+import { servizi } from '@/lib/data';
+
+const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
+
+const serviziMega = servizi.map((s) => ({
+  href: `/servizi/${s.slug}`,
+  title: s.title,
+  desc: s.body,
+  benefit: s.resultNote,
+  Icon: serviziIconMap[s.icon] || AIIcon,
+}));
 
 const softwareDropdown = [
   { href: '/software', label: 'MG Business Suite (overview)' },
@@ -24,7 +36,7 @@ const contattiDropdown = [
 
 const links = [
   { href: '/chi-sono', label: 'Chi Sono' },
-  { href: '/servizi', label: 'Cosa Facciamo' },
+  { href: '/servizi', label: 'Cosa Facciamo', mega: serviziMega },
   { href: '/settori', label: 'I Tre Settori' },
   { href: '/metodo', label: 'Metodo' },
   { href: '/software', label: 'Software', dropdown: softwareDropdown },
@@ -53,7 +65,44 @@ export default function Nav() {
 
         <nav className="hidden md:flex items-center gap-7">
           {links.map((l) =>
-            l.dropdown ? (
+            l.mega ? (
+              <div key={l.href} className="relative group">
+                <Link
+                  href={l.href}
+                  className="font-mono text-[13px] tracking-wide text-ink/70 hover:text-ink transition-colors flex items-center gap-1"
+                >
+                  {l.label}
+                  <span className="text-[10px] text-ink/40" aria-hidden="true">▾</span>
+                </Link>
+                <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150">
+                  <div className="w-[600px] bg-paper border border-line rounded-xl shadow-lg p-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      {l.mega.map((m) => (
+                        <Link
+                          key={m.href}
+                          href={m.href}
+                          className="flex gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                        >
+                          <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
+                            <m.Icon className="w-5 h-5" />
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-[13px] font-semibold text-ink leading-snug">{m.title}</p>
+                            <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
+                            <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-line">
+                      <Link href="/servizi" className="text-[13px] font-semibold text-forest hover:text-brass">
+                        Vedi tutti i servizi →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : l.dropdown ? (
               <div key={l.href} className="relative group">
                 <Link
                   href={l.href}
@@ -105,7 +154,7 @@ export default function Nav() {
         <div className="md:hidden bg-paper border-b border-line max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="px-6 py-6 flex flex-col gap-4">
             {links.map((l) =>
-              l.dropdown ? (
+              l.mega || l.dropdown ? (
                 <div key={l.href}>
                   <div className="flex items-center justify-between">
                     <Link
@@ -127,16 +176,31 @@ export default function Nav() {
                   </div>
                   {mobileDropdownOpen === l.href && (
                     <div className="mt-3 ml-3 flex flex-col gap-3 border-l border-line pl-4">
-                      {l.dropdown.map((d) => (
-                        <Link
-                          key={d.href}
-                          href={d.href}
-                          onClick={() => setOpen(false)}
-                          className="font-mono text-xs text-ink/65"
-                        >
-                          {d.label}
-                        </Link>
-                      ))}
+                      {l.mega
+                        ? l.mega.map((m) => (
+                            <Link
+                              key={m.href}
+                              href={m.href}
+                              onClick={() => setOpen(false)}
+                              className="flex gap-3"
+                            >
+                              <m.Icon className="w-4 h-4 text-forest shrink-0 mt-0.5" />
+                              <span>
+                                <span className="block font-mono text-xs text-ink/80">{m.title}</span>
+                                <span className="block text-[11px] text-ink/50 mt-0.5 leading-snug">{m.benefit}</span>
+                              </span>
+                            </Link>
+                          ))
+                        : l.dropdown.map((d) => (
+                            <Link
+                              key={d.href}
+                              href={d.href}
+                              onClick={() => setOpen(false)}
+                              className="font-mono text-xs text-ink/65"
+                            >
+                              {d.label}
+                            </Link>
+                          ))}
                     </div>
                   )}
                 </div>

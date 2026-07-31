@@ -223,3 +223,12 @@ export function UsersIcon({ className = 'w-6 h-6' }) {
     </svg>
   );
 }
+
+export function CoinIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg {...base} className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.5 15.5c0 1 1 1.8 2.5 1.8s2.5-.7 2.5-1.7c0-2.6-5-1.3-5-3.9 0-1 1-1.7 2.5-1.7s2.5.7 2.5 1.7M12 7.7v1M12 15.3v1" />
+    </svg>
+  );
+}

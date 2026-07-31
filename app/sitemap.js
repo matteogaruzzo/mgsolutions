@@ -7,6 +7,7 @@ export default function sitemap() {
     '',
     '/chi-sono',
     '/servizi',
+    '/servizi/wine-club',
     '/settori',
     '/metodo',
     '/software',
