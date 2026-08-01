@@ -48,6 +48,56 @@ const articles = [
     query: 'freelancer vs agency team',
     alt: 'Un piccolo team indipendente al lavoro, specialista digitale contro web agency',
   },
+  {
+    slug: 'ecommerce-vino-margini-vendita-diretta',
+    query: 'wine bottles shipping boxes packaging',
+    alt: 'Bottiglie di vino imballate per la spedizione da un e-commerce di vendita diretta',
+  },
+  {
+    slug: 'wine-club-revenue-ricorrente-fedelta',
+    query: 'wine subscription box tasting',
+    alt: 'Selezione di vini pronta per la spedizione mensile di un wine club',
+  },
+  {
+    slug: 'enoturismo-prenotazioni-online-vendite-dirette',
+    query: 'wine tasting vineyard experience guests',
+    alt: 'Degustazione guidata in cantina durante una visita enoturistica prenotata online',
+  },
+  {
+    slug: 'software-frantoi-gestione-ordini-crm',
+    query: 'warehouse inventory management orders',
+    alt: 'Gestione digitale di ordini B2B per un frantoio con dashboard di controllo',
+  },
+  {
+    slug: 'agriturismo-booking-online-prenotazioni',
+    query: 'farm stay guest room countryside',
+    alt: 'Camera di un agriturismo pronta ad accogliere ospiti prenotati online',
+  },
+  {
+    slug: 'chatbot-cantina-ai-customer-service',
+    query: 'AI chat conversation smartphone',
+    alt: 'Interfaccia di un chatbot AI che risponde a un cliente di una cantina',
+  },
+  {
+    slug: 'seo-locale-agroalimentare-google-maps',
+    query: 'map pin location search city',
+    alt: 'Ricerca locale su Google Maps di attività agroalimentari nel territorio',
+  },
+  {
+    slug: 'storytelling-vino-marketing-vendite',
+    query: 'old vineyard heritage vines family',
+    alt: 'Vigneto storico che racconta la tradizione di una cantina familiare',
+  },
+  {
+    slug: 'bandi-incentivi-digitalizzazione-agroalimentare',
+    query: 'office paperwork documents desk',
+    alt: 'Documentazione e scrivania per la ricerca di bandi e incentivi alla digitalizzazione',
+  },
+  {
+    slug: 'scegliere-partner-digitale-checklist',
+    query: 'business meeting handshake partnership',
+    alt: 'Incontro di lavoro per valutare un partner digitale per un progetto agroalimentare',
+  },
 ];
 
 function fail(msg) {
@@ -124,12 +174,16 @@ async function main() {
   const credits = [];
 
   for (const article of articles) {
+    const destPath = path.join(OUT_DIR, `${article.slug}.jpg`);
+    if (fs.existsSync(destPath) && !process.argv.includes('--force')) {
+      console.log(`↷ ${article.slug}.jpg gia' presente, salto (usa --force per rigenerare)`);
+      continue;
+    }
     try {
       const photo = await searchPhoto(article.query, usedIds);
       usedIds.add(photo.id);
 
       await trackDownload(photo);
-      const destPath = path.join(OUT_DIR, `${article.slug}.jpg`);
       const bytes = await downloadImage(photo, destPath);
 
       console.log(`✓ ${article.slug}.jpg (${(bytes / 1024).toFixed(0)} KB) — foto di ${photo.user.name} (@${photo.user.username})`);
@@ -154,7 +208,17 @@ async function main() {
   console.log(`Immagini uniche scaricate: ${uniquePhotos}/${results.filter((r) => r.ok).length}.`);
 
   const creditsPath = path.join(OUT_DIR, 'CREDITS.json');
-  fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 2));
+  let existingCredits = [];
+  if (fs.existsSync(creditsPath)) {
+    try {
+      existingCredits = JSON.parse(fs.readFileSync(creditsPath, 'utf8'));
+    } catch {
+      existingCredits = [];
+    }
+  }
+  const bySlug = new Map(existingCredits.map((c) => [c.slug, c]));
+  for (const c of credits) bySlug.set(c.slug, c);
+  fs.writeFileSync(creditsPath, JSON.stringify([...bySlug.values()], null, 2));
   console.log(`Crediti fotografi salvati in ${path.relative(process.cwd(), creditsPath)} — Unsplash richiede attribuzione visibile quando si usa la API.`);
 }
 
