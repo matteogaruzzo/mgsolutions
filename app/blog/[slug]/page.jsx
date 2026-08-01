@@ -6,8 +6,11 @@ import ServiceArea from '@/components/geo/ServiceArea';
 import ProgressBar from '@/components/blog/ProgressBar';
 import AuthorBox from '@/components/blog/AuthorBox';
 import ShareArticle from '@/components/blog/ShareArticle';
+import CtaHeroSection from '@/components/blog/CtaHeroSection';
+import SidebarPromo from '@/components/blog/SidebarPromo';
 import { posts, getPost, site, slugifyTag } from '@/lib/data';
 import { pageMetadata, breadcrumbSchema, SITE_URL } from '@/lib/seo';
+import { renderRichText, isBlockquote, stripBlockquoteMarker } from '@/lib/richtext';
 
 function slugifyHeading(text) {
   return text
@@ -93,6 +96,10 @@ export default function Post({ params }) {
           <Link href="/" className="hover:text-forest">Home</Link> {'>'}{' '}
           <Link href="/blog" className="hover:text-forest">Blog</Link> {'>'} {p.category}
         </p>
+      </div>
+
+      <div className="max-w-edge mx-auto px-6 pb-8">
+        <CtaHeroSection category={p.category} />
       </div>
 
       {p.featuredImage && (
@@ -182,16 +189,28 @@ export default function Post({ params }) {
             {p.body.map((section, i) => (
               <div key={i}>
                 {typeof section === 'string' ? (
-                  <p className="text-lg text-ink/80 leading-relaxed">{section}</p>
+                  isBlockquote(section) ? (
+                    <blockquote className="border-l-4 border-forest pl-5 py-1 text-xl italic text-ink/75 leading-relaxed">
+                      {renderRichText(stripBlockquoteMarker(section))}
+                    </blockquote>
+                  ) : (
+                    <p className="text-lg text-ink/80 leading-relaxed">{renderRichText(section)}</p>
+                  )
                 ) : (
                   <div id={slugifyHeading(section.h2)} className="scroll-mt-24">
                     <h2 className="h2 text-2xl md:text-3xl text-ink mb-4">{section.h2}</h2>
                     <div className="space-y-4">
-                      {section.paragraphs.map((para, j) => (
-                        <p key={j} className="text-lg text-ink/80 leading-relaxed">
-                          {para}
-                        </p>
-                      ))}
+                      {section.paragraphs.map((para, j) =>
+                        isBlockquote(para) ? (
+                          <blockquote key={j} className="border-l-4 border-forest pl-5 py-1 text-xl italic text-ink/75 leading-relaxed">
+                            {renderRichText(stripBlockquoteMarker(para))}
+                          </blockquote>
+                        ) : (
+                          <p key={j} className="text-lg text-ink/80 leading-relaxed">
+                            {renderRichText(para)}
+                          </p>
+                        )
+                      )}
                     </div>
                   </div>
                 )}
@@ -238,6 +257,7 @@ export default function Post({ params }) {
         <aside className="hidden lg:block">
           <div className="sticky top-24">
             <AuthorBox />
+            <SidebarPromo category={p.category} className="mt-4" />
           </div>
         </aside>
       </div>

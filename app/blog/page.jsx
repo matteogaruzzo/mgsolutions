@@ -2,10 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import ServiceArea from '@/components/geo/ServiceArea';
+import CategoryFilter from '@/components/blog/CategoryFilter';
 import { posts, getAllTags } from '@/lib/data';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const tags = getAllTags();
+const categories = [...new Set(posts.map((p) => p.category))].sort();
 
 const PAGE = {
   title: 'Blog: strategie reali per scalare il tuo agroalimentare',
@@ -24,7 +26,10 @@ export const metadata = pageMetadata({
   ],
 });
 
-export default function Blog() {
+export default function Blog({ searchParams }) {
+  const activeCategory = searchParams?.category;
+  const filteredPosts = activeCategory ? posts.filter((p) => p.category === activeCategory) : posts;
+
   return (
     <>
       <script
@@ -41,8 +46,14 @@ export default function Blog() {
         da Google e dalle risposte AI.
       </p>
 
-      <div className="mt-16 rule">
-        {posts.map((p, i) => (
+      <CategoryFilter categories={categories} />
+
+      {filteredPosts.length === 0 && (
+        <p className="mt-10 text-ink/60">Nessun articolo in questa categoria per ora.</p>
+      )}
+
+      <div className="rule">
+        {filteredPosts.map((p, i) => (
           <Reveal key={p.slug}>
             <Link
               href={`/blog/${p.slug}`}
