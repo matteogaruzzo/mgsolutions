@@ -102,6 +102,35 @@ export default function Post({ params }) {
         <CtaHeroSection category={p.category} />
       </div>
 
+      <div className="max-w-edge mx-auto px-6 pb-8">
+        <div className="max-w-3xl">
+          <div className="text-xs text-ink/50 flex flex-wrap gap-4">
+            <span className="text-forest font-semibold">{p.category}</span>
+            <span>
+              {new Date(p.date).toLocaleDateString('it-IT', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </span>
+            {p.updated && p.updated !== p.date && (
+              <span>
+                Aggiornato il{' '}
+                {new Date(p.updated).toLocaleDateString('it-IT', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
+            )}
+            <span>{p.readingMinutes} min di lettura</span>
+            <span>{wordCount.toLocaleString('it-IT')} parole</span>
+          </div>
+
+          <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">{p.title}</h1>
+        </div>
+      </div>
+
       {p.featuredImage && (
         <div className="max-w-edge mx-auto px-6">
           <div className="relative aspect-[16/7] rounded-2xl overflow-hidden border border-line">
@@ -138,31 +167,6 @@ export default function Post({ params }) {
         )}
 
         <article className="max-w-3xl">
-          <div className="text-xs text-ink/50 flex flex-wrap gap-4">
-            <span className="text-forest font-semibold">{p.category}</span>
-            <span>
-              {new Date(p.date).toLocaleDateString('it-IT', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </span>
-            {p.updated && p.updated !== p.date && (
-              <span>
-                Aggiornato il{' '}
-                {new Date(p.updated).toLocaleDateString('it-IT', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </span>
-            )}
-            <span>{p.readingMinutes} min di lettura</span>
-            <span>{wordCount.toLocaleString('it-IT')} parole</span>
-          </div>
-
-          <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">{p.title}</h1>
-
           {p.tags && p.tags.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2">
               {p.tags.map((tag) => (
