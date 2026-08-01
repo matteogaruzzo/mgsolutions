@@ -18,7 +18,7 @@ export default function CategoryFilter({ categories }) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mt-10 pb-6 rule">
+    <div className="flex flex-wrap items-center gap-2 mt-10 pt-6 pb-6 rule">
       <span className="text-xs text-ink/50 mr-1">Filtra per categoria:</span>
       {options.map((cat) => (
         <button
