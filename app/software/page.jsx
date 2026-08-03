@@ -179,6 +179,36 @@ export default function Software() {
         </div>
       </section>
 
+      {/* ---------- PERCHÉ UNA PIATTAFORMA UNICA ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Non 5 programmi separati</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
+            Perché un unico account batte 5 strumenti scollegati.
+          </h2>
+          <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+            I moduli non sono programmi indipendenti da scaricare: sono sezioni di uno stesso account
+            online, pensate per condividere gli stessi dati man mano che li attivi.
+          </p>
+        </Reveal>
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: 'Un solo accesso', body: 'Un’unica email e password per tutto quello che attivi. Niente account da ricordare.' },
+            { title: 'Un solo archivio dati', body: 'I moduli attivi condividono gli stessi dati: niente copia-incolla manuale tra strumenti diversi.' },
+            { title: 'Cresce con te', body: 'Parti da un modulo, aggiungi gli altri quando sono pronti e ti servono. Nessuna migrazione.' },
+            { title: 'Un solo referente', body: 'Un unico canone, un unico posto dove gestire utenti e assistenza — non 5 fornitori diversi.' },
+          ].map((v, i) => (
+            <Reveal key={v.title} delay={i * 60}>
+              <div className="border border-line rounded-2xl p-6 h-full">
+                <p className="text-primary text-lg">✓</p>
+                <p className="mt-3 font-semibold text-ink">{v.title}</p>
+                <p className="mt-2 text-sm text-ink/60 leading-relaxed">{v.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ---------- I 5 SOFTWARE ---------- */}
       <section id="software" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
         <Reveal>
@@ -210,17 +240,20 @@ export default function Software() {
                   </div>
                   <h3 className="h3 text-xl mt-4 text-ink">{m.name}</h3>
                   <p className="mt-3 text-sm text-ink/65 leading-relaxed">{m.tagline}</p>
-                  <ul className="mt-4 space-y-1.5">
-                    {m.features.slice(0, 3).map((f) => (
-                      <li key={f} className="flex gap-2 text-xs text-ink/60">
-                        <span className="text-primary shrink-0">✓</span> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-xs text-ink/50">
-                    <span className="font-semibold text-ink/70">Per chi: </span>
-                    {m.targetAudience}
-                  </p>
+                  <div className="mt-4 space-y-2.5">
+                    <p className="text-xs text-ink/60">
+                      <span className="font-semibold text-ink/75">Risolve: </span>
+                      {m.problemSolved}
+                    </p>
+                    <p className="text-xs text-ink/60">
+                      <span className="font-semibold text-ink/75">Risultato: </span>
+                      {m.resultForClient}
+                    </p>
+                    <p className="text-xs text-ink/50">
+                      <span className="font-semibold text-ink/70">Per chi: </span>
+                      {m.targetAudience}
+                    </p>
+                  </div>
                   <span className="mt-5 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
                     Scopri →
                   </span>
