@@ -40,16 +40,26 @@ export default function PricingTiers() {
           <h3 className="mt-2 text-2xl font-bold text-gray-900 leading-snug">{pkg.benefitTitle}</h3>
           <p className="mt-2 text-sm text-gray-600 leading-relaxed">{pkg.tagline}</p>
 
-          <div className="mt-5">
+          <div className="mt-5 flex items-baseline gap-2">
             <span
-              className={`text-xl font-bold ${
-                pkg.highlight === 'blue' ? 'text-[#0066cc]' : pkg.highlight === 'green' ? 'text-primary' : 'text-ink'
+              className={`font-bold ${pkg.price ? 'text-4xl' : 'text-xl'} ${
+                pkg.price
+                  ? 'text-primary'
+                  : pkg.highlight === 'blue'
+                    ? 'text-[#0066cc]'
+                    : pkg.highlight === 'green'
+                      ? 'text-primary'
+                      : 'text-ink'
               }`}
             >
               {pkg.priceLabel}
             </span>
+            {pkg.price && <span className="text-base text-gray-600">/mese</span>}
           </div>
           <p className="text-xs text-gray-500">{pkg.activationLabel}</p>
+          {pkg.trialDays && (
+            <p className="mt-1 text-xs font-semibold text-forest">Prova gratis {pkg.trialDays} giorni</p>
+          )}
 
           <ul className="mt-6 space-y-2.5 text-sm text-gray-700">
             {pkg.features.map((f) => (

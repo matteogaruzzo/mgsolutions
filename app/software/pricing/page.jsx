@@ -10,15 +10,15 @@ import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 import { BuildingIcon, CompassIcon, CheckCircleIcon } from '@/components/icons/ServiceIcons';
 
 const PAGE = {
-  title: 'MG Business Suite: struttura dei piani e accesso anticipato',
+  title: 'MG Business Suite: piani e prezzi',
   description:
-    'MG Business Suite è in accesso anticipato: solo Lead & Sales è attivabile oggi. Scopri la struttura dei piani Essenziale, Crescita ed Ecosistema — prezzo in definizione.',
+    'MG Essenziale costa €89/mese + €249 di setup, con 30 giorni di prova gratis. Crescita ed Ecosistema sono in roadmap: la struttura è già definita, il prezzo arriva quando saranno attivabili.',
   path: '/software/pricing',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
-  keywords: ['mg business suite accesso anticipato', 'piani mg business suite', 'crm agroalimentare early access'],
+  keywords: ['prezzi mg business suite', 'piani mg business suite', 'crm agroalimentare prezzo'],
 });
 
 const howItWorksColumns = [
@@ -30,12 +30,12 @@ const howItWorksColumns = [
   {
     icon: CompassIcon,
     title: 'Attivi solo quello che esiste',
-    body: 'La suite prevede 5 moduli: Lead & Sales (contatti), Booking (prenotazioni), Social AI (contenuti), Staff & Operations (team), Control Tower (dashboard). Oggi solo Lead & Sales è attivabile in accesso anticipato; gli altri sono in roadmap.',
+    body: 'La suite prevede 5 moduli: Lead & Sales (contatti), Booking (prenotazioni), Social AI (contenuti), Staff & Operations (team), Control Tower (dashboard). Oggi solo Lead & Sales è attivabile.',
   },
   {
     icon: CheckCircleIcon,
-    title: 'Nessun prezzo nascosto',
-    body: 'Non pubblichiamo un canone finché non è reale. Durante l’accesso anticipato definiamo il costo insieme a te, in base a moduli, utenti e integrazioni.',
+    title: 'Prezzo chiaro, non nascosto',
+    body: 'Il prezzo di Essenziale (€89/mese) è reale e pubblico, non "richiedi quotazione". Crescita ed Ecosistema mostrano lo stesso numero solo quando sarà un prezzo vero, non una stima.',
   },
 ];
 
@@ -54,19 +54,22 @@ export default function SoftwarePricingPage() {
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <Reveal>
-          <p className="eyebrow">MG Business Suite · Accesso anticipato</p>
+          <p className="eyebrow">MG Business Suite</p>
           <h1 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.05]">
-            La struttura dei piani, con trasparenza su cosa è già reale.
+            Piani e prezzi, senza sorprese.
           </h1>
           <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">
-            MG Business Suite è pensata come un unico software modulare. Oggi solo MG Lead & Sales è
-            attivabile, in accesso anticipato: gli altri 4 moduli sono in roadmap.
+            Scegli il piano che ti serve. MG Essenziale è attivabile oggi con un prezzo reale.
+            Crescita ed Ecosistema mostrano la struttura futura: il prezzo arriva quando saranno
+            davvero attivabili.
           </p>
-          <p className="mt-4 text-ink/60 max-w-2xl leading-relaxed">
-            Qui sotto trovi la struttura dei 3 piani previsti — quanti moduli includeranno e a chi si
-            rivolgono — non un listino prezzi. Il canone verrà definito e comunicato quando ogni piano
-            sarà davvero attivabile.
-          </p>
+          <div className="mt-6 inline-flex items-start gap-3 max-w-2xl rounded-xl border border-primary/30 bg-primary/5 px-5 py-4">
+            <span className="text-primary text-lg leading-none">●</span>
+            <p className="text-sm text-ink/80 leading-relaxed">
+              <span className="font-semibold text-primary">MG Essenziale include 30 giorni di prova gratis.</span>{' '}
+              Nessuna carta di credito richiesta per iniziare la conversazione.
+            </p>
+          </div>
         </Reveal>
       </section>
 
@@ -95,6 +98,46 @@ export default function SoftwarePricingPage() {
       {/* ---------- 3 PACCHETTI ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">
         <PricingTiers />
+      </section>
+
+      {/* ---------- COSTO AL GIORNO (solo per il prezzo reale, Essenziale) ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-16 text-center">
+          <Reveal>
+            <p className="eyebrow">Se lo guardi al giorno</p>
+            <p className="mt-4 text-2xl md:text-3xl text-ink max-w-xl mx-auto leading-snug">
+              MG Essenziale costa <span className="font-bold text-primary">circa €2,97 al giorno</span> — meno di un caffè.
+            </p>
+            <p className="mt-3 text-sm text-ink/50 max-w-md mx-auto">
+              (€89/mese ÷ 30 giorni. Crescita ed Ecosistema non hanno ancora un prezzo da calcolare.)
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- PER TE CHI SEI ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Per te, chi sei?</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Trova il tuo punto di partenza.</h2>
+        </Reveal>
+        <div className="mt-10 grid sm:grid-cols-3 gap-6">
+          <div className="border border-line rounded-2xl p-6">
+            <p className="font-semibold text-ink">Piccolo business, primo passo?</p>
+            <p className="mt-2 text-sm text-ink/60">→ MG Essenziale, €89/mese</p>
+            <p className="mt-1 text-sm text-ink/60">→ Prova gratis 30 giorni</p>
+          </div>
+          <div className="border border-line rounded-2xl p-6">
+            <p className="font-semibold text-ink">Business in crescita, più processi?</p>
+            <p className="mt-2 text-sm text-ink/60">→ MG Crescita, struttura pronta</p>
+            <p className="mt-1 text-sm text-ink/60">→ Prezzo quando sarà attivabile</p>
+          </div>
+          <div className="border border-line rounded-2xl p-6">
+            <p className="font-semibold text-ink">Azienda strutturata, più sedi?</p>
+            <p className="mt-2 text-sm text-ink/60">→ MG Ecosistema, struttura pronta</p>
+            <p className="mt-1 text-sm text-ink/60">→ Prezzo quando sarà attivabile</p>
+          </div>
+        </div>
       </section>
 
       {/* ---------- COMPARISON ---------- */}

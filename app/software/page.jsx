@@ -4,9 +4,9 @@ import CTA from '@/components/CTA';
 import ServiceArea from '@/components/geo/ServiceArea';
 import FAQAccordion from '@/components/FAQAccordion';
 import SuiteDashboardGraphic from '@/components/graphics/SuiteDashboardGraphic';
+import PricingComparison from '@/components/pricing/PricingComparison';
 import {
   businessSuiteModules,
-  businessSuitePersonas,
   businessSuitePackages,
   softwareOngoing,
 } from '@/lib/data';
@@ -65,20 +65,44 @@ const howItWorksSteps = [
 const softwareFaqs = [
   {
     q: 'MG Business Suite è già disponibile?',
-    a: 'In parte. MG Lead & Sales è in accesso anticipato e attivabile oggi. Gli altri 4 moduli sono in roadmap: non ancora attivabili, ma con una direzione di sviluppo già definita.',
+    a: 'In parte. MG Lead & Sales è in accesso anticipato e attivabile oggi, con prezzo reale (€89/mese + €249 di setup). Gli altri 4 moduli sono in roadmap: non ancora attivabili.',
   },
   {
     q: 'Che differenza c’è tra i cinque moduli?',
     a: 'Coprono reparti diversi dell’azienda: contenuti social (Social AI), contatti e vendite (Lead & Sales), prenotazioni ed esperienza cliente (Booking & Customer Experience), team e operatività (Staff & Operations), visione d’insieme (Control Tower).',
   },
   {
-    q: 'Quanto costa?',
-    a: 'Non c’è ancora un prezzo pubblico: lo definiamo insieme durante l’accesso anticipato, in base a moduli, utenti e integrazioni. La struttura dei piani futuri è su /software/pricing.',
+    q: 'Come scelgo il piano giusto?',
+    a: 'Se ti serve solo gestire contatti e vendite, Essenziale (€89/mese) è già attivabile oggi. Se pensi di aver bisogno di più moduli insieme, scrivici: ti aggiorniamo su Crescita ed Ecosistema quando saranno pronti per il tuo caso.',
   },
 ];
 
-function packageName(id) {
-  return businessSuitePackages.find((p) => p.id === id)?.name || id;
+const scenarios = [
+  {
+    emoji: '🍷',
+    label: 'Piccola cantina o agriturismo (1-5 persone)',
+    signals: ['Vuoi iniziare a gestire i contatti in un posto solo', 'Team piccolo, una sola sede', 'Niente complicazioni'],
+    planId: 'essenziale',
+    body: 'Con questo risolvi il tuo primo problema — i contatti commerciali — con MG Lead & Sales, già attivo oggi. Quando cresci, aggiungi altri moduli.',
+  },
+  {
+    emoji: '🌾',
+    label: 'Cantina media o frantoio (6-20 persone)',
+    signals: ['Vendi online e tramite distributori', 'Hai un team da coordinare', 'Vuoi automatizzare più processi insieme'],
+    planId: 'crescita',
+    body: 'Il profilo a cui pensiamo per MG Crescita: più moduli che lavorano insieme. Oggi puoi già iniziare con Essenziale (Lead & Sales) e passare a Crescita quando gli altri moduli che ti servono saranno pronti.',
+  },
+  {
+    emoji: '🏢',
+    label: 'Azienda strutturata o rete di più sedi (20+ persone)',
+    signals: ['Più sedi o filiali', 'Vuoi una visione strategica di tutto', 'Vuoi che ogni cosa si integri'],
+    planId: 'ecosistema',
+    body: 'Il profilo a cui pensiamo per MG Ecosistema, con Control Tower incluso. Attivabile quando la maggior parte dei moduli sarà pubblicata: scrivici per essere aggiornato.',
+  },
+];
+
+function findPlan(id) {
+  return businessSuitePackages.find((p) => p.id === id);
 }
 
 export default function Software() {
@@ -98,14 +122,14 @@ export default function Software() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
             <div>
-              <p className="eyebrow">Prodotti · MG Business Suite · Accesso anticipato</p>
+              <p className="eyebrow">MG Business Suite · Come funziona</p>
               <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">
-                Una piattaforma modulare, in costruzione con i primi clienti.
+                Una sola piattaforma. 5 moduli. Oggi ne è già attivo uno.
               </h1>
               <p className="mt-6 text-lg text-ink/70 max-w-xl leading-relaxed">
-                MG Business Suite prevede 5 moduli — social, vendite, prenotazioni, team, controllo.
-                Oggi solo MG Lead & Sales è attivabile, in accesso anticipato. Gli altri sono in
-                roadmap: qui sotto trovi lo stato reale di ciascuno.
+                MG Business Suite è pensata per essere semplice: scegli i moduli che ti servono —
+                social, vendite, prenotazioni, team, controllo — e li attivi dentro un unico account.
+                Oggi MG Lead & Sales è già attivabile; gli altri 4 sono in roadmap.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link href="/contatti?interesse=software" className="btn-solid">
@@ -193,6 +217,10 @@ export default function Software() {
                       </li>
                     ))}
                   </ul>
+                  <p className="mt-4 text-xs text-ink/50">
+                    <span className="font-semibold text-ink/70">Per chi: </span>
+                    {m.targetAudience}
+                  </p>
                   <span className="mt-5 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
                     Scopri →
                   </span>
@@ -208,50 +236,70 @@ export default function Software() {
         </p>
       </section>
 
-      {/* ---------- QUALE SOFTWARE SERVE A TE ---------- */}
+      {/* ---------- COME SCEGLIERE IL PIANO GIUSTO ---------- */}
       <section className="bg-ink text-paper">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-brass">Direzione futura</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl">Verso quale combinazione stiamo costruendo la Suite?</h2>
+            <p className="eyebrow text-brass">Come scegliere il piano giusto</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl">Trova la tua situazione qui sotto.</h2>
             <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">
-              Questi scenari descrivono a chi si rivolgerà ogni piano quando i moduli citati saranno
-              pubblicati. Non sono combinazioni attivabili oggi.
+              Solo lo scenario Essenziale è attivabile con un prezzo reale oggi. Gli altri due
+              descrivono a chi si rivolgerà ogni piano quando i moduli citati saranno pronti.
             </p>
           </Reveal>
 
           <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {businessSuitePersonas.map((p, i) => (
-              <Reveal key={p.label} delay={i * 80}>
-                <div className="border border-paper/15 rounded-2xl p-7 h-full flex flex-col">
-                  <p className="font-semibold text-lg leading-snug">{p.label}</p>
-                  <p className="mt-4 text-xs font-semibold tracking-widest text-brass uppercase">Userebbe</p>
-                  <ul className="mt-2 space-y-1">
-                    {p.modules.map((slug) => {
-                      const mod = businessSuiteModules.find((m) => m.slug === slug);
-                      return (
-                        <li key={slug} className="text-sm text-paper/80">
-                          {mod?.name}
-                          {mod?.status !== 'early-access' && (
-                            <span className="text-paper/40"> · in roadmap</span>
-                          )}
+            {scenarios.map((s, i) => {
+              const plan = findPlan(s.planId);
+              const isReal = Boolean(plan.price);
+              return (
+                <Reveal key={s.label} delay={i * 80}>
+                  <div className="border border-paper/15 rounded-2xl p-7 h-full flex flex-col">
+                    <p className="text-2xl">{s.emoji}</p>
+                    <p className="mt-3 font-semibold text-lg leading-snug">{s.label}</p>
+                    <ul className="mt-4 space-y-1.5">
+                      {s.signals.map((sig) => (
+                        <li key={sig} className="text-sm text-paper/70">
+                          • {sig}
                         </li>
-                      );
-                    })}
-                  </ul>
-                  <p className="mt-4 text-xs text-paper/50">Piano previsto: {packageName(p.package)}</p>
-                  <p className="mt-4 text-sm text-paper/70 leading-relaxed flex-1">{p.benefit}</p>
-                </div>
-              </Reveal>
-            ))}
+                      ))}
+                    </ul>
+                    <p className="mt-5 text-xs font-semibold tracking-widest text-brass uppercase">
+                      Piano indicato: {plan.name}
+                    </p>
+                    <p className="mt-1 text-lg font-bold">
+                      {isReal ? `${plan.priceLabel}/mese` : plan.priceLabel}
+                    </p>
+                    <p className="mt-4 text-sm text-paper/70 leading-relaxed flex-1">{s.body}</p>
+                    <Link
+                      href={plan.ctaHref}
+                      className="mt-5 inline-block text-sm font-semibold text-brass hover:text-paper"
+                    >
+                      {isReal ? `Scegli ${plan.name} →` : `${plan.cta} →`}
+                    </Link>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
 
           <div className="mt-12 text-center">
             <Link href="/software/pricing" className="btn-solid bg-brass text-ink hover:bg-paper">
               <GrapeIcon className="w-4 h-4" />
-              Vedi la struttura dei piani →
+              Vedi tutti i dettagli dei piani →
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ---------- CONFRONTO PIANI ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Confronto rapido</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Cosa include ogni piano.</h2>
+        </Reveal>
+        <div className="mt-10">
+          <PricingComparison />
         </div>
       </section>
 
