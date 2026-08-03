@@ -1,11 +1,34 @@
 'use client';
 
-import { useState } from 'react';
-import { site } from '@/lib/data';
+import { useState, useEffect } from 'react';
+import { site, getBusinessSuiteModule } from '@/lib/data';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 
 const activityTypes = ['Cantina', 'Oleificio', 'Agriturismo', 'Altro'];
 const projectTypes = ['Sito web', 'E-commerce', 'Software su misura', 'Consulenza strategica', 'Altro'];
+
+const planNames = { essenziale: 'Essenziale', crescita: 'Crescita', ecosistema: 'Ecosistema' };
+
+// Precompila il form quando si arriva da una CTA della sezione software
+// (?interesse=software&modulo=lead-sales oppure &plan=essenziale), così il
+// contesto del link non va perso una volta atterrati sul form di contatto.
+// Letto da window.location invece di useSearchParams per non forzare
+// questa pagina (e le altre che riusano BookingForm) fuori dal prerendering statico.
+function prefillFromSearch(search) {
+  const params = new URLSearchParams(search);
+  if (params.get('interesse') !== 'software') return null;
+
+  const moduleSlug = params.get('modulo');
+  const planId = params.get('plan');
+  const mod = moduleSlug ? getBusinessSuiteModule(moduleSlug) : null;
+  const planName = planId ? planNames[planId] : null;
+
+  let messaggio = 'Sono interessato a MG Business Suite.';
+  if (mod) messaggio = `Sono interessato all’accesso anticipato di ${mod.name}.`;
+  else if (planName) messaggio = `Sono interessato al piano MG ${planName}.`;
+
+  return { progetto: 'Software su misura', messaggio };
+}
 
 export default function BookingForm() {
   const [form, setForm] = useState({
@@ -17,6 +40,11 @@ export default function BookingForm() {
     messaggio: '',
   });
   const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    const prefill = prefillFromSearch(window.location.search);
+    if (prefill) setForm((f) => ({ ...f, ...prefill }));
+  }, []);
 
   function update(field) {
     return (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
