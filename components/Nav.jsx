@@ -46,14 +46,6 @@ const settoriMega = sectors.map((s) => ({
   Icon: settoriIconMap[s.slug] || GrapeIcon,
 }));
 
-const softwareBenefits = {
-  'social-ai': 'Da 40h a 5h/mese di gestione social',
-  'lead-sales': 'Prima risposta in ore, non giorni',
-  'booking-experience': '+40% prenotazioni dirette',
-  'staff-operations': 'Turni, task e documenti in un posto solo',
-  'control-tower': 'Tutti i dati in un unico sguardo',
-};
-
 const softwareIconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
 
 const softwareMega = [
@@ -61,14 +53,14 @@ const softwareMega = [
     href: `/software/${m.slug}`,
     title: m.name,
     desc: m.whatItDoes,
-    benefit: softwareBenefits[m.slug],
+    benefit: m.status === 'early-access' ? 'Accesso anticipato — attivabile ora' : 'In roadmap — non ancora attivabile',
     Icon: softwareIconMap[m.icon] || GearIcon,
   })),
   {
     href: '/software/pricing',
-    title: 'Pricing',
-    desc: 'Pacchetti pronti con canone e attivazione definiti, senza sorprese.',
-    benefit: 'Da €89/mese, nessun vincolo lungo',
+    title: 'Struttura dei piani',
+    desc: 'Come saranno organizzati i piani quando la Suite sarà completa.',
+    benefit: 'Prezzo in definizione',
     Icon: CoinIcon,
   },
 ];

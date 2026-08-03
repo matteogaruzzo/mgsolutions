@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import ServiceArea from '@/components/geo/ServiceArea';
-import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import SuiteDashboardGraphic from '@/components/graphics/SuiteDashboardGraphic';
 import {
@@ -10,7 +9,6 @@ import {
   businessSuitePersonas,
   businessSuitePackages,
   softwareOngoing,
-  testimonials,
 } from '@/lib/data';
 import {
   ChatIcon,
@@ -25,9 +23,9 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'MG Business Suite: 5 software per il tuo agroalimentare',
+  title: 'MG Business Suite: software modulare per l’agroalimentare (accesso anticipato)',
   description:
-    'Una piattaforma, 5 software scelti da te: Social AI, CRM, booking, operations e control tower. Attivi solo quelli che ti servono, canone mensile trasparente.',
+    'MG Business Suite è la piattaforma modulare in costruzione di MG Solutions per cantine, frantoi e agriturismi. Lead & Sales è in accesso anticipato; gli altri moduli sono in roadmap.',
   path: '/software',
 };
 
@@ -36,9 +34,8 @@ export const metadata = pageMetadata({
   keywords: [
     'business suite agroalimentare',
     'software modulare cantina',
-    'crm agriturismo',
-    'automazione social ai',
-    'dashboard direzionale agribusiness',
+    'crm agriturismo accesso anticipato',
+    'roadmap software agribusiness',
   ],
 });
 
@@ -47,40 +44,38 @@ const iconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, cl
 const howItWorksSteps = [
   {
     icon: CompassIcon,
-    title: 'Scegli',
-    duration: '1 clic',
-    body: 'Decidi quale area del tuo business automatizzare: social, vendite, prenotazioni, team o controllo direzionale.',
+    title: 'Ci scrivi',
+    duration: '5 minuti',
+    body: 'Ci racconti quale area del business vuoi automatizzare: contatti, prenotazioni, social, team o controllo direzionale.',
   },
   {
     icon: GearIcon,
-    title: 'Attiviamo',
-    duration: '24-48 ore',
-    body: 'Il nostro team configura tutto secondo il tuo processo. Collegamenti, automazioni, utenti: zero complicazioni per te.',
+    title: 'Valutiamo insieme',
+    duration: '1 call',
+    body: 'Se il tuo caso è adatto a un modulo già in accesso anticipato, definiamo condizioni e tempi. Se il modulo che ti serve è ancora in roadmap, ti aggiorniamo quando sarà pronto.',
   },
   {
     icon: ChartIcon,
-    title: 'Tu lavori',
-    duration: '24/7',
-    body: 'Il software lavora mentre tu segui il tuo business. Clienti gestiti in automatico, report ogni settimana via email.',
+    title: 'Costruiamo insieme',
+    duration: 'in corso',
+    body: 'Chi entra in accesso anticipato aiuta a definire le funzionalità reali dei moduli successivi, non solo a usarle.',
   },
 ];
 
 const softwareFaqs = [
   {
-    q: 'Come si aggiorna? Devo scaricare qualcosa?',
-    a: 'No. Il software vive online, come Gmail o WhatsApp — non come un programma da installare sul computer. Quando facciamo un aggiornamento lo ricevi automaticamente, senza fare nulla.',
+    q: 'MG Business Suite è già disponibile?',
+    a: 'In parte. MG Lead & Sales è in accesso anticipato e attivabile oggi. Gli altri 4 moduli sono in roadmap: non ancora attivabili, ma con una direzione di sviluppo già definita.',
   },
   {
-    q: 'Che differenza c’è tra i cinque software?',
-    a: 'Coprono reparti diversi dell’azienda: contenuti social (Social AI), contatti e vendite (Lead & Sales), prenotazioni ed esperienza cliente (Booking & Customer Experience), team e operatività (Staff & Operations), visione d’insieme (Control Tower). Puoi partire da uno e aggiungerne altri nel tempo.',
+    q: 'Che differenza c’è tra i cinque moduli?',
+    a: 'Coprono reparti diversi dell’azienda: contenuti social (Social AI), contatti e vendite (Lead & Sales), prenotazioni ed esperienza cliente (Booking & Customer Experience), team e operatività (Staff & Operations), visione d’insieme (Control Tower).',
   },
   {
     q: 'Quanto costa?',
-    a: 'Dipende da quanti software attivi: i 3 pacchetti (Essenziale, Crescita, Ecosistema) hanno canone e attivazione definiti, senza sorprese. Il dettaglio completo è su /software/pricing.',
+    a: 'Non c’è ancora un prezzo pubblico: lo definiamo insieme durante l’accesso anticipato, in base a moduli, utenti e integrazioni. La struttura dei piani futuri è su /software/pricing.',
   },
 ];
-
-const relevantTestimonials = testimonials.filter((t) => ['Andrea', 'Giulia'].includes(t.name));
 
 function packageName(id) {
   return businessSuitePackages.find((p) => p.id === id)?.name || id;
@@ -103,22 +98,22 @@ export default function Software() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
             <div>
-              <p className="eyebrow">Prodotti · MG Business Suite</p>
+              <p className="eyebrow">Prodotti · MG Business Suite · Accesso anticipato</p>
               <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">
-                Una piattaforma, 5 software scelti da te.
+                Una piattaforma modulare, in costruzione con i primi clienti.
               </h1>
               <p className="mt-6 text-lg text-ink/70 max-w-xl leading-relaxed">
-                MG Business Suite parte vuota: tu scegli quali software attivare dentro — social,
-                vendite, prenotazioni, team, controllo — e paghi solo per quello che usi, fin dal
-                primo giorno.
+                MG Business Suite prevede 5 moduli — social, vendite, prenotazioni, team, controllo.
+                Oggi solo MG Lead & Sales è attivabile, in accesso anticipato. Gli altri sono in
+                roadmap: qui sotto trovi lo stato reale di ciascuno.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <Link href="/software/pricing" className="btn-solid">
+                <Link href="/contatti?interesse=software" className="btn-solid">
                   <GrapeIcon className="w-4 h-4" />
-                  Scopri i pacchetti →
+                  Richiedi accesso anticipato →
                 </Link>
                 <Link href="#software" className="btn-ghost">
-                  Scegli i 5 software
+                  Guarda lo stato dei moduli
                 </Link>
               </div>
             </div>
@@ -163,22 +158,32 @@ export default function Software() {
       {/* ---------- I 5 SOFTWARE ---------- */}
       <section id="software" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
         <Reveal>
-          <p className="eyebrow">I 5 software disponibili</p>
+          <p className="eyebrow">I 5 moduli previsti</p>
           <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-            Scegli quali software ti servono.
+            Lo stato reale di ciascun modulo, senza ambiguità.
           </h2>
         </Reveal>
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {businessSuiteModules.map((m, i) => {
             const Icon = iconMap[m.icon] || TargetIcon;
+            const isAvailable = m.status === 'early-access';
             return (
               <Reveal key={m.slug} delay={i * 60}>
                 <Link
                   href={`/software/${m.slug}`}
                   className="group block h-full rounded-2xl p-7 border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <Icon className="w-8 h-8 text-forest" />
+                  <div className="flex items-start justify-between gap-3">
+                    <Icon className="w-8 h-8 text-forest" />
+                    <span
+                      className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide rounded-full px-2.5 py-1 ${
+                        isAvailable ? 'bg-primary/10 text-primary' : 'bg-line/60 text-ink/60'
+                      }`}
+                    >
+                      {m.statusLabel}
+                    </span>
+                  </div>
                   <h3 className="h3 text-xl mt-4 text-ink">{m.name}</h3>
                   <p className="mt-3 text-sm text-ink/65 leading-relaxed">{m.tagline}</p>
                   <ul className="mt-4 space-y-1.5">
@@ -198,8 +203,8 @@ export default function Software() {
         </div>
 
         <p className="mt-8 text-xs text-ink/50 max-w-2xl">
-          * Il checkout automatico via Stripe è in arrivo: per attivare un pacchetto oggi, prenota
-          una call.
+          I moduli in roadmap non sono ancora attivabili e non hanno una data di uscita confermata.
+          Scrivici per essere aggiornato quando cambia lo stato di un modulo.
         </p>
       </section>
 
@@ -207,8 +212,12 @@ export default function Software() {
       <section className="bg-ink text-paper">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-brass">Trova il tuo percorso</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl">Quale software serve a te?</h2>
+            <p className="eyebrow text-brass">Direzione futura</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl">Verso quale combinazione stiamo costruendo la Suite?</h2>
+            <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">
+              Questi scenari descrivono a chi si rivolgerà ogni piano quando i moduli citati saranno
+              pubblicati. Non sono combinazioni attivabili oggi.
+            </p>
           </Reveal>
 
           <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -216,18 +225,21 @@ export default function Software() {
               <Reveal key={p.label} delay={i * 80}>
                 <div className="border border-paper/15 rounded-2xl p-7 h-full flex flex-col">
                   <p className="font-semibold text-lg leading-snug">{p.label}</p>
-                  <p className="mt-4 text-xs font-semibold tracking-widest text-brass uppercase">Ti servono</p>
+                  <p className="mt-4 text-xs font-semibold tracking-widest text-brass uppercase">Userebbe</p>
                   <ul className="mt-2 space-y-1">
                     {p.modules.map((slug) => {
                       const mod = businessSuiteModules.find((m) => m.slug === slug);
                       return (
                         <li key={slug} className="text-sm text-paper/80">
                           {mod?.name}
+                          {mod?.status !== 'early-access' && (
+                            <span className="text-paper/40"> · in roadmap</span>
+                          )}
                         </li>
                       );
                     })}
                   </ul>
-                  <p className="mt-4 text-xs text-paper/50">Pacchetto: {packageName(p.package)}</p>
+                  <p className="mt-4 text-xs text-paper/50">Piano previsto: {packageName(p.package)}</p>
                   <p className="mt-4 text-sm text-paper/70 leading-relaxed flex-1">{p.benefit}</p>
                 </div>
               </Reveal>
@@ -237,7 +249,7 @@ export default function Software() {
           <div className="mt-12 text-center">
             <Link href="/software/pricing" className="btn-solid bg-brass text-ink hover:bg-paper">
               <GrapeIcon className="w-4 h-4" />
-              Scopri i pacchetti →
+              Vedi la struttura dei piani →
             </Link>
           </div>
         </div>
@@ -255,21 +267,6 @@ export default function Software() {
           </div>
         </div>
       </section>
-
-      {/* ---------- SOCIAL PROOF ---------- */}
-      {relevantTestimonials.length > 0 && (
-        <section className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Chi lo sta usando</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">
-              Esempi illustrativi dai case study.
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <TestimonialCarousel items={relevantTestimonials} />
-          </div>
-        </section>
-      )}
 
       {/* ---------- GESTIONE CONTINUATIVA (trasparenza) ---------- */}
       <section className="bg-paper-dim">
@@ -291,8 +288,8 @@ export default function Software() {
       </section>
 
       <CTA
-        title="Pronto a lavorare meno e crescere di più?"
-        sub="Scegli il tuo pacchetto oppure prenota una call con il nostro team per capire esattamente come funziona per il tuo business."
+        title="Vuoi essere tra i primi a provarlo?"
+        sub="Richiedi accesso anticipato a MG Lead & Sales, oppure prenota una call per raccontarci quale modulo in roadmap ti servirebbe di più."
       />
 
       <ServiceArea pageType="software" />

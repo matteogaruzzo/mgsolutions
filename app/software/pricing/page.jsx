@@ -10,32 +10,32 @@ import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 import { BuildingIcon, CompassIcon, CheckCircleIcon } from '@/components/icons/ServiceIcons';
 
 const PAGE = {
-  title: 'MG Business Suite: pacchetti, prezzi e bundle',
+  title: 'MG Business Suite: struttura dei piani e accesso anticipato',
   description:
-    'Software scelti, attivazione rapida, crescita reale. Non paghi l’illimitato, paghi per quello che usi: 3 pacchetti, Web Care e bundle sito+software.',
+    'MG Business Suite è in accesso anticipato: solo Lead & Sales è attivabile oggi. Scopri la struttura dei piani Essenziale, Crescita ed Ecosistema — prezzo in definizione.',
   path: '/software/pricing',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
-  keywords: ['prezzi software agroalimentare', 'pacchetti mg business suite', 'canone software cantina'],
+  keywords: ['mg business suite accesso anticipato', 'piani mg business suite', 'crm agroalimentare early access'],
 });
 
 const howItWorksColumns = [
   {
     icon: BuildingIcon,
     title: 'Una sola suite',
-    body: 'Tutto dentro un unico software. Non devi imparare cinque piattaforme diverse né integrare chissà cosa: è già tutto dentro.',
+    body: 'Un unico software per più aree del business, non cinque piattaforme separate da integrare a mano. È il modo in cui la stiamo costruendo, modulo dopo modulo.',
   },
   {
     icon: CompassIcon,
-    title: 'Scegli quello che usi',
-    body: 'Dentro la suite ci sono 5 software: Lead & Sales (contatti), Booking (prenotazioni), Social AI (contenuti), Staff & Operations (team), Control Tower (dashboard). Attivi solo quelli che ti servono.',
+    title: 'Attivi solo quello che esiste',
+    body: 'La suite prevede 5 moduli: Lead & Sales (contatti), Booking (prenotazioni), Social AI (contenuti), Staff & Operations (team), Control Tower (dashboard). Oggi solo Lead & Sales è attivabile in accesso anticipato; gli altri sono in roadmap.',
   },
   {
     icon: CheckCircleIcon,
-    title: 'Niente sorprese',
-    body: 'Il prezzo che vedi è il prezzo che paghi. Setup iniziale una tantum, canone mensile chiaro. Cresci quando decidi tu, non quando lo decide un upsell.',
+    title: 'Nessun prezzo nascosto',
+    body: 'Non pubblichiamo un canone finché non è reale. Durante l’accesso anticipato definiamo il costo insieme a te, in base a moduli, utenti e integrazioni.',
   },
 ];
 
@@ -54,18 +54,18 @@ export default function SoftwarePricingPage() {
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <Reveal>
-          <p className="eyebrow">MG Business Suite</p>
+          <p className="eyebrow">MG Business Suite · Accesso anticipato</p>
           <h1 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.05]">
-            Semplice, potente, senza sorprese.
+            La struttura dei piani, con trasparenza su cosa è già reale.
           </h1>
           <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">
-            Un solo software. Scegli i tool che ti servono, come pezzi di un puzzle. Niente pagamenti
-            nascosti, niente funzioni che non usi.
+            MG Business Suite è pensata come un unico software modulare. Oggi solo MG Lead & Sales è
+            attivabile, in accesso anticipato: gli altri 4 moduli sono in roadmap.
           </p>
           <p className="mt-4 text-ink/60 max-w-2xl leading-relaxed">
-            Che tu debba automatizzare i contatti commerciali, gestire le prenotazioni o tenere sotto
-            controllo tutta l’azienda, la soluzione è qui dentro. Paghi solo quello che usi e cresci al
-            tuo ritmo.
+            Qui sotto trovi la struttura dei 3 piani previsti — quanti moduli includeranno e a chi si
+            rivolgono — non un listino prezzi. Il canone verrà definito e comunicato quando ogni piano
+            sarà davvero attivabile.
           </p>
         </Reveal>
       </section>

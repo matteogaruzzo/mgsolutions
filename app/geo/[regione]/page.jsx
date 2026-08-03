@@ -61,8 +61,8 @@ export default function RegionePage({ params }) {
     {
       Icon: GearIcon,
       title: 'Software di automazione (MG Business Suite)',
-      body: 'CRM per i contatti commerciali, booking automatico per degustazioni ed esperienze, email automation per follow-up e wine club.',
-      price: 'Canone €89-€249/mese',
+      body: 'CRM per i contatti commerciali (in accesso anticipato); booking automatico per degustazioni ed esperienze ed email automation per follow-up e wine club (in roadmap).',
+      price: 'Prezzo in definizione',
       href: '/software',
     },
     (() => {

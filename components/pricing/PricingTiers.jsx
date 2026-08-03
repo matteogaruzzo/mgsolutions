@@ -1,8 +1,8 @@
 import { businessSuitePackages, businessSuiteModules } from '@/lib/data';
 
-// Bottoni volutamente disabled: il checkout Stripe non è ancora collegato.
-// Quando lo sarà, questo file andrà convertito in 'use client' per gestire
-// l'onClick reale (POST /api/checkout/create → redirect Stripe Checkout).
+// Nessun prezzo pubblicato: la Suite è in accesso anticipato (solo Lead &
+// Sales esiste oggi). I bottoni portano a /contatti, non a un checkout —
+// non c'è alcun pagamento da attivare finché i piani non sono reali.
 const highlightStyles = {
   blue: 'border-[#0066cc] bg-blue-50/60 md:col-span-2 lg:col-span-1',
   green: 'border-primary bg-primary/5',
@@ -14,11 +14,10 @@ const buttonStyles = {
   green: 'bg-primary text-white',
 };
 
-// Quanti software si scelgono in ciascun pacchetto: usato per etichettare i chip dei 5 software.
 const moduleSlots = {
-  essenziale: { count: 1, label: 'Scegli 1 software tra i 5' },
-  crescita: { count: 3, label: 'Scegli 3 software tra i 5' },
-  ecosistema: { count: 5, label: 'Tutti e 5 i software inclusi' },
+  essenziale: { count: 1, label: '1 modulo a scelta tra quelli disponibili' },
+  crescita: { count: 3, label: 'Fino a 3 moduli a scelta tra quelli disponibili' },
+  ecosistema: { count: 5, label: 'Tutti i moduli pubblicati' },
 };
 
 export default function PricingTiers() {
@@ -33,7 +32,7 @@ export default function PricingTiers() {
         >
           {pkg.badge && (
             <span className="absolute -top-3 left-8 bg-[#0066cc] text-white text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full">
-              ★ {pkg.badge}
+              {pkg.badge}
             </span>
           )}
 
@@ -41,18 +40,16 @@ export default function PricingTiers() {
           <h3 className="mt-2 text-2xl font-bold text-gray-900 leading-snug">{pkg.benefitTitle}</h3>
           <p className="mt-2 text-sm text-gray-600 leading-relaxed">{pkg.tagline}</p>
 
-          <div className="mt-5 flex items-baseline gap-2">
+          <div className="mt-5">
             <span
-              className={`text-4xl font-bold ${
+              className={`text-xl font-bold ${
                 pkg.highlight === 'blue' ? 'text-[#0066cc]' : pkg.highlight === 'green' ? 'text-primary' : 'text-ink'
               }`}
             >
-              €{pkg.price}
+              {pkg.priceLabel}
             </span>
-            <span className="text-base text-gray-600">/mese</span>
           </div>
-          <p className="text-xs text-gray-500">+ €{pkg.activation} setup (una tantum)</p>
-          <p className="mt-1 text-xs font-semibold text-forest">Prova gratis {pkg.trialDays} giorni</p>
+          <p className="text-xs text-gray-500">{pkg.activationLabel}</p>
 
           <ul className="mt-6 space-y-2.5 text-sm text-gray-700">
             {pkg.features.map((f) => (
@@ -63,13 +60,9 @@ export default function PricingTiers() {
             ))}
           </ul>
 
-          {pkg.examples?.length > 0 && (
-            <div className="mt-6 rounded-xl bg-paper-dim/70 border border-line/60 p-4 space-y-2">
-              {pkg.examples.map((ex) => (
-                <p key={ex} className="text-xs text-ink/65 leading-relaxed">
-                  {ex}
-                </p>
-              ))}
+          {pkg.availabilityNote && (
+            <div className="mt-6 rounded-xl bg-paper-dim/70 border border-line/60 p-4">
+              <p className="text-xs text-ink/65 leading-relaxed">{pkg.availabilityNote}</p>
             </div>
           )}
 
@@ -79,36 +72,36 @@ export default function PricingTiers() {
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {businessSuiteModules.map((m) => {
-                const isIncluded = pkg.id === 'ecosistema';
+                const isAvailable = m.status === 'early-access';
                 return (
                   <span
                     key={m.slug}
+                    title={m.statusLabel}
                     className={`text-xs rounded-full px-2.5 py-1 border ${
-                      isIncluded
+                      isAvailable
                         ? 'border-primary/30 bg-primary/10 text-primary font-medium'
-                        : 'border-line text-gray-600'
+                        : 'border-line text-gray-500'
                     }`}
                   >
-                    {isIncluded && '✓ '}
+                    {isAvailable ? '● ' : '○ '}
                     {m.name.replace('MG ', '')}
                   </span>
                 );
               })}
             </div>
+            <p className="mt-2 text-[11px] text-gray-500">
+              ● disponibile in accesso anticipato · ○ in roadmap, non ancora attivabile
+            </p>
           </div>
 
           <div className="mt-8 flex-1" />
 
-          <button
-            type="button"
-            disabled
-            title="Prossimamente — Integrazione Stripe in corso"
-            className={`w-full py-3 px-6 rounded-lg text-base font-bold opacity-50 cursor-not-allowed ${
-              buttonStyles[pkg.highlight]
-            }`}
+          <a
+            href={pkg.ctaHref}
+            className={`block text-center w-full py-3 px-6 rounded-lg text-base font-bold ${buttonStyles[pkg.highlight]}`}
           >
             {pkg.cta}
-          </button>
+          </a>
           <p className="mt-2 text-center text-xs text-gray-500">{pkg.ctaSub}</p>
         </div>
       ))}
