@@ -68,7 +68,7 @@ const softwareMega = [
     href: '/software/pricing',
     title: 'Pricing',
     desc: 'Pacchetti pronti con canone e attivazione definiti, senza sorprese.',
-    benefit: 'Da €199/mese, nessun vincolo lungo',
+    benefit: 'Da €89/mese, nessun vincolo lungo',
     Icon: CoinIcon,
   },
 ];

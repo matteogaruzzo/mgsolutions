@@ -23,7 +23,7 @@ const moduleSlots = {
 
 export default function PricingTiers() {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
       {businessSuitePackages.map((pkg) => (
         <div
           key={pkg.id}
@@ -33,14 +33,15 @@ export default function PricingTiers() {
         >
           {pkg.badge && (
             <span className="absolute -top-3 left-8 bg-[#0066cc] text-white text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full">
-              {pkg.badge}
+              ★ {pkg.badge}
             </span>
           )}
 
-          <h3 className="text-2xl font-bold text-gray-900">{pkg.name}</h3>
-          <p className="mt-1 text-sm text-gray-600">{pkg.tagline}</p>
+          <p className="text-xs font-semibold tracking-widest text-forest uppercase">{pkg.name}</p>
+          <h3 className="mt-2 text-2xl font-bold text-gray-900 leading-snug">{pkg.benefitTitle}</h3>
+          <p className="mt-2 text-sm text-gray-600 leading-relaxed">{pkg.tagline}</p>
 
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-5 flex items-baseline gap-2">
             <span
               className={`text-4xl font-bold ${
                 pkg.highlight === 'blue' ? 'text-[#0066cc]' : pkg.highlight === 'green' ? 'text-primary' : 'text-ink'
@@ -50,9 +51,10 @@ export default function PricingTiers() {
             </span>
             <span className="text-base text-gray-600">/mese</span>
           </div>
-          <p className="text-xs text-gray-500">+ €{pkg.activation} attivazione (una tantum)</p>
+          <p className="text-xs text-gray-500">+ €{pkg.activation} setup (una tantum)</p>
+          <p className="mt-1 text-xs font-semibold text-forest">Prova gratis {pkg.trialDays} giorni</p>
 
-          <ul className="mt-6 space-y-2.5 text-sm text-gray-700 flex-1">
+          <ul className="mt-6 space-y-2.5 text-sm text-gray-700">
             {pkg.features.map((f) => (
               <li key={f} className="flex gap-2">
                 <span className="text-primary shrink-0">✓</span>
@@ -60,6 +62,16 @@ export default function PricingTiers() {
               </li>
             ))}
           </ul>
+
+          {pkg.examples?.length > 0 && (
+            <div className="mt-6 rounded-xl bg-paper-dim/70 border border-line/60 p-4 space-y-2">
+              {pkg.examples.map((ex) => (
+                <p key={ex} className="text-xs text-ink/65 leading-relaxed">
+                  {ex}
+                </p>
+              ))}
+            </div>
+          )}
 
           <div className="mt-6 pt-6 border-t border-line/60">
             <p className="text-xs font-semibold tracking-widest text-forest uppercase">
@@ -85,16 +97,19 @@ export default function PricingTiers() {
             </div>
           </div>
 
+          <div className="mt-8 flex-1" />
+
           <button
             type="button"
             disabled
             title="Prossimamente — Integrazione Stripe in corso"
-            className={`mt-8 w-full py-3 px-6 rounded-lg text-base font-bold opacity-50 cursor-not-allowed ${
+            className={`w-full py-3 px-6 rounded-lg text-base font-bold opacity-50 cursor-not-allowed ${
               buttonStyles[pkg.highlight]
             }`}
           >
             {pkg.cta}
           </button>
+          <p className="mt-2 text-center text-xs text-gray-500">{pkg.ctaSub}</p>
         </div>
       ))}
     </div>

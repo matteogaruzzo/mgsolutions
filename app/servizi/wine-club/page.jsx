@@ -111,7 +111,7 @@ const ecosystemCards = [
     Icon: GearIcon,
     title: 'Automazione MG Business Suite',
     body: 'Iscrizioni e email di benvenuto automatiche, reminder di spedizione, richiesta feedback post-consegna, upsell verso il tier superiore, CRM per gli iscritti.',
-    price: 'Canone €449-€649/mese',
+    price: 'Canone €179-€249/mese',
   },
   {
     Icon: CompassIcon,
