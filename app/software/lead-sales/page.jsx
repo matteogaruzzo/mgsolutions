@@ -5,9 +5,9 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/
 const mod = getBusinessSuiteModule('lead-sales');
 
 const PAGE = {
-  title: `${mod.name}: CRM per cantine, frantoi e agriturismi`,
+  title: 'MG Lead & Sales: CRM per Cantine e Frantoi',
   description:
-    'CRM costruito sulle esigenze reali dell’agroalimentare: distingue privati, ristoranti, distributori e degustazioni. Non è un CRM generico.',
+    'Centralizza contatti, gestisci la pipeline commerciale, automatizza i follow-up. Il CRM pensato per vendite dirette e B2B nell’agroalimentare.',
   path: '/software/lead-sales',
 };
 

@@ -8,9 +8,9 @@ import { ChartIcon, CompassIcon, PaletteIcon, CodeIcon } from '@/components/icon
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Il nostro metodo: zero fuffa, solo crescita reale',
+  title: 'Il Nostro Metodo: Zero Fuffa, Crescita Reale',
   description:
-    'Niente template generici. Analisi, strategia, esecuzione: come costruiamo siti che vendono davvero per il tuo business agroalimentare.',
+    'Come lavoriamo: analisi del business, strategia digitale, sviluppo e supporto continuativo. Un metodo concreto per cantine, frantoi e agriturismi.',
   path: '/metodo',
 };
 

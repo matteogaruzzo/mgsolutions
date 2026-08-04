@@ -9,9 +9,9 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Prenota una call consultativa gratuita (30 minuti)',
+  title: 'Prenota una Call Gratuita con MG Solutions',
   description:
-    '30 minuti con Matteo. Analizziamo la vostra situazione, identifichiamo il blocco reale, vi diciamo se possiamo aiutare. Zero impegno.',
+    'Analizziamo insieme come far crescere le tue vendite dirette online. Consulenza gratuita di 30 minuti, senza impegno, con uno specialista di settore.',
   path: '/prenota-call',
 };
 

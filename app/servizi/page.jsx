@@ -18,9 +18,9 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Servizi web & AI per l’agroalimentare',
+  title: 'Servizi Web e Software per l’Agroalimentare',
   description:
-    'E-commerce, automazione, AI agents, CRM, booking engine. Tutto quello che serve per vendere online e automatizzare il tuo business agroalimentare.',
+    'Siti web, e-commerce, CRM, AI e consulenza strategica per cantine, frantoi e agriturismi. Soluzioni su misura per aumentare vendite e visibilità.',
   path: '/servizi',
 };
 

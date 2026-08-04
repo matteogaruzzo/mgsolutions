@@ -15,7 +15,7 @@ export function generateMetadata({ params }) {
   if (!match) return {};
   return pageMetadata({
     title: `Articoli su ${match.tag}`,
-    description: `Tutti gli articoli del blog MG Solutions taggati "${match.tag}": strategie e case study per l’agroalimentare.`,
+    description: `Articoli del blog MG Solutions sul tema ${match.tag}: guide pratiche e case study per cantine, frantoi e agriturismi che vogliono vendere di più online.`,
     path: `/blog/tag/${match.slug}`,
   });
 }

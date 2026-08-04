@@ -5,9 +5,9 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/
 const mod = getBusinessSuiteModule('staff-operations');
 
 const PAGE = {
-  title: `${mod.name}: turni, checklist e task per il team`,
+  title: 'MG Staff & Operations: Gestione Team',
   description:
-    'Turni, ferie, timbrature, checklist di apertura/chiusura e task board per aziende agroalimentari e ricettive con personale.',
+    'Turni, checklist e comunicazioni interne in un solo posto. Coordina il team di cantina, frantoio o agriturismo senza caos né riunioni continue.',
   path: '/software/staff-operations',
 };
 

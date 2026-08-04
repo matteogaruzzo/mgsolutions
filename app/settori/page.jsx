@@ -40,9 +40,9 @@ const processSteps = [
 const latestSlugs = ['tenuta-monteverdi', 'frantoi-san-lorenzo', 'podere-la-vite'];
 
 const PAGE = {
-  title: 'Soluzioni web per vino, agriturismo, oleificio',
+  title: 'Soluzioni Digitali per Vino, Olio e Ospitalità',
   description:
-    'Strategie digitali costruite sul tuo settore. E-commerce per cantine, booking per agriturismi, B2B per frantoi. Crescita reale, non generica.',
+    'Strategie su misura per cantine, oleifici e agriturismi. Software, siti web ed e-commerce pensati per i tre settori dell’agroalimentare italiano.',
   path: '/settori',
 };
 

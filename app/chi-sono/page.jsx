@@ -11,9 +11,9 @@ import { ClockIcon, LockIcon, TargetIcon } from '@/components/icons/ServiceIcons
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Matteo Garuzzo, specialista digitale agroalimentare',
+  title: 'Matteo Garuzzo, sviluppatore agroalimentare',
   description:
-    '6 anni specializzato in e-commerce, AI e crescita per vino, agriturismo, oleificio. Fondatore di MG Solutions. Scopri come scalare il tuo business.',
+    'Specialista Next.js e AI per cantine, frantoi e agriturismi. Sviluppo siti, e-commerce e software su misura per aumentare le vendite dirette.',
   path: '/chi-sono',
 };
 

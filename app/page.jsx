@@ -23,9 +23,9 @@ import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 import { faqs } from '@/lib/data';
 
 const PAGE = {
-  title: 'Matteo Garuzzo | Sviluppatore & AI Specialist per Agroalimentare',
+  title: 'Software e Siti Web per Cantine, Frantoi e Agriturismi',
   description:
-    'Specialista Next.js e AI per cantine, frantoi e agriturismi. Costruisco siti web, CRM e software su misura che aumentano vendite dirette e automazioni.',
+    'Aumenta le vendite dirette con siti web, e-commerce, software CRM e AI per cantine, frantoi e agriturismi. Soluzioni su misura in tutta Italia.',
   path: '/',
 };
 

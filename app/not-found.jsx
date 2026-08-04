@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Pagina non trovata',
+  title: 'Pagina Non Trovata - Errore 404',
+  description:
+    'La pagina che cercavi non esiste più o è stata spostata. Torna alla home, esplora i servizi o contattaci: siamo qui per aiutarti.',
   robots: { index: false, follow: false },
 };
 

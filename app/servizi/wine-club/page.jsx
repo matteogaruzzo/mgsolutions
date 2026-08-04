@@ -18,9 +18,9 @@ import {
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, howToSchema, serviceSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Wine Club per Cantine: Revenue Ricorrente e Fedeltà',
+  title: 'Wine Club per Cantine: Revenue Ricorrente',
   description:
-    'Lanciamo wine club per cantine ed enoteche: revenue ricorrente, community, clienti fedeli. Sito, software e consulenza. Scopri come funziona.',
+    'Aiutiamo le cantine a costruire wine club esclusivi: sito dedicato, pagamenti ricorrenti automatici, CRM per i soci. Revenue mensile prevedibile.',
   path: '/servizi/wine-club',
 };
 

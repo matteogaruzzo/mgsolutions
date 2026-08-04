@@ -11,9 +11,9 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, faqPageSchema } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: 'Contatti',
+  title: 'Contatti: Prenota una Consulenza Gratuita',
   description:
-    'Contatta MG Solutions: telefono, email o WhatsApp. Prima consulenza gratuita, risposta entro 24 ore, zero impegno. Perugia, Italia.',
+    'Parliamo di come aumentare le tue vendite dirette. Consulenza gratuita di 30 minuti su siti, e-commerce, software e AI per l’agroalimentare.',
   path: '/contatti',
   keywords: ['contatti web agency agroalimentare', 'consulenza digitale Perugia', 'contattare Matteo Garuzzo'],
 });

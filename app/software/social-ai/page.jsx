@@ -5,9 +5,9 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/
 const mod = getBusinessSuiteModule('social-ai');
 
 const PAGE = {
-  title: `${mod.name}: automazione social con approvazione cliente`,
+  title: 'MG Social AI: Contenuti Social Automatizzati',
   description:
-    'Calendario editoriale, contenuti AI e pubblicazione automatica sui social — ma nulla esce senza la tua approvazione. Per cantine, agriturismi e produttori agroalimentari.',
+    'L’AI genera testi e grafiche coerenti col tuo brand, tu approvi sempre prima della pubblicazione. Presenza social costante senza assumere nessuno.',
   path: '/software/social-ai',
 };
 

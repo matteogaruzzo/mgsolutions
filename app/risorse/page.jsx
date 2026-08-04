@@ -2,9 +2,9 @@ import RisorseContent from '@/components/RisorseContent';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Risorse: guide, template e mini-corsi per il tuo business',
+  title: 'Risorse: Guide e Template per il Tuo Business',
   description:
-    'Guide, template e mini-corsi pratici su AI, Shopify, SEO e GEO per PMI agroalimentari. Iscriviti in lista per essere il primo ad accedere.',
+    'Guide, template e mini-corsi pratici su AI, Shopify, SEO e GEO per PMI agroalimentari. Iscriviti in lista per essere il primo ad accedere gratis.',
   path: '/risorse',
 };
 

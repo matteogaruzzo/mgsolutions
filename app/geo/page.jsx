@@ -4,9 +4,9 @@ import { regions } from '@/lib/geo-data';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Servizi Digitali Agroalimentare in Italia',
+  title: 'Servizi Digitali per l’Agroalimentare in Italia',
   description:
-    'Siti web, e-commerce e software per cantine, oleifici e agriturismi in tutte le regioni italiane. Trova la tua regione.',
+    'Siti web, e-commerce e software per cantine, oleifici e agriturismi in tutte le regioni italiane. Trova la soluzione digitale per la tua zona.',
   path: '/geo',
 };
 

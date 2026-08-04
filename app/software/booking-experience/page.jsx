@@ -5,9 +5,9 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/
 const mod = getBusinessSuiteModule('booking-experience');
 
 const PAGE = {
-  title: `${mod.name}: da prenotazione a recensione`,
+  title: 'MG Booking & Experience: Prenotazioni Online',
   description:
-    'Prenotazioni, caparre, promemoria, upselling e richiesta recensione automatica. Per enoturismo, agriturismi e strutture ricettive rurali.',
+    'Calendario online, conferme automatiche, promemoria e upselling per degustazioni e soggiorni. Per cantine, agriturismi e strutture ricettive rurali.',
   path: '/software/booking-experience',
 };
 

@@ -12,9 +12,9 @@ const categories = [...new Set(posts.map((p) => p.category))].sort();
 const POSTS_PER_PAGE = 8;
 
 const PAGE = {
-  title: 'Blog: strategie reali per scalare il tuo agroalimentare',
+  title: 'Blog: Strategie Digitali per l’Agroalimentare',
   description:
-    'E-commerce, AI, SEO, marketing. Articoli che risolvono problemi concreti di cantine, agriturismo, frantoi. Niente fuffa, solo cose che funzionano.',
+    'E-commerce, AI, SEO e wine club per cantine, frantoi e agriturismi. Articoli pratici basati su casi reali, senza fuffa né promesse vaghe di crescita.',
   path: '/blog',
 };
 

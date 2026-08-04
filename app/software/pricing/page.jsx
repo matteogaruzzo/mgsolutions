@@ -10,9 +10,9 @@ import { pageMetadata, webPageSchema, faqPageSchema, productSchema } from '@/lib
 import { UsersIcon, BuildingIcon, CoinIcon, GearIcon } from '@/components/icons/ServiceIcons';
 
 const PAGE = {
-  title: 'MG Business Suite: piani e prezzi',
+  title: 'MG Business Suite: Piani e Prezzi',
   description:
-    'MG Essenziale €89/mese, Crescita €179/mese, Ecosistema €249/mese. Confronta moduli, utenti, sedi e integrazioni incluse in ogni piano di MG Business Suite.',
+    'Essenziale €89/mese, Crescita €179/mese, Ecosistema €249/mese. Moduli a scelta libera, utenti e integrazioni scalabili. Prova gratuita inclusa.',
   path: '/software/pricing',
 };
 

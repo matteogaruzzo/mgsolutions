@@ -6,9 +6,9 @@ import { caseStudies, testimonials } from '@/lib/data';
 import { pageMetadata, webPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Portfolio: 6 case study nel settore agroalimentare',
+  title: 'Portfolio: Progetti per l’Agroalimentare',
   description:
-    'Case study reali: cantine, agriturismo, frantoi. Scopri come abbiamo fatto scalare business veri con strategie digitali specifiche per settore.',
+    'Case study illustrativi per cantine, frantoi e agriturismi: e-commerce, wine club, booking online e software su misura, con risultati misurabili.',
   path: '/portfolio',
 };
 

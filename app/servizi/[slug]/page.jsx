@@ -11,8 +11,8 @@ export function generateMetadata({ params }) {
   const service = getServizio(params.slug);
   if (!service) return {};
   return pageMetadata({
-    title: service.title,
-    description: service.body,
+    title: service.seoTitle || service.title,
+    description: service.seoDescription || service.body,
     path: `/servizi/${service.slug}`,
   });
 }

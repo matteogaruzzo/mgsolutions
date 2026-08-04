@@ -5,9 +5,9 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/
 const mod = getBusinessSuiteModule('control-tower');
 
 const PAGE = {
-  title: `${mod.name}: la dashboard direzionale con report AI`,
+  title: 'MG Control Tower: Dashboard e Report AI',
   description:
-    'Sito, prenotazioni, vendite, social e team in un’unica dashboard, con alert automatici e report AI settimanale. Incluso nel pacchetto Ecosistema.',
+    'Una dashboard che aggrega vendite, prenotazioni, social e team, con un report AI settimanale. Decisioni basate su dati reali, non su intuizioni.',
   path: '/software/control-tower',
 };
 

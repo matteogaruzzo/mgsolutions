@@ -23,9 +23,9 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'MG Business Suite: il software per l’agroalimentare',
+  title: 'MG Business Suite per l’Agroalimentare',
   description:
-    'MG Business Suite riunisce vendite, prenotazioni, social, personale e dati aziendali in un’unica piattaforma online. Scegli il piano, attiva i moduli che ti servono.',
+    'Piattaforma modulare con CRM, prenotazioni, social AI, gestione team e dashboard analytics. Attivi solo i moduli che ti servono, in un unico account.',
   path: '/software',
 };
 
