@@ -9,6 +9,8 @@ import { pageMetadata, webPageSchema } from '@/lib/seo';
 const tags = getAllTags();
 const categories = [...new Set(posts.map((p) => p.category))].sort();
 
+const POSTS_PER_PAGE = 8;
+
 const PAGE = {
   title: 'Blog: strategie reali per scalare il tuo agroalimentare',
   description:
@@ -26,9 +28,26 @@ export const metadata = pageMetadata({
   ],
 });
 
+function pageHref(activeCategory, page) {
+  const params = new URLSearchParams();
+  if (activeCategory) params.set('category', activeCategory);
+  if (page > 1) params.set('page', String(page));
+  const qs = params.toString();
+  return qs ? `/blog?${qs}` : '/blog';
+}
+
 export default function Blog({ searchParams }) {
   const activeCategory = searchParams?.category;
-  const filteredPosts = activeCategory ? posts.filter((p) => p.category === activeCategory) : posts;
+  const categoryPosts = activeCategory ? posts.filter((p) => p.category === activeCategory) : posts;
+  const sortedPosts = [...categoryPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const totalPages = Math.max(1, Math.ceil(sortedPosts.length / POSTS_PER_PAGE));
+  const requestedPage = parseInt(searchParams?.page, 10) || 1;
+  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+  const filteredPosts = sortedPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
 
   return (
     <>
@@ -95,6 +114,59 @@ export default function Blog({ searchParams }) {
           </Reveal>
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <nav aria-label="Paginazione articoli" className="mt-10 flex items-center justify-center gap-2">
+          {currentPage > 1 ? (
+            <Link
+              href={pageHref(activeCategory, currentPage - 1)}
+              className="px-3.5 py-1.5 rounded-full text-sm font-medium bg-paper-dim text-ink/65 hover:bg-forest/10 hover:text-forest transition-colors"
+            >
+              ← Precedente
+            </Link>
+          ) : (
+            <span className="px-3.5 py-1.5 rounded-full text-sm font-medium text-ink/30 cursor-not-allowed">
+              ← Precedente
+            </span>
+          )}
+
+          <div className="flex gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Link
+                key={page}
+                href={pageHref(activeCategory, page)}
+                aria-current={page === currentPage ? 'page' : undefined}
+                className={`w-9 h-9 flex items-center justify-center rounded-full text-sm font-medium transition-colors ${
+                  page === currentPage
+                    ? 'bg-forest text-paper'
+                    : 'bg-paper-dim text-ink/65 hover:bg-forest/10 hover:text-forest'
+                }`}
+              >
+                {page}
+              </Link>
+            ))}
+          </div>
+
+          {currentPage < totalPages ? (
+            <Link
+              href={pageHref(activeCategory, currentPage + 1)}
+              className="px-3.5 py-1.5 rounded-full text-sm font-medium bg-paper-dim text-ink/65 hover:bg-forest/10 hover:text-forest transition-colors"
+            >
+              Successivo →
+            </Link>
+          ) : (
+            <span className="px-3.5 py-1.5 rounded-full text-sm font-medium text-ink/30 cursor-not-allowed">
+              Successivo →
+            </span>
+          )}
+        </nav>
+      )}
+
+      {totalPages > 1 && (
+        <p className="mt-3 text-center text-xs text-ink/45">
+          Pagina {currentPage} di {totalPages} · {sortedPosts.length} articoli
+        </p>
+      )}
 
       {tags.length > 0 && (
         <div className="mt-14 rule pt-8">
