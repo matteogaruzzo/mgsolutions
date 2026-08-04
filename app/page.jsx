@@ -7,7 +7,6 @@ import BookingForm from '@/components/BookingForm';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
 import {
-  site,
   servizi,
   sectors,
   caseStudies,
@@ -24,28 +23,26 @@ import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 import { faqs } from '@/lib/data';
 
 const PAGE = {
-  title: "Digitalizziamo l'eccellenza agroalimentare",
+  title: 'Matteo Garuzzo | Sviluppatore & AI Specialist per Agroalimentare',
   description:
-    "E-commerce, AI agents, automazione per vino, agriturismo, oleificio. Scalate il vostro business con strategie digitali costruite sul vostro processo reale.",
+    'Specialista Next.js e AI per cantine, frantoi e agriturismi. Costruisco siti web, CRM e software su misura che aumentano vendite dirette e automazioni.',
   path: '/',
 };
 
-export const metadata = {
-  // La root page condivide il segmento con app/layout.jsx: il title.template
-  // lì definito non si applica qui, quindi il suffisso va aggiunto a mano
-  // (altrove ci pensa il template automaticamente).
-  ...pageMetadata({
-    ...PAGE,
-    keywords: [
-      'web agency agroalimentare',
-      'e-commerce vino',
-      'automazione agribusiness',
-      'software per cantina',
-      'digitalizzazione Umbria',
-    ],
-  }),
-  title: `${PAGE.title} · ${site.name}`,
-};
+// La root page condivide il segmento con app/layout.jsx: il title.template
+// lì definito non si applica qui (stesso segmento, non un discendente), quindi
+// il <title> risulta esattamente PAGE.title, senza suffisso automatico.
+export const metadata = pageMetadata({
+  ...PAGE,
+  keywords: [
+    'web agency agroalimentare',
+    'e-commerce vino',
+    'automazione agribusiness',
+    'software per cantina',
+    'digitalizzazione Umbria',
+    'Matteo Garuzzo',
+  ],
+});
 
 const sectorTheme = {
   'wine-viticulture': { icon: GrapeIcon, accent: 'text-wine-accent', border: 'hover:border-wine-accent' },

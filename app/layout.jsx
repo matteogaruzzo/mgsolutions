@@ -6,6 +6,7 @@ import QuizFloatingButton from '@/components/QuizFloatingButton';
 import QuizPopup from '@/components/QuizPopup';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
+import { OG_IMAGE } from '@/lib/seo';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,13 +38,13 @@ export const metadata = {
     type: 'website',
     locale: 'it_IT',
     siteName: site.name,
-    images: [{ url: '/images/og-image-default.png', width: 1200, height: 630, alt: site.name }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} — ${site.tagline}`,
     description: site.positioning,
-    images: ['/images/og-image-default.png'],
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
   verification: {
