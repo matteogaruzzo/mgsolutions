@@ -1,12 +1,15 @@
 import { businessSuitePackages, businessSuiteModules } from '@/lib/data';
 
-const highlightStyles = {
-  green: 'border-primary bg-primary/5',
+const cardStyles = {
+  essenziale: 'border-line bg-paper-dim',
+  crescita: 'border-primary bg-primary/5 shadow-lg',
+  ecosistema: 'border-ink bg-paper',
 };
 
 const buttonStyles = {
-  null: 'bg-ink text-paper',
-  green: 'bg-primary text-white',
+  essenziale: 'bg-ink text-paper',
+  crescita: 'bg-primary text-white',
+  ecosistema: 'bg-ink text-paper',
 };
 
 export default function PricingTiers() {
@@ -16,7 +19,7 @@ export default function PricingTiers() {
         <div
           key={pkg.id}
           className={`relative rounded-2xl border-2 p-8 flex flex-col ${
-            highlightStyles[pkg.highlight] || 'border-line bg-paper'
+            cardStyles[pkg.id] || 'border-line bg-paper'
           }`}
         >
           {pkg.badge && (
@@ -69,7 +72,7 @@ export default function PricingTiers() {
 
           <a
             href={pkg.ctaHref}
-            className={`block text-center w-full py-3 px-6 rounded-lg text-base font-bold ${buttonStyles[pkg.highlight] || buttonStyles.null}`}
+            className={`block text-center w-full py-3 px-6 rounded-lg text-base font-bold ${buttonStyles[pkg.id] || 'bg-ink text-paper'}`}
           >
             {pkg.cta}
           </a>
