@@ -97,11 +97,11 @@ const softwareFaqs = [
   },
   {
     q: 'Posso iniziare con un solo modulo?',
-    a: 'Sì. Il piano Essenziale include 1 modulo a scelta, pensato per chi vuole risolvere una priorità specifica prima di allargarsi.',
+    a: 'Sì. Hai accesso a tutti i moduli operativi fin dal piano Essenziale, ma puoi scegliere di attivarne uno solo — quello che risolve la priorità del momento — e aggiungere gli altri quando serve.',
   },
   {
     q: 'Posso aggiungere moduli dopo?',
-    a: 'Sì. Puoi passare a un piano superiore quando vuoi: i tuoi dati restano nello stesso account, senza migrazioni.',
+    a: 'Sì, in qualsiasi momento e senza costi aggiuntivi per il cambio. Se invece ti serve più capacità — più utenti, sedi o integrazioni — puoi passare a un piano superiore quando vuoi: i tuoi dati restano nello stesso account, senza migrazioni.',
   },
   {
     q: 'Più persone possono lavorare nello stesso account?',

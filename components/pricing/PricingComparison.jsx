@@ -14,8 +14,8 @@ export default function PricingComparison() {
           <tr className="border-b border-line">
             <th className="text-left py-4 pr-4 text-sm font-semibold text-gray-900">Caratteristica</th>
             <th className="text-center py-4 px-4 text-sm font-semibold text-gray-900">Essenziale</th>
-            <th className="text-center py-4 px-4 text-sm font-semibold text-[#0066cc]">Crescita</th>
-            <th className="text-center py-4 px-4 text-sm font-semibold text-primary">Ecosistema</th>
+            <th className="text-center py-4 px-4 text-sm font-semibold text-primary">Crescita</th>
+            <th className="text-center py-4 px-4 text-sm font-semibold text-sky-600">Ecosistema</th>
           </tr>
         </thead>
         <tbody>

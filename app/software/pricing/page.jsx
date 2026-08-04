@@ -24,22 +24,22 @@ export const metadata = pageMetadata({
 const activationSteps = [
   { icon: UsersIcon, title: 'Registrati', body: 'Email, password e nome azienda.' },
   { icon: CoinIcon, title: 'Scegli il piano', body: 'Essenziale, Crescita o Ecosistema.' },
-  { icon: GearIcon, title: 'Attiva i moduli', body: 'Scegli quali moduli attivare, in base al piano.' },
+  { icon: GearIcon, title: 'Attiva i moduli', body: 'Scegli quali moduli attivare, in base alle tue esigenze.' },
   { icon: BuildingIcon, title: 'Configura e inizia', body: 'Inviti il team, importi i dati esistenti, inizi a usare la piattaforma.' },
 ];
 
 const controlTowerFaqs = [
   {
-    q: 'Che differenza c’è tra Crescita ed Ecosistema?',
-    a: 'Crescita include fino a 3 moduli a scelta. Ecosistema include tutti i moduli, compreso Control Tower, che aggrega i dati di tutti gli altri moduli attivi.',
+    q: 'Perché Control Tower è incluso solo in Ecosistema?',
+    a: 'Perché non è un modulo indipendente: aggrega i dati degli altri moduli attivi (Lead & Sales, Booking, Social AI, Staff & Operations). Ha senso solo quando più moduli lavorano insieme, per questo è incluso nel piano che dà accesso a tutti loro senza vincoli.',
   },
   {
     q: 'Mi basta Control Tower senza altri moduli?',
     a: 'No. Control Tower serve per aggregare i dati degli altri moduli: funziona quando hai Lead & Sales, Booking, Social AI o Staff & Operations attivi.',
   },
   {
-    q: 'Se scelgo Crescita e in seguito voglio aggiungere un quarto modulo?',
-    a: 'Non è possibile restando su Crescita, che include fino a 3 moduli. Passi al piano Ecosistema per avere accesso a tutti i moduli, incluso Control Tower.',
+    q: 'Gli altri moduli sono limitati in base al piano?',
+    a: 'No. Lead & Sales, Social AI, Booking & Experience e Staff & Operations sono selezionabili liberamente in tutti e tre i piani. Quello che cambia tra Essenziale, Crescita ed Ecosistema è la capacità della piattaforma — utenti, sedi, integrazioni, supporto — non l’accesso ai moduli.',
   },
 ];
 
@@ -63,8 +63,8 @@ export default function SoftwarePricingPage() {
             Scegli quanti moduli attivare nella tua MG Business Suite.
           </h1>
           <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">
-            Tutti i piani includono l’accesso alla stessa piattaforma. Quello che cambia è il numero
-            di moduli attivabili, gli utenti, le integrazioni e il livello di supporto.
+            Ogni piano dà accesso agli stessi moduli operativi: scegli tu quali attivare. Quello che
+            cambia è quanto puoi scalare — utenti, sedi, integrazioni e livello di supporto.
           </p>
           <p className="mt-3 text-sm text-ink/60 max-w-2xl leading-relaxed">
             Un modulo è una funzione specializzata della piattaforma, ad esempio gestione vendite,
