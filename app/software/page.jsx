@@ -217,37 +217,21 @@ export default function Software() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {businessSuiteModules.map((m, i) => {
               const Icon = iconMap[m.icon] || TargetIcon;
               return (
                 <Reveal key={m.slug} delay={i * 60}>
                   <Link
                     href={`/software/${m.slug}`}
-                    className="group block h-full rounded-2xl p-7 border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="group block h-full rounded-2xl p-6 border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   >
-                    <Icon className="w-8 h-8 text-forest" />
-                    <h3 className="h3 text-xl mt-4 text-ink">{m.name}</h3>
-                    <div className="mt-4 space-y-2.5">
-                      <p className="text-xs text-ink/60">
-                        <span className="font-semibold text-ink/75">Risolve: </span>
-                        {m.problemSolved}
-                      </p>
-                      <p className="text-xs text-ink/60">
-                        <span className="font-semibold text-ink/75">Risultato: </span>
-                        {m.resultForClient}
-                      </p>
+                    <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-primary" />
                     </div>
-                    <ul className="mt-4 space-y-1.5">
-                      {m.useCases.slice(0, 3).map((u) => (
-                        <li key={u} className="text-xs text-ink/55">• {u}</li>
-                      ))}
-                    </ul>
-                    <p className="mt-4 text-xs text-ink/50">
-                      <span className="font-semibold text-ink/70">Per chi: </span>
-                      {m.targetAudience}
-                    </p>
-                    <span className="mt-5 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
+                    <h3 className="h3 text-lg mt-4 text-ink">{m.name}</h3>
+                    <p className="mt-2.5 text-sm text-ink/65 leading-relaxed">{m.cardSummary}</p>
+                    <span className="mt-4 inline-block text-xs font-semibold text-forest group-hover:text-brass transition-colors">
                       Scopri di più →
                     </span>
                   </Link>
