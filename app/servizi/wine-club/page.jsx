@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
-import { site } from '@/lib/data';
 import { GrapeIcon, GlassIcon } from '@/components/icons/WineIcons';
 import {
   CoinIcon,
@@ -100,6 +100,29 @@ const steps = [
   },
 ];
 
+const differentiators = [
+  {
+    Icon: CompassIcon,
+    title: 'Su misura, non un tool generico',
+    body: 'Il club è costruito sul vostro brand e sui vostri vini, non su un plugin standardizzato che sembra uguale per tutti i produttori che lo usano.',
+  },
+  {
+    Icon: HandshakeIcon,
+    title: 'Un solo team per sito, software e strategia',
+    body: 'Non dovete far parlare tra loro tre fornitori diversi. Chi disegna la pagina è lo stesso team che imposta l’automazione e vi consiglia sui tier.',
+  },
+  {
+    Icon: GearIcon,
+    title: 'Già collegato a MG Business Suite',
+    body: 'CRM, email di follow-up e upsell non vanno ricostruiti a parte: si appoggiano agli stessi moduli che gestiscono già gli altri contatti della cantina.',
+  },
+  {
+    Icon: ChartIcon,
+    title: 'Consulenza sul lancio, non solo il tool',
+    body: 'Vi aiutiamo a decidere struttura dei tier, prezzo e timeline prima ancora di scrivere una riga di codice — non consegniamo solo l’accesso a una piattaforma.',
+  },
+];
+
 const ecosystemCards = [
   {
     Icon: ScreenIcon,
@@ -193,15 +216,16 @@ export default function WineClubPage() {
         className="relative bg-cover bg-center text-paper"
         style={{
           backgroundImage:
-            'linear-gradient(180deg, rgba(26,26,26,0.45) 0%, rgba(26,26,26,0.8) 100%), url(/images/sectors/wine-hero.png)',
+            'linear-gradient(180deg, rgba(26,26,26,0.5) 0%, rgba(26,26,26,0.82) 100%), url(/images/servizi/wine-club-hero.jpg)',
+          backgroundPosition: 'center 25%',
         }}
       >
         <div className="max-w-edge mx-auto px-6 pt-32 pb-20 text-center">
           <Reveal>
-            <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-paper/15">
-              <GlassIcon className="w-7 h-7" />
+            <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-wine-accent/25 border border-wine-gold/40">
+              <GlassIcon className="w-7 h-7 text-wine-gold" />
             </span>
-            <p className="eyebrow text-brass mt-6">Wine Club</p>
+            <p className="eyebrow text-wine-gold mt-6">Wine Club</p>
             <h1 className="display text-3xl sm:text-4xl md:text-5xl mt-4 max-w-2xl mx-auto leading-[1.2] break-words">
               Fedeltà, comunità e nuove entrate ricorrenti.
             </h1>
@@ -213,7 +237,7 @@ export default function WineClubPage() {
               <a href="#come-funziona" className="btn-solid bg-paper text-forest hover:bg-paper/90">
                 Scopri come funziona ↓
               </a>
-              <Link href="/prenota-call" className="btn-ghost border-paper/40 text-paper hover:border-paper hover:bg-paper hover:text-forest">
+              <Link href="/prenota-call" className="btn-ghost border-wine-gold/50 text-paper hover:border-wine-gold hover:bg-wine-gold hover:text-ink">
                 <GrapeIcon className="w-4 h-4" />
                 Prenota una consulenza
               </Link>
@@ -227,30 +251,46 @@ export default function WineClubPage() {
 
       {/* ---------- COS'È UN WINE CLUB ---------- */}
       <section className="max-w-edge mx-auto px-6 py-20">
-        <Reveal>
-          <p className="eyebrow">Le basi</p>
-          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">
-            Cos’è un wine club (e perché ogni cantina dovrebbe averne uno).
-          </h2>
-          <div className="mt-8 space-y-5 max-w-3xl">
-            <p className="text-ink/70 leading-relaxed">
-              Un wine club è un programma di fedeltà strutturato: i soci si iscrivono per
-              ricevere periodicamente — mensilmente, trimestralmente, annualmente — una
-              selezione curata di vini della vostra cantina. Non è un e-commerce con acquisti
-              a caso: è una relazione che si costruisce nel tempo.
-            </p>
-            <p className="text-ink/70 leading-relaxed">
-              <strong className="body-strong">Il cliente riceve</strong>: esclusività (vini non
-              disponibili al pubblico), un prezzo migliore rispetto al retail, una comunità di
-              appassionati, lo storytelling dietro ogni selezione e l’accesso a eventi privati.
-            </p>
-            <p className="text-ink/70 leading-relaxed">
-              <strong className="body-strong">Voi guadagnate</strong>: revenue ricorrente e
-              prevedibile, una relazione diretta che bypassa i grossisti, feedback immediato sui
-              vini e ambassador che promuovono il vostro brand senza costarvi in pubblicità.
-            </p>
-          </div>
-        </Reveal>
+        <div className="grid lg:grid-cols-[1fr_22rem] gap-10 items-start">
+          <Reveal>
+            <p className="eyebrow">Le basi</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">
+              Cos’è un wine club (e perché ogni cantina dovrebbe averne uno).
+            </h2>
+            <div className="mt-8 space-y-5 max-w-3xl">
+              <p className="text-ink/70 leading-relaxed">
+                Un wine club è un programma di fedeltà strutturato: i soci si iscrivono per
+                ricevere periodicamente — mensilmente, trimestralmente, annualmente — una
+                selezione curata di vini della vostra cantina. Non è un e-commerce con acquisti
+                a caso: è una relazione che si costruisce nel tempo.
+              </p>
+              <p className="text-ink/70 leading-relaxed">
+                <strong className="body-strong">Il cliente riceve</strong>: esclusività (vini non
+                disponibili al pubblico), un prezzo migliore rispetto al retail, una comunità di
+                appassionati, lo storytelling dietro ogni selezione e l’accesso a eventi privati.
+              </p>
+              <p className="text-ink/70 leading-relaxed">
+                <strong className="body-strong">Voi guadagnate</strong>: revenue ricorrente e
+                prevedibile, una relazione diretta che bypassa i grossisti, feedback immediato sui
+                vini e ambassador che promuovono il vostro brand senza costarvi in pubblicità.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-line">
+              <Image
+                src="/images/servizi/wine-club-cellar.jpg"
+                alt="Botti di rovere in una cantina, luce calda"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <blockquote className="mt-5 border-l-2 border-wine-accent pl-4 text-sm italic text-ink/60 leading-relaxed">
+              “Non è un e-commerce con acquisti a caso: è una relazione che si costruisce mese
+              dopo mese.”
+            </blockquote>
+          </Reveal>
+        </div>
       </section>
 
       {/* ---------- PERCHÉ FUNZIONA ---------- */}
@@ -265,8 +305,8 @@ export default function WineClubPage() {
           <div className="mt-12 grid sm:grid-cols-2 gap-5">
             {whyCards.map(({ Icon, title, body }, i) => (
               <Reveal key={title} delay={i * 70}>
-                <div className="bg-paper border border-line rounded-xl p-6 h-full flex gap-4">
-                  <Icon className="w-6 h-6 text-forest shrink-0 mt-0.5" />
+                <div className="bg-paper border border-line border-l-2 border-l-wine-accent rounded-xl p-6 h-full flex gap-4">
+                  <Icon className="w-6 h-6 text-wine-accent shrink-0 mt-0.5" />
                   <div>
                     <h3 className="h3 text-base text-ink">{title}</h3>
                     <p className="mt-2 text-sm text-ink/60 leading-relaxed">{body}</p>
@@ -291,8 +331,8 @@ export default function WineClubPage() {
             <Reveal key={n} delay={i * 70}>
               <div className="bg-paper border border-line rounded-2xl p-6 h-full flex flex-col">
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-forest/10">
-                    <Icon className="w-5 h-5 text-forest" />
+                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-wine-bg">
+                    <Icon className="w-5 h-5 text-wine-accent" />
                   </span>
                   <span className="font-mono text-xs text-ink/35">{n}</span>
                 </div>
@@ -300,7 +340,7 @@ export default function WineClubPage() {
                 <ul className="mt-3 space-y-1.5 text-xs text-ink/60 leading-relaxed">
                   {items.map((it) => (
                     <li key={it} className="flex gap-1.5">
-                      <span className="text-forest">·</span>
+                      <span className="text-wine-accent">·</span>
                       <span>{it}</span>
                     </li>
                   ))}
@@ -308,6 +348,31 @@ export default function WineClubPage() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* ---------- PERCHÉ COSTRUIRLO CON NOI ---------- */}
+      <section className="bg-ink text-paper">
+        <div className="max-w-edge mx-auto px-6 py-20">
+          <Reveal>
+            <p className="eyebrow text-wine-gold text-center">Il differenziale</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 text-center max-w-2xl mx-auto">
+              Non un tool da configurare da soli. Un progetto che seguiamo insieme.
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 gap-5">
+            {differentiators.map(({ Icon, title, body }, i) => (
+              <Reveal key={title} delay={i * 70}>
+                <div className="border border-paper/15 border-l-2 border-l-wine-gold rounded-xl p-6 h-full flex gap-4">
+                  <Icon className="w-6 h-6 text-wine-gold shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="h3 text-base">{title}</h3>
+                    <p className="mt-2 text-sm text-paper/65 leading-relaxed">{body}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -413,9 +478,9 @@ export default function WineClubPage() {
       </section>
 
       {/* ---------- CTA FINALE ---------- */}
-      <section className="bg-forest text-paper">
+      <section className="bg-wine-accent text-paper">
         <div className="max-w-edge mx-auto px-6 py-24 text-center">
-          <p className="eyebrow text-brass">Prossimo passo</p>
+          <p className="eyebrow text-wine-gold">Prossimo passo</p>
           <h2 className="display text-3xl md:text-4xl mt-5 max-w-xl mx-auto leading-tight">
             Pronti a lanciare il vostro wine club?
           </h2>
