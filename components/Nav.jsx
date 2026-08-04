@@ -53,14 +53,14 @@ const softwareMega = [
     href: `/software/${m.slug}`,
     title: m.name,
     desc: m.whatItDoes,
-    benefit: m.status === 'early-access' ? 'Accesso anticipato — attivabile ora' : 'In roadmap — non ancora attivabile',
+    benefit: m.problemSolved,
     Icon: softwareIconMap[m.icon] || GearIcon,
   })),
   {
     href: '/software/pricing',
-    title: 'Struttura dei piani',
-    desc: 'Come saranno organizzati i piani quando la Suite sarà completa.',
-    benefit: 'Prezzo in definizione',
+    title: 'Piani e prezzi',
+    desc: 'Essenziale, Crescita ed Ecosistema: quanti moduli includono e quanto costano.',
+    benefit: 'Da €89/mese',
     Icon: CoinIcon,
   },
 ];

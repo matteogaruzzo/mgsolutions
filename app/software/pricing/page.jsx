@@ -1,18 +1,18 @@
+import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import PricingTiers from '@/components/pricing/PricingTiers';
 import PricingComparison from '@/components/pricing/PricingComparison';
-import BundleSection from '@/components/pricing/BundleSection';
-import ExtrasSection from '@/components/pricing/ExtrasSection';
-import PricingFAQ from '@/components/pricing/PricingFAQ';
-import PricingCTA from '@/components/pricing/PricingCTA';
+import FAQAccordion from '@/components/FAQAccordion';
+import CTA from '@/components/CTA';
 import { businessSuiteFaqs } from '@/lib/data';
+import { SOFTWARE_PLANS, SOFTWARE_PLAN_ORDER } from '@/lib/config/software-plans';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
-import { BuildingIcon, CompassIcon, CheckCircleIcon } from '@/components/icons/ServiceIcons';
+import { UsersIcon, BuildingIcon, CoinIcon, GearIcon } from '@/components/icons/ServiceIcons';
 
 const PAGE = {
   title: 'MG Business Suite: piani e prezzi',
   description:
-    'MG Essenziale costa €89/mese + €249 di setup, con 30 giorni di prova gratis. Crescita ed Ecosistema sono in roadmap: la struttura è già definita, il prezzo arriva quando saranno attivabili.',
+    'MG Essenziale €89/mese, Crescita €179/mese, Ecosistema €249/mese. Confronta moduli, utenti, sedi e integrazioni incluse in ogni piano di MG Business Suite.',
   path: '/software/pricing',
 };
 
@@ -21,21 +21,25 @@ export const metadata = pageMetadata({
   keywords: ['prezzi mg business suite', 'piani mg business suite', 'crm agroalimentare prezzo'],
 });
 
-const howItWorksColumns = [
+const activationSteps = [
+  { icon: UsersIcon, title: 'Registrati', body: 'Email, password e nome azienda.' },
+  { icon: CoinIcon, title: 'Scegli il piano', body: 'Essenziale, Crescita o Ecosistema.' },
+  { icon: GearIcon, title: 'Attiva i moduli', body: 'Scegli quali moduli attivare, in base al piano.' },
+  { icon: BuildingIcon, title: 'Configura e inizia', body: 'Inviti il team, importi i dati esistenti, inizi a usare la piattaforma.' },
+];
+
+const controlTowerFaqs = [
   {
-    icon: BuildingIcon,
-    title: 'Una sola suite',
-    body: 'Un unico software per più aree del business, non cinque piattaforme separate da integrare a mano. È il modo in cui la stiamo costruendo, modulo dopo modulo.',
+    q: 'Che differenza c’è tra Crescita ed Ecosistema?',
+    a: 'Crescita include fino a 3 moduli a scelta. Ecosistema include tutti i moduli, compreso Control Tower, che aggrega i dati di tutti gli altri moduli attivi.',
   },
   {
-    icon: CompassIcon,
-    title: 'Attivi solo quello che esiste',
-    body: 'La suite prevede 5 moduli: Lead & Sales (contatti), Booking (prenotazioni), Social AI (contenuti), Staff & Operations (team), Control Tower (dashboard). Oggi solo Lead & Sales è attivabile.',
+    q: 'Mi basta Control Tower senza altri moduli?',
+    a: 'No. Control Tower serve per aggregare i dati degli altri moduli: funziona quando hai Lead & Sales, Booking, Social AI o Staff & Operations attivi.',
   },
   {
-    icon: CheckCircleIcon,
-    title: 'Prezzo chiaro, non nascosto',
-    body: 'Il prezzo di Essenziale (€89/mese) è reale e pubblico, non "richiedi quotazione". Crescita ed Ecosistema mostrano lo stesso numero solo quando sarà un prezzo vero, non una stima.',
+    q: 'Se scelgo Crescita e in seguito voglio aggiungere un quarto modulo?',
+    a: 'Non è possibile restando su Crescita, che include fino a 3 moduli. Passi al piano Ecosistema per avere accesso a tutti i moduli, incluso Control Tower.',
   },
 ];
 
@@ -48,46 +52,95 @@ export default function SoftwarePricingPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(businessSuiteFaqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema([...businessSuiteFaqs, ...controlTowerFaqs])) }}
       />
 
-      {/* ---------- HERO ---------- */}
+      {/* ---------- 1. HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-32 pb-16">
         <Reveal>
           <p className="eyebrow">MG Business Suite</p>
           <h1 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.05]">
-            Piani e prezzi, senza sorprese.
+            Scegli quanti moduli attivare nella tua MG Business Suite.
           </h1>
           <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">
-            Scegli il piano che ti serve. MG Essenziale è attivabile oggi con un prezzo reale.
-            Crescita ed Ecosistema mostrano la struttura futura: il prezzo arriva quando saranno
-            davvero attivabili.
+            Tutti i piani includono l’accesso alla stessa piattaforma. Quello che cambia è il numero
+            di moduli attivabili, gli utenti, le integrazioni e il livello di supporto.
+          </p>
+          <p className="mt-3 text-sm text-ink/60 max-w-2xl leading-relaxed">
+            Un modulo è una funzione specializzata della piattaforma, ad esempio gestione vendite,
+            prenotazioni, social o personale.
           </p>
           <div className="mt-6 inline-flex items-start gap-3 max-w-2xl rounded-xl border border-primary/30 bg-primary/5 px-5 py-4">
             <span className="text-primary text-lg leading-none">●</span>
             <p className="text-sm text-ink/80 leading-relaxed">
-              <span className="font-semibold text-primary">MG Essenziale include 30 giorni di prova gratis.</span>{' '}
-              Nessuna carta di credito richiesta per iniziare la conversazione.
+              <span className="font-semibold text-primary">
+                Tutti i piani includono una prova gratuita (30-60 giorni).
+              </span>{' '}
+              Nessuna carta di credito richiesta.
             </p>
           </div>
         </Reveal>
       </section>
 
-      {/* ---------- COME FUNZIONA ---------- */}
+      {/* ---------- 2. 3 CARD PRICING ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-16">
+        <PricingTiers />
+      </section>
+
+      {/* ---------- 3. QUANTO COSTA DAVVERO? ---------- */}
       <section className="bg-paper-dim">
         <div className="max-w-edge mx-auto px-6 py-20">
           <Reveal>
-            <p className="eyebrow">Come funziona MG Business Suite</p>
+            <p className="eyebrow text-center">Quanto costa davvero?</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink text-center max-w-2xl mx-auto">
+              Investimento minimo. Ritorno che puoi misurare fin da mese 1.
+            </h2>
           </Reveal>
-          <div className="mt-10 grid sm:grid-cols-3 gap-6">
-            {howItWorksColumns.map((c, i) => (
-              <Reveal key={c.title} delay={i * 80}>
-                <div className="bg-paper border border-line rounded-2xl p-7 h-full">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <c.icon className="w-6 h-6 text-primary" />
+          <div className="mt-12 grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            {SOFTWARE_PLAN_ORDER.map((id, i) => {
+              const plan = SOFTWARE_PLANS[id];
+              const perDay = (plan.monthlyPrice / 30).toFixed(2).replace('.', ',');
+              return (
+                <Reveal key={id} delay={i * 60}>
+                  <div className="border border-line rounded-2xl p-6 bg-paper text-center h-full">
+                    <p className="text-xs font-semibold tracking-widest text-forest uppercase">{plan.name}</p>
+                    <p className="mt-3 text-2xl font-bold text-primary">€{perDay}<span className="text-sm text-ink/50">/giorno</span></p>
+                    <p className="mt-2 text-xs text-ink/50">€{plan.monthlyPrice}/mese</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold text-ink">{c.title}</h3>
-                  <p className="mt-3 text-sm text-ink/70 leading-relaxed">{c.body}</p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- 4. TABELLA COMPARATIVA ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Confronto</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Tutte le differenze, in un colpo d’occhio.</h2>
+        </Reveal>
+        <div className="mt-10">
+          <PricingComparison />
+        </div>
+      </section>
+
+      {/* ---------- 5. ATTIVAZIONE ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Come funziona l’attivazione</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
+              Dalla registrazione al primo modulo attivo.
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {activationSteps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 60}>
+                <div className="relative h-full border border-line rounded-xl p-6 bg-paper">
+                  <span className="text-3xl font-bold text-brass/70">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="h3 text-base mt-3 text-ink">{s.title}</h3>
+                  <p className="mt-2 text-sm text-ink/65 leading-relaxed">{s.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -95,82 +148,37 @@ export default function SoftwarePricingPage() {
         </div>
       </section>
 
-      {/* ---------- 3 PACCHETTI ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <PricingTiers />
-      </section>
-
-      {/* ---------- COSTO AL GIORNO (solo per il prezzo reale, Essenziale) ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-16 text-center">
-          <Reveal>
-            <p className="eyebrow">Se lo guardi al giorno</p>
-            <p className="mt-4 text-2xl md:text-3xl text-ink max-w-xl mx-auto leading-snug">
-              MG Essenziale costa <span className="font-bold text-primary">circa €2,97 al giorno</span> — meno di un caffè.
-            </p>
-            <p className="mt-3 text-sm text-ink/50 max-w-md mx-auto">
-              (€89/mese ÷ 30 giorni. Crescita ed Ecosistema non hanno ancora un prezzo da calcolare.)
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- PER TE CHI SEI ---------- */}
+      {/* ---------- 6. FAQ CONTROL TOWER ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">
         <Reveal>
-          <p className="eyebrow">Per te, chi sei?</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Trova il tuo punto di partenza.</h2>
+          <p className="eyebrow">MG Control Tower</p>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Perché è solo nel piano Ecosistema.</h2>
         </Reveal>
-        <div className="mt-10 grid sm:grid-cols-3 gap-6">
-          <div className="border border-line rounded-2xl p-6">
-            <p className="font-semibold text-ink">Piccolo business, primo passo?</p>
-            <p className="mt-2 text-sm text-ink/60">→ MG Essenziale, €89/mese</p>
-            <p className="mt-1 text-sm text-ink/60">→ Prova gratis 30 giorni</p>
-          </div>
-          <div className="border border-line rounded-2xl p-6">
-            <p className="font-semibold text-ink">Business in crescita, più processi?</p>
-            <p className="mt-2 text-sm text-ink/60">→ MG Crescita, struttura pronta</p>
-            <p className="mt-1 text-sm text-ink/60">→ Prezzo quando sarà attivabile</p>
-          </div>
-          <div className="border border-line rounded-2xl p-6">
-            <p className="font-semibold text-ink">Azienda strutturata, più sedi?</p>
-            <p className="mt-2 text-sm text-ink/60">→ MG Ecosistema, struttura pronta</p>
-            <p className="mt-1 text-sm text-ink/60">→ Prezzo quando sarà attivabile</p>
-          </div>
+        <div className="mt-10 max-w-2xl">
+          <FAQAccordion items={controlTowerFaqs} />
         </div>
       </section>
 
-      {/* ---------- COMPARISON ---------- */}
+      {/* ---------- 7. FAQ GENERICHE ---------- */}
       <section className="bg-paper-dim">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">Confronto</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">Tutte le differenze, in un colpo d’occhio.</h2>
+            <p className="eyebrow">Domande sui piani</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Prima di iscriverti.</h2>
           </Reveal>
-          <div className="mt-10">
-            <PricingComparison />
+          <div className="mt-10 max-w-2xl">
+            <FAQAccordion items={businessSuiteFaqs} />
           </div>
         </div>
       </section>
 
-      {/* ---------- BUNDLE SITO + SOFTWARE ---------- */}
-      <section id="bundle" className="max-w-edge mx-auto px-6 py-24 scroll-mt-24">
-        <BundleSection />
-      </section>
-
-      {/* ---------- EXTRA & OPZIONI ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <ExtrasSection />
-        </div>
-      </section>
-
-      {/* ---------- FAQ ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <PricingFAQ />
-      </section>
-
-      <PricingCTA />
+      {/* ---------- 8. CTA FINALE ---------- */}
+      <CTA
+        title="Non scegliere il piano in base al numero più alto."
+        sub="Parti dal problema operativo da risolvere. Ti aiutiamo a capire quale modulo serve davvero e quali integrazioni sono necessarie."
+        href="/contatti?interesse=mg-business-suite"
+        ctaLabel="Trova il piano adatto"
+      />
     </>
   );
 }

@@ -143,11 +143,11 @@ export default function ServicePageTemplate({ service }) {
         </div>
       </section>
 
-      {/* ---------- ROADMAP (solo per software AI, dove esiste davvero) ---------- */}
+      {/* ---------- MG BUSINESS SUITE (solo per software AI, dove esiste davvero) ---------- */}
       {service.slug === 'software-ai-su-misura' && (
         <section className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">Cosa stiamo costruendo</p>
+            <p className="eyebrow">MG Business Suite</p>
             <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">{softwareUpcoming.title}</h2>
             <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
           </Reveal>

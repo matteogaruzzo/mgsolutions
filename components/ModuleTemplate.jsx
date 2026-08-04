@@ -4,6 +4,7 @@ import CTA from '@/components/CTA';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
 import { businessSuiteModules, getBusinessSuiteModule } from '@/lib/data';
+import { SOFTWARE_PLANS } from '@/lib/config/software-plans';
 import {
   ChatIcon,
   TargetIcon,
@@ -47,9 +48,9 @@ export default function ModuleTemplate({ module: mod }) {
     .map((slug) => getBusinessSuiteModule(slug))
     .filter(Boolean);
   const otherModules = businessSuiteModules.filter((m) => m.slug !== mod.slug);
-  const isAvailable = mod.status === 'early-access';
-  const ctaLabel = isAvailable ? 'Richiedi accesso anticipato' : 'Segui lo sviluppo';
-  const ctaHref = `/contatti?interesse=software&modulo=${mod.slug}`;
+  const includedInPlans = mod.availableInPlans.map((id) => SOFTWARE_PLANS[id]);
+  const ctaLabel = 'Scopri come attivarlo';
+  const ctaHref = `/contatti?interesse=mg-business-suite&modulo=${mod.slug}`;
 
   return (
     <>
@@ -68,19 +69,10 @@ export default function ModuleTemplate({ module: mod }) {
           <div className="flex items-center gap-4 mt-6">
             <Icon className="w-9 h-9 text-brass shrink-0" />
             <h1 className="display text-3xl md:text-5xl leading-[1.1]">{mod.name}</h1>
-            <span
-              className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide rounded-full px-3 py-1 ${
-                isAvailable ? 'bg-brass text-ink' : 'bg-paper/15 text-paper/80'
-              }`}
-            >
-              {mod.statusLabel}
-            </span>
           </div>
           <p className="mt-5 text-lg text-paper/85 max-w-2xl leading-relaxed">{mod.tagline}</p>
           <p className="mt-3 text-sm text-paper/60 max-w-2xl leading-relaxed">
-            {isAvailable
-              ? 'Questo modulo è reale ed è attivabile oggi, in accesso anticipato con le prime aziende partner.'
-              : 'Questo modulo è in roadmap: descrive la direzione di sviluppo prevista e non è ancora attivabile.'}
+            {mod.problemSolved} {mod.resultForClient}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href={ctaHref} className="btn-solid bg-brass text-ink hover:bg-paper">
@@ -175,15 +167,10 @@ export default function ModuleTemplate({ module: mod }) {
       <section className="bg-paper-dim">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">{isAvailable ? 'Vantaggi attesi' : 'Vantaggi previsti'}</p>
+            <p className="eyebrow">Vantaggi</p>
             <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-              {isAvailable ? 'Perché puntiamo su questo modulo.' : 'Perché lo stiamo costruendo.'}
+              Perché attivarlo.
             </h2>
-            <p className="mt-4 text-sm text-ink/50 max-w-2xl">
-              {isAvailable
-                ? 'Obiettivi del modulo in accesso anticipato: verranno confermati o corretti con i primi utilizzi reali.'
-                : 'Obiettivi di progettazione del modulo in roadmap, non risultati misurati: il modulo non è ancora disponibile.'}
-            </p>
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 gap-6">
             {mod.benefits.map((b) => (
@@ -200,22 +187,20 @@ export default function ModuleTemplate({ module: mod }) {
       {mod.caseStudy && (
         <section className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">{isAvailable ? 'Esempio illustrativo' : 'Scenario futuro'}</p>
+            <p className="eyebrow">Esempio operativo</p>
             <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">{mod.caseStudy.title}</h2>
             <p className="mt-5 text-ink/70 max-w-2xl leading-relaxed">{mod.caseStudy.narrative}</p>
           </Reveal>
           <div className="mt-8 grid sm:grid-cols-3 gap-4 max-w-2xl">
             {mod.caseStudy.stats.map(([value, label]) => (
               <div key={label} className="border border-line rounded-xl px-5 py-4 bg-paper-dim">
-                <p className="text-2xl font-bold text-forest">{value}</p>
+                <p className="text-lg font-bold text-forest leading-snug">{value}</p>
                 <p className="mt-1 text-xs text-ink/60 leading-snug">{label}</p>
               </div>
             ))}
           </div>
           <p className="mt-4 text-xs italic text-ink/45">
-            {isAvailable
-              ? 'Esempio illustrativo di utilizzo del software, non un cliente reale.'
-              : 'Scenario ipotetico: il modulo è in roadmap e non è ancora disponibile. Non riflette un cliente o un utilizzo reale.'}
+            Esempio operativo di utilizzo del software, non un caso cliente reale.
           </p>
         </section>
       )}
@@ -263,20 +248,29 @@ export default function ModuleTemplate({ module: mod }) {
         </section>
       )}
 
-      {/* ---------- PRICING ---------- */}
+      {/* ---------- PIANI CHE LO INCLUDONO ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">
         <Reveal>
           <p className="eyebrow">Prezzo</p>
           <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
-            {isAvailable ? 'Non ancora un listino: lo definiamo insieme a te.' : 'Non ancora attivabile, quindi nessun prezzo.'}
+            In quali piani è incluso.
           </h2>
         </Reveal>
-        <div className="mt-8 border border-line rounded-xl px-6 py-5 bg-paper max-w-2xl">
-          <p className="text-sm text-ink/75 leading-relaxed">{mod.pricing.note}</p>
+        <div className="mt-8 grid sm:grid-cols-3 gap-4 max-w-2xl">
+          {includedInPlans.map((plan) => (
+            <Link
+              key={plan.id}
+              href="/software/pricing"
+              className="block border border-line rounded-xl px-5 py-4 bg-paper hover:shadow-lg transition-shadow"
+            >
+              <p className="text-sm font-semibold text-ink">{plan.name}</p>
+              <p className="mt-1 text-lg font-bold text-forest">€{plan.monthlyPrice}/mese</p>
+            </Link>
+          ))}
         </div>
         <div className="mt-6">
           <Link href="/software/pricing" className="text-sm font-semibold text-forest hover:text-brass">
-            Vedi la struttura dei piani previsti →
+            Vedi la struttura completa dei piani →
           </Link>
         </div>
       </section>
@@ -338,12 +332,8 @@ export default function ModuleTemplate({ module: mod }) {
       </section>
 
       <CTA
-        title={isAvailable ? 'Vuoi provarlo per primo?' : 'Vuoi essere aggiornato su questo modulo?'}
-        sub={
-          isAvailable
-            ? `Richiedi accesso anticipato a ${mod.name} e definiamo insieme condizioni e tempi di attivazione.`
-            : `${mod.name} è in roadmap. Raccontaci le tue esigenze: aiuta a definire le priorità di sviluppo.`
-        }
+        title={`Vuoi attivare ${mod.name}?`}
+        sub={`Scrivici e ti aiutiamo a scegliere il piano giusto per attivare ${mod.name} nel tuo account.`}
         href={ctaHref}
         ctaLabel={ctaLabel}
       />

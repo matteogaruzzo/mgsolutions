@@ -272,11 +272,11 @@ export default function Servizi() {
         </div>
       </section>
 
-      {/* ---------- ROADMAP FUTURA ---------- */}
+      {/* ---------- MG BUSINESS SUITE ---------- */}
       <section className="bg-ink text-paper">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-brass">Quello che stiamo costruendo</p>
+            <p className="eyebrow text-brass">MG Business Suite</p>
             <h2 className="h2 text-3xl md:text-4xl mt-4">{softwareUpcoming.title}</h2>
             <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
           </Reveal>

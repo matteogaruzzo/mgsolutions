@@ -10,13 +10,15 @@ const projectTypes = ['Sito web', 'E-commerce', 'Software su misura', 'Consulenz
 const planNames = { essenziale: 'Essenziale', crescita: 'Crescita', ecosistema: 'Ecosistema' };
 
 // Precompila il form quando si arriva da una CTA della sezione software
-// (?interesse=software&modulo=lead-sales oppure &plan=essenziale), così il
-// contesto del link non va perso una volta atterrati sul form di contatto.
-// Letto da window.location invece di useSearchParams per non forzare
-// questa pagina (e le altre che riusano BookingForm) fuori dal prerendering statico.
+// (?interesse=mg-business-suite&modulo=lead-sales oppure &plan=essenziale),
+// così il contesto del link non va perso una volta atterrati sul form di
+// contatto. Letto da window.location invece di useSearchParams per non
+// forzare questa pagina (e le altre che riusano BookingForm) fuori dal
+// prerendering statico.
 function prefillFromSearch(search) {
   const params = new URLSearchParams(search);
-  if (params.get('interesse') !== 'software') return null;
+  const interesse = params.get('interesse');
+  if (interesse !== 'mg-business-suite' && interesse !== 'software') return null;
 
   const moduleSlug = params.get('modulo');
   const planId = params.get('plan');
@@ -24,7 +26,7 @@ function prefillFromSearch(search) {
   const planName = planId ? planNames[planId] : null;
 
   let messaggio = 'Sono interessato a MG Business Suite.';
-  if (mod) messaggio = `Sono interessato all’accesso anticipato di ${mod.name}.`;
+  if (mod) messaggio = `Sono interessato a ${mod.name}.`;
   else if (planName) messaggio = `Sono interessato al piano MG ${planName}.`;
 
   return { progetto: 'Software su misura', messaggio };
