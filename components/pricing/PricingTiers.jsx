@@ -2,14 +2,14 @@ import { businessSuitePackages, businessSuiteModules } from '@/lib/data';
 
 const cardStyles = {
   essenziale: 'border-line bg-paper-dim',
-  crescita: 'border-primary bg-primary/5 shadow-lg',
-  ecosistema: 'border-ink bg-paper',
+  crescita: 'border-primary bg-primary/5 shadow-lg ring-2 ring-primary/20 lg:scale-105 z-10',
+  ecosistema: 'border-sky-600 bg-sky-50',
 };
 
 const buttonStyles = {
   essenziale: 'bg-ink text-paper',
   crescita: 'bg-primary text-white',
-  ecosistema: 'bg-ink text-paper',
+  ecosistema: 'bg-sky-700 text-white',
 };
 
 export default function PricingTiers() {
@@ -23,8 +23,8 @@ export default function PricingTiers() {
           }`}
         >
           {pkg.badge && (
-            <span className="absolute -top-3 left-8 bg-primary text-white text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full">
-              {pkg.badge}
+            <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-deep text-white text-xs font-bold tracking-wide uppercase px-4 py-1.5 rounded-full shadow-md">
+              ⭐ {pkg.badge}
             </span>
           )}
 
