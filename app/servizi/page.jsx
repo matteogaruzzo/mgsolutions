@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import TestimonialCarousel from '@/components/TestimonialCarousel';
 import FAQAccordion from '@/components/FAQAccordion';
@@ -158,6 +159,62 @@ export default function Servizi() {
               </Reveal>
             );
           })}
+        </div>
+      </section>
+
+      {/* ---------- WINE CLUB ---------- */}
+      <section className="bg-wine-bg">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow text-wine-accent">Wine Club</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">
+              Wine Club: quando il vino diventa esperienza.
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid md:grid-cols-2 gap-10 items-center">
+            <Reveal>
+              <div>
+                <p className="text-ink/75 leading-relaxed">
+                  Un wine club non è un semplice abbonamento. È un modo per trasformare i clienti
+                  occasionali in una comunità fedele.
+                </p>
+                <p className="mt-4 text-ink/75 leading-relaxed">Aiutiamo le cantine a costruire wine club che funzionano:</p>
+                <ul className="mt-5 space-y-2">
+                  {[
+                    'Pagina landing dedicata al club',
+                    'Iscrizioni e pagamenti ricorrenti automatici',
+                    'Automazioni MG Business Suite (email, reminder, upsell)',
+                    'CRM dedicato per gli iscritti',
+                    'Consulenza su tier, prezzo e lancio',
+                  ].map((b) => (
+                    <li key={b} className="flex gap-3 text-ink/80">
+                      <span className="text-wine-accent shrink-0">✓</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-sm text-ink/60 leading-relaxed max-w-md">
+                  Non è solo per grandi cantine. Anche i piccoli produttori possono costruire una
+                  comunità di appassionati veri e trasformarla in revenue ricorrente prevedibile
+                  ogni mese.
+                </p>
+                <Link href="/servizi/wine-club" className="mt-7 btn-solid bg-wine-accent hover:bg-ink inline-flex">
+                  <GrapeIcon className="w-4 h-4" />
+                  Vai alla pagina Wine Club →
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-line">
+                <Image
+                  src="/images/servizi/wine-club-cellar.jpg"
+                  alt="Botti di rovere in una cantina, luce calda"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

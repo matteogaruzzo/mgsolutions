@@ -17,8 +17,8 @@ import {
   notForWho,
   metodoSteps,
 } from '@/lib/data';
-import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
-import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
+import { GrapeIcon, OliveIcon, FarmhouseDoorIcon, GlassIcon } from '@/components/icons/WineIcons';
+import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon, CoinIcon, HandshakeIcon } from '@/components/icons/ServiceIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 import { faqs } from '@/lib/data';
 
@@ -209,6 +209,58 @@ export default function Home() {
               </Reveal>
             );
           })}
+        </div>
+      </section>
+
+      {/* ---------- WINE CLUB ---------- */}
+      <section className="bg-wine-bg">
+        <div className="max-w-edge mx-auto px-6 py-20">
+          <Reveal>
+            <p className="eyebrow text-wine-accent">Wine Club</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 max-w-2xl text-ink">
+              Aiutiamo le cantine a costruire wine club esclusivi.
+            </h2>
+            <p className="mt-4 text-ink/70 max-w-xl leading-relaxed">
+              Non è solo un abbonamento. È comunità, esclusività e revenue ricorrente per i vostri
+              clienti più fedeli.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-3 gap-5">
+            {[
+              {
+                Icon: GlassIcon,
+                title: 'Esperienza esclusiva',
+                body: 'Trasformiamo il vostro vino in un percorso che i clienti vogliono seguire ogni mese, non solo acquistare una volta.',
+              },
+              {
+                Icon: CoinIcon,
+                title: 'Revenue ricorrente',
+                body: 'I clienti non comprano più saltuariamente: con un wine club strutturato, comprano ogni mese, in modo prevedibile.',
+              },
+              {
+                Icon: HandshakeIcon,
+                title: 'Comunità vera',
+                body: 'Non è una mailing list. È una community di soci che diventano ambassador del vostro brand.',
+              },
+            ].map(({ Icon, title, body }, i) => (
+              <Reveal key={title} delay={i * 70}>
+                <div className="bg-paper border border-line rounded-xl p-6 h-full">
+                  <Icon className="w-6 h-6 text-wine-accent" />
+                  <h3 className="h3 text-base mt-4 text-ink">{title}</h3>
+                  <p className="mt-2 text-sm text-ink/60 leading-relaxed">{body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={100}>
+            <div className="mt-10 flex flex-col sm:flex-row items-center gap-5">
+              <p className="text-ink/75 font-medium">Pronti a creare il vostro wine club?</p>
+              <Link href="/servizi/wine-club" className="btn-solid bg-wine-accent hover:bg-ink w-full sm:w-auto justify-center">
+                <GrapeIcon className="w-4 h-4" />
+                Scopri la pagina Wine Club →
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
