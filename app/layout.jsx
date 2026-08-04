@@ -59,6 +59,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: site.name,
   url: 'https://matteogaruzzo.com',
+  logo: 'https://matteogaruzzo.com/images/brand/mg-logo-mark.png',
   founder: { '@type': 'Person', name: site.founder },
   description: site.positioning,
   telephone: site.phone,

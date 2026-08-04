@@ -15,7 +15,7 @@ import {
   ScreenIcon,
   GearIcon,
 } from '@/components/icons/ServiceIcons';
-import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, howToSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, howToSchema, serviceSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'Wine Club per Cantine: Revenue Ricorrente e Fedeltà',
@@ -181,6 +181,14 @@ export default function WineClubPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            serviceSchema({ name: PAGE.title, description: PAGE.description, path: PAGE.path })
+          ),
+        }}
       />
       <script
         type="application/ld+json"

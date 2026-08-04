@@ -6,7 +6,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import CTA from '@/components/CTA';
 import { businessSuiteFaqs } from '@/lib/data';
 import { SOFTWARE_PLANS, SOFTWARE_PLAN_ORDER } from '@/lib/config/software-plans';
-import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, faqPageSchema, productSchema } from '@/lib/seo';
 import { UsersIcon, BuildingIcon, CoinIcon, GearIcon } from '@/components/icons/ServiceIcons';
 
 const PAGE = {
@@ -49,6 +49,22 @@ export default function SoftwarePricingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            productSchema({
+              name: 'MG Business Suite',
+              description: PAGE.description,
+              path: PAGE.path,
+              plans: SOFTWARE_PLAN_ORDER.map((id) => ({
+                name: SOFTWARE_PLANS[id].name,
+                price: SOFTWARE_PLANS[id].monthlyPrice,
+              })),
+            })
+          ),
+        }}
       />
       <script
         type="application/ld+json"

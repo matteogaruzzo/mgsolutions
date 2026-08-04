@@ -23,7 +23,7 @@ import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'MG Business Suite: piattaforma software modulare per l’agroalimentare',
+  title: 'MG Business Suite: il software per l’agroalimentare',
   description:
     'MG Business Suite riunisce vendite, prenotazioni, social, personale e dati aziendali in un’unica piattaforma online. Scegli il piano, attiva i moduli che ti servono.',
   path: '/software',

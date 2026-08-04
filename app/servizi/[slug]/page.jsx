@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import ServicePageTemplate from '@/components/ServicePageTemplate';
 import { servizi, getServizio } from '@/lib/data';
-import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, serviceSchema } from '@/lib/seo';
 
 export function generateStaticParams() {
   return servizi.map((s) => ({ slug: s.slug }));
@@ -27,6 +27,14 @@ export default function ServizioPage({ params }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             webPageSchema({ title: service.title, description: service.body, path: `/servizi/${service.slug}` })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            serviceSchema({ name: service.title, description: service.body, path: `/servizi/${service.slug}` })
           ),
         }}
       />
