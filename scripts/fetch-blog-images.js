@@ -113,6 +113,11 @@ const articles = [
     query: 'software dashboard analytics screen',
     alt: 'Dashboard di una piattaforma software per la gestione di una cantina',
   },
+  {
+    slug: 'siti-web-per-agriturismi',
+    query: 'tuscany countryside farmhouse terrace',
+    alt: 'Terrazza di un agriturismo tra le colline, tavolo apparecchiato all’aperto',
+  },
 ];
 
 function fail(msg) {
