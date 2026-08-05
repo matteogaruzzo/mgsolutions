@@ -63,6 +63,8 @@ export default function SoftwareHospitalityPage() {
         accentKey="hospitality"
         h1="Software per Agriturismi: Prenotazioni, CRM e Team in Una Piattaforma"
         subheadline="Camere, cene, degustazioni ed escursioni: un agriturismo vende più di un semplice pernottamento. Se prenotazioni, contatti e team vivono su strumenti diversi, nessuno di quegli strumenti ha davvero il quadro completo."
+        heroImage="/images/software/sector-hospitality-hero.jpg"
+        heroImageAlt="Laptop con calendario di prenotazioni aperto su una scrivania"
         todayVsSuite={{
           today: [
             'Prenotazioni gestite solo per telefono o email',

@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "sector-vitivinicolo-hero",
+    "photographer": "Kari Shea",
+    "username": "karishea",
+    "profileUrl": "https://unsplash.com/@karishea?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/macbook-pro-on-top-of-brown-table-1SAnrIxw5OY?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "sector-hospitality-hero",
+    "photographer": "Dell",
+    "username": "dell",
+    "profileUrl": "https://unsplash.com/@dell?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/person-using-black-laptop-computer-on-brown-wooden-table-8pb7Hq539Zw?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "sector-frantoi-hero",
+    "photographer": "Zulfugar Karimov",
+    "username": "zulfugarkarimov",
+    "profileUrl": "https://unsplash.com/@zulfugarkarimov?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/woman-working-on-laptop-at-desk-with-notebooks-pzjeeyl5C38?utm_source=mg_solutions&utm_medium=referral"
+  }
+]

@@ -63,6 +63,8 @@ export default function SoftwareFrantoiPage() {
         accentKey="olio"
         h1="Software per Frantoi: Ordini, Clienti e Team in Una Piattaforma"
         subheadline="Un frantoio vende a privati, ristoranti e distributori, con volumi e cicli diversi. Se gli ordini vivono su fogli di calcolo separati dal resto, nessuno ha davvero il quadro di chi compra cosa, e quanto spesso."
+        heroImage="/images/software/sector-frantoi-hero.jpg"
+        heroImageAlt="Persona che lavora al computer per gestire ordini e clienti"
         todayVsSuite={{
           today: [
             'Ordini B2B e B2C gestiti su fogli di calcolo separati',

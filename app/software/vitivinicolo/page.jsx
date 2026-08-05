@@ -67,6 +67,8 @@ export default function SoftwareVitivinicoloPage() {
         accentKey="wine"
         h1="Software per Cantine: Vendite, Prenotazioni e Team in Una Piattaforma"
         subheadline="Vendi vino online e offline, gestisci l’enoturismo e un wine club ricorrente: se ognuno di questi vive in uno strumento diverso, il problema non è la mancanza di software, è la mancanza di una piattaforma che li unisca."
+        heroImage="/images/software/sector-vitivinicolo-hero.jpg"
+        heroImageAlt="Laptop su una scrivania, pronto per gestire vendite e prenotazioni della cantina"
         todayVsSuite={{
           today: [
             'Contatti commerciali sparsi tra email, agende e WhatsApp',

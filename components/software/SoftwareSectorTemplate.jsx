@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import ServiceArea from '@/components/geo/ServiceArea';
@@ -55,6 +56,8 @@ export default function SoftwareSectorTemplate({
   breadcrumbLabel,
   h1,
   subheadline,
+  heroImage,
+  heroImageAlt,
   accentKey = 'wine',
   todayVsSuite,
   moduleNotes,
@@ -81,20 +84,38 @@ export default function SoftwareSectorTemplate({
 
       {/* ---------- HERO ---------- */}
       <section className="max-w-edge mx-auto px-6 pt-6 pb-20">
-        <Reveal>
-          <p className={`eyebrow ${accent.text}`}>{eyebrow}</p>
-          <h1 className="display text-4xl md:text-5xl mt-5 max-w-3xl leading-[1.05]">{h1}</h1>
-          <p className="mt-6 text-lg text-ink/70 max-w-2xl leading-relaxed">{subheadline}</p>
-          <div className="mt-9 flex flex-wrap gap-4">
-            <Link href="/prenota-call" className="btn-solid">
-              <GrapeIcon className="w-4 h-4" />
-              Prenota una demo — 20 minuti
-            </Link>
-            <Link href="/software/pricing" className="btn-ghost">
-              Confronta i piani
-            </Link>
-          </div>
-        </Reveal>
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+          <Reveal>
+            <div>
+              <p className={`eyebrow ${accent.text}`}>{eyebrow}</p>
+              <h1 className="display text-4xl md:text-5xl mt-5 leading-[1.05]">{h1}</h1>
+              <p className="mt-6 text-lg text-ink/70 leading-relaxed">{subheadline}</p>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <Link href="/prenota-call" className="btn-solid">
+                  <GrapeIcon className="w-4 h-4" />
+                  Prenota una demo — 20 minuti
+                </Link>
+                <Link href="/software/pricing" className="btn-ghost">
+                  Confronta i piani
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+          {heroImage && (
+            <Reveal delay={100}>
+              <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden border ${accent.border}`}>
+                <Image
+                  src={heroImage}
+                  alt={heroImageAlt || h1}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </Reveal>
+          )}
+        </div>
       </section>
 
       {/* ---------- OGGI VS CON LA SUITE ---------- */}
