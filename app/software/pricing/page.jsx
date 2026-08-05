@@ -28,6 +28,12 @@ const activationSteps = [
   { icon: BuildingIcon, title: 'Configura e inizia', body: 'Inviti il team, importi i dati esistenti, inizi a usare la piattaforma.' },
 ];
 
+const sectorLinks = [
+  { href: '/software/vitivinicolo', title: 'Cantine', body: 'CRM, wine club e prenotazioni degustazioni.' },
+  { href: '/software/hospitality', title: 'Agriturismi', body: 'Prenotazioni, esperienze e gestione team.' },
+  { href: '/software/frantoi', title: 'Frantoi', body: 'Ordini B2B, clienti olio e gestione team.' },
+];
+
 const controlTowerFaqs = [
   {
     q: 'Perché Control Tower è incluso solo in Ecosistema?',
@@ -96,6 +102,37 @@ export default function SoftwarePricingPage() {
             </p>
           </div>
         </Reveal>
+      </section>
+
+      {/* ---------- 1B. TROVA IL PIANO PER SETTORE ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-16">
+          <Reveal>
+            <p className="eyebrow">Prima di scegliere</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">
+              Vedi come i moduli si applicano al tuo settore.
+            </h2>
+            <p className="mt-3 text-sm text-ink/60 max-w-xl leading-relaxed">
+              Ogni pagina mostra il piano consigliato, un caso concreto e le domande più frequenti per il tuo tipo di azienda.
+            </p>
+          </Reveal>
+          <div className="mt-8 grid sm:grid-cols-3 gap-5">
+            {sectorLinks.map((s, i) => (
+              <Reveal key={s.href} delay={i * 60}>
+                <Link
+                  href={s.href}
+                  className="group block h-full border border-line rounded-2xl p-6 bg-paper hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                >
+                  <p className="font-semibold text-ink">{s.title}</p>
+                  <p className="mt-2 text-sm text-ink/60 leading-relaxed">{s.body}</p>
+                  <span className="mt-4 inline-block text-xs font-semibold text-forest group-hover:text-brass transition-colors">
+                    Vedi il piano consigliato →
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ---------- 2. 3 CARD PRICING ---------- */}
