@@ -12,15 +12,12 @@ import {
   GearIcon,
   CompassIcon,
   ChatIcon,
-  TargetIcon,
   CalendarIcon,
-  ClockIcon,
-  ChartIcon,
   GiftIcon,
   CoinIcon,
 } from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
-import { servizi, sectors, businessSuiteModules } from '@/lib/data';
+import { servizi, sectors } from '@/lib/data';
 
 const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
 
@@ -46,8 +43,6 @@ const settoriMega = sectors.map((s) => ({
   Icon: settoriIconMap[s.slug] || GrapeIcon,
 }));
 
-const softwareIconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
-
 const softwareSectors = [
   { href: '/software/vitivinicolo', title: 'Per Cantine', desc: 'CRM, wine club e prenotazioni degustazioni.', benefit: 'Vitivinicolo', Icon: GrapeIcon },
   { href: '/software/hospitality', title: 'Per Agriturismi', desc: 'Prenotazioni, esperienze e gestione team.', benefit: 'Hospitality', Icon: FarmhouseDoorIcon },
@@ -56,13 +51,6 @@ const softwareSectors = [
 
 const softwareMega = [
   ...softwareSectors,
-  ...businessSuiteModules.map((m) => ({
-    href: `/software/${m.slug}`,
-    title: m.name,
-    desc: m.whatItDoes,
-    benefit: m.problemSolved,
-    Icon: softwareIconMap[m.icon] || GearIcon,
-  })),
   {
     href: '/software/pricing',
     title: 'Piani e prezzi',
@@ -117,8 +105,7 @@ const links = [
     href: '/software',
     label: 'Software',
     mega: softwareMega,
-    megaCols: 3,
-    megaWidth: 'w-[760px]',
+    megaCols: 2,
     megaAlign: 'right',
     megaViewAll: { href: '/software', label: 'Vedi l’intera Business Suite →' },
   },
