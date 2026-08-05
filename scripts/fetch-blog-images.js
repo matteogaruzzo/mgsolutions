@@ -103,6 +103,11 @@ const articles = [
     query: 'vineyard rows sunset winery',
     alt: 'Sito web moderno per una cantina, con e-commerce e storytelling del vigneto',
   },
+  {
+    slug: 'ecommerce-per-cantine',
+    query: 'wine cellar bottles rack dark',
+    alt: 'Bottiglie di vino pronte per la spedizione da un e-commerce di cantina',
+  },
 ];
 
 function fail(msg) {
