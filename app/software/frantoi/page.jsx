@@ -1,5 +1,4 @@
 import SoftwareSectorTemplate from '@/components/software/SoftwareSectorTemplate';
-import { testimonials } from '@/lib/data';
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
@@ -31,9 +30,15 @@ const faqs = [
     q: 'Posso tenere traccia degli ordini ricorrenti di un ristorante o distributore?',
     a: 'Sì, lo storico ordini di ogni contatto è visibile nel CRM, utile per capire chi riordina con regolarità e chi rischia di passare alla concorrenza.',
   },
+  {
+    q: 'Gestisce anche un abbonamento ricorrente all’olio?',
+    a: 'Il CRM traccia gli ordini ricorrenti e automatizza il follow-up per il riordino; l’abbonamento vero e proprio si configura lato e-commerce, in base alla piattaforma che usi.',
+  },
+  {
+    q: 'Serve un modulo diverso per la parte B2B rispetto al B2C?',
+    a: 'No, MG Lead & Sales gestisce entrambi nello stesso CRM, distinguendoli tramite segmentazione automatica, non con moduli separati.',
+  },
 ];
-
-const testimonial = testimonials.find((t) => t.caseStudySlug === 'frantoi-san-lorenzo');
 
 export default function SoftwareFrantoiPage() {
   return (
@@ -54,6 +59,8 @@ export default function SoftwareFrantoiPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }} />
       <SoftwareSectorTemplate
         eyebrow="MG Business Suite · Per Frantoi"
+        breadcrumbLabel="Per Frantoi"
+        accentKey="olio"
         h1="Software per Frantoi: Ordini, Clienti e Team in Una Piattaforma"
         subheadline="Un frantoio vende a privati, ristoranti e distributori, con volumi e cicli diversi. Se gli ordini vivono su fogli di calcolo separati dal resto, nessuno ha davvero il quadro di chi compra cosa, e quanto spesso."
         todayVsSuite={{
@@ -77,8 +84,24 @@ export default function SoftwareFrantoiPage() {
           'staff-operations': 'Turni e task per la raccolta, la frangitura e la gestione ordini, soprattutto nei periodi di picco stagionale.',
           'control-tower': 'Una dashboard che aggrega vendite dirette, ordini B2B e performance del team (piano Ecosistema).',
         }}
-        caseStudySlug="frantoi-san-lorenzo"
-        testimonial={testimonial}
+        sizeTiers={[
+          {
+            label: 'Piccolo frantoio',
+            body: 'Vendita diretta prevalente, pochi clienti B2B. Ha senso partire dal CRM per centralizzare gli ordini e i contatti sparsi tra telefono ed email.',
+            planId: 'essenziale',
+          },
+          {
+            label: 'Frantoio medio',
+            body: 'Vendita diretta insieme a un canale B2B strutturato (ristoranti, distributori), con un team da coordinare nei periodi di raccolta.',
+            planId: 'crescita',
+          },
+          {
+            label: 'Grande frantoio o cooperativa',
+            body: 'Volumi B2B importanti, più figure commerciali o siti di lavorazione, necessità di una vista direzionale unica su vendite e team.',
+            planId: 'ecosistema',
+          },
+        ]}
+        caseStudySlugs={['frantoi-san-lorenzo']}
         recommendedPlanId="crescita"
         faqs={faqs}
         blogHref="/blog/software-frantoi-gestione-ordini-crm"

@@ -1,11 +1,10 @@
 import SoftwareSectorTemplate from '@/components/software/SoftwareSectorTemplate';
-import { testimonials } from '@/lib/data';
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
   title: 'Software per Agriturismi: MG Business Suite',
   description:
-    'Prenotazioni, CRM ospiti e gestione team per agriturismi, in un’unica piattaforma. Scopri come si applica al tuo caso.',
+    'Prenotazioni, esperienze, CRM ospiti e gestione team per agriturismi, in un’unica piattaforma. Scopri come si applica al tuo caso.',
   path: '/software/hospitality',
 };
 
@@ -17,11 +16,11 @@ export const metadata = pageMetadata({
 const faqs = [
   {
     q: 'Posso continuare a usare Booking.com e Airbnb insieme alla piattaforma?',
-    a: 'Sì, MG Booking & Experience si sincronizza con i principali canali per evitare l’overbooking mentre cresce il canale diretto.',
+    a: 'Sì, MG Booking & Experience si sincronizza con i principali canali per evitare l’overbooking mentre cresce il canale diretto, che non paga commissioni.',
   },
   {
     q: 'Gestisce anche le esperienze, non solo le camere?',
-    a: 'Sì, puoi proporre cene, degustazioni ed escursioni nello stesso percorso di prenotazione della camera.',
+    a: 'Sì, puoi proporre cene, degustazioni ed escursioni nello stesso percorso di prenotazione della camera, con upselling al momento giusto.',
   },
   {
     q: 'Ha senso anche per un B&B con poche camere?',
@@ -31,9 +30,15 @@ const faqs = [
     q: 'Serve formazione per il team?',
     a: 'Sì, viene inclusa all’attivazione; l’interfaccia è pensata per essere usata senza competenze tecniche.',
   },
+  {
+    q: 'Come gestisce i periodi di alta stagione per il team?',
+    a: 'MG Staff & Operations organizza turni, task e checklist di apertura/chiusura, riducendo le dimenticanze proprio nei periodi più intensi.',
+  },
+  {
+    q: 'Posso richiedere una caparra alla prenotazione?',
+    a: 'Sì, MG Booking & Experience gestisce il pagamento di una caparra al momento della prenotazione, riducendo le disdette dell’ultimo minuto.',
+  },
 ];
-
-const testimonial = testimonials.find((t) => t.caseStudySlug === 'podere-la-vite');
 
 export default function SoftwareHospitalityPage() {
   return (
@@ -54,6 +59,8 @@ export default function SoftwareHospitalityPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }} />
       <SoftwareSectorTemplate
         eyebrow="MG Business Suite · Per Agriturismi"
+        breadcrumbLabel="Per Agriturismi"
+        accentKey="hospitality"
         h1="Software per Agriturismi: Prenotazioni, CRM e Team in Una Piattaforma"
         subheadline="Camere, cene, degustazioni ed escursioni: un agriturismo vende più di un semplice pernottamento. Se prenotazioni, contatti e team vivono su strumenti diversi, nessuno di quegli strumenti ha davvero il quadro completo."
         todayVsSuite={{
@@ -77,8 +84,24 @@ export default function SoftwareHospitalityPage() {
           'staff-operations': 'Turni e task per pulizie, cucina e accoglienza, coordinati senza il caos di WhatsApp nei periodi di alta stagione.',
           'control-tower': 'Una dashboard che aggrega occupazione, esperienze vendute e performance del team (piano Ecosistema).',
         }}
-        caseStudySlug="podere-la-vite"
-        testimonial={testimonial}
+        sizeTiers={[
+          {
+            label: 'B&B o agriturismo piccolo',
+            body: 'Poche camere, prenotazioni gestite prevalentemente in autonomia. Ha senso partire dal modulo prenotazioni per avere subito un booking diretto funzionante.',
+            planId: 'essenziale',
+          },
+          {
+            label: 'Agriturismo medio',
+            body: 'Camere, ristorazione ed esperienze insieme, con un team da coordinare. Qui le automazioni tra prenotazioni, CRM e turni del team fanno la differenza reale.',
+            planId: 'crescita',
+          },
+          {
+            label: 'Struttura strutturata o multi-location',
+            body: 'Più sedi o un team numeroso, con necessità di una vista unica su occupazione, esperienze vendute e performance del personale.',
+            planId: 'ecosistema',
+          },
+        ]}
+        caseStudySlugs={['podere-la-vite']}
         recommendedPlanId="crescita"
         faqs={faqs}
         blogHref="/blog/software-per-agriturismi"
