@@ -118,6 +118,11 @@ const articles = [
     query: 'tuscany countryside farmhouse terrace',
     alt: 'Terrazza di un agriturismo tra le colline, tavolo apparecchiato all’aperto',
   },
+  {
+    slug: 'software-per-agriturismi',
+    query: 'small hotel reception team desk',
+    alt: 'Dashboard di gestione prenotazioni per un agriturismo',
+  },
 ];
 
 function fail(msg) {
