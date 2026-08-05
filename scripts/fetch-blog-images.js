@@ -108,6 +108,11 @@ const articles = [
     query: 'wine cellar bottles rack dark',
     alt: 'Bottiglie di vino pronte per la spedizione da un e-commerce di cantina',
   },
+  {
+    slug: 'software-per-cantine',
+    query: 'software dashboard analytics screen',
+    alt: 'Dashboard di una piattaforma software per la gestione di una cantina',
+  },
 ];
 
 function fail(msg) {
