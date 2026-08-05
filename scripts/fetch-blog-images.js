@@ -98,6 +98,11 @@ const articles = [
     query: 'business meeting handshake partnership',
     alt: 'Incontro di lavoro per valutare un partner digitale per un progetto agroalimentare',
   },
+  {
+    slug: 'siti-web-per-cantine',
+    query: 'vineyard rows sunset winery',
+    alt: 'Sito web moderno per una cantina, con e-commerce e storytelling del vigneto',
+  },
 ];
 
 function fail(msg) {
