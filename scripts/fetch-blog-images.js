@@ -123,6 +123,11 @@ const articles = [
     query: 'small hotel reception team desk',
     alt: 'Dashboard di gestione prenotazioni per un agriturismo',
   },
+  {
+    slug: 'ecommerce-per-frantoi',
+    query: 'extra virgin olive oil pouring',
+    alt: 'Bottiglie di olio extravergine pronte per la vendita online',
+  },
 ];
 
 function fail(msg) {

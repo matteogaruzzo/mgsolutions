@@ -215,5 +215,12 @@
     "username": "helenalopesph",
     "profileUrl": "https://unsplash.com/@helenalopesph?utm_source=mg_solutions&utm_medium=referral",
     "photoUrl": "https://unsplash.com/photos/man-in-black-shirt-standing-beside-counter-yIcm3DWRz-c?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "ecommerce-per-frantoi",
+    "photographer": "Seval Torun",
+    "username": "sevaltorun",
+    "profileUrl": "https://unsplash.com/@sevaltorun?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/a-bowl-of-fruit-i7LPhyiv9Fo?utm_source=mg_solutions&utm_medium=referral"
   }
 ]
