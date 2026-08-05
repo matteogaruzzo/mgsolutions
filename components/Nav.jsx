@@ -48,7 +48,14 @@ const settoriMega = sectors.map((s) => ({
 
 const softwareIconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
 
+const softwareSectors = [
+  { href: '/software/vitivinicolo', title: 'Per Cantine', desc: 'CRM, wine club e prenotazioni degustazioni.', benefit: 'Vitivinicolo', Icon: GrapeIcon },
+  { href: '/software/hospitality', title: 'Per Agriturismi', desc: 'Prenotazioni, esperienze e gestione team.', benefit: 'Hospitality', Icon: FarmhouseDoorIcon },
+  { href: '/software/frantoi', title: 'Per Frantoi', desc: 'Ordini B2B, clienti olio e gestione team.', benefit: 'Oleifici', Icon: OliveIcon },
+];
+
 const softwareMega = [
+  ...softwareSectors,
   ...businessSuiteModules.map((m) => ({
     href: `/software/${m.slug}`,
     title: m.name,
@@ -110,7 +117,8 @@ const links = [
     href: '/software',
     label: 'Software',
     mega: softwareMega,
-    megaCols: 2,
+    megaCols: 3,
+    megaWidth: 'w-[760px]',
     megaAlign: 'right',
     megaViewAll: { href: '/software', label: 'Vedi l’intera Business Suite →' },
   },
@@ -158,7 +166,7 @@ export default function Nav() {
                 <div
                   className={`absolute ${l.megaAlign === 'right' ? 'right-0' : 'left-0'} top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150`}
                 >
-                  <div className="w-[600px] bg-paper border border-line rounded-xl shadow-lg p-6">
+                  <div className={`${l.megaWidth || 'w-[600px]'} bg-paper border border-line rounded-xl shadow-lg p-6`}>
                     <div className={`grid gap-4 ${l.megaCols === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                       {l.mega.map((m) =>
                         l.megaCols === 3 ? (
