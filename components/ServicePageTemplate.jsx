@@ -8,12 +8,6 @@ import {
   sectors,
   getCaseStudy,
   testimonials,
-  investmentFactors,
-  webCare,
-  siteDevPricing,
-  ecommerceDevPricing,
-  ecommerceWebCare,
-  restylingPricing,
   aiIntegrationPricing,
   softwareCustomPricing,
 } from '@/lib/data';
@@ -220,77 +214,6 @@ export default function ServicePageTemplate({ service }) {
         </section>
       )}
 
-      {/* ---------- QUANTO COSTA ---------- */}
-      {(service.slug === 'siti-web-contatti' || service.slug === 'ecommerce-shopify') && (() => {
-        const devPricing = service.slug === 'ecommerce-shopify' ? ecommerceDevPricing : siteDevPricing;
-        const care = service.slug === 'ecommerce-shopify' ? ecommerceWebCare : webCare;
-        return (
-          <section className="max-w-edge mx-auto px-6 py-24">
-            <Reveal>
-              <p className="eyebrow">Quanto costa</p>
-              <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">
-                {service.slug === 'ecommerce-shopify' ? 'Sviluppo dello store e manutenzione.' : 'Sviluppo del sito e manutenzione.'}
-              </h2>
-              <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
-                {service.slug === 'ecommerce-shopify'
-                  ? `La realizzazione dello store è sempre preventivata a parte, in base a cosa serve davvero. Una volta online, ${care.name} lo mantiene in piedi 24/7.`
-                  : `La realizzazione del sito è sempre preventivata a parte, in base a cosa serve davvero. Una volta online, ${care.name} lo mantiene in piedi 24/7.`}
-              </p>
-            </Reveal>
-
-            <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
-              {devPricing.map((s) => (
-                <div key={s.label} className="border border-line rounded-xl px-5 py-4 text-sm">
-                  <p className="text-ink/80">{s.label}</p>
-                  <p className="mt-1 font-semibold text-ink">{s.range}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10 max-w-2xl border border-line rounded-2xl p-8 bg-paper-dim">
-              <h3 className="text-xl font-bold text-ink">{care.name}</h3>
-              <p className="mt-1 text-sm text-ink/60">{care.tagline}</p>
-              <p className="mt-3 flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-ink">€{care.price}</span>
-                <span className="text-sm text-ink/60">/mese</span>
-              </p>
-              <p className="mt-1 text-xs text-ink/50">(€{care.price * 12}/anno)</p>
-              <div className="mt-6 grid sm:grid-cols-2 gap-6">
-                <div>
-                  <p className="text-xs font-semibold tracking-widest text-forest uppercase">Comprende</p>
-                  <ul className="mt-3 space-y-1.5 text-sm text-ink/75">
-                    {care.included.map((i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-primary shrink-0">✓</span>
-                        {i}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold tracking-widest text-ink/40 uppercase">Non comprende</p>
-                  <ul className="mt-3 space-y-1.5 text-sm text-ink/50">
-                    {care.excluded.map((e) => (
-                      <li key={e} className="flex gap-2">
-                        <span className="text-ink/30 shrink-0">✗</span>
-                        {e}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <p className="mt-6 text-sm text-ink/60 max-w-2xl">
-              Vuoi anche un gestionale su misura integrato {service.slug === 'ecommerce-shopify' ? 'nello store' : 'nel sito'}?{' '}
-              <Link href="/software" className="font-semibold text-forest hover:text-brass">
-                Scopri il software su misura →
-              </Link>
-            </p>
-          </section>
-        );
-      })()}
-
       {service.slug === 'software-ai-su-misura' && (
         <section className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
@@ -311,26 +234,6 @@ export default function ServicePageTemplate({ service }) {
         </section>
       )}
 
-      {service.slug === 'restyling-ottimizzazione' && (
-        <section className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Quanto costa</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Un intervento una tantum.</h2>
-            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{restylingPricing.note}</p>
-          </Reveal>
-          <div className="mt-8 max-w-xs border border-line rounded-xl px-5 py-4 text-sm">
-            <p className="text-ink/80">Restyling completo</p>
-            <p className="mt-1 font-semibold text-ink">{restylingPricing.range}</p>
-          </div>
-          <p className="mt-6 text-sm text-ink/60 max-w-2xl">
-            Dopo il restyling puoi aggiungere {webCare.name} (€{webCare.price}/mese) per mantenere il sito in piedi 24/7.{' '}
-            <Link href="/servizi/siti-web-contatti" className="font-semibold text-forest hover:text-brass">
-              Scopri {webCare.name} →
-            </Link>
-          </p>
-        </section>
-      )}
-
       {service.slug === 'ai-integration' && (
         <section className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
@@ -341,29 +244,6 @@ export default function ServicePageTemplate({ service }) {
           <div className="mt-8 max-w-xs border border-line rounded-xl px-5 py-4 text-sm">
             <p className="text-ink/80">Per integrazione</p>
             <p className="mt-1 font-semibold text-ink">€{aiIntegrationPricing.perIntegration} una tantum</p>
-          </div>
-        </section>
-      )}
-
-      {(service.slug === 'consulenza-strategica' ||
-        !['siti-web-contatti', 'ecommerce-shopify', 'software-ai-su-misura', 'restyling-ottimizzazione', 'ai-integration'].includes(
-          service.slug
-        )) && (
-        <section className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Quanto costa</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Da cosa dipende l’investimento.</h2>
-            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
-              Non pubblichiamo un listino perché il costo reale cambia in base a come il servizio
-              viene usato. Ne parliamo apertamente in call, prima di qualsiasi proposta.
-            </p>
-          </Reveal>
-          <div className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {investmentFactors.map((f) => (
-              <div key={f} className="border border-line rounded-xl px-5 py-4 text-sm text-ink/75">
-                {f}
-              </div>
-            ))}
           </div>
         </section>
       )}

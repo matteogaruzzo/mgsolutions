@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
+import { site, wineClubPricing } from '@/lib/data';
 import { GrapeIcon, GlassIcon } from '@/components/icons/WineIcons';
 import {
   CoinIcon,
@@ -10,7 +11,6 @@ import {
   HandshakeIcon,
   ChartIcon,
   CompassIcon,
-  MegaphoneIcon,
   CalendarIcon,
   ScreenIcon,
   GearIcon,
@@ -20,7 +20,7 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, howToSche
 const PAGE = {
   title: 'Wine Club per Cantine: Revenue Ricorrente',
   description:
-    'Aiutiamo le cantine a costruire wine club esclusivi: sito dedicato, pagamenti ricorrenti automatici, CRM per i soci. Revenue mensile prevedibile.',
+    'Aiutiamo le cantine a costruire wine club esclusivi: sito dedicato, CRM e automazioni su misura, consulenza sul lancio. Revenue ricorrente, non occasionale.',
   path: '/servizi/wine-club',
 };
 
@@ -30,118 +30,28 @@ export const metadata = pageMetadata({
   image: '/servizi/wine-club/opengraph-image',
 });
 
-const whyCards = [
-  {
-    Icon: CoinIcon,
-    title: 'Revenue ricorrente',
-    body: 'Non dipendete più solo da acquisti occasionali. Con 100 iscritti a €50/mese, sono €60.000/anno calcolabili in anticipo, non sperati.',
-  },
-  {
-    Icon: RefreshIcon,
-    title: 'Retention & loyalty',
-    body: 'I wine club ben strutturati trattengono la maggior parte dei soci da un anno all’altro, molto più di un acquisto occasionale via e-commerce.',
-  },
-  {
-    Icon: HandshakeIcon,
-    title: 'Comunità & advocacy',
-    body: 'I soci del wine club diventano ambassador: raccontano la cantina ai loro amici e portano nuovi clienti senza che voi spendiate in ads.',
-  },
-  {
-    Icon: ChartIcon,
-    title: 'Feedback & dati diretti',
-    body: 'Sapete esattamente cosa piace ai vostri clienti — non lo scoprite di seconda mano dai distributori, ma da chi il vino lo beve davvero.',
-  },
+// Usato solo per lo schema HowTo: le fasi del ciclo di vita di un wine club,
+// non il nostro processo di consegna (quello è in howWeWork più sotto).
+const launchCycle = [
+  { title: 'Definite il concept', items: ['Tier di membership (es. Starter, Premium, VIP)', 'Frequenza di consegna', 'Cosa include ogni spedizione', 'Tema di rotazione'] },
+  { title: 'Lanciate il programma', items: ['Pagina landing dedicata', 'Email ai clienti attuali', 'Iscrizione in pochi click', 'Primo invio curato'] },
+  { title: 'Gestite il ciclo', items: ['Selezione dei vini per il periodo', 'Note di degustazione', 'Spedizione e conferme automatiche', 'Raccolta feedback dai soci'] },
+  { title: 'Potenziate con eventi', items: ['Degustazioni virtuali periodiche', 'Visita in cantina per i soci VIP', 'Cena con il vignaiolo', 'Accesso anticipato alle nuove annate'] },
 ];
 
-const steps = [
-  {
-    n: '01',
-    Icon: CompassIcon,
-    title: 'Definite il concept',
-    items: [
-      'Tier di membership (es. Starter, Premium, VIP)',
-      'Frequenza di consegna (mensile, trimestrale, semestrale)',
-      'Cosa include: numero bottiglie, sconto, accesso eventi, spedizione',
-      'Tema di rotazione: stagionale, per zona, per vitigno',
-    ],
-  },
-  {
-    n: '02',
-    Icon: MegaphoneIcon,
-    title: 'Lanciate il programma',
-    items: [
-      'Pagina landing dedicata nel sito',
-      'Email ai clienti attuali per il lancio',
-      'Iscrizione in pochi click',
-      'Primo invio curato, con storytelling forte',
-    ],
-  },
-  {
-    n: '03',
-    Icon: RefreshIcon,
-    title: 'Gestite il ciclo',
-    items: [
-      'Selezione dei vini per il periodo',
-      'Note di degustazione: il vignaiolo, la storia, gli abbinamenti',
-      'Spedizione e conferme automatiche',
-      'Raccolta feedback dai soci per il periodo successivo',
-    ],
-  },
-  {
-    n: '04',
-    Icon: CalendarIcon,
-    title: 'Potenziate con eventi',
-    items: [
-      'Degustazioni virtuali periodiche',
-      'Visita in cantina riservata ai soci VIP',
-      'Cena con il vignaiolo o un sommelier',
-      'Accesso anticipato alle nuove annate',
-    ],
-  },
+const includes = [
+  { Icon: ScreenIcon, title: 'Sito dedicato', body: 'Pagina landing per il club, iscrizione integrata, tier, FAQ. Percepito come esclusivo, non come un modulo in più.' },
+  { Icon: GearIcon, title: 'CRM e automazioni su misura', body: 'Iscrizioni e benvenuto automatici, reminder di spedizione, richiesta feedback, upsell verso il tier superiore.' },
+  { Icon: RefreshIcon, title: 'Gestione del ciclo', body: 'Selezione vini, note di degustazione, spedizioni e conferme, raccolta feedback dai soci.' },
+  { Icon: CalendarIcon, title: 'Eventi e retention', body: 'Degustazioni virtuali, visite VIP in cantina, accesso anticipato alle nuove annate.' },
+  { Icon: CompassIcon, title: 'Consulenza su tier e lancio', body: 'Struttura dei tier, prezzo, tema di rotazione, timeline di lancio.' },
 ];
 
 const differentiators = [
-  {
-    Icon: CompassIcon,
-    title: 'Su misura, non un tool generico',
-    body: 'Il club è costruito sul vostro brand e sui vostri vini, non su un plugin standardizzato che sembra uguale per tutti i produttori che lo usano.',
-  },
-  {
-    Icon: HandshakeIcon,
-    title: 'Un solo team per sito, software e strategia',
-    body: 'Non dovete far parlare tra loro tre fornitori diversi. Chi disegna la pagina è lo stesso team che imposta l’automazione e vi consiglia sui tier.',
-  },
-  {
-    Icon: GearIcon,
-    title: 'CRM e automazioni su misura',
-    body: 'CRM, email di follow-up e upsell li costruiamo insieme al resto del gestionale, non come uno strumento a parte da far parlare con gli altri.',
-  },
-  {
-    Icon: ChartIcon,
-    title: 'Consulenza sul lancio, non solo il tool',
-    body: 'Vi aiutiamo a decidere struttura dei tier, prezzo e timeline prima ancora di scrivere una riga di codice — non consegniamo solo l’accesso a una piattaforma.',
-  },
-];
-
-const ecosystemCards = [
-  {
-    Icon: ScreenIcon,
-    title: 'Sito dedicato',
-    body: 'Pagina landing per il club, form di iscrizione integrato, descrizione dei tier, testimonianze dei soci, FAQ. Un design che fa percepire il club come esclusivo, non come un modulo in più sul sito.',
-    price: 'A partire da €3.500',
-  },
-  {
-    Icon: GearIcon,
-    title: 'CRM e automazioni su misura',
-    body: 'Iscrizioni e email di benvenuto automatiche, reminder di spedizione, richiesta feedback post-consegna, upsell verso il tier superiore, CRM dedicato per gli iscritti.',
-    price: 'Incluso nel progetto',
-  },
-  {
-    Icon: CompassIcon,
-    title: 'Consulenza & strategia',
-    body: 'Vi aiutiamo a definire struttura dei tier, prezzo, tema di rotazione, copy della pagina, timeline di lancio e strategie di retention e upsell.',
-    price: 'Preventivo personalizzato',
-  },
+  { Icon: CompassIcon, title: 'Su misura, non un tool generico', body: 'Il club è costruito sul vostro brand e sui vostri vini, non su un plugin standardizzato uguale per tutti.' },
+  { Icon: HandshakeIcon, title: 'Un solo team per sito, software e strategia', body: 'Non dovete far parlare tra loro tre fornitori diversi.' },
+  { Icon: ChartIcon, title: 'Consulenza sul lancio, non solo il tool', body: 'Vi aiutiamo a decidere tier, prezzo e timeline prima di scrivere una riga di codice.' },
+  { Icon: CoinIcon, title: 'Revenue ricorrente, non occasionale', body: 'Con 100 iscritti a 50€/mese sono 60.000€/anno calcolabili in anticipo, non sperati — a patto di costruirlo bene.' },
 ];
 
 const wineClubFaqs = [
@@ -151,43 +61,40 @@ const wineClubFaqs = [
   },
   {
     q: 'Quanti iscritti servono perché abbia senso economico?',
-    a: 'Un minimo di 50 iscritti rende il programma sostenibile. Consigliamo di puntare a 100-150 nel primo anno: a quel livello il club genera un revenue ricorrente mensile significativo.',
-  },
-  {
-    q: 'Cos’è il churn e come si controlla?',
-    a: 'È il tasso di abbandono dei soci, fisiologico in ogni wine club. Si contiene con storytelling forte dietro ogni selezione, eventi esclusivi, un percorso di upgrade tra tier e attenzione al feedback dei soci.',
+    a: 'Un minimo di 50 iscritti rende il programma sostenibile. Consigliamo di puntare a 100-150 nel primo anno.',
   },
   {
     q: 'Posso gestire il wine club senza software?',
-    a: 'Tecnicamente sì, ma con fogli Excel ed email manuali diventa presto ingestibile. Con CRM e automazione email rispondete alle iscrizioni in automatico e gestite centinaia di soci senza fatica aggiuntiva.',
+    a: 'Tecnicamente sì, ma con fogli Excel ed email manuali diventa presto ingestibile. Con CRM e automazione email rispondete alle iscrizioni in automatico.',
   },
   {
-    q: 'Come gestisco la logistica delle spedizioni?',
-    a: 'Tre strade: gestirla internamente (massimo controllo sulla qualità), affidarla a un logista specializzato in vino (più scalabile), o in dropship dai produttori. Valutiamo insieme quale ha senso per i vostri volumi.',
+    q: 'Siete in tre. Riuscite a seguirci?',
+    a: 'Proprio perché siamo in tre prendiamo pochi progetti alla volta. Chi vi risponde è chi lavora sul vostro club, non un account che gira la mail a qualcun altro.',
   },
   {
-    q: 'Quali tier di prezzo consigliate?',
-    a: 'Dipende dal mercato, ma una struttura tipica è: Base (€40-50, alcune bottiglie, spedizione inclusa), Premium (€70-100, più bottiglie, sconto maggiore, evento periodico), VIP (€150+, selezione personalizzata, visita annuale in cantina, posti limitati).',
-  },
-  {
-    q: 'Come trovo i primi iscritti?',
-    a: 'Partite dai vostri clienti attuali: una campagna email dedicata converte tipicamente una parte significativa della lista. Aggiungete un incentivo per i primi iscritti e promuovete il lancio su Instagram, LinkedIn e nella newsletter.',
+    q: 'Lavorate solo in Umbria?',
+    a: 'Siamo a Perugia ma lavoriamo in tutta Italia. Per chi è entro due o tre ore veniamo di persona all’inizio e al lancio.',
   },
 ];
 
+const howWeWork = [
+  { n: '1', title: 'Analisi', duration: '1 settimana', body: 'Guardiamo i vostri clienti attuali, i vini disponibili, cosa avete già provato.' },
+  { n: '2', title: 'Progetto', duration: '1-2 settimane', body: 'Tier, prezzo, tema di rotazione. Vedete il mockup della pagina prima dello sviluppo.' },
+  { n: '3', title: 'Costruzione', duration: '2-4 settimane', body: 'Sito, CRM e automazioni. Avanzamento visibile ogni settimana.' },
+  { n: '4', title: 'Lancio e dopo', duration: '3 mesi', body: 'Primo invio curato, e restiamo per sistemare ciò che i dati sui soci dicono.' },
+];
+
 export default function WineClubPage() {
+  const waNumber = site.phone.replace(/[^\d]/g, '');
+  const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent('Ciao, vorrei parlare del Wine Club.')}`;
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema(PAGE)) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            serviceSchema({ name: PAGE.title, description: PAGE.description, path: PAGE.path })
-          ),
+          __html: JSON.stringify(serviceSchema({ name: PAGE.title, description: PAGE.description, path: PAGE.path })),
         }}
       />
       <script
@@ -202,10 +109,7 @@ export default function WineClubPage() {
           ),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(wineClubFaqs)) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(wineClubFaqs)) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -213,13 +117,13 @@ export default function WineClubPage() {
             howToSchema({
               name: 'Come lanciare un Wine Club per la tua cantina',
               description: PAGE.description,
-              steps: steps.map((s) => ({ title: s.title, body: s.items.join('. ') })),
+              steps: launchCycle.map((s) => ({ title: s.title, body: s.items.join('. ') })),
             })
           ),
         }}
       />
 
-      {/* ---------- HERO ---------- */}
+      {/* ---------- 1. HERO ---------- */}
       <section
         className="relative bg-cover bg-center text-paper"
         style={{
@@ -233,279 +137,236 @@ export default function WineClubPage() {
             <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-wine-accent/25 border border-wine-gold/40">
               <GlassIcon className="w-7 h-7 text-wine-gold" />
             </span>
-            <p className="eyebrow text-wine-gold mt-6">Wine Club</p>
+            <p className="eyebrow text-wine-gold mt-6">wine club · cantine</p>
             <h1 className="display text-3xl sm:text-4xl md:text-5xl mt-4 max-w-2xl mx-auto leading-[1.2] break-words">
-              Fedeltà, comunità e nuove entrate ricorrenti.
+              L’unico modo per far tornare chi ha già comprato.
             </h1>
             <p className="mt-5 text-lg text-paper/85 max-w-xl mx-auto leading-relaxed">
-              Trasformate i vostri clienti migliori in ambassador della cantina, con un
-              programma che genera revenue prevedibile mese dopo mese.
+              Trasformiamo i vostri clienti migliori in soci di un programma che genera revenue
+              ricorrente, mese dopo mese.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#come-funziona" className="btn-solid bg-paper text-forest hover:bg-paper/90">
-                Scopri come funziona ↓
-              </a>
-              <Link href="/prenota-call" className="btn-ghost border-wine-gold/50 text-paper hover:border-wine-gold hover:bg-wine-gold hover:text-ink">
+              <Link href="/prenota-call" className="btn-solid bg-paper text-forest hover:bg-paper/90">
                 <GrapeIcon className="w-4 h-4" />
-                Prenota una consulenza
+                Parliamone in 15 minuti
               </Link>
+              <a href="#come-lavoriamo" className="btn-ghost border-wine-gold/50 text-paper hover:border-wine-gold hover:bg-wine-gold hover:text-ink">
+                Guarda come lavoriamo
+              </a>
             </div>
-            <p className="mt-6 text-sm text-paper/60">
-              Per cantine che vogliono vendite prevedibili e clienti davvero fidelizzati.
-            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- COS'È UN WINE CLUB ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-[1fr_22rem] gap-10 items-start">
+      {/* ---------- 2. IL PROBLEMA RICONOSCIBILE ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <p className="eyebrow">Le basi</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">
-              Cos’è un wine club (e perché ogni cantina dovrebbe averne uno).
-            </h2>
-            <div className="mt-8 space-y-5 max-w-3xl">
-              <p className="text-ink/70 leading-relaxed">
-                Un wine club è un programma di fedeltà strutturato: i soci si iscrivono per
-                ricevere periodicamente — mensilmente, trimestralmente, annualmente — una
-                selezione curata di vini della vostra cantina. Non è un e-commerce con acquisti
-                a caso: è una relazione che si costruisce nel tempo.
-              </p>
-              <p className="text-ink/70 leading-relaxed">
-                <strong className="body-strong">Il cliente riceve</strong>: esclusività (vini non
-                disponibili al pubblico), un prezzo migliore rispetto al retail, una comunità di
-                appassionati, lo storytelling dietro ogni selezione e l’accesso a eventi privati.
-              </p>
-              <p className="text-ink/70 leading-relaxed">
-                <strong className="body-strong">Voi guadagnate</strong>: revenue ricorrente e
-                prevedibile, una relazione diretta che bypassa i grossisti, feedback immediato sui
-                vini e ambassador che promuovono il vostro brand senza costarvi in pubblicità.
-              </p>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-line">
+              <Image src="/images/servizi/wine-club-cellar.jpg" alt="Botti di rovere in una cantina, luce calda" fill className="object-cover" />
             </div>
           </Reveal>
-          <Reveal delay={100}>
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-line">
-              <Image
-                src="/images/servizi/wine-club-cellar.jpg"
-                alt="Botti di rovere in una cantina, luce calda"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <blockquote className="mt-5 border-l-2 border-wine-accent pl-4 text-sm italic text-ink/60 leading-relaxed">
-              “Non è un e-commerce con acquisti a caso: è una relazione che si costruisce mese
-              dopo mese.”
-            </blockquote>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---------- PERCHÉ FUNZIONA ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-20">
-          <Reveal>
-            <p className="eyebrow text-center">Perché funziona</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink text-center">
-              Quattro motivi per cui un wine club conviene.
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid sm:grid-cols-2 gap-5">
-            {whyCards.map(({ Icon, title, body }, i) => (
-              <Reveal key={title} delay={i * 70}>
-                <div className="bg-paper border border-line border-l-2 border-l-wine-accent rounded-xl p-6 h-full flex gap-4">
-                  <Icon className="w-6 h-6 text-wine-accent shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="h3 text-base text-ink">{title}</h3>
-                    <p className="mt-2 text-sm text-ink/60 leading-relaxed">{body}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- COME FUNZIONA ---------- */}
-      <section id="come-funziona" className="max-w-edge mx-auto px-6 py-20">
-        <Reveal>
-          <p className="eyebrow text-center">Come funziona</p>
-          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink text-center">
-            La struttura che consigliamo.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {steps.map(({ n, Icon, title, items }, i) => (
-            <Reveal key={n} delay={i * 70}>
-              <div className="bg-paper border border-line rounded-2xl p-6 h-full flex flex-col">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-wine-bg">
-                    <Icon className="w-5 h-5 text-wine-accent" />
-                  </span>
-                  <span className="font-mono text-xs text-ink/35">{n}</span>
-                </div>
-                <h3 className="h3 text-base mt-5 text-ink">{title}</h3>
-                <ul className="mt-3 space-y-1.5 text-xs text-ink/60 leading-relaxed">
-                  {items.map((it) => (
-                    <li key={it} className="flex gap-1.5">
-                      <span className="text-wine-accent">·</span>
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
+          <Reveal delay={80}>
+            <div>
+              <p className="eyebrow">Ci risulta che vada più o meno così</p>
+              <div className="mt-5 space-y-4">
+                <p className="text-ink/75 leading-relaxed">Il cliente più costoso è quello che avete già.</p>
+                <p className="text-ink/75 leading-relaxed">
+                  Trovare qualcuno di nuovo costa. Farlo tornare no — ma solo se avete un motivo per
+                  riscrivergli e lui ha un motivo per esserci.
+                </p>
+                <p className="text-ink/75 leading-relaxed">
+                  Un club fa esattamente questo: trasforma una bottiglia comprata una volta in un
+                  rapporto che dura. E cambia il modo in cui pianificate, perché sapete in anticipo
+                  quante bottiglie escono ogni mese.
+                </p>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ---------- PERCHÉ COSTRUIRLO CON NOI ---------- */}
-      <section className="bg-ink text-paper">
-        <div className="max-w-edge mx-auto px-6 py-20">
-          <Reveal>
-            <p className="eyebrow text-wine-gold text-center">Il differenziale</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-center max-w-2xl mx-auto">
-              Non un tool da configurare da soli. Un progetto che seguiamo insieme.
-            </h2>
+            </div>
           </Reveal>
-          <div className="mt-12 grid sm:grid-cols-2 gap-5">
-            {differentiators.map(({ Icon, title, body }, i) => (
-              <Reveal key={title} delay={i * 70}>
-                <div className="border border-paper/15 border-l-2 border-l-wine-gold rounded-xl p-6 h-full flex gap-4">
-                  <Icon className="w-6 h-6 text-wine-gold shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="h3 text-base">{title}</h3>
-                    <p className="mt-2 text-sm text-paper/65 leading-relaxed">{body}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ---------- CASE STUDY ---------- */}
+      {/* ---------- 3. COSA CAMBIA ---------- */}
       <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-20">
-          <Reveal>
-            <p className="eyebrow text-center">Esempio concreto</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink text-center">
-              Wine Club Pro, per Azienda Rossi.
-            </h2>
-            <p className="mt-2 text-xs italic text-ink/45 text-center">
-              Case study illustrativo — esempio di progetto tipo per il settore, non un cliente reale.
-            </p>
-          </Reveal>
-          <div className="mt-10 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal>
               <div>
-                <p className="text-xs font-semibold text-forest uppercase tracking-wide">Il problema</p>
-                <p className="mt-2 text-sm text-ink/70 leading-relaxed">
-                  Gli abbonamenti venivano gestiti a mano tra fogli di calcolo e pagamenti
-                  singoli, con perdita di soci per mancanza di follow-up e nessuna
-                  personalizzazione delle spedizioni.
-                </p>
-                <p className="mt-5 text-xs font-semibold text-forest uppercase tracking-wide">La soluzione</p>
-                <p className="mt-2 text-sm text-ink/70 leading-relaxed">
-                  Onboarding guidato, pagamenti ricorrenti automatici, quiz AI per capire le
-                  preferenze di gusto di ogni socio, tracking spedizione e automazione
-                  anti-abbandono (churn prevention).
-                </p>
+                <h2 className="h2 text-2xl md:text-3xl text-ink">Cosa cambia con un wine club strutturato</h2>
+                <div className="mt-5 space-y-4">
+                  <p className="text-ink/75 leading-relaxed">
+                    Il cliente riceve esclusività, un prezzo migliore del retail, lo storytelling
+                    dietro ogni selezione e l’accesso a eventi privati.
+                  </p>
+                  <p className="text-ink/75 leading-relaxed">
+                    Voi guadagnate revenue ricorrente e prevedibile, una relazione diretta che
+                    bypassa i grossisti, e ambassador che promuovono il vostro brand senza
+                    costarvi in pubblicità.
+                  </p>
+                </div>
               </div>
             </Reveal>
             <Reveal delay={80}>
-              <div className="bg-paper border border-line rounded-2xl p-6">
-                <p className="text-xs font-semibold text-forest uppercase tracking-wide">Risultati</p>
-                <div className="mt-4 grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <p className="display text-2xl text-forest">85%</p>
-                    <p className="text-[11px] text-ink/55 mt-1 leading-snug">retention M1→M12</p>
+              <div className="grid grid-cols-2 gap-4">
+                {differentiators.map(({ Icon, title, body }) => (
+                  <div key={title} className="bg-paper border border-line rounded-xl p-4">
+                    <Icon className="w-5 h-5 text-wine-accent" />
+                    <p className="mt-2 text-xs font-semibold text-ink">{title}</p>
+                    <p className="mt-1 text-[11px] text-ink/55 leading-snug">{body}</p>
                   </div>
-                  <div>
-                    <p className="display text-2xl text-forest">3%</p>
-                    <p className="text-[11px] text-ink/55 mt-1 leading-snug">churn mensile</p>
-                  </div>
-                  <div>
-                    <p className="display text-2xl text-forest">€450</p>
-                    <p className="text-[11px] text-ink/55 mt-1 leading-snug">LTV medio per socio</p>
-                  </div>
-                </div>
-                <p className="mt-6 text-xs font-semibold text-forest uppercase tracking-wide">Cosa abbiamo imparato</p>
-                <p className="mt-2 text-sm text-ink/70 leading-relaxed">
-                  La retention si gioca nei primi tre mesi, non dopo un anno: l’onboarding è il
-                  momento più critico. Il churn si previene, non si recupera — intercettare i
-                  segnali prima della disdetta costa meno che riconquistare un socio perso.
-                </p>
-                <Link href="/portfolio/azienda-rossi" className="mt-5 inline-block text-sm font-semibold text-forest hover:text-brass">
-                  Leggi il caso studio completo →
-                </Link>
+                ))}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ---------- WINE CLUB + SITO + SOFTWARE ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-20">
+      {/* ---------- 4. COSA INCLUDE ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
         <Reveal>
-          <p className="eyebrow text-center">L’ecosistema</p>
-          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink text-center">
-            Come supportiamo il vostro wine club.
-          </h2>
-          <p className="mt-2 text-sm text-ink/55 text-center max-w-lg mx-auto">
-            Non è solo una pagina sul sito. È un ecosistema completo.
-          </p>
+          <p className="eyebrow">Cosa include</p>
+          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">Non solo una pagina sul sito.</h2>
         </Reveal>
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {ecosystemCards.map(({ Icon, title, body, price }, i) => (
-            <Reveal key={title} delay={i * 80}>
-              <div className="bg-paper border border-line rounded-2xl p-6 h-full flex flex-col">
-                <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-forest/10">
-                  <Icon className="w-5 h-5 text-forest" />
-                </span>
-                <h3 className="h3 text-base mt-5 text-ink">{title}</h3>
-                <p className="mt-2 text-sm text-ink/60 leading-relaxed flex-1">{body}</p>
-                <p className="mt-4 text-xs font-semibold text-forest">{price}</p>
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {includes.map(({ Icon, title, body }, i) => (
+            <Reveal key={title} delay={i * 60}>
+              <div className="border border-line rounded-xl p-5 h-full bg-paper">
+                <Icon className="w-6 h-6 text-forest" />
+                <p className="mt-3 font-semibold text-ink">{title}</p>
+                <p className="mt-1.5 text-sm text-ink/60 leading-relaxed">{body}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* ---------- FAQ ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-20">
+      {/* ---------- 5. COME LAVORIAMO ---------- */}
+      <section id="come-lavoriamo" className="bg-ink text-paper scroll-mt-24">
+        <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-center">Domande frequenti</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink text-center">Dubbi? Risolti.</h2>
+            <p className="eyebrow text-brass">Come lavoriamo</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl">Cosa succede dopo che firmate.</h2>
           </Reveal>
-          <div className="mt-10 max-w-2xl mx-auto">
-            <FAQAccordion items={wineClubFaqs} />
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {howWeWork.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80}>
+                <div className="border border-paper/15 rounded-2xl p-6 h-full flex flex-col">
+                  <p className="font-semibold">{s.n} · {s.title}</p>
+                  <p className="mt-1 text-xs text-brass">{s.duration}</p>
+                  <p className="mt-3 text-sm text-paper/70 leading-relaxed flex-1">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
+          <p className="mt-8 text-sm text-paper/60">In media: 4-7 settimane dal via al lancio.</p>
         </div>
       </section>
 
-      {/* ---------- CTA FINALE ---------- */}
+      {/* ---------- 6. PERCHÉ NOI E NON ALTRI ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Perché noi e non altri</p>
+          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">Un confronto onesto.</h2>
+        </Reveal>
+        <div className="mt-10 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-line">
+                <th className="text-left py-3 pr-4 text-ink/50 font-medium"></th>
+                <th className="text-left py-3 px-4 text-ink/60 font-medium">Piattaforma di membership generica</th>
+                <th className="text-left py-3 px-4 text-ink/60 font-medium">Nessun club (vendita spot)</th>
+                <th className="text-left py-3 pl-4 text-forest font-semibold">MG Solutions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-line">
+                <td className="py-3 pr-4 text-ink/70">Conosce il settore</td>
+                <td className="py-3 px-4 text-ink/55">No</td>
+                <td className="py-3 px-4 text-ink/55">—</td>
+                <td className="py-3 pl-4 text-ink font-medium">Solo questo</td>
+              </tr>
+              <tr className="border-b border-line">
+                <td className="py-3 pr-4 text-ink/70">Costruito sul vostro brand</td>
+                <td className="py-3 px-4 text-ink/55">No, template uguale per tutti</td>
+                <td className="py-3 px-4 text-ink/55">—</td>
+                <td className="py-3 pl-4 text-ink font-medium">Sì</td>
+              </tr>
+              <tr className="border-b border-line">
+                <td className="py-3 pr-4 text-ink/70">Revenue ricorrente</td>
+                <td className="py-3 px-4 text-ink/55">Sì</td>
+                <td className="py-3 px-4 text-ink/55">No</td>
+                <td className="py-3 pl-4 text-ink font-medium">Sì</td>
+              </tr>
+              <tr className="border-b border-line">
+                <td className="py-3 pr-4 text-ink/70">Consulenza su tier e lancio</td>
+                <td className="py-3 px-4 text-ink/55">No</td>
+                <td className="py-3 px-4 text-ink/55">—</td>
+                <td className="py-3 pl-4 text-ink font-medium">Sì</td>
+              </tr>
+              <tr className="border-b border-line">
+                <td className="py-3 pr-4 text-ink/70">Chi vi risponde</td>
+                <td className="py-3 px-4 text-ink/55">Un account</td>
+                <td className="py-3 px-4 text-ink/55">Nessuno</td>
+                <td className="py-3 pl-4 text-ink font-medium">Chi lavora sul progetto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-6 text-sm text-ink/60 max-w-xl">
+          La differenza non è tecnica. È che quando dite "wine club", "annata" o "DOP" non
+          dobbiamo chiedere cosa significa.
+        </p>
+      </section>
+
+      {/* ---------- 7. INVESTIMENTO ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <div className="mt-5 max-w-2xl space-y-4 text-ink/75 leading-relaxed">
+              <p>
+                Per l’impianto completo — sito dedicato, CRM e automazioni, consulenza su tier e
+                lancio — si parte da {wineClubPricing.from.toLocaleString('it-IT')}€.
+              </p>
+              <p className="text-sm text-ink/55">
+                La cifra esatta dipende da quanti tier volete e da quanto è già pronto (sito
+                esistente, lista clienti, ecc.): ve la diciamo dopo la prima call.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- 8. FAQ ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Domande frequenti</p>
+          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">FAQ.</h2>
+        </Reveal>
+        <div className="mt-10 max-w-2xl">
+          <FAQAccordion items={wineClubFaqs} />
+        </div>
+      </section>
+
+      {/* ---------- 9. CTA FINALE ---------- */}
       <section className="bg-wine-accent text-paper">
         <div className="max-w-edge mx-auto px-6 py-24 text-center">
           <p className="eyebrow text-wine-gold">Prossimo passo</p>
-          <h2 className="display text-3xl md:text-4xl mt-5 max-w-xl mx-auto leading-tight">
-            Pronti a lanciare il vostro wine club?
-          </h2>
-          <p className="mt-4 text-paper/75 max-w-xl mx-auto">
-            Aiutiamo cantine come la vostra a costruire un canale di revenue ricorrente.
-            Non è magia: è struttura, software e storytelling.
+          <h2 className="display text-4xl md:text-5xl mt-5 max-w-2xl mx-auto leading-tight">Parliamone.</h2>
+          <p className="mt-5 text-paper/75 max-w-xl mx-auto">
+            Prima call di 15 minuti, senza impegno. Vi diciamo cosa faremmo e quanto costerebbe.
+            Se non ha senso ve lo diciamo.
           </p>
-          <Link href="/prenota-call" className="btn-solid bg-brass text-ink hover:bg-paper mt-9">
-            <GrapeIcon className="w-4 h-4" />
-            Prenota una consulenza Wine Club →
-          </Link>
-          <p className="mt-6 text-xs text-paper/60">
-            Oppure leggete il caso studio completo:{' '}
-            <Link href="/portfolio/azienda-rossi" className="underline hover:text-paper">
-              Wine Club Pro, per Azienda Rossi
+          <div className="mt-9 flex flex-wrap gap-4 justify-center">
+            <Link href="/prenota-call" className="btn-solid bg-brass text-ink hover:bg-paper">
+              <GrapeIcon className="w-4 h-4" />
+              Prenota una call
             </Link>
-          </p>
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="btn-ghost border-paper/40 text-paper hover:bg-paper/10">
+              Scrivici su WhatsApp
+            </a>
+          </div>
+          <p className="mt-6 text-sm text-paper/60">Oppure passiamo da voi: siamo a Perugia e ci spostiamo volentieri.</p>
         </div>
       </section>
 

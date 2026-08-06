@@ -1,7 +1,12 @@
 import { notFound } from 'next/navigation';
 import ServicePageTemplate from '@/components/ServicePageTemplate';
+import ServiceLandingTemplate from '@/components/servizi/ServiceLandingTemplate';
 import { servizi, getServizio } from '@/lib/data';
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, serviceSchema } from '@/lib/seo';
+
+// Le pagine con il nuovo template a 9 blocchi (vedi components/servizi/ServiceLandingTemplate).
+// software-ai-su-misura e ai-integration restano sul vecchio ServicePageTemplate.
+const LANDING_TEMPLATE_SLUGS = ['siti-web-contatti', 'ecommerce-shopify', 'restyling-ottimizzazione', 'consulenza-strategica'];
 
 export function generateStaticParams() {
   return servizi.map((s) => ({ slug: s.slug }));
@@ -56,7 +61,11 @@ export default function ServizioPage({ params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(service.faqs)) }}
         />
       )}
-      <ServicePageTemplate service={service} />
+      {LANDING_TEMPLATE_SLUGS.includes(service.slug) ? (
+        <ServiceLandingTemplate service={service} />
+      ) : (
+        <ServicePageTemplate service={service} />
+      )}
     </>
   );
 }
