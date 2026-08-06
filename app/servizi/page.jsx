@@ -35,18 +35,18 @@ export const metadata = pageMetadata({
 const iconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
 
 const decisionGuide = [
-  { problem: 'Il software o il gestionale non è efficiente', goto: 'software-ai-su-misura' },
+  { problem: 'Il software o il gestionale non è efficiente', href: '/software', label: 'Software su misura' },
   { problem: 'Pochi visitatori o vendite dal sito', goto: 'siti-web-contatti' },
   { problem: 'Il sito è vecchio ma funziona in parte', goto: 'restyling-ottimizzazione' },
   { problem: 'L’e-commerce non converte abbastanza', goto: 'ecommerce-shopify' },
-  { problem: 'Hai strumenti sparsi che non comunicano', goto: 'ai-integration' },
+  { problem: 'Hai strumenti sparsi che non comunicano', goto: 'automazioni-ai' },
   { problem: 'Non sai da dove iniziare', goto: 'consulenza-strategica' },
 ];
 
 const faqs = [
   { q: 'Quale servizio mi serve?', a: 'Se non sei sicuro, la Consulenza Strategica è il punto di partenza più sicuro: chiarisce le priorità prima di scegliere la tecnologia.' },
   { q: 'Posso combinare più servizi?', a: 'Sì, è la situazione più comune: molti progetti nascono da un servizio e ne aggiungono altri nel tempo (vedi l’esempio più sotto).' },
-  { q: 'Quanto costa ogni servizio?', a: 'Non pubblichiamo un listino: il costo dipende da obiettivi, funzionalità e integrazioni. Ne parliamo apertamente in call.' },
+  { q: 'Pubblicate i prezzi di ogni servizio?', a: 'Sì. Ogni servizio ha il suo prezzo di partenza pubblicato sulla pagina dedicata, con la possibilità di pagare a rate. La cifra esatta dipende da cosa serve e ve la diamo dopo una call di 20 minuti.' },
   { q: 'Quali sono i tempi di realizzazione?', a: 'Variano molto in base al servizio: da poche settimane per un sito vetrina a diversi mesi per un software su misura complesso.' },
   { q: 'Posso iniziare da un servizio e aggiungere altri dopo?', a: 'Sì, è pensato per funzionare così: ogni servizio si integra con gli altri senza dover ripartire da zero.' },
   { q: 'Differenza tra software custom e le future soluzioni preconfigurate?', a: 'Il custom è disponibile oggi, su misura per il tuo processo. Le soluzioni preconfigurate sono ancora in fase di progettazione (vedi la sezione qui sotto).' },
@@ -225,16 +225,16 @@ export default function Servizi() {
           </Reveal>
           <div className="mt-10 rule max-w-3xl">
             {decisionGuide.map((d) => {
-              const target = servizi.find((s) => s.slug === d.goto);
+              const target = d.goto ? servizi.find((s) => s.slug === d.goto) : null;
               return (
                 <Link
                   key={d.problem}
-                  href={`/servizi/${d.goto}`}
+                  href={d.href || `/servizi/${d.goto}`}
                   className="rule py-4 flex items-center justify-between gap-4 group"
                 >
                   <span className="text-ink/80">{d.problem}</span>
                   <span className="text-sm font-semibold text-forest whitespace-nowrap group-hover:text-brass">
-                    {target.title} →
+                    {d.label || target.title} →
                   </span>
                 </Link>
               );

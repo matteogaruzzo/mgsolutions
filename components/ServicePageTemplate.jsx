@@ -3,14 +3,9 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
-import {
-  servizi,
-  sectors,
-  getCaseStudy,
-  testimonials,
-  aiIntegrationPricing,
-  softwareCustomPricing,
-} from '@/lib/data';
+import PricingBlock from '@/components/PricingBlock';
+import { servizi, sectors, getCaseStudy, testimonials } from '@/lib/data';
+import { pricing } from '@/lib/pricing-data';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon, OliveIcon, FarmhouseDoorIcon } from '@/components/icons/WineIcons';
 
@@ -214,38 +209,25 @@ export default function ServicePageTemplate({ service }) {
         </section>
       )}
 
-      {service.slug === 'software-ai-su-misura' && (
-        <section className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Quanto costa</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Sviluppo su misura e canone di gestione.</h2>
-            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{softwareCustomPricing.note}</p>
-          </Reveal>
-          <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
-            <div className="border border-line rounded-xl px-5 py-4 text-sm">
-              <p className="text-ink/80">Sviluppo (una tantum)</p>
-              <p className="mt-1 font-semibold text-ink">{softwareCustomPricing.devRange}</p>
-            </div>
-            <div className="border border-line rounded-xl px-5 py-4 text-sm">
-              <p className="text-ink/80">Canone successivo</p>
-              <p className="mt-1 font-semibold text-ink">{softwareCustomPricing.monthlyRange}/mese</p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {service.slug === 'ai-integration' && (
-        <section className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Quanto costa</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Prezzo per integrazione.</h2>
-            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{aiIntegrationPricing.note}</p>
-          </Reveal>
-          <div className="mt-8 max-w-xs border border-line rounded-xl px-5 py-4 text-sm">
-            <p className="text-ink/80">Per integrazione</p>
-            <p className="mt-1 font-semibold text-ink">€{aiIntegrationPricing.perIntegration} una tantum</p>
-          </div>
-        </section>
+      {service.slug === 'automazioni-ai' && (
+        <PricingBlock
+          heading="Quanto costa la prima automazione"
+          subheading="Un solo processo collegato, senza cambiare gli strumenti che già usate."
+          plans={[
+            {
+              ...pricing.primaAutomazione,
+              offerDescription: 'Colleghiamo l’AI a un processo che già usate.',
+              benefits: [
+                'Mezza giornata di analisi',
+                'Un solo processo automatizzato',
+                'Collegamento agli strumenti esistenti',
+                'Test e formazione',
+              ],
+              exclusions: ['Processi aggiuntivi (690€ l’uno, 490€ dal terzo in poi)', 'Costi delle API di terzi'],
+              closing: 'Cifra precisa dopo una call di 20 minuti.',
+            },
+          ]}
+        />
       )}
 
       {/* ---------- FAQ ---------- */}

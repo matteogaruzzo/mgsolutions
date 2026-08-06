@@ -52,22 +52,21 @@ export default function RegionePage({ params }) {
   const cards = [
     (() => {
       const s = servizi.find((x) => x.slug === 'siti-web-contatti');
-      return { Icon: ScreenIcon, title: `Siti web per cantine, oleifici e agriturismi`, body: s.body, price: 'A partire da €2.500', href: `/servizi/${s.slug}` };
+      return { Icon: ScreenIcon, title: `Siti web per cantine, oleifici e agriturismi`, body: s.body, href: `/servizi/${s.slug}` };
     })(),
     (() => {
       const s = servizi.find((x) => x.slug === 'ecommerce-shopify');
-      return { Icon: CartIcon, title: 'E-commerce Shopify', body: s.body, price: 'A partire da €4.500', href: `/servizi/${s.slug}` };
+      return { Icon: CartIcon, title: 'E-commerce Shopify', body: s.body, href: `/servizi/${s.slug}` };
     })(),
     {
       Icon: GearIcon,
       title: 'Software gestionale su misura',
       body: 'CRM per i contatti commerciali, prenotazioni per degustazioni ed esperienze, automazioni email per follow-up e wine club: costruito attorno a come lavorate voi.',
-      price: 'Da €8.000',
       href: '/software',
     },
     (() => {
       const s = servizi.find((x) => x.slug === 'consulenza-strategica');
-      return { Icon: CompassIcon, title: s.title, body: s.body, price: 'Preventivo personalizzato', href: `/servizi/${s.slug}` };
+      return { Icon: CompassIcon, title: s.title, body: s.body, href: `/servizi/${s.slug}` };
     })(),
   ];
 
@@ -78,7 +77,7 @@ export default function RegionePage({ params }) {
     },
     {
       q: `Quanto costa un sito o un e-commerce per la mia azienda in ${region.name}?`,
-      a: 'Dipende dalla complessità: si parte da circa €2.500 per un sito vetrina e da €4.500 per un e-commerce Shopify. Con una call gratuita definiamo un preventivo preciso.',
+      a: 'Ogni servizio ha il suo prezzo pubblicato sulla pagina dedicata, con la possibilità di pagare a rate. Con una call gratuita di 20 minuti definiamo la cifra esatta per il vostro caso.',
     },
     {
       q: `Avete progetti in ${region.name} che posso vedere?`,
@@ -184,18 +183,15 @@ export default function RegionePage({ params }) {
             </h2>
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 gap-5">
-            {cards.map(({ Icon, title, body, price, href }, i) => (
+            {cards.map(({ Icon, title, body, href }, i) => (
               <Reveal key={title} delay={i * 70}>
                 <div className="bg-paper border border-line rounded-xl p-6 h-full flex flex-col">
                   <Icon className="w-6 h-6 text-forest shrink-0" />
                   <h3 className="h3 text-base mt-4 text-ink">{title}</h3>
                   <p className="mt-2 text-sm text-ink/60 leading-relaxed flex-1">{body}</p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-forest">{price}</span>
-                    <Link href={href} className="text-xs font-semibold text-ink/60 hover:text-forest">
-                      Scopri →
-                    </Link>
-                  </div>
+                  <Link href={href} className="mt-4 text-xs font-semibold text-forest hover:text-brass">
+                    Prezzi e formule di pagamento sulla pagina del servizio →
+                  </Link>
                 </div>
               </Reveal>
             ))}

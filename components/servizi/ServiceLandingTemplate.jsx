@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
+import PricingBlock from '@/components/PricingBlock';
 import { site, servizi } from '@/lib/data';
 import {
   CartIcon,
@@ -18,12 +19,6 @@ import {
   ChartIcon,
 } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-
-// Number.prototype.toLocaleString('it-IT') non raggruppa le migliaia in
-// questo ambiente (ICU limitata): formattiamo a mano.
-function formatEuro(n) {
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
 
 const includeIconMap = {
   cart: CartIcon,
@@ -53,9 +48,6 @@ export default function ServiceLandingTemplate({ service }) {
   const related = servizi.filter((s) => service.relatedSlugs.includes(s.slug));
   const waNumber = site.phone.replace(/[^\d]/g, '');
   const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(`Ciao, vorrei parlare di "${service.title}".`)}`;
-  const waPricingHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-    `Ciao Matteo, vi scrivo per il servizio "${service.investment.offerName}" (da ${formatEuro(service.investment.price)}€). Ho una cantina/agriturismo/frantoio, possiamo sentirci?`
-  )}`;
   const heroLabel = heroLabelBySlug[service.slug] || service.title.toLowerCase();
 
   return (
@@ -231,60 +223,13 @@ export default function ServiceLandingTemplate({ service }) {
       </section>
 
       {/* ---------- 7. INVESTIMENTO ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">{service.investment.eyebrow}</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">{service.investment.heading}</h2>
-            <p className="mt-2 text-ink/60 max-w-2xl">{service.investment.subheading}</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10 max-w-2xl border-2 border-forest rounded-2xl p-8 md:p-10 bg-paper">
-              <p className="text-xs font-semibold tracking-widest text-forest uppercase">{service.investment.offerName}</p>
-              <p className="mt-3 text-4xl md:text-5xl font-bold text-ink">
-                da {formatEuro(service.investment.price)}€
-              </p>
-              {service.investment.installment && (
-                <p className="mt-2 text-sm text-ink/60">{service.investment.installment}</p>
-              )}
-              {service.investment.typicalRange && (
-                <p className="mt-1 text-xs text-ink/40">La maggior parte dei progetti si ferma tra {service.investment.typicalRange}.</p>
-              )}
-              <p className="mt-5 text-ink/75 leading-relaxed">{service.investment.offerDescription}</p>
-
-              <ul className="mt-6 space-y-2.5">
-                {service.investment.benefits.map((b) => (
-                  <li key={b} className="flex gap-2.5 text-sm text-ink/80">
-                    <span className="text-forest font-bold shrink-0">✓</span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              <ul className="mt-6 pt-6 border-t border-line space-y-2.5">
-                {service.investment.reassurances.map((r) => (
-                  <li key={r} className="flex gap-2.5 text-sm text-ink/70">
-                    <span className="text-forest font-bold shrink-0">✓</span>
-                    {r}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 text-sm text-ink/55 italic">{service.investment.closing}</p>
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/prenota-call" className="btn-solid">
-                  <GrapeIcon className="w-4 h-4" />
-                  Prenota una call
-                </Link>
-                <a href={waPricingHref} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                  Scrivici su WhatsApp
-                </a>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PricingBlock
+        eyebrow={service.investment.eyebrow}
+        heading={service.investment.heading}
+        subheading={service.investment.subheading}
+        plans={service.investment.plans}
+        note={service.investment.note}
+      />
 
       {/* ---------- 8. FAQ ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">

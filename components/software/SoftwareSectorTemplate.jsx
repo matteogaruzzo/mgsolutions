@@ -4,6 +4,8 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import ServiceArea from '@/components/geo/ServiceArea';
 import FAQAccordion from '@/components/FAQAccordion';
+import PricingBlock from '@/components/PricingBlock';
+import { pricing } from '@/lib/pricing-data';
 import { CompassIcon, ScreenIcon, GearIcon, HandshakeIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 
@@ -142,27 +144,26 @@ export default function SoftwareSectorTemplate({
       </section>
 
       {/* ---------- INVESTIMENTO ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Quanto costa</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Dipende da cosa serve.</h2>
-            <div className="mt-6 max-w-2xl space-y-4 text-ink/70 leading-relaxed">
-              <p>
-                E non lo sappiamo prima di averne parlato. Come ordine di grandezza: i progetti che
-                seguiamo partono da <strong className="text-ink">8.000€</strong> e la maggior parte sta
-                tra <strong className="text-ink">10.000 e 20.000€</strong>, con tempi di 2-4 mesi.
-              </p>
-              <p>
-                A questo si aggiunge un canone di assistenza ed evoluzione a partire da{' '}
-                <strong className="text-ink">150€/mese</strong>: hosting, aggiornamenti, supporto e le
-                modifiche che servono nel tempo.
-              </p>
-              <p>Vi diciamo una cifra precisa dopo la prima analisi, non prima.</p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PricingBlock
+        heading="Quanto costa un CRM su misura"
+        subheading="Un punto di partenza: la cifra definitiva arriva dopo la prima analisi."
+        plans={[
+          {
+            ...pricing.crm,
+            offerDescription: 'Sviluppo dedicato al vostro processo, non un gestionale preconfezionato.',
+            benefits: [
+              'Analisi e anagrafiche',
+              'Una vista operativa principale',
+              'Notifiche email e WhatsApp',
+              'Una dashboard',
+              'Formazione',
+              '30 giorni di assistenza',
+            ],
+            exclusions: ['Moduli aggiuntivi', 'Integrazioni con gestionali esterni', `Hosting (${pricing.assistenzaMensile.price}€/mese)`],
+            closing: 'È un punto di partenza: la cifra precisa arriva dopo la prima analisi.',
+          },
+        ]}
+      />
 
       {/* ---------- FAQ ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">

@@ -5,7 +5,7 @@ import { servizi, getServizio } from '@/lib/data';
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, serviceSchema } from '@/lib/seo';
 
 // Le pagine con il nuovo template a 9 blocchi (vedi components/servizi/ServiceLandingTemplate).
-// software-ai-su-misura e ai-integration restano sul vecchio ServicePageTemplate.
+// automazioni-ai resta sul vecchio ServicePageTemplate.
 const LANDING_TEMPLATE_SLUGS = ['siti-web-contatti', 'ecommerce-shopify', 'restyling-ottimizzazione', 'consulenza-strategica'];
 
 export function generateStaticParams() {

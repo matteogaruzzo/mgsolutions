@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
 import ServiceArea from '@/components/geo/ServiceArea';
-import { site, wineClubPricing } from '@/lib/data';
+import PricingBlock from '@/components/PricingBlock';
+import { site } from '@/lib/data';
+import { pricing } from '@/lib/pricing-data';
 import { GrapeIcon, GlassIcon } from '@/components/icons/WineIcons';
 import {
   CoinIcon,
@@ -16,12 +18,6 @@ import {
   GearIcon,
 } from '@/components/icons/ServiceIcons';
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, howToSchema, serviceSchema } from '@/lib/seo';
-
-// Number.prototype.toLocaleString('it-IT') non raggruppa le migliaia in
-// questo ambiente (ICU limitata): formattiamo a mano.
-function formatEuro(n) {
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
 
 const PAGE = {
   title: 'Wine Club per Cantine: Revenue Ricorrente',
@@ -93,9 +89,6 @@ const howWeWork = [
 export default function WineClubPage() {
   const waNumber = site.phone.replace(/[^\d]/g, '');
   const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent('Ciao, vorrei parlare del Wine Club.')}`;
-  const waPricingHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-    `Ciao Matteo, vi scrivo per il servizio "Impianto wine club" (da ${formatEuro(wineClubPricing.from)}€). Ho una cantina, possiamo sentirci?`
-  )}`;
 
   return (
     <>
@@ -328,64 +321,29 @@ export default function WineClubPage() {
       </section>
 
       {/* ---------- 7. INVESTIMENTO ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Prezzi pubblicati</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">Quanto costa lanciare un wine club</h2>
-            <p className="mt-2 text-ink/60 max-w-2xl">L’unico modo per far tornare chi ha già comprato, prezzato in chiaro.</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-10 max-w-2xl border-2 border-wine-accent rounded-2xl p-8 md:p-10 bg-paper">
-              <p className="text-xs font-semibold tracking-widest text-wine-accent uppercase">Impianto completo del wine club</p>
-              <p className="mt-3 text-4xl md:text-5xl font-bold text-ink">da {formatEuro(wineClubPricing.from)}€</p>
-              <p className="mt-2 text-sm text-ink/60">oppure 3 rate senza interessi, anche legate alla vendemmia</p>
-              <p className="mt-1 text-xs text-ink/40">La maggior parte dei progetti si ferma tra {wineClubPricing.typicalRange}.</p>
-              <p className="mt-5 text-ink/75 leading-relaxed">
-                Sito dedicato, CRM e automazioni su misura, consulenza su tier e lancio.
-              </p>
-
-              <ul className="mt-6 space-y-2.5">
-                {[
-                  'Pagina dedicata al club, non un modulo in più sul sito',
-                  'CRM e automazioni per iscrizioni, spedizioni e feedback',
-                  'Consulenza su tier, prezzo e timeline di lancio',
-                ].map((b) => (
-                  <li key={b} className="flex gap-2.5 text-sm text-ink/80">
-                    <span className="text-wine-accent font-bold shrink-0">✓</span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              <ul className="mt-6 pt-6 border-t border-line space-y-2.5">
-                {[
-                  'Rate anche stagionali, senza interessi',
-                  'Prezzi pubblicati: quello che leggete è quello che pagate',
-                  'Tutto resta vostro',
-                ].map((r) => (
-                  <li key={r} className="flex gap-2.5 text-sm text-ink/70">
-                    <span className="text-wine-accent font-bold shrink-0">✓</span>
-                    {r}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 text-sm text-ink/55 italic">Cifra precisa dopo una call di 20 minuti. Se non ha senso farlo, ve lo diciamo.</p>
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link href="/prenota-call" className="btn-solid bg-wine-accent hover:bg-ink">
-                  <GrapeIcon className="w-4 h-4" />
-                  Prenota una call
-                </Link>
-                <a href={waPricingHref} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                  Scrivici su WhatsApp
-                </a>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <PricingBlock
+        accent="wine"
+        heading="Quanto costa lanciare un wine club"
+        subheading="L’unico modo per far tornare chi ha già comprato, prezzato in chiaro."
+        plans={[
+          {
+            ...pricing.wineClub,
+            offerName: 'Impianto completo del wine club',
+            installmentVariant: 'harvest',
+            offerDescription: 'Sito dedicato, CRM e automazioni su misura, consulenza su tier e lancio.',
+            benefits: [
+              'Struttura del club e pagina dedicata',
+              'Iscrizione e pagamento ricorrente',
+              'Sequenza email di benvenuto e rinnovo',
+              'Gestione rotazione e spedizioni',
+              'Report sui soci',
+            ],
+            exclusions: ['Logistica fisica', 'Packaging', 'Contenuti fotografici'],
+            reassurances: ['Prezzi pubblicati: quello che leggete è quello che pagate', 'Tutto resta vostro'],
+            closing: 'Cifra precisa dopo una call di 20 minuti. Se non ha senso farlo, ve lo diciamo.',
+          },
+        ]}
+      />
 
       {/* ---------- 8. FAQ ---------- */}
       <section className="max-w-edge mx-auto px-6 py-24">
