@@ -1,4 +1,4 @@
-import { posts, sectors, caseStudies, metodoSteps, servizi, businessSuiteModules, getAllTags } from '@/lib/data';
+import { posts, sectors, caseStudies, metodoSteps, servizi, getAllTags } from '@/lib/data';
 import { regions } from '@/lib/geo-data';
 
 const base = 'https://matteogaruzzo.com';
@@ -6,8 +6,12 @@ const base = 'https://matteogaruzzo.com';
 export default function sitemap() {
   const home = [{ url: base, lastModified: new Date(), changeFrequency: 'weekly', priority: 1.0 }];
 
-  const coreRoutes = ['/servizi', '/software', '/software/pricing', '/portfolio', '/blog', '/settori'].map(
+  const coreRoutes = ['/servizi', '/software', '/portfolio', '/blog', '/settori'].map(
     (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 })
+  );
+
+  const softwareSectorRoutes = ['/software/vitivinicolo', '/software/hospitality', '/software/frantoi'].map(
+    (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 })
   );
 
   const secondaryRoutes = ['/chi-sono', '/servizi/wine-club', '/metodo', '/geo'].map((path) => ({
@@ -59,13 +63,6 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  const softwareRoutes = businessSuiteModules.map((m) => ({
-    url: `${base}/software/${m.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
-
   const postRoutes = posts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
     lastModified: new Date(p.updated || p.date),
@@ -90,6 +87,7 @@ export default function sitemap() {
   return [
     ...home,
     ...coreRoutes,
+    ...softwareSectorRoutes,
     ...secondaryRoutes,
     ...utilityRoutes,
     ...legalRoutes,
@@ -97,7 +95,6 @@ export default function sitemap() {
     ...caseStudyRoutes,
     ...metodoRoutes,
     ...servizioRoutes,
-    ...softwareRoutes,
     ...postRoutes,
     ...geoRoutes,
     ...tagRoutes,

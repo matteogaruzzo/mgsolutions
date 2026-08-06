@@ -2,41 +2,58 @@ import SoftwareSectorTemplate from '@/components/software/SoftwareSectorTemplate
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Software per Frantoi: MG Business Suite',
+  title: 'Software e CRM su misura per frantoi e oleifici',
   description:
-    'CRM, ordini B2B, gestione team e analytics per frantoi e oleifici, in un’unica piattaforma. Scopri come si applica al tuo caso.',
+    'Ordini privati e B2B, listini multipli, giacenze per lotto. Gestionale su misura per il settore oleario. Prima analisi gratuita.',
   path: '/software/frantoi',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
-  keywords: ['software per frantoi', 'crm frantoi', 'gestionale frantoio', 'software olio', 'gestione ordini B2B olio'],
+  keywords: ['software per frantoi', 'crm frantoi', 'gestionale frantoio su misura', 'software olio', 'gestione ordini B2B olio'],
 });
+
+const problems = [
+  'Vendiamo ai privati in bottiglia e ai ristoranti in latta, ma sono due gestioni completamente diverse e le teniamo separate a mano.',
+  'I clienti B2B hanno listini e condizioni diverse e ogni ordine è una telefonata.',
+  'Chi compra a novembre non lo risentiamo fino all’anno dopo, e spesso nel frattempo ha comprato altrove.',
+  'Le giacenze per formato e per lotto le sappiamo solo andando a guardare in magazzino.',
+];
+
+const capabilities = [
+  'Anagrafica clienti divisa privati/B2B',
+  'Ordini con formati e listini multipli',
+  'Gestione abbonamenti olio',
+  'Condizioni e scontistiche per cliente B2B',
+  'Giacenze per formato, varietà e lotto',
+  'Automazioni per riordino stagionale',
+  'Report su margine per formato e canale',
+];
 
 const faqs = [
   {
     q: 'Distingue i clienti B2B (ristoranti, distributori) dai privati?',
-    a: 'Sì, MG Lead & Sales segmenta i contatti per tipo di cliente e volume d’ordine, con follow-up diversi per B2B e B2C.',
+    a: 'Sì, il CRM segmenta i contatti per tipo di cliente e volume d’ordine, con follow-up diversi per B2B e B2C.',
   },
   {
     q: 'Gestisce anche le visite al frantoio, non solo gli ordini?',
-    a: 'Sì, MG Booking & Experience gestisce le prenotazioni di visite e degustazioni guidate con calendario condiviso dal team.',
+    a: 'Sì, possiamo costruire la prenotazione di visite e degustazioni guidate con calendario condiviso dal team.',
   },
   {
     q: 'Ha senso nei periodi di picco della raccolta?',
-    a: 'È proprio in quei periodi che MG Staff & Operations aiuta di più: organizza turni e task del team quando il carico di lavoro è più alto e le dimenticanze costano di più.',
+    a: 'È proprio in quei periodi che aiuta di più: organizza turni e task del team quando il carico di lavoro è più alto e le dimenticanze costano di più.',
   },
   {
     q: 'Posso tenere traccia degli ordini ricorrenti di un ristorante o distributore?',
-    a: 'Sì, lo storico ordini di ogni contatto è visibile nel CRM, utile per capire chi riordina con regolarità e chi rischia di passare alla concorrenza.',
+    a: 'Sì, lo storico ordini di ogni contatto resta visibile nel CRM, utile per capire chi riordina con regolarità e chi rischia di passare alla concorrenza.',
   },
   {
     q: 'Gestisce anche un abbonamento ricorrente all’olio?',
-    a: 'Il CRM traccia gli ordini ricorrenti e automatizza il follow-up per il riordino; l’abbonamento vero e proprio si configura lato e-commerce, in base alla piattaforma che usi.',
+    a: 'Sì, il CRM può tracciare gli ordini ricorrenti e automatizzare il follow-up per il riordino, collegandosi alla piattaforma di vendita che usi.',
   },
   {
-    q: 'Serve un modulo diverso per la parte B2B rispetto al B2C?',
-    a: 'No, MG Lead & Sales gestisce entrambi nello stesso CRM, distinguendoli tramite segmentazione automatica, non con moduli separati.',
+    q: 'Serve uno strumento diverso per la parte B2B rispetto al B2C?',
+    a: 'No, costruiamo un unico CRM che gestisce entrambi, distinguendoli tramite segmentazione automatica, non con strumenti separati.',
   },
 ];
 
@@ -58,56 +75,16 @@ export default function SoftwareFrantoiPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }} />
       <SoftwareSectorTemplate
-        eyebrow="MG Business Suite · Per Frantoi"
+        eyebrow="Software su misura · Per Frantoi"
         breadcrumbLabel="Per Frantoi"
         accentKey="olio"
-        h1="Software per Frantoi: Ordini, Clienti e Team in Una Piattaforma"
+        h1="Software e CRM su misura per frantoi e oleifici"
         subheadline="Un frantoio vende a privati, ristoranti e distributori, con volumi e cicli diversi. Se gli ordini vivono su fogli di calcolo separati dal resto, nessuno ha davvero il quadro di chi compra cosa, e quanto spesso."
         heroImage="/images/software/sector-frantoi-hero.jpg"
         heroImageAlt="Persona che lavora al computer per gestire ordini e clienti"
-        todayVsSuite={{
-          today: [
-            'Ordini B2B e B2C gestiti su fogli di calcolo separati',
-            'Nessuna distinzione automatica tra un privato e un distributore',
-            'Turni del team coordinati a voce nei periodi di raccolta',
-            'Nessun follow-up automatico verso i clienti che riordinano',
-          ],
-          withSuite: [
-            'Un unico CRM per contatti B2B e B2C, con storico ordini',
-            'Segmentazione automatica tra privati, ristoranti e distributori',
-            'Turni e task del team organizzati anche nei periodi di picco',
-            'Email automatiche per il riordino e le novità di prodotto',
-          ],
-        }}
-        moduleNotes={{
-          'lead-sales': 'Traccia i clienti dell’olio — privati, ristoranti, distributori — distinguendo chi acquista B2B da chi compra online.',
-          'social-ai': 'Contenuti social sulla raccolta, la frangitura e le varietà, pubblicati con costanza.',
-          'booking-experience': 'Prenotazioni di visite al frantoio e degustazioni guidate, con calendario condiviso dal team.',
-          'staff-operations': 'Turni e task per la raccolta, la frangitura e la gestione ordini, soprattutto nei periodi di picco stagionale.',
-          'control-tower': 'Una dashboard che aggrega vendite dirette, ordini B2B e performance del team (piano Ecosistema).',
-        }}
-        sizeTiers={[
-          {
-            label: 'Piccolo frantoio',
-            body: 'Vendita diretta prevalente, pochi clienti B2B. Ha senso partire dal CRM per centralizzare gli ordini e i contatti sparsi tra telefono ed email.',
-            planId: 'essenziale',
-          },
-          {
-            label: 'Frantoio medio',
-            body: 'Vendita diretta insieme a un canale B2B strutturato (ristoranti, distributori), con un team da coordinare nei periodi di raccolta.',
-            planId: 'crescita',
-          },
-          {
-            label: 'Grande frantoio o cooperativa',
-            body: 'Volumi B2B importanti, più figure commerciali o siti di lavorazione, necessità di una vista direzionale unica su vendite e team.',
-            planId: 'ecosistema',
-          },
-        ]}
-        caseStudySlugs={['frantoi-san-lorenzo']}
-        recommendedPlanId="crescita"
+        problems={problems}
+        capabilities={capabilities}
         faqs={faqs}
-        blogHref="/blog/software-frantoi-gestione-ordini-crm"
-        blogLabel="Leggi l’articolo: Software per Frantoi"
         otherSectors={[
           { href: '/software/vitivinicolo', label: 'Per Cantine' },
           { href: '/software/hospitality', label: 'Per Agriturismi' },

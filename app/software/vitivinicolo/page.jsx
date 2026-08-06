@@ -2,44 +2,62 @@ import SoftwareSectorTemplate from '@/components/software/SoftwareSectorTemplate
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Software per Cantine: MG Business Suite',
+  title: 'Software e CRM su misura per cantine',
   description:
-    'CRM, wine club, prenotazioni degustazioni, gestione team e analytics per cantine, in un’unica piattaforma. Scopri come si applica al tuo caso.',
+    'Wine club, degustazioni, vendita diretta, listini B2B. Costruiamo il gestionale attorno a come lavorate. Prima analisi gratuita.',
   path: '/software/vitivinicolo',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
-  keywords: ['software per cantine', 'crm cantine', 'gestionale cantina', 'software vino', 'wine club automatico'],
+  keywords: ['software per cantine', 'crm cantine', 'gestionale cantina', 'software vino su misura', 'wine club'],
 });
+
+const problems = [
+  'Il wine club lo gestiamo su un foglio Excel e ogni mese è un terno al lotto capire a chi va spedito cosa.',
+  'Le degustazioni arrivano per mail, le segniamo su un’agenda, e ogni tanto ne saltiamo una o ci ritroviamo doppioni.',
+  'So quanto abbiamo fatturato, ma non so quale vino ci lascia più margine né quali clienti sono tornati a comprare.',
+  'Il gestionale che abbiamo è quello del commercialista. Va bene per le fatture, ma dei clienti non sa niente.',
+  'Ogni volta che parte una spedizione qualcuno deve controllare a mano le giacenze.',
+];
+
+const capabilities = [
+  'Anagrafica clienti con storico e preferenze',
+  'Gestione wine club e spedizioni ricorrenti',
+  'Prenotazione degustazioni e visite con calendario e pagamenti',
+  'Listini differenziati privati/enoteche/ristoranti',
+  'Automazioni email per rinnovi e riordini',
+  'Giacenze per vino, annata e formato',
+  'Report su margine per etichetta',
+];
 
 const faqs = [
   {
     q: 'Posso gestire wine club differenziati (es. solo rossi, solo bianchi)?',
-    a: 'Sì, con la segmentazione dei contatti in MG Lead & Sales puoi creare gruppi diversi e inviare comunicazioni specifiche a ciascuno.',
+    a: 'Sì, il CRM che costruiamo segmenta i contatti in gruppi diversi e invia comunicazioni specifiche a ciascuno.',
   },
   {
     q: 'Integra le prenotazioni di degustazioni e visite in cantina?',
-    a: 'Sì, MG Booking & Experience gestisce prenotazioni e calendario condiviso con il team, con promemoria automatici agli ospiti e proposte di upgrade (es. cena abbinata) al momento giusto.',
+    a: 'Sì, con calendario condiviso con il team, promemoria automatici agli ospiti e proposte di upgrade (es. cena abbinata) al momento giusto.',
   },
   {
     q: 'Posso tracciare quali vini vendono di più?',
-    a: 'La dashboard di MG Lead & Sales mostra lo storico degli ordini; con il piano Ecosistema, MG Control Tower aggrega questi dati insieme a prenotazioni e team in un’unica vista, con un report AI settimanale.',
+    a: 'Sì, costruiamo report sullo storico degli ordini e sul margine per etichetta, non solo sul fatturato totale.',
   },
   {
     q: 'Serve sostituire il sito o l’e-commerce esistente?',
-    a: 'No, la piattaforma si affianca al sito e all’e-commerce che già usi: centralizza contatti, prenotazioni e team, non li sostituisce.',
+    a: 'No, il gestionale si affianca al sito e all’e-commerce che già usi: centralizza contatti, prenotazioni e team, non li sostituisce.',
   },
   {
     q: 'Gestisce anche i distributori e i clienti B2B, non solo la vendita diretta?',
-    a: 'Sì, MG Lead & Sales distingue automaticamente privati, ristoranti e distributori, con pipeline e follow-up differenziati per ciascun segmento.',
+    a: 'Sì, il CRM distingue privati, ristoranti e distributori, con pipeline e follow-up differenziati per ciascun segmento.',
   },
   {
     q: 'Cosa succede al wine club se un cliente non rinnova?',
-    a: 'Le email automatiche di MG Lead & Sales includono promemoria di rinnovo prima della scadenza; resta comunque una decisione del cliente — la piattaforma riduce le disdette per dimenticanza, non le elimina.',
+    a: 'Le email automatiche includono promemoria di rinnovo prima della scadenza; resta comunque una decisione del cliente — il gestionale riduce le disdette per dimenticanza, non le elimina.',
   },
   {
-    q: 'Serve un team tecnico per gestire la piattaforma?',
+    q: 'Serve un team tecnico per gestire il gestionale?',
     a: 'No, l’interfaccia è pensata per essere usata dal titolare o da chi si occupa di vendite e accoglienza, senza competenze tecniche.',
   },
 ];
@@ -62,56 +80,16 @@ export default function SoftwareVitivinicoloPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }} />
       <SoftwareSectorTemplate
-        eyebrow="MG Business Suite · Per Cantine"
+        eyebrow="Software su misura · Per Cantine"
         breadcrumbLabel="Per Cantine"
         accentKey="wine"
-        h1="Software per Cantine: Vendite, Prenotazioni e Team in Una Piattaforma"
-        subheadline="Vendi vino online e offline, gestisci l’enoturismo e un wine club ricorrente: se ognuno di questi vive in uno strumento diverso, il problema non è la mancanza di software, è la mancanza di una piattaforma che li unisca."
+        h1="Software e CRM su misura per cantine"
+        subheadline="Vendi vino online e offline, gestisci l’enoturismo e un wine club ricorrente: se ognuno di questi vive in uno strumento diverso, il problema non è la mancanza di software, è la mancanza di uno strumento costruito attorno a come lavorate voi."
         heroImage="/images/software/sector-vitivinicolo-hero.jpg"
         heroImageAlt="Laptop su una scrivania, pronto per gestire vendite e prenotazioni della cantina"
-        todayVsSuite={{
-          today: [
-            'Contatti commerciali sparsi tra email, agende e WhatsApp',
-            'Prenotazioni di degustazioni gestite solo per telefono',
-            'Nessun follow-up automatico verso il wine club',
-            'Nessuna vista unica su vini più venduti e clienti ricorrenti',
-          ],
-          withSuite: [
-            'Un’unica pipeline per privati, ristoranti e distributori',
-            'Calendario di degustazioni e visite condiviso con tutto il team',
-            'Email automatiche per rinnovo e promozione del wine club',
-            'Dashboard che mostra vendite, prenotazioni e clienti ricorrenti',
-          ],
-        }}
-        moduleNotes={{
-          'lead-sales': 'Traccia ogni cliente vino — privati, ristoranti, distributori — con follow-up automatici per il nuovo millesimo o l’iscrizione al wine club.',
-          'social-ai': 'Contenuti social per raccontare vendemmia, cantina e vini, pubblicati con costanza senza doverci pensare ogni settimana.',
-          'booking-experience': 'Prenotazioni di degustazioni e visite in cantina, con calendario condiviso da tutto il team.',
-          'staff-operations': 'Turni e task per chi accoglie, chi guida il tour in vigna, chi serve durante un evento.',
-          'control-tower': 'Una dashboard che aggrega vendite, prenotazioni e performance del team in un unico sguardo (piano Ecosistema).',
-        }}
-        sizeTiers={[
-          {
-            label: 'Piccola cantina',
-            body: 'Poche etichette, enoturismo occasionale. Ha senso partire da un solo modulo — tipicamente il CRM per i contatti commerciali o le prenotazioni delle degustazioni — e ampliare quando serve.',
-            planId: 'essenziale',
-          },
-          {
-            label: 'Cantina media',
-            body: 'Vendita diretta strutturata, wine club attivo o da lanciare, enoturismo regolare. Qui le automazioni tra i moduli — CRM, prenotazioni, team — iniziano a fare la differenza reale.',
-            planId: 'crescita',
-          },
-          {
-            label: 'Grande cantina o cooperativa',
-            body: 'Più sedi o reparti, team strutturato, necessità di una vista direzionale unica su vendite, prenotazioni e performance del personale.',
-            planId: 'ecosistema',
-          },
-        ]}
-        caseStudySlugs={['tenuta-monteverdi', 'azienda-rossi']}
-        recommendedPlanId="crescita"
+        problems={problems}
+        capabilities={capabilities}
         faqs={faqs}
-        blogHref="/blog/software-per-cantine"
-        blogLabel="Leggi l’articolo: Software per Cantine"
         otherSectors={[
           { href: '/software/hospitality', label: 'Per Agriturismi' },
           { href: '/software/frantoi', label: 'Per Frantoi' },

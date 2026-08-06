@@ -113,8 +113,8 @@ const differentiators = [
   },
   {
     Icon: GearIcon,
-    title: 'Già collegato a MG Business Suite',
-    body: 'CRM, email di follow-up e upsell non vanno ricostruiti a parte: si appoggiano agli stessi moduli che gestiscono già gli altri contatti della cantina.',
+    title: 'CRM e automazioni su misura',
+    body: 'CRM, email di follow-up e upsell li costruiamo insieme al resto del gestionale, non come uno strumento a parte da far parlare con gli altri.',
   },
   {
     Icon: ChartIcon,
@@ -132,9 +132,9 @@ const ecosystemCards = [
   },
   {
     Icon: GearIcon,
-    title: 'Automazione MG Business Suite',
-    body: 'Iscrizioni e email di benvenuto automatiche, reminder di spedizione, richiesta feedback post-consegna, upsell verso il tier superiore, CRM per gli iscritti (MG Lead & Sales).',
-    price: 'Da €89/mese',
+    title: 'CRM e automazioni su misura',
+    body: 'Iscrizioni e email di benvenuto automatiche, reminder di spedizione, richiesta feedback post-consegna, upsell verso il tier superiore, CRM dedicato per gli iscritti.',
+    price: 'Incluso nel progetto',
   },
   {
     Icon: CompassIcon,

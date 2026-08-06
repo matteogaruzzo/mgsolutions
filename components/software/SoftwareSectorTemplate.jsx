@@ -4,44 +4,8 @@ import Reveal from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import ServiceArea from '@/components/geo/ServiceArea';
 import FAQAccordion from '@/components/FAQAccordion';
-import { businessSuiteModules, getCaseStudy, testimonials } from '@/lib/data';
-import { SOFTWARE_PLANS, SOFTWARE_PLAN_ORDER } from '@/lib/config/software-plans';
-import {
-  ChatIcon,
-  TargetIcon,
-  CalendarIcon,
-  ClockIcon,
-  ChartIcon,
-  AIIcon,
-  CompassIcon,
-  RefreshIcon,
-  BookIcon,
-  PaletteIcon,
-  LockIcon,
-  CartIcon,
-  PinIcon,
-  GearIcon,
-} from '@/components/icons/ServiceIcons';
+import { CompassIcon, ScreenIcon, GearIcon, HandshakeIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-
-const moduleIconMap = { chat: ChatIcon, target: TargetIcon, calendar: CalendarIcon, clock: ClockIcon, chart: ChartIcon };
-
-const featureIconMap = {
-  ai: AIIcon,
-  calendar: CalendarIcon,
-  palette: PaletteIcon,
-  lock: LockIcon,
-  compass: CompassIcon,
-  chart: ChartIcon,
-  target: TargetIcon,
-  refresh: RefreshIcon,
-  book: BookIcon,
-  chat: ChatIcon,
-  cart: CartIcon,
-  pin: PinIcon,
-  gear: GearIcon,
-  clock: ClockIcon,
-};
 
 // Colori distintivi per settore, definiti in tailwind.config.js (wine / olio / hospitality),
 // già usati dalle pagine /settori/*: li riusiamo qui per coerenza visiva invece di introdurne di nuovi.
@@ -51,6 +15,13 @@ const accentClasses = {
   hospitality: { text: 'text-hospitality-accent', border: 'border-hospitality-accent/30', bg: 'bg-hospitality-bg' },
 };
 
+const steps = [
+  { n: '1', Icon: CompassIcon, title: 'Analisi', body: 'Veniamo da voi o facciamo una call lunga. Capiamo come lavorate oggi, dove perdete tempo, cosa vi manca.' },
+  { n: '2', Icon: ScreenIcon, title: 'Progetto e preventivo', body: 'Vi presentiamo cosa costruiremmo, in che ordine, con quali tempi e quale cifra. Solo a quel punto decidete.' },
+  { n: '3', Icon: GearIcon, title: 'Sviluppo a blocchi', body: 'Non spariamo per sei mesi. Consegniamo il primo pezzo funzionante presto e costruiamo sopra, con voi che provate mano a mano.' },
+  { n: '4', Icon: HandshakeIcon, title: 'Avvio e assistenza', body: 'Formazione al vostro team, e restiamo per far evolvere lo strumento quando cambiano le esigenze.' },
+];
+
 export default function SoftwareSectorTemplate({
   eyebrow,
   breadcrumbLabel,
@@ -59,18 +30,12 @@ export default function SoftwareSectorTemplate({
   heroImage,
   heroImageAlt,
   accentKey = 'wine',
-  todayVsSuite,
-  moduleNotes,
-  sizeTiers,
-  caseStudySlugs,
-  recommendedPlanId,
+  problems,
+  capabilities,
   faqs,
-  blogHref,
-  blogLabel,
   otherSectors,
 }) {
   const accent = accentClasses[accentKey] || accentClasses.wine;
-  const caseStudies = (caseStudySlugs || []).map((slug) => getCaseStudy(slug)).filter(Boolean);
 
   return (
     <>
@@ -93,10 +58,7 @@ export default function SoftwareSectorTemplate({
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link href="/prenota-call" className="btn-solid">
                   <GrapeIcon className="w-4 h-4" />
-                  Prenota una demo — 20 minuti
-                </Link>
-                <Link href="/software/pricing" className="btn-ghost">
-                  Confronta i piani
+                  Raccontateci cosa vi serve
                 </Link>
               </div>
             </div>
@@ -118,206 +80,98 @@ export default function SoftwareSectorTemplate({
         </div>
       </section>
 
-      {/* ---------- OGGI VS CON LA SUITE ---------- */}
+      {/* ---------- I PROBLEMI CHE SENTIAMO PIÙ SPESSO ---------- */}
       <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-20">
+        <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">La differenza concreta</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Oggi vs. con MG Business Suite.</h2>
+            <p className="eyebrow">Quello che sentiamo più spesso</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Quello che ci raccontano più spesso in cantina, in agriturismo, al frantoio.</h2>
           </Reveal>
-          <div className="mt-10 grid md:grid-cols-2 gap-6">
-            <Reveal>
-              <div className="border border-line rounded-2xl p-7 h-full bg-paper">
-                <p className="text-xs font-semibold tracking-widest text-ink/40 uppercase">Oggi</p>
-                <ul className="mt-4 space-y-3">
-                  {todayVsSuite.today.map((t) => (
-                    <li key={t} className="text-sm text-ink/70 leading-relaxed">— {t}</li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-            <Reveal delay={80}>
-              <div className={`border ${accent.border} rounded-2xl p-7 h-full bg-paper`}>
-                <p className={`text-xs font-semibold tracking-widest uppercase ${accent.text}`}>Con MG Business Suite</p>
-                <ul className="mt-4 space-y-3">
-                  {todayVsSuite.withSuite.map((t) => (
-                    <li key={t} className="text-sm text-ink/80 leading-relaxed font-medium">— {t}</li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
+          <div className="mt-10 grid md:grid-cols-2 gap-5">
+            {problems.map((p, i) => (
+              <Reveal key={p} delay={i * 60}>
+                <div className={`border ${accent.border} ${accent.bg} rounded-2xl p-6 h-full`}>
+                  <p className="text-sm text-ink/80 leading-relaxed italic">“{p}”</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-8 text-sm font-medium text-ink/70">
+            Se qualcuna di queste vi suona familiare, è di questo che ci occupiamo.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- COSA SI PUÒ COSTRUIRE ---------- */}
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Cosa si può costruire</p>
+          <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Capacità, non moduli da comprare a pacchetto.</h2>
+        </Reveal>
+        <div className="mt-10 grid sm:grid-cols-2 gap-4">
+          {capabilities.map((c) => (
+            <div key={c} className="flex gap-3 border border-line rounded-xl p-4">
+              <span className={`shrink-0 ${accent.text}`}>✓</span>
+              <span className="text-sm text-ink/75 leading-relaxed">{c}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------- COME LAVORIAMO ---------- */}
+      <section className="bg-ink text-paper">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow text-brass">Come lavoriamo</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl">Quattro passaggi, nessuna sorpresa.</h2>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80}>
+                <div className="border border-paper/15 rounded-2xl p-6 h-full flex flex-col">
+                  <div className="w-11 h-11 rounded-full bg-paper/10 flex items-center justify-center">
+                    <s.Icon className="w-5 h-5 text-brass" />
+                  </div>
+                  <p className="mt-4 font-semibold">{s.n} · {s.title}</p>
+                  <p className="mt-2 text-sm text-paper/70 leading-relaxed flex-1">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ---------- TUTTE LE FUNZIONALITÀ, PER MODULO ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <Reveal>
-          <p className="eyebrow">Tutte le funzionalità</p>
-          <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Come funziona ogni modulo, applicato al tuo settore.</h2>
-        </Reveal>
-        <div className="mt-12 space-y-10">
-          {businessSuiteModules.map((m, i) => {
-            const Icon = moduleIconMap[m.icon] || TargetIcon;
-            const note = moduleNotes[m.slug];
-            return (
-              <Reveal key={m.slug} delay={i * 60}>
-                <div className={`rounded-2xl border ${accent.border} ${accent.bg} p-7`}>
-                  <div className="flex items-start gap-4 flex-wrap">
-                    <div className="w-11 h-11 shrink-0 rounded-full bg-paper flex items-center justify-center">
-                      <Icon className={`w-5 h-5 ${accent.text}`} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <h3 className="h3 text-lg text-ink">{m.name}</h3>
-                        <Link href={`/software/${m.slug}`} className="text-xs font-semibold text-forest hover:text-brass">
-                          Pagina del modulo →
-                        </Link>
-                      </div>
-                      {note && <p className="mt-2 text-sm text-ink/70 leading-relaxed max-w-2xl">{note}</p>}
-                    </div>
-                  </div>
-                  <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {m.featureCards.map((f) => {
-                      const FIcon = featureIconMap[f.icon] || TargetIcon;
-                      return (
-                        <div key={f.title} className="rounded-xl bg-paper border border-line p-4">
-                          <FIcon className="w-4 h-4 text-ink/40" />
-                          <p className="mt-2.5 text-sm font-semibold text-ink">{f.title}</p>
-                          <p className="mt-1.5 text-xs text-ink/60 leading-relaxed">{f.body}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ---------- PER DIMENSIONE AZIENDA ---------- */}
-      {sizeTiers && sizeTiers.length > 0 && (
-        <section className="bg-ink text-paper">
-          <div className="max-w-edge mx-auto px-6 py-24">
-            <Reveal>
-              <p className="eyebrow text-brass">Per dimensione azienda</p>
-              <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl">Da dove iniziare, in base a dove sei oggi.</h2>
-            </Reveal>
-            <div className="mt-12 grid md:grid-cols-3 gap-6">
-              {sizeTiers.map((tier, i) => {
-                const plan = SOFTWARE_PLANS[tier.planId];
-                return (
-                  <Reveal key={tier.label} delay={i * 80}>
-                    <div className="border border-paper/15 rounded-2xl p-7 h-full flex flex-col">
-                      <p className="font-semibold text-lg">{tier.label}</p>
-                      <p className="mt-4 text-sm text-paper/70 leading-relaxed flex-1">{tier.body}</p>
-                      <p className="mt-5 text-xs font-semibold tracking-widest text-brass uppercase">
-                        Piano consigliato: {plan.name}
-                      </p>
-                    </div>
-                  </Reveal>
-                );
-              })}
+      {/* ---------- INVESTIMENTO ---------- */}
+      <section className="bg-paper-dim">
+        <div className="max-w-edge mx-auto px-6 py-24">
+          <Reveal>
+            <p className="eyebrow">Quanto costa</p>
+            <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Dipende da cosa serve.</h2>
+            <div className="mt-6 max-w-2xl space-y-4 text-ink/70 leading-relaxed">
+              <p>
+                E non lo sappiamo prima di averne parlato. Come ordine di grandezza: i progetti che
+                seguiamo partono da <strong className="text-ink">8.000€</strong> e la maggior parte sta
+                tra <strong className="text-ink">10.000 e 20.000€</strong>, con tempi di 2-4 mesi.
+              </p>
+              <p>
+                A questo si aggiunge un canone di assistenza ed evoluzione a partire da{' '}
+                <strong className="text-ink">150€/mese</strong>: hosting, aggiornamenti, supporto e le
+                modifiche che servono nel tempo.
+              </p>
+              <p>Vi diciamo una cifra precisa dopo la prima analisi, non prima.</p>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* ---------- CASE STUDY + TESTIMONIAL ---------- */}
-      {caseStudies.length > 0 && (
-        <section className="bg-paper-dim">
-          <div className="max-w-edge mx-auto px-6 py-24">
-            <Reveal>
-              <p className="eyebrow">{caseStudies.length > 1 ? 'Esempi dal settore' : 'Un esempio dal settore'}</p>
-            </Reveal>
-            <div className={`mt-8 grid gap-6 ${caseStudies.length > 1 ? 'md:grid-cols-2' : 'max-w-2xl'}`}>
-              {caseStudies.map((caseStudy, ci) => {
-                const testimonial = testimonials.find((t) => t.caseStudySlug === caseStudy.slug);
-                return (
-                  <Reveal key={caseStudy.slug} delay={ci * 80}>
-                    <div className="border border-line rounded-2xl p-7 h-full bg-paper">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <h3 className="h3 text-xl text-ink">{caseStudy.title}</h3>
-                        {caseStudy.concept && (
-                          <span className="text-[10px] tracking-widest border border-line rounded-full px-2 py-0.5 text-ink/50">
-                            CONCEPT
-                          </span>
-                        )}
-                      </div>
-                      <p className="mt-3 text-sm text-ink/65 leading-relaxed">{caseStudy.tagline}</p>
-                      <div className="mt-6 grid grid-cols-3 gap-3">
-                        {caseStudy.stats.map(([value, label]) => (
-                          <div key={label}>
-                            <p className={`text-xl font-bold ${accent.text}`}>{value}</p>
-                            <p className="mt-1 text-xs text-ink/60 leading-snug">{label}</p>
-                          </div>
-                        ))}
-                      </div>
-                      {testimonial && (
-                        <div className="mt-6 border-l-2 border-line pl-4">
-                          <p className="text-sm text-ink/75 italic leading-relaxed">“{testimonial.quote}”</p>
-                          <p className="mt-2 text-xs font-semibold text-ink">{testimonial.name} · {testimonial.role}</p>
-                        </div>
-                      )}
-                      <Link href={`/portfolio/${caseStudy.slug}`} className="mt-5 inline-block text-sm font-semibold text-forest hover:text-brass">
-                        Leggi il case study completo →
-                      </Link>
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </div>
-            <p className="mt-6 text-xs italic text-ink/45 max-w-xl">
-              Esempi illustrativi di cosa progettiamo per questo tipo di azienda, non clienti reali — li trovi in
-              dettaglio nel nostro portfolio.
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* ---------- PIANO CONSIGLIATO ---------- */}
-      <section className="max-w-edge mx-auto px-6 py-24">
-        <Reveal>
-          <p className="eyebrow">Prezzi</p>
-          <h2 className="h2 text-2xl md:text-3xl mt-3 max-w-2xl text-ink">Tre piani, stessa piattaforma.</h2>
-        </Reveal>
-        <div className="mt-10 grid md:grid-cols-3 gap-6">
-          {SOFTWARE_PLAN_ORDER.map((id, i) => {
-            const plan = SOFTWARE_PLANS[id];
-            const recommended = id === recommendedPlanId;
-            return (
-              <Reveal key={id} delay={i * 60}>
-                <div className={`border rounded-2xl p-7 h-full ${recommended ? 'border-forest bg-paper-dim shadow-md' : 'border-line'}`}>
-                  {recommended && (
-                    <p className="text-[10px] font-semibold tracking-widest text-forest uppercase mb-2">Consigliato per il tuo settore</p>
-                  )}
-                  <p className="text-xs font-semibold tracking-widest text-forest uppercase">{plan.name}</p>
-                  <p className="mt-2 text-sm text-ink/60">{plan.moduleLimitLabel}</p>
-                  <p className="mt-4 text-3xl font-bold text-primary">€{plan.monthlyPrice}<span className="text-base text-ink/50">/mese</span></p>
-                  <p className="mt-1 text-xs text-ink/50">+ €{plan.setupPrice} attivazione · {plan.trialDays} giorni di prova</p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-        <div className="mt-8">
-          <Link href="/software/pricing" className="text-sm font-semibold text-forest hover:text-brass">
-            Vedi il confronto completo dei piani →
-          </Link>
+          </Reveal>
         </div>
       </section>
 
       {/* ---------- FAQ ---------- */}
-      <section className="bg-paper-dim">
-        <div className="max-w-edge mx-auto px-6 py-24">
-          <Reveal>
-            <p className="eyebrow">Domande frequenti</p>
-            <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">Risposte specifiche per il tuo settore.</h2>
-          </Reveal>
-          <div className="mt-10 max-w-2xl">
-            <FAQAccordion items={faqs} />
-          </div>
+      <section className="max-w-edge mx-auto px-6 py-24">
+        <Reveal>
+          <p className="eyebrow">Domande frequenti</p>
+          <h2 className="h2 text-2xl md:text-3xl mt-3 text-ink max-w-2xl">Risposte specifiche per il tuo settore.</h2>
+        </Reveal>
+        <div className="mt-10 max-w-2xl">
+          <FAQAccordion items={faqs} />
         </div>
       </section>
 
@@ -335,24 +189,16 @@ export default function SoftwareSectorTemplate({
                 {s.label} →
               </Link>
             ))}
-            {blogHref && (
-              <Link
-                href={blogHref}
-                className="text-sm font-semibold text-ink/70 hover:text-forest border border-line rounded-full px-4 py-2 transition-colors"
-              >
-                {blogLabel} →
-              </Link>
-            )}
           </div>
         </section>
       )}
 
       {/* ---------- CTA FINALE ---------- */}
       <CTA
-        title="Vedi MG Business Suite applicato al tuo caso."
-        sub="20 minuti, senza impegno: ti mostriamo come i moduli si applicano al processo che oggi ti fa perdere più tempo."
+        title="Raccontateci come lavorate."
+        sub="Prima call di analisi, senza impegno e senza costo."
         href="/prenota-call"
-        ctaLabel="Prenota una demo gratuita"
+        ctaLabel="Prenota una call"
       />
 
       <ServiceArea pageType="software" />

@@ -9,8 +9,6 @@ import {
   getCaseStudy,
   testimonials,
   investmentFactors,
-  businessSuiteModules,
-  softwareUpcoming,
   webCare,
   siteDevPricing,
   ecommerceDevPricing,
@@ -143,28 +141,23 @@ export default function ServicePageTemplate({ service }) {
         </div>
       </section>
 
-      {/* ---------- MG BUSINESS SUITE (solo per software AI, dove esiste davvero) ---------- */}
+      {/* ---------- GESTIONALI DI SETTORE (solo per software AI, dove esiste davvero) ---------- */}
       {service.slug === 'software-ai-su-misura' && (
         <section className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow">MG Business Suite</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">{softwareUpcoming.title}</h2>
-            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
+            <p className="eyebrow">Cantine, agriturismi, frantoi</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">
+              Se lavori nell’agroalimentare, abbiamo pagine dedicate al tuo settore.
+            </h2>
+            <p className="mt-4 text-ink/70 max-w-2xl leading-relaxed">
+              Progettiamo CRM e gestionali su misura specificamente per cantine, agriturismi e frantoi:
+              vedi i problemi che risolviamo e cosa si può costruire nel tuo caso.
+            </p>
           </Reveal>
-          <div className="mt-10 grid sm:grid-cols-2 gap-4">
-            {businessSuiteModules.map((m) => (
-              <Link
-                key={m.slug}
-                href={`/software/${m.slug}`}
-                className="group block border border-line rounded-xl p-5 hover:shadow-lg transition-shadow"
-              >
-                <p className="font-semibold text-ink">{m.name}</p>
-                <p className="mt-2 text-sm text-ink/60 leading-relaxed">{m.tagline}</p>
-                <span className="mt-3 inline-block text-xs font-semibold text-forest opacity-0 group-hover:opacity-100 transition-opacity">
-                  Scopri il software →
-                </span>
-              </Link>
-            ))}
+          <div className="mt-10">
+            <Link href="/software" className="text-sm font-semibold text-forest hover:text-brass">
+              Scopri il software su misura per l’agroalimentare →
+            </Link>
           </div>
         </section>
       )}
@@ -289,9 +282,9 @@ export default function ServicePageTemplate({ service }) {
             </div>
 
             <p className="mt-6 text-sm text-ink/60 max-w-2xl">
-              Vuoi anche uno o più software di MG Business Suite integrati {service.slug === 'ecommerce-shopify' ? 'nello store' : 'nel sito'}?{' '}
-              <Link href="/software/pricing" className="font-semibold text-forest hover:text-brass">
-                Guarda i bundle sito + software →
+              Vuoi anche un gestionale su misura integrato {service.slug === 'ecommerce-shopify' ? 'nello store' : 'nel sito'}?{' '}
+              <Link href="/software" className="font-semibold text-forest hover:text-brass">
+                Scopri il software su misura →
               </Link>
             </p>
           </section>

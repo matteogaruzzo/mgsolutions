@@ -14,7 +14,6 @@ import {
   ChatIcon,
   CalendarIcon,
   GiftIcon,
-  CoinIcon,
 } from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
 import { servizi, sectors } from '@/lib/data';
@@ -43,21 +42,10 @@ const settoriMega = sectors.map((s) => ({
   Icon: settoriIconMap[s.slug] || GrapeIcon,
 }));
 
-const softwareSectors = [
+const softwareMega = [
   { href: '/software/vitivinicolo', title: 'Per Cantine', desc: 'CRM, wine club e prenotazioni degustazioni.', benefit: 'Vitivinicolo', Icon: GrapeIcon },
   { href: '/software/hospitality', title: 'Per Agriturismi', desc: 'Prenotazioni, esperienze e gestione team.', benefit: 'Hospitality', Icon: FarmhouseDoorIcon },
   { href: '/software/frantoi', title: 'Per Frantoi', desc: 'Ordini B2B, clienti olio e gestione team.', benefit: 'Oleifici', Icon: OliveIcon },
-];
-
-const softwareMega = [
-  ...softwareSectors,
-  {
-    href: '/software/pricing',
-    title: 'Piani e prezzi',
-    desc: 'Essenziale, Crescita ed Ecosistema: quanti moduli includono e quanto costano.',
-    benefit: 'Da €89/mese',
-    Icon: CoinIcon,
-  },
 ];
 
 const contattiMega = [
@@ -105,9 +93,9 @@ const links = [
     href: '/software',
     label: 'Software',
     mega: softwareMega,
-    megaCols: 2,
+    megaCols: 3,
     megaAlign: 'right',
-    megaViewAll: { href: '/software', label: 'Vedi l’intera Business Suite →' },
+    megaViewAll: { href: '/software', label: 'Scopri il software su misura →' },
   },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/blog', label: 'Blog' },

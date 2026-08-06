@@ -51,7 +51,7 @@ const steps = [
     n: '03',
     Icon: GiftIcon,
     title: 'Guadagni',
-    body: 'Se decidono di attivare MG Business Suite, ricevi €200 via bonifico. Sempre, senza limite.',
+    body: 'Se firmano un progetto con MG Solutions, ricevi €200 via bonifico. Sempre, senza limite.',
     cta: { label: 'Comincia ora', href: '/prenota-call' },
   },
 ];
@@ -82,7 +82,7 @@ const audiences = [
 const referralFaqs = [
   {
     q: 'Come ricevo i €200?',
-    a: 'Quando l’azienda che hai presentato attiva MG Business Suite (almeno il pacchetto Essenziale), ricevi un’email di conferma e i €200 arrivano via bonifico entro 7 giorni lavorativi. Niente burocrazia.',
+    a: 'Quando l’azienda che hai presentato firma un progetto con MG Solutions, ricevi un’email di conferma e i €200 arrivano via bonifico entro 7 giorni lavorativi. Niente burocrazia.',
   },
   {
     q: 'Quanti €200 posso guadagnare?',

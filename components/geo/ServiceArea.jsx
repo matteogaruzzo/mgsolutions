@@ -7,8 +7,8 @@ const copyByPageType = {
     desc: 'Lavoriamo con cantine, oleifici e agriturismi in tutte le regioni italiane. Seleziona la tua per scoprire come lavoriamo nella tua zona.',
   },
   software: {
-    title: 'MG Business Suite in tutta Italia',
-    desc: 'Implementiamo software e automazioni per l’agroalimentare in tutte le regioni italiane. Seleziona la tua regione per scoprire come lavoriamo nella tua zona.',
+    title: 'Software su misura in tutta Italia',
+    desc: 'Sviluppiamo gestionali su misura per l’agroalimentare in tutte le regioni italiane. Seleziona la tua regione per scoprire come lavoriamo nella tua zona.',
   },
   servizi: {
     title: 'Siti, e-commerce e software in tutta Italia',

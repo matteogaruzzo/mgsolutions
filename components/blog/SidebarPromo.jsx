@@ -16,8 +16,8 @@ const promosByBucket = {
     { Icon: CompassIcon, title: 'Consulenza strategica', body: 'Analisi personalizzata del tuo caso.', href: '/servizi/consulenza-strategica' },
   ],
   ai: [
-    { Icon: GearIcon, title: 'Software AI su misura', body: 'Automazione per le attività ripetitive.', href: '/software' },
-    { Icon: ChartIcon, title: 'Lead & Sales', body: 'Qualifica i contatti in automatico.', href: '/software/lead-sales' },
+    { Icon: GearIcon, title: 'Software AI su misura', body: 'Automazione per le attività ripetitive.', href: '/servizi/software-ai-su-misura' },
+    { Icon: ChartIcon, title: 'Gestionali su misura', body: 'CRM e automazioni per cantine, agriturismi e frantoi.', href: '/software' },
   ],
   seo: [
     { Icon: ScreenIcon, title: 'Siti che generano contatti', body: 'Struttura pensata per farti trovare.', href: '/servizi/siti-web-contatti' },
@@ -28,7 +28,7 @@ const promosByBucket = {
     { Icon: ScreenIcon, title: 'Tutti i servizi', body: 'Siti, e-commerce, software.', href: '/servizi' },
   ],
   default: [
-    { Icon: GearIcon, title: 'MG Business Suite', body: 'I 5 software che automatizzano il tuo lavoro.', href: '/software' },
+    { Icon: GearIcon, title: 'Software su misura', body: 'Gestionali costruiti sul tuo modo di lavorare.', href: '/software' },
     { Icon: CompassIcon, title: 'Consulenza strategica', body: 'Analisi personalizzata del tuo caso.', href: '/servizi/consulenza-strategica' },
   ],
 };

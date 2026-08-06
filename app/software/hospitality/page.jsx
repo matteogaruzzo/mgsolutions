@@ -2,21 +2,38 @@ import SoftwareSectorTemplate from '@/components/software/SoftwareSectorTemplate
 import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
 
 const PAGE = {
-  title: 'Software per Agriturismi: MG Business Suite',
+  title: 'Software e CRM su misura per agriturismi',
   description:
-    'Prenotazioni, esperienze, CRM ospiti e gestione team per agriturismi, in un’unica piattaforma. Scopri come si applica al tuo caso.',
+    'Prenotazioni dirette, gestione ospiti, esperienze. Un gestionale costruito su come lavorate voi. Prima analisi gratuita.',
   path: '/software/hospitality',
 };
 
 export const metadata = pageMetadata({
   ...PAGE,
-  keywords: ['software per agriturismi', 'crm agriturismi', 'gestionale agriturismi', 'pms agriturismi'],
+  keywords: ['software per agriturismi', 'crm agriturismi', 'gestionale agriturismi su misura', 'pms agriturismi'],
 });
+
+const problems = [
+  'Metà delle prenotazioni arriva da Booking e ci lascia il 15-18%. Le dirette non riusciamo a farle crescere.',
+  'Chi è stato qui una volta non lo risentiamo mai più. Non abbiamo nemmeno le mail.',
+  'Le esperienze — cena, corso di cucina, visita — le gestiamo a voce e ogni volta bisogna ricordarsi chi fa cosa.',
+  'Il PMS che usiamo è pensato per gli hotel. Metà delle funzioni non ci servono e quelle che ci servirebbero non ci sono.',
+];
+
+const capabilities = [
+  'Anagrafica ospiti con storico soggiorni',
+  'Calendario camere e disponibilità',
+  'Motore di prenotazione diretta',
+  'Gestione esperienze e attività',
+  'Automazioni pre e post soggiorno',
+  'Assegnazione compiti al team',
+  'Report su canale di provenienza e prenotazioni dirette vs OTA',
+];
 
 const faqs = [
   {
-    q: 'Posso continuare a usare Booking.com e Airbnb insieme alla piattaforma?',
-    a: 'Sì, MG Booking & Experience si sincronizza con i principali canali per evitare l’overbooking mentre cresce il canale diretto, che non paga commissioni.',
+    q: 'Posso continuare a usare Booking.com e Airbnb insieme al gestionale?',
+    a: 'Sì, il motore di prenotazione si sincronizza con i principali canali per evitare l’overbooking mentre cresce il canale diretto, che non paga commissioni.',
   },
   {
     q: 'Gestisce anche le esperienze, non solo le camere?',
@@ -24,19 +41,19 @@ const faqs = [
   },
   {
     q: 'Ha senso anche per un B&B con poche camere?',
-    a: 'Sì: il piano Essenziale è pensato proprio per strutture piccole che vogliono partire da un solo processo prioritario, tipicamente le prenotazioni.',
+    a: 'Sì: si parte sempre dal singolo processo che oggi vi fa perdere più tempo, tipicamente le prenotazioni dirette, e si amplia da lì.',
   },
   {
     q: 'Serve formazione per il team?',
-    a: 'Sì, viene inclusa all’attivazione; l’interfaccia è pensata per essere usata senza competenze tecniche.',
+    a: 'Sì, viene inclusa all’avvio; l’interfaccia è pensata per essere usata senza competenze tecniche.',
   },
   {
-    q: 'Come gestisce i periodi di alta stagione per il team?',
-    a: 'MG Staff & Operations organizza turni, task e checklist di apertura/chiusura, riducendo le dimenticanze proprio nei periodi più intensi.',
+    q: 'Come aiuta nei periodi di alta stagione per il team?',
+    a: 'Organizzando turni, task e checklist di apertura/chiusura, riducendo le dimenticanze proprio nei periodi più intensi.',
   },
   {
     q: 'Posso richiedere una caparra alla prenotazione?',
-    a: 'Sì, MG Booking & Experience gestisce il pagamento di una caparra al momento della prenotazione, riducendo le disdette dell’ultimo minuto.',
+    a: 'Sì, il gestionale gestisce il pagamento di una caparra al momento della prenotazione, riducendo le disdette dell’ultimo minuto.',
   },
 ];
 
@@ -58,56 +75,16 @@ export default function SoftwareHospitalityPage() {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }} />
       <SoftwareSectorTemplate
-        eyebrow="MG Business Suite · Per Agriturismi"
+        eyebrow="Software su misura · Per Agriturismi"
         breadcrumbLabel="Per Agriturismi"
         accentKey="hospitality"
-        h1="Software per Agriturismi: Prenotazioni, CRM e Team in Una Piattaforma"
+        h1="Software e CRM su misura per agriturismi"
         subheadline="Camere, cene, degustazioni ed escursioni: un agriturismo vende più di un semplice pernottamento. Se prenotazioni, contatti e team vivono su strumenti diversi, nessuno di quegli strumenti ha davvero il quadro completo."
         heroImage="/images/software/sector-hospitality-hero.jpg"
         heroImageAlt="Laptop con calendario di prenotazioni aperto su una scrivania"
-        todayVsSuite={{
-          today: [
-            'Prenotazioni gestite solo per telefono o email',
-            'Nessun modo semplice per proporre esperienze durante la prenotazione',
-            'Task del team coordinati a voce o su WhatsApp',
-            'Nessun follow-up automatico verso gli ospiti che tornano',
-          ],
-          withSuite: [
-            'Booking diretto con calendario sincronizzato anche con Booking.com e Airbnb',
-            'Esperienze proposte nello stesso percorso di prenotazione della camera',
-            'Turni e task del team organizzati in un unico posto',
-            'Email automatiche dopo il soggiorno per far tornare l’ospite',
-          ],
-        }}
-        moduleNotes={{
-          'lead-sales': 'Contatti degli ospiti — chi prenota per la prima volta, chi torna ogni anno — con follow-up automatici.',
-          'social-ai': 'Contenuti social per raccontare l’esperienza — colazioni, colline, silenzio — pubblicati con costanza.',
-          'booking-experience': 'Prenotazioni dirette di camere ed esperienze, con calendario sincronizzato anche con Booking.com e Airbnb.',
-          'staff-operations': 'Turni e task per pulizie, cucina e accoglienza, coordinati senza il caos di WhatsApp nei periodi di alta stagione.',
-          'control-tower': 'Una dashboard che aggrega occupazione, esperienze vendute e performance del team (piano Ecosistema).',
-        }}
-        sizeTiers={[
-          {
-            label: 'B&B o agriturismo piccolo',
-            body: 'Poche camere, prenotazioni gestite prevalentemente in autonomia. Ha senso partire dal modulo prenotazioni per avere subito un booking diretto funzionante.',
-            planId: 'essenziale',
-          },
-          {
-            label: 'Agriturismo medio',
-            body: 'Camere, ristorazione ed esperienze insieme, con un team da coordinare. Qui le automazioni tra prenotazioni, CRM e turni del team fanno la differenza reale.',
-            planId: 'crescita',
-          },
-          {
-            label: 'Struttura strutturata o multi-location',
-            body: 'Più sedi o un team numeroso, con necessità di una vista unica su occupazione, esperienze vendute e performance del personale.',
-            planId: 'ecosistema',
-          },
-        ]}
-        caseStudySlugs={['podere-la-vite']}
-        recommendedPlanId="crescita"
+        problems={problems}
+        capabilities={capabilities}
         faqs={faqs}
-        blogHref="/blog/software-per-agriturismi"
-        blogLabel="Leggi l’articolo: Software per Agriturismi"
         otherSectors={[
           { href: '/software/vitivinicolo', label: 'Per Cantine' },
           { href: '/software/frantoi', label: 'Per Frantoi' },

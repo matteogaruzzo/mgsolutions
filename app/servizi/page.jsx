@@ -9,8 +9,6 @@ import {
   heroStats,
   referenceNumbers,
   whyMG,
-  businessSuiteModules,
-  softwareUpcoming,
   getCaseStudy,
 } from '@/lib/data';
 import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
@@ -183,7 +181,7 @@ export default function Servizi() {
                   {[
                     'Pagina landing dedicata al club',
                     'Iscrizioni e pagamenti ricorrenti automatici',
-                    'Automazioni MG Business Suite (email, reminder, upsell)',
+                    'Automazioni via email per rinnovi, promemoria e upsell',
                     'CRM dedicato per gli iscritti',
                     'Consulenza su tier, prezzo e lancio',
                   ].map((b) => (
@@ -329,24 +327,21 @@ export default function Servizi() {
         </div>
       </section>
 
-      {/* ---------- MG BUSINESS SUITE ---------- */}
+      {/* ---------- SOFTWARE SU MISURA ---------- */}
       <section className="bg-ink text-paper">
         <div className="max-w-edge mx-auto px-6 py-24">
           <Reveal>
-            <p className="eyebrow text-brass">MG Business Suite</p>
-            <h2 className="h2 text-3xl md:text-4xl mt-4">{softwareUpcoming.title}</h2>
-            <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">{softwareUpcoming.body}</p>
+            <p className="eyebrow text-brass">Software su misura</p>
+            <h2 className="h2 text-3xl md:text-4xl mt-4">
+              Il gestionale che vi serve probabilmente non esiste ancora.
+            </h2>
+            <p className="mt-4 text-paper/70 max-w-2xl leading-relaxed">
+              Progettiamo CRM e gestionali su misura per cantine, agriturismi e frantoi, partendo
+              da come lavorate voi, non da un pacchetto preconfezionato.
+            </p>
           </Reveal>
-          <div className="mt-10 grid sm:grid-cols-2 gap-4">
-            {businessSuiteModules.map((m) => (
-              <div key={m.slug} className="border border-paper/15 rounded-xl p-5">
-                <p className="font-semibold">{m.name}</p>
-                <p className="mt-2 text-sm text-paper/60 leading-relaxed">{m.tagline}</p>
-              </div>
-            ))}
-          </div>
           <Link href="/software" className="mt-8 inline-block text-sm font-semibold text-brass hover:text-paper">
-            Scopri tutto sul software →
+            Scopri il software su misura →
           </Link>
         </div>
       </section>
