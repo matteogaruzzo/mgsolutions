@@ -1,0 +1,17 @@
+{
+  "servizi": {
+    "siti-web-contatti-problema": { "id": "qT515JdZNy8", "alt": "Vigneto al tramonto, l’ora in cui arrivano le richieste che si perdono" },
+    "siti-web-contatti-cambia": { "id": "z38uTGNpNnA", "alt": "Degustazione guidata con più calici in fila, prenotata comodamente in cantina" },
+    "ecommerce-shopify-problema": { "id": "gthSas4oYC0", "alt": "Scatole di spedizione pronte per la distribuzione all’ingrosso" },
+    "ecommerce-shopify-cambia": { "id": "2hSvuQHdLDQ", "alt": "Bottiglia confezionata con cura per la spedizione diretta al cliente" },
+    "restyling-ottimizzazione-problema": { "id": "0GxXoWjHMKs", "alt": "Vecchia facciata di un edificio italiano con intonaco consumato, come un sito da rinnovare" },
+    "restyling-ottimizzazione-cambia": { "id": "qegPEtazWCY", "alt": "Casale ristrutturato, l’intervento mirato che serviva" },
+    "consulenza-strategica-problema": { "id": "0AgtPoAARtE", "alt": "Appunti e pianificazione in vigna, prima di decidere cosa costruire" },
+    "consulenza-strategica-cambia": { "id": "_ZFHa5zk_U4", "alt": "Cassette di vendemmia ordinate, come le priorità dopo l’analisi" }
+  },
+  "software": {
+    "sector-vitivinicolo-hero": { "id": "h6S8-UsDB6E", "alt": "Cantina storica con volta in pietra e file di botti in affinamento" },
+    "sector-hospitality-hero": { "id": "C1n9zpNxtP4", "alt": "Terrazza di un borgo di campagna con vista sulle colline, tipica di un agriturismo" },
+    "sector-frantoi-hero": { "id": "dDWVq_XEhus", "alt": "Olio extravergine appena spremuto che scende dal frantoio" }
+  }
+}

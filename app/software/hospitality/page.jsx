@@ -81,7 +81,7 @@ export default function SoftwareHospitalityPage() {
         h1="Software e CRM su misura per agriturismi"
         subheadline="Camere, cene, degustazioni ed escursioni: un agriturismo vende più di un semplice pernottamento. Se prenotazioni, contatti e team vivono su strumenti diversi, nessuno di quegli strumenti ha davvero il quadro completo."
         heroImage="/images/software/sector-hospitality-hero.jpg"
-        heroImageAlt="Laptop con calendario di prenotazioni aperto su una scrivania"
+        heroImageAlt="Terrazza di un borgo di campagna con vista sulle colline, tipica di un agriturismo"
         problems={problems}
         capabilities={capabilities}
         faqs={faqs}

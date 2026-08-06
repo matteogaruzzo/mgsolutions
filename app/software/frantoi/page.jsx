@@ -81,7 +81,7 @@ export default function SoftwareFrantoiPage() {
         h1="Software e CRM su misura per frantoi e oleifici"
         subheadline="Un frantoio vende a privati, ristoranti e distributori, con volumi e cicli diversi. Se gli ordini vivono su fogli di calcolo separati dal resto, nessuno ha davvero il quadro di chi compra cosa, e quanto spesso."
         heroImage="/images/software/sector-frantoi-hero.jpg"
-        heroImageAlt="Persona che lavora al computer per gestire ordini e clienti"
+        heroImageAlt="Olio extravergine appena spremuto che scende dal frantoio"
         problems={problems}
         capabilities={capabilities}
         faqs={faqs}

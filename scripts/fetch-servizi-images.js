@@ -1,80 +1,36 @@
-// Scarica le immagini "problema"/"cambia" mancanti delle pagine servizio da
-// Unsplash (formato WebP, richiesto direttamente all'API via `fm=webp` —
-// niente sharp/dipendenze aggiuntive) e le salva in public/images/servizi.
+// Scarica le foto Unsplash scelte per le pagine servizio e software, per ID
+// (non per ricerca): un ID è stabile e restituisce sempre la stessa identica
+// foto, a differenza di /search/photos i cui risultati cambiano nel tempo.
+//
+// Le foto sono state scelte a mano guardandole una per una (vedi
+// scripts/unsplash-candidates.js per generare nuove candidate da rivedere)
+// e bloccate per ID in scripts/unsplash-map.json.
 //
 // Uso:
-//   node --env-file=.env.local scripts/fetch-servizi-images.js
+//   node --env-file=.env.local scripts/fetch-servizi-images.js [--force]
 //
 // Richiede UNSPLASH_ACCESS_KEY in .env.local (mai committare la chiave:
-// .env*.local e' gia' in .gitignore). Stesso pattern di fetch-blog-images.js.
+// .env*.local e' gia' in .gitignore).
 
 const fs = require('fs');
 const path = require('path');
 
 const ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
-const OUT_DIR = path.join(__dirname, '..', 'public', 'images', 'servizi');
+const MAP = require('./unsplash-map.json');
 const WIDTH = 1600;
 const HEIGHT = 1200;
-
-// file = nome file di destinazione (senza estensione). Ogni query è scelta
-// per corrispondere al paragrafo affiancato nella relativa pagina, non
-// genericamente al servizio.
-const images = [
-  {
-    file: 'siti-web-contatti-problema',
-    query: 'vineyard dusk sunset evening',
-    alt: 'Vigneto al tramonto, l’ora in cui arrivano le richieste che si perdono',
-  },
-  {
-    file: 'siti-web-contatti-cambia',
-    query: 'wine tasting glasses vineyard guests',
-    alt: 'Degustazione prenotata comodamente in cantina',
-  },
-  {
-    file: 'ecommerce-shopify-problema',
-    query: 'wine bottles wholesale crates warehouse',
-    alt: 'Casse di vino pronte per la distribuzione all’ingrosso',
-  },
-  {
-    file: 'ecommerce-shopify-cambia',
-    query: 'wine bottles gift box packaging',
-    alt: 'Confezione regalo di vino pronta per la spedizione diretta',
-  },
-  {
-    file: 'restyling-ottimizzazione-problema',
-    query: 'old stone farmhouse window italy',
-    alt: 'Vecchio casale di campagna, come un sito da rinnovare',
-  },
-  {
-    file: 'restyling-ottimizzazione-cambia',
-    query: 'renovated farmhouse windows modern italy',
-    alt: 'Casale ristrutturato, l’intervento mirato che serviva',
-  },
-  {
-    file: 'consulenza-strategica-problema',
-    query: 'notebook pen vineyard planning',
-    alt: 'Appunti e pianificazione in vigna, prima di decidere cosa costruire',
-  },
-  {
-    file: 'consulenza-strategica-cambia',
-    query: 'harvest crates grapes sorted',
-    alt: 'Cassette di vendemmia ordinate, come le priorità dopo l’analisi',
-  },
-];
 
 function fail(msg) {
   console.error(`✗ ${msg}`);
   process.exitCode = 1;
 }
 
-async function searchPhoto(query, excludeIds) {
-  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=10&orientation=landscape&content_filter=high`;
-  const res = await fetch(url, { headers: { Authorization: `Client-ID ${ACCESS_KEY}` } });
-  if (!res.ok) throw new Error(`Unsplash search fallita (${res.status}): ${await res.text()}`);
-  const data = await res.json();
-  const candidate = (data.results || []).find((p) => !excludeIds.has(p.id));
-  if (!candidate) throw new Error(`Nessun risultato utilizzabile per "${query}"`);
-  return candidate;
+async function fetchPhotoById(id) {
+  const res = await fetch(`https://api.unsplash.com/photos/${id}`, {
+    headers: { Authorization: `Client-ID ${ACCESS_KEY}` },
+  });
+  if (!res.ok) throw new Error(`ID ${id} non valido o non raggiungibile (${res.status})`);
+  return res.json();
 }
 
 async function trackDownload(photo) {
@@ -86,8 +42,8 @@ async function trackDownload(photo) {
   }
 }
 
-async function downloadImage(photo, destPath) {
-  const url = `${photo.urls.raw}&w=${WIDTH}&h=${HEIGHT}&fit=crop&q=80&fm=webp`;
+async function downloadImage(photo, destPath, ext) {
+  const url = `${photo.urls.raw}&w=${WIDTH}&h=${HEIGHT}&fit=crop&q=80&fm=${ext}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Download immagine fallito (${res.status})`);
   const buffer = Buffer.from(await res.arrayBuffer());
@@ -96,54 +52,59 @@ async function downloadImage(photo, destPath) {
   return buffer.length;
 }
 
-async function main() {
-  if (!ACCESS_KEY) {
-    fail('UNSPLASH_ACCESS_KEY non trovata. Esegui con: node --env-file=.env.local scripts/fetch-servizi-images.js');
-    process.exit(1);
-  }
-
-  const usedIds = new Set();
+async function processGroup(groupName, outDir, ext) {
+  const group = MAP[groupName];
   const credits = [];
 
-  for (const img of images) {
-    const destPath = path.join(OUT_DIR, `${img.file}.webp`);
+  for (const [file, cfg] of Object.entries(group)) {
+    const destPath = path.join(outDir, `${file}.${ext}`);
     if (fs.existsSync(destPath) && !process.argv.includes('--force')) {
-      console.log(`↷ ${img.file}.webp gia' presente, salto (usa --force per rigenerare)`);
+      console.log(`↷ ${groupName}/${file}.${ext} gia' presente, salto (usa --force per rigenerare)`);
       continue;
     }
     try {
-      const photo = await searchPhoto(img.query, usedIds);
-      usedIds.add(photo.id);
-
+      const photo = await fetchPhotoById(cfg.id);
       await trackDownload(photo);
-      const bytes = await downloadImage(photo, destPath);
-
-      console.log(`✓ ${img.file}.webp (${(bytes / 1024).toFixed(0)} KB) — foto di ${photo.user.name} (@${photo.user.username})`);
+      const bytes = await downloadImage(photo, destPath, ext);
+      console.log(`✓ ${groupName}/${file}.${ext} (${(bytes / 1024).toFixed(0)} KB) — foto di ${photo.user.name} (@${photo.user.username})`);
       credits.push({
-        slug: img.file,
+        slug: file,
         photographer: photo.user.name,
         username: photo.user.username,
         profileUrl: `${photo.user.links.html}?utm_source=mg_solutions&utm_medium=referral`,
         photoUrl: `${photo.links.html}?utm_source=mg_solutions&utm_medium=referral`,
       });
     } catch (err) {
-      fail(`${img.file}: ${err.message}`);
+      fail(`${groupName}/${file}: ${err.message}`);
     }
+    await new Promise((r) => setTimeout(r, 300));
   }
 
-  const creditsPath = path.join(OUT_DIR, 'CREDITS.json');
-  let existingCredits = [];
-  if (fs.existsSync(creditsPath)) {
-    try {
-      existingCredits = JSON.parse(fs.readFileSync(creditsPath, 'utf8'));
-    } catch {
-      existingCredits = [];
+  if (credits.length) {
+    const creditsPath = path.join(outDir, 'CREDITS.json');
+    let existing = [];
+    if (fs.existsSync(creditsPath)) {
+      try {
+        existing = JSON.parse(fs.readFileSync(creditsPath, 'utf8'));
+      } catch {
+        existing = [];
+      }
     }
+    const bySlug = new Map(existing.map((c) => [c.slug, c]));
+    for (const c of credits) bySlug.set(c.slug, c);
+    fs.writeFileSync(creditsPath, JSON.stringify([...bySlug.values()], null, 2));
+    console.log(`Crediti aggiornati in ${path.relative(process.cwd(), creditsPath)}`);
   }
-  const bySlug = new Map(existingCredits.map((c) => [c.slug, c]));
-  for (const c of credits) bySlug.set(c.slug, c);
-  fs.writeFileSync(creditsPath, JSON.stringify([...bySlug.values()], null, 2));
-  console.log(`\nCrediti fotografi salvati in ${path.relative(process.cwd(), creditsPath)} — Unsplash richiede attribuzione visibile quando si usa la API.`);
+}
+
+async function main() {
+  if (!ACCESS_KEY) {
+    fail('UNSPLASH_ACCESS_KEY non trovata. Esegui con: node --env-file=.env.local scripts/fetch-servizi-images.js');
+    process.exit(1);
+  }
+
+  await processGroup('servizi', path.join(__dirname, '..', 'public', 'images', 'servizi'), 'webp');
+  await processGroup('software', path.join(__dirname, '..', 'public', 'images', 'software'), 'jpg');
 }
 
 main();

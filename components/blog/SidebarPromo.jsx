@@ -16,7 +16,7 @@ const promosByBucket = {
     { Icon: CompassIcon, title: 'Consulenza strategica', body: 'Analisi personalizzata del tuo caso.', href: '/servizi/consulenza-strategica' },
   ],
   ai: [
-    { Icon: GearIcon, title: 'Software AI su misura', body: 'Automazione per le attività ripetitive.', href: '/servizi/software-ai-su-misura' },
+    { Icon: GearIcon, title: 'Automazioni e AI', body: 'Automazione per le attività ripetitive.', href: '/servizi/automazioni-ai' },
     { Icon: ChartIcon, title: 'Gestionali su misura', body: 'CRM e automazioni per cantine, agriturismi e frantoi.', href: '/software' },
   ],
   seo: [
