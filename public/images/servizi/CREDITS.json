@@ -12,5 +12,61 @@
     "username": "vinceveras",
     "profileUrl": "https://unsplash.com/@vinceveras?utm_source=mg_solutions&utm_medium=referral",
     "photoUrl": "https://unsplash.com/photos/Hh3-he9zRQA?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "siti-web-contatti-problema",
+    "photographer": "Boudewijn Boer",
+    "username": "boudewijnboer",
+    "profileUrl": "https://unsplash.com/@boudewijnboer?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/green-grass-field-during-golden-hour-qT515JdZNy8?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "siti-web-contatti-cambia",
+    "photographer": "Manuel Alejandro Cayetano Ruiz",
+    "username": "alex_cr",
+    "profileUrl": "https://unsplash.com/@alex_cr?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/two-hands-clinking-wine-glasses-filled-with-red-wine-IB2PBUJJdVs?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "ecommerce-shopify-problema",
+    "photographer": "Hermes Rivera",
+    "username": "hermez777",
+    "profileUrl": "https://unsplash.com/@hermez777?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/selective-focus-photography-of-bottles-aK6WGqxyHFw?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "ecommerce-shopify-cambia",
+    "photographer": "Fran Taylor",
+    "username": "whingewhingewine",
+    "profileUrl": "https://unsplash.com/@whingewhingewine?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/trivento-wine-bottles-in-a-gift-box-with-festive-lights-nZ1MYksXDUY?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "restyling-ottimizzazione-problema",
+    "photographer": "Francesco Pinto",
+    "username": "pintoff",
+    "profileUrl": "https://unsplash.com/@pintoff?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/view-of-alberobellos-trulli-houses-through-a-wooden-window-oy2QBfXlbpE?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "restyling-ottimizzazione-cambia",
+    "photographer": "Yanapi Senaud",
+    "username": "yaanapi",
+    "profileUrl": "https://unsplash.com/@yaanapi?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/gazebo-outside-white-painted-building-qegPEtazWCY?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "consulenza-strategica-problema",
+    "photographer": "Dan Meyers",
+    "username": "dmey503",
+    "profileUrl": "https://unsplash.com/@dmey503?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/pile-of-leafed-plants-0AgtPoAARtE?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "consulenza-strategica-cambia",
+    "photographer": "Gabriella Clare Marino",
+    "username": "gabiontheroad",
+    "profileUrl": "https://unsplash.com/@gabiontheroad?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/green-grapes-on-yellow-plastic-crate-_ZFHa5zk_U4?utm_source=mg_solutions&utm_medium=referral"
   }
 ]

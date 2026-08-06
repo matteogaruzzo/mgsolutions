@@ -28,6 +28,7 @@ const legalLinks = [
   { href: '/privacy-policy', label: 'Privacy Policy' },
   { href: '/cookie-policy', label: 'Cookie Policy' },
   { href: '/termini-e-condizioni', label: 'Termini e Condizioni' },
+  { href: '/crediti-immagini', label: 'Crediti immagini' },
 ];
 
 export default function Footer() {
