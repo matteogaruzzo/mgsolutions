@@ -143,41 +143,45 @@ export default function Nav() {
                 <div
                   className={`absolute ${l.megaAlign === 'right' ? 'right-0' : 'left-0'} top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150`}
                 >
-                  <div className={`${l.megaWidth || 'w-[600px]'} bg-paper border border-line rounded-xl shadow-lg p-6`}>
-                    <div className={`grid gap-4 ${l.megaCols === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
-                      {l.mega.map((m) =>
-                        l.megaCols === 3 ? (
-                          <Link
-                            key={m.href}
-                            href={m.href}
-                            className="p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
-                          >
-                            <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
-                              <m.Icon className="w-5 h-5" />
-                            </span>
-                            <p className="text-[13px] font-semibold text-ink leading-snug mt-3">{m.title}</p>
-                            <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
-                            <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
-                          </Link>
-                        ) : (
-                          <Link
-                            key={m.href}
-                            href={m.href}
-                            className="flex gap-3 p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
-                          >
-                            <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
-                              <m.Icon className="w-5 h-5" />
-                            </span>
-                            <div className="min-w-0">
-                              <p className="text-[13px] font-semibold text-ink leading-snug">{m.title}</p>
+                  <div
+                    className={`${l.megaWidth || 'w-[600px]'} max-h-[calc(100vh-6rem)] bg-paper border border-line rounded-xl shadow-lg overflow-hidden flex flex-col`}
+                  >
+                    <div className="p-6 min-h-0 overflow-y-auto mega-scroll overscroll-contain">
+                      <div className={`grid gap-4 ${l.megaCols === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                        {l.mega.map((m) =>
+                          l.megaCols === 3 ? (
+                            <Link
+                              key={m.href}
+                              href={m.href}
+                              className="p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                            >
+                              <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
+                                <m.Icon className="w-5 h-5" />
+                              </span>
+                              <p className="text-[13px] font-semibold text-ink leading-snug mt-3">{m.title}</p>
                               <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
                               <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
-                            </div>
-                          </Link>
-                        )
-                      )}
+                            </Link>
+                          ) : (
+                            <Link
+                              key={m.href}
+                              href={m.href}
+                              className="flex gap-3 p-4 rounded-lg transition-all duration-200 hover:bg-paper-dim hover:scale-[1.02] hover:shadow-sm"
+                            >
+                              <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-forest/10 text-forest">
+                                <m.Icon className="w-5 h-5" />
+                              </span>
+                              <div className="min-w-0">
+                                <p className="text-[13px] font-semibold text-ink leading-snug">{m.title}</p>
+                                <p className="text-[11px] text-ink/55 mt-1 leading-snug">{m.desc}</p>
+                                <p className="text-[11px] text-forest mt-1 leading-snug">{m.benefit}</p>
+                              </div>
+                            </Link>
+                          )
+                        )}
+                      </div>
                     </div>
-                    <div className="mt-4 pt-4 border-t border-line">
+                    <div className="px-6 py-4 border-t border-line shrink-0">
                       <Link href={l.megaViewAll.href} className="text-[13px] font-semibold text-forest hover:text-brass">
                         {l.megaViewAll.label}
                       </Link>
