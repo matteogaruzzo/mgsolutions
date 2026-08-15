@@ -22,13 +22,29 @@ import { servizi, sectors } from '@/lib/data';
 
 const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon, target: TargetIcon, palette: PaletteIcon };
 
-const serviziMega = servizi.map((s) => ({
-  href: `/servizi/${s.slug}`,
-  title: s.title,
-  desc: s.body,
-  benefit: s.resultNote,
-  Icon: serviziIconMap[s.icon] || AIIcon,
-}));
+// Ordine di visualizzazione nel mega-menu "Cosa Facciamo" (diverso
+// dall'ordine dell'array `servizi`, che resta invariato per /servizi e le
+// altre pagine): siti web, e-commerce, brand identity, restyling, AI
+// integrations, SEO & GEO, consulenza strategica.
+const SERVIZI_MENU_ORDER = [
+  'siti-web-contatti',
+  'ecommerce-shopify',
+  'brand-identity',
+  'restyling-ottimizzazione',
+  'automazioni-ai',
+  'seo-geo-strategy',
+  'consulenza-strategica',
+];
+
+const serviziMega = [...servizi]
+  .sort((a, b) => SERVIZI_MENU_ORDER.indexOf(a.slug) - SERVIZI_MENU_ORDER.indexOf(b.slug))
+  .map((s) => ({
+    href: `/servizi/${s.slug}`,
+    title: s.title,
+    desc: s.body,
+    benefit: s.resultNote,
+    Icon: serviziIconMap[s.icon] || AIIcon,
+  }));
 
 const settoriIconMap = {
   'wine-viticulture': GrapeIcon,
