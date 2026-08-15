@@ -11,7 +11,7 @@ import {
   whyMG,
   getCaseStudy,
 } from '@/lib/data';
-import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
+import { AIIcon, CartIcon, ScreenIcon, RefreshIcon, GearIcon, CompassIcon, TargetIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
 
@@ -32,11 +32,12 @@ export const metadata = pageMetadata({
   ],
 });
 
-const iconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon };
+const iconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon, target: TargetIcon };
 
 const decisionGuide = [
   { problem: 'Il software o il gestionale non è efficiente', href: '/software', label: 'Software su misura' },
   { problem: 'Pochi visitatori o vendite dal sito', goto: 'siti-web-contatti' },
+  { problem: 'Il sito non compare su Google o sull’AI', goto: 'seo-geo-strategy' },
   { problem: 'Il sito è vecchio ma funziona in parte', goto: 'restyling-ottimizzazione' },
   { problem: 'L’e-commerce non converte abbastanza', goto: 'ecommerce-shopify' },
   { problem: 'Hai strumenti sparsi che non comunicano', goto: 'automazioni-ai' },
@@ -120,7 +121,7 @@ export default function Servizi() {
       <section className="max-w-edge mx-auto px-6 py-24">
         <Reveal>
           <p className="eyebrow">I servizi</p>
-          <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Sei modi per far crescere il tuo business.</h2>
+          <h2 className="h2 text-3xl md:text-4xl mt-4 text-ink max-w-2xl">Sette modi per far crescere il tuo business.</h2>
         </Reveal>
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {servizi.map((s, i) => {

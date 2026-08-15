@@ -68,5 +68,26 @@
     "username": "gabiontheroad",
     "profileUrl": "https://unsplash.com/@gabiontheroad?utm_source=mg_solutions&utm_medium=referral",
     "photoUrl": "https://unsplash.com/photos/green-grapes-on-yellow-plastic-crate-_ZFHa5zk_U4?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "seo-geo-strategy-hero",
+    "photographer": "Rafael Peier",
+    "username": "rafaelpeier",
+    "profileUrl": "https://unsplash.com/@rafaelpeier?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/cypress-lined-road-through-a-vineyard-at-golden-hour-aoNwZuHPyps?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "seo-geo-strategy-problema",
+    "photographer": "Leanid Biazruchka",
+    "username": "leanid72_",
+    "profileUrl": "https://unsplash.com/@leanid72_?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/a-dirt-road-curves-into-dense-fog-and-bare-fields-8cGF4HccATw?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "seo-geo-strategy-cambia",
+    "photographer": "Annie Spratt",
+    "username": "anniespratt",
+    "profileUrl": "https://unsplash.com/@anniespratt?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/brown-wooden-signage-near-green-trees-during-daytime-JmdWyKAVkik?utm_source=mg_solutions&utm_medium=referral"
   }
 ]

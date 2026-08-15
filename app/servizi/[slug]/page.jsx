@@ -6,7 +6,7 @@ import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, serviceSc
 
 // Le pagine con il nuovo template a 9 blocchi (vedi components/servizi/ServiceLandingTemplate).
 // automazioni-ai resta sul vecchio ServicePageTemplate.
-const LANDING_TEMPLATE_SLUGS = ['siti-web-contatti', 'ecommerce-shopify', 'restyling-ottimizzazione', 'consulenza-strategica'];
+const LANDING_TEMPLATE_SLUGS = ['siti-web-contatti', 'ecommerce-shopify', 'restyling-ottimizzazione', 'consulenza-strategica', 'seo-geo-strategy'];
 
 export function generateStaticParams() {
   return servizi.map((s) => ({ slug: s.slug }));

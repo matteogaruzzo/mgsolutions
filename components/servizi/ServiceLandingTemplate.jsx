@@ -42,6 +42,7 @@ const heroLabelBySlug = {
   'restyling-ottimizzazione': 'restyling e ottimizzazione',
   'consulenza-strategica': 'consulenza strategica',
   'wine-club': 'wine club',
+  'seo-geo-strategy': 'SEO & GEO Strategy',
 };
 
 export default function ServiceLandingTemplate({ service }) {
