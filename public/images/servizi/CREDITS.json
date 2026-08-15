@@ -89,5 +89,26 @@
     "username": "anniespratt",
     "profileUrl": "https://unsplash.com/@anniespratt?utm_source=mg_solutions&utm_medium=referral",
     "photoUrl": "https://unsplash.com/photos/brown-wooden-signage-near-green-trees-during-daytime-JmdWyKAVkik?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "brand-identity-hero",
+    "photographer": "Andreas Weilguny",
+    "username": "aweilguny",
+    "profileUrl": "https://unsplash.com/@aweilguny?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/ancient-olive-trees-in-a-sunlit-tuscan-field-OBHoIVnUCBQ?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "brand-identity-problema",
+    "photographer": "Gabriella Clare Marino",
+    "username": "gabiontheroad",
+    "profileUrl": "https://unsplash.com/@gabiontheroad?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/brown-wooden-stick-on-gray-textile-aWiKY9pz548?utm_source=mg_solutions&utm_medium=referral"
+  },
+  {
+    "slug": "brand-identity-cambia",
+    "photographer": "John Rodriguez",
+    "username": "johnmrodriguez",
+    "profileUrl": "https://unsplash.com/@johnmrodriguez?utm_source=mg_solutions&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/white-and-blue-paper-on-brown-wooden-table-u6jxjh2f6Lw?utm_source=mg_solutions&utm_medium=referral"
   }
 ]

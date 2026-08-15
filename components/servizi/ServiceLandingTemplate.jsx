@@ -17,6 +17,8 @@ import {
   TargetIcon,
   CalendarIcon,
   ChartIcon,
+  PaletteIcon,
+  MegaphoneIcon,
 } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
 
@@ -32,6 +34,8 @@ const includeIconMap = {
   target: TargetIcon,
   calendar: CalendarIcon,
   chart: ChartIcon,
+  palette: PaletteIcon,
+  megaphone: MegaphoneIcon,
 };
 
 // Micro-etichetta dell'hero: "solo agroalimentare" va ripetuto qui, non
@@ -43,6 +47,7 @@ const heroLabelBySlug = {
   'consulenza-strategica': 'consulenza strategica',
   'wine-club': 'wine club',
   'seo-geo-strategy': 'SEO & GEO Strategy',
+  'brand-identity': 'brand identity',
 };
 
 export default function ServiceLandingTemplate({ service }) {

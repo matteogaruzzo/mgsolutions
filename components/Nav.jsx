@@ -15,11 +15,12 @@ import {
   CalendarIcon,
   GiftIcon,
   TargetIcon,
+  PaletteIcon,
 } from '@/components/icons/ServiceIcons';
 import SocialIcons from '@/components/SocialIcons';
 import { servizi, sectors } from '@/lib/data';
 
-const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon, target: TargetIcon };
+const serviziIconMap = { ai: AIIcon, cart: CartIcon, web: ScreenIcon, refresh: RefreshIcon, integration: GearIcon, compass: CompassIcon, target: TargetIcon, palette: PaletteIcon };
 
 const serviziMega = servizi.map((s) => ({
   href: `/servizi/${s.slug}`,
