@@ -1,5 +1,5 @@
 import './globals.css';
-import { Poppins } from 'next/font/google';
+import { Poppins, Inter, IBM_Plex_Mono } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import QuizFloatingButton from '@/components/QuizFloatingButton';
@@ -12,6 +12,20 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
   variable: '--font-poppins',
+  display: 'swap',
+});
+
+// Font Agria (redesign): solo variabili CSS, non applicati al body.
+// Il font di default del sito resta Poppins (vedi globals.css).
+const agriaSans = Inter({
+  subsets: ['latin'],
+  variable: '--font-agria-sans',
+  display: 'swap',
+});
+const agriaMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-agria-mono',
   display: 'swap',
 });
 
@@ -77,7 +91,7 @@ const organizationSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={poppins.variable}>
+    <html lang="it" className={`${poppins.variable} ${agriaSans.variable} ${agriaMono.variable}`}>
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

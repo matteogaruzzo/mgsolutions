@@ -12,6 +12,17 @@
 
   /* colore divisore attivo per settore, sovrascritto per pagina */
   --sector-divider: #D4A574;
+
+  /* ---- token Agria (namespace dedicato, non usati dal markup legacy) ----
+     canali RGB (non hex) per permettere i modificatori di opacità Tailwind
+     (es. bg-agria-green/10) via rgb(var(--agria-*) / <alpha-value>) */
+  --agria-green: 79 143 87;
+  --agria-green-dark: 58 110 68;
+  --agria-graphite: 17 17 17;
+  --agria-white: 255 255 255;
+  --agria-offwhite: 246 247 244;
+  --agria-grey: 107 112 108;
+  --agria-border: 228 232 227;
 }
 
 * {
