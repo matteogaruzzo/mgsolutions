@@ -1,7 +1,8 @@
 import { posts, sectors, caseStudies, metodoSteps, servizi, getAllTags } from '@/lib/data';
 import { regions } from '@/lib/geo-data';
+import { SITE_URL } from '@/lib/seo';
 
-const base = 'https://matteogaruzzo.com';
+const base = SITE_URL;
 
 export default function sitemap() {
   const home = [{ url: base, lastModified: new Date(), changeFrequency: 'weekly', priority: 1.0 }];

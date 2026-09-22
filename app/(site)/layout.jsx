@@ -6,7 +6,7 @@ import QuizFloatingButton from '@/components/QuizFloatingButton';
 import QuizPopup from '@/components/QuizPopup';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
-import { OG_IMAGE } from '@/lib/seo';
+import { OG_IMAGE, SITE_URL } from '@/lib/seo';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -30,7 +30,7 @@ const agriaMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://matteogaruzzo.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
@@ -72,8 +72,8 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: site.name,
-  url: 'https://matteogaruzzo.com',
-  logo: 'https://matteogaruzzo.com/images/brand/mg-logo-mark.png',
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/brand/mg-logo-mark.png`,
   founder: { '@type': 'Person', name: site.founder },
   description: site.positioning,
   telephone: site.phone,

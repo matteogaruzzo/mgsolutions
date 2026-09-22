@@ -7,7 +7,7 @@ import { regions, getRegionBySlug } from '@/lib/geo-data';
 import { servizi, caseStudies, site } from '@/lib/data';
 import { ScreenIcon, CartIcon, GearIcon, CompassIcon } from '@/components/icons/ServiceIcons';
 import { GrapeIcon } from '@/components/icons/WineIcons';
-import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema } from '@/lib/seo';
+import { pageMetadata, webPageSchema, breadcrumbSchema, faqPageSchema, SITE_URL } from '@/lib/seo';
 
 const heroImageBySlug = {
   'frantoi-san-lorenzo': '/images/sectors/olio-hero.png',
@@ -100,7 +100,7 @@ export default function RegionePage({ params }) {
     description: PAGE.description,
     areaServed: { '@type': 'State', name: region.name },
     serviceType: ['Web Design', 'E-commerce', 'Software Development'],
-    url: `https://matteogaruzzo.com${PAGE.path}`,
+    url: `${SITE_URL}${PAGE.path}`,
     telephone: site.phone,
     email: site.email,
   };
