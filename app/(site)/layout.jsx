@@ -7,6 +7,7 @@ import QuizPopup from '@/components/QuizPopup';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
 import { OG_IMAGE, SITE_URL } from '@/lib/seo';
+import { defaultLocale } from '@/lib/i18n';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -91,7 +92,7 @@ const organizationSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`${poppins.variable} ${agriaSans.variable} ${agriaMono.variable}`}>
+    <html lang={defaultLocale} className={`${poppins.variable} ${agriaSans.variable} ${agriaMono.variable}`}>
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
