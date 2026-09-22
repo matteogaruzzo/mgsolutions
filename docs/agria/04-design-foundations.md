@@ -38,6 +38,7 @@
 | `components/agria/ui/index.js` | Barrel export di tutti i componenti |
 | `app/design-system/page.jsx` | Pagina di anteprima (gate dev/env, `noindex`) |
 | `app/design-system/contrast.js` | Calcolo contrasti WCAG 2.1 dai token reali |
+| `app/design-system/layout.jsx` | Layout annidato: font Inter/IBM Plex Mono di default, sfondo bianco Agria, testo agria-graphite. Vedi nota architetturale in §8 |
 | `docs/agria/04-design-foundations.md` | Questo report |
 
 ### Non toccati (confermato)
@@ -181,3 +182,19 @@ Senza quella variabile, la stessa build risponde 404 su `/design-system`.
 1. `#6B706C` (agria-grey) su `#F6F7F4` (agria-offwhite) è a 4.70:1, sopra soglia ma con margine minimo: se questa combinazione verrà usata spesso per testo secondario su sezioni off-white nei prompt successivi, valutare uno scurimento leggero del grey (es. `#63676B`) per portarlo oltre 5:1 con margine più comodo.
 2. Il raggio card è fissato a 24px in ogni breakpoint; se in fase di header/footer/pagine (prompt successivi) risultasse troppo pronunciato su card molto strette in mobile, si può introdurre una riduzione responsive (es. 20px sotto `sm:`) senza toccare il token, solo nel componente `Card`.
 3. Nessun'altra criticità emersa: procedere con i prompt successivi (header, footer, pagine) può riusare i componenti così come sono.
+
+---
+
+## 8. Nota architetturale: isolamento di `/design-system` (aggiunta successiva)
+
+Richiesta originale: escludere `Nav`, `Footer`, `QuizFloatingButton`, `QuizPopup` e `CookieConsentBanner` dalla pagina di anteprima, senza modificare `app/layout.jsx` né alcun componente esistente.
+
+**Non è possibile ottenerlo letteralmente con questi vincoli.** In Next.js App Router esiste un solo root layout (`app/layout.jsx`), che disegna `<html>`/`<body>` e renderizza `Nav`, `{children}`, `Footer`, `QuizFloatingButton`, `QuizPopup`, `CookieConsentBanner` come **fratelli** di `{children}`, non genitori. Un layout annidato come `app/design-system/layout.jsx` può solo avvolgere `{children}`: non ha modo di rimuovere o nascondere elementi renderizzati dal genitore fuori da quell'albero.
+
+Le uniche due strade per un'isolazione vera erano:
+1. Modificare `app/layout.jsx` per saltare quei componenti sul path `/design-system` — esplicitamente escluso.
+2. Usare il pattern "multiple root layouts" di Next.js: spostare tutte le route esistenti (inclusa `app/layout.jsx`) dentro un route group (es. `app/(site)/...`) e dare a `/design-system` un root layout separato. Gli URL non sarebbero cambiati e gli import con alias `@/` (root-relative) non si sarebbero rotti, ma è uno spostamento fisico di ~26 cartelle di route esistenti: una ristrutturazione ampia, sproporzionata per un'aggiunta pensata come piccola e isolata.
+
+**Scelta concordata:** `app/design-system/layout.jsx` applica solo i default tipografici e cromatici Agria (font Inter di default, sfondo `agria-white`, testo `agria-graphite`) al contenuto della pagina. `Nav`, `Footer`, `QuizFloatingButton`, `QuizPopup` e `CookieConsentBanner` restano visibili attorno all'anteprima, invariati, esattamente come sulle altre pagine del sito. `app/layout.jsx` non è stato toccato; nessuna route esistente è stata spostata.
+
+Verificato dopo l'aggiunta: gate produzione/sviluppo ancora attivo (`__next_error__` nell'HTML statico senza `NEXT_PUBLIC_DESIGN_PREVIEW`), contenuto reale con la variabile attiva (wrapper `bg-agria-white font-agria-sans text-agria-graphite` presente nell'HTML), `npm run build` riuscito, `/`, `/settori/wine-viticulture`, `/blog/shopify-velocita-conversioni` invariate (200, classi font Poppins intatte).
