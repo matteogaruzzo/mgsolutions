@@ -11,7 +11,7 @@ const BLOCKS = [
 
 export default function ClaritySection() {
   return (
-    <Section as="div" background="white" spacing="compact">
+    <Section as="div" background="offwhite" spacing="compact">
       <Container className="grid grid-cols-1 gap-14 md:grid-cols-2 md:gap-[clamp(26px,4vw,58px)]">
         {BLOCKS.map((block) => (
           <section key={block.id} className="flex flex-col gap-5 border-t border-agria-border pt-8" aria-labelledby={block.id}>

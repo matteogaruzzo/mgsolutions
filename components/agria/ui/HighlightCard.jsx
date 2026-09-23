@@ -19,7 +19,18 @@ const SURFACES = {
 
 // Card grande con sfumatura che contiene tre card più piccole: blocco di rottura visiva.
 // items: [{ title, text, meta? }] — meta è un'etichetta breve opzionale (es. uno stato).
-export default function HighlightCard({ tone = 'dark', eyebrow, title, text, items = [], titleAs = 'h2', className = '' }) {
+// note: riga finale in piccolo (es. una precisazione sul contenuto).
+export default function HighlightCard({
+  tone = 'dark',
+  eyebrow,
+  title,
+  text,
+  items = [],
+  note,
+  titleAs = 'h2',
+  titleId,
+  className = '',
+}) {
   const surface = SURFACES[tone] ?? SURFACES.dark;
   const onDark = tone === 'dark';
 
@@ -33,7 +44,7 @@ export default function HighlightCard({ tone = 'dark', eyebrow, title, text, ite
         <div className="flex max-w-2xl flex-col gap-4">
           {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
           {title && (
-            <Heading level="h2" as={titleAs} onDark={onDark}>
+            <Heading level="h2" as={titleAs} id={titleId} onDark={onDark}>
               {title}
             </Heading>
           )}
@@ -68,6 +79,15 @@ export default function HighlightCard({ tone = 'dark', eyebrow, title, text, ite
             </li>
           ))}
         </HoverGroup>
+      )}
+      {note && (
+        <p
+          className={`mt-6 font-agria-mono text-[10.5px] uppercase tracking-[0.12em] ${
+            onDark ? 'text-agria-on-dark-muted' : 'text-agria-grey'
+          }`}
+        >
+          {note}
+        </p>
       )}
     </div>
   );

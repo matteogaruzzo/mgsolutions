@@ -4,7 +4,7 @@ import { closing } from '@/content/agria/home';
 
 export default function ClosingCta() {
   return (
-    <Section background="white" spacingTop="none" spacingBottom="compact" aria-labelledby="home-chiusura-title">
+    <Section background="white" spacing="compact" aria-labelledby="home-chiusura-title">
       <Container>
         <Reveal className="relative overflow-hidden rounded-[30px] bg-agria-ink px-6 py-[clamp(40px,6vw,76px)] text-center sm:px-[clamp(40px,6vw,76px)]">
           <div

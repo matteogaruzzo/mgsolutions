@@ -6,6 +6,10 @@
 export const hero = {
   eyebrow: 'Technology company · Hospitality · Vino · Olio',
   title: 'Uno strato digitale sopra il vostro lavoro.',
+  // titolo animato (Prompt 09): la prima variante è quella nell'HTML
+  titlePrefix: 'Uno strato digitale sopra ',
+  titlePhrases: ['il vostro lavoro', 'la vostra cantina', 'il vostro agriturismo', 'il vostro frantoio'],
+  titleSuffix: '.',
   lead: 'Siti, e-commerce e automazioni per agriturismi, hotel, cantine e frantoi. I dati smettono di stare in dieci posti diversi e iniziano a lavorare per voi.',
   primary: { label: 'Parliamo del progetto', href: '/contatti' },
   secondary: { label: 'Come lavoriamo', href: '#come-lavoriamo' },
@@ -29,6 +33,10 @@ export const sectors = {
       key: 'hospitality',
       title: 'Hospitality',
       href: '/settori/hospitality',
+      image: {
+        src: '/images/agria/settori/agriturismo.jpg',
+        alt: 'Casale in pietra con giardino, ulivi e piscina',
+      },
       text: 'Agriturismi, boutique hotel, relais, masserie. Prenotazioni diverse su portali, email e telefono, inserite due volte a mano. Commissioni che crescono mentre il canale diretto resta fermo.',
     },
     {
@@ -51,20 +59,54 @@ export const services = {
   title: 'Tre aree, un solo sistema.',
   intro: 'Non vendiamo pacchetti. Partiamo da come lavorate oggi e costruiamo quello che serve, integrato con gli strumenti che già usate.',
   linkLabel: 'Approfondisci',
+  tabsLabel: 'Servizi per settore',
+  // Prompt 09: come le tre aree si applicano a ciascun settore (testi approvati)
+  bySector: [
+    {
+      key: 'hospitality',
+      label: 'Hospitality',
+      lines: {
+        presence: 'Un sito che porta prenotazioni dirette, visibile su Google e sui sistemi AI.',
+        commerce: 'Prenotazioni e pagamenti sul vostro canale diretto.',
+        automation: 'Prenotazioni da portali, email e telefono in un unico flusso, senza doppi inserimenti.',
+      },
+    },
+    {
+      key: 'vino',
+      label: 'Vino',
+      lines: {
+        presence: "Il sito della cantina come strumento commerciale, anche per l'estero.",
+        commerce: 'Vendita diretta online, degustazioni prenotabili, spedizioni gestite.',
+        automation: 'Contatti delle degustazioni raccolti e collegati alla vendita diretta.',
+      },
+    },
+    {
+      key: 'olio',
+      label: 'Olio',
+      lines: {
+        presence: 'Il frantoio trovabile su Google e sui sistemi AI, con un sito che vende.',
+        commerce: 'Listini per privati, ristorazione e B2B nello stesso e-commerce.',
+        automation: 'Ordini da telefono, WhatsApp ed email raccolti in un unico ingresso.',
+      },
+    },
+  ],
   items: [
     {
+      key: 'presence',
       eyebrow: '01 — Presence',
       title: 'Digital Presence',
       href: '/servizi/digital-presence',
       text: 'Il sito come strumento commerciale: struttura, contenuti, velocità e visibilità su Google e sui sistemi AI.',
     },
     {
+      key: 'commerce',
       eyebrow: '02 — Commerce',
       title: 'Digital Commerce',
       href: '/servizi/digital-commerce',
       text: 'Vendita diretta: e-commerce, prenotazioni, pagamenti, listini B2B e integrazione con i canali che già usate.',
     },
     {
+      key: 'automation',
       eyebrow: '03 — Automation',
       title: 'Digital Automation',
       href: '/servizi/digital-automation',

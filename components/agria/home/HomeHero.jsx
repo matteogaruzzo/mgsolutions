@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button, Container, Eyebrow, Heading, Text } from '@/components/agria/ui';
+import { RotatingHeadline } from '@/components/agria/motion';
 import { hero } from '@/content/agria/home';
 import styles from './HomeHero.module.css';
 
@@ -30,7 +31,7 @@ export default function HomeHero() {
           onDark
           className={`mx-auto mt-5 max-w-[16ch] ${styles.enter}`}
         >
-          {hero.title}
+          <RotatingHeadline prefix={hero.titlePrefix} phrases={hero.titlePhrases} suffix={hero.titleSuffix} />
         </Heading>
         <Text size="lg" onDark muted measure={false} className={`mx-auto mt-6 max-w-[54ch] ${styles.enter}`}>
           {hero.lead}
