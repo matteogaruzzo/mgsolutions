@@ -8,6 +8,11 @@ export const NAV_PANELS = [
     key: 'servizi',
     label: 'Servizi',
     href: '/servizi',
+    // card di evidenza a destra del pannello (testi già approvati nella homepage)
+    feature: {
+      title: 'Prima capire, poi costruire.',
+      link: { label: 'Come lavoriamo', href: '/#come-lavoriamo' },
+    },
     items: [
       {
         title: 'Digital Presence',
@@ -30,6 +35,10 @@ export const NAV_PANELS = [
     key: 'settori',
     label: 'Settori',
     href: '/settori',
+    feature: {
+      title: 'Conosciamo tre mestieri, non tutti.',
+      link: { label: 'Tutti i settori', href: '/settori' },
+    },
     items: [
       {
         title: 'Hospitality',

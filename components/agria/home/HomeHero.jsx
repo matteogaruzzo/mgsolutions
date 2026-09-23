@@ -29,7 +29,7 @@ export default function HomeHero() {
           as="h1"
           id="home-hero-title"
           onDark
-          className={`mx-auto mt-5 max-w-[16ch] ${styles.enter}`}
+          className={`mx-auto mt-5 max-w-[19ch] ${styles.enter}`}
         >
           <RotatingHeadline prefix={hero.titlePrefix} phrases={hero.titlePhrases} suffix={hero.titleSuffix} />
         </Heading>

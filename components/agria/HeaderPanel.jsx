@@ -52,22 +52,50 @@ export default function HeaderPanel({ panel, isOpen, onOpen, onClose, onToggle, 
           id={panelId}
           role="group"
           aria-label={panel.label}
-          className="absolute left-1/2 top-full z-10 mt-3 w-[320px] -translate-x-1/2 rounded-2xl border border-white/10 bg-agria-ink p-2 shadow-[0_24px_58px_rgb(0_0_0/0.45)]"
+          className="absolute left-1/2 top-full z-10 mt-3 w-[320px] -translate-x-1/2 rounded-2xl border border-white/10 bg-agria-ink p-2 shadow-[0_24px_58px_rgb(0_0_0/0.45)] lg:grid lg:w-[640px] lg:grid-cols-[1fr_236px] lg:gap-2"
         >
-          {panel.items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-inset"
-            >
-              <span className="block font-agria-sans text-agria-sm font-medium text-agria-on-dark">
-                {item.title}
-              </span>
-              <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-on-dark-muted">
-                {item.description}
-              </span>
-            </Link>
-          ))}
+          <div>
+            {panel.items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-inset"
+              >
+                <span className="block font-agria-sans text-agria-sm font-medium text-agria-on-dark">
+                  {item.title}
+                </span>
+                <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-on-dark-muted">
+                  {item.description}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* card di evidenza: solo da lg, dove il pannello ha spazio per due colonne */}
+          {panel.feature && (
+            <div className="relative isolate hidden flex-col justify-between gap-6 overflow-hidden rounded-xl border border-white/10 p-5 lg:flex">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10"
+                style={{
+                  background:
+                    'radial-gradient(90% 80% at 0% 0%, rgb(var(--agria-green-bright) / 0.2), transparent 70%), radial-gradient(80% 70% at 100% 100%, rgb(var(--agria-green) / 0.3), transparent 70%)',
+                }}
+              />
+              <p className="font-agria-sans text-agria-lg font-light leading-snug text-agria-on-dark">
+                {panel.feature.title}
+              </p>
+              <Link
+                href={panel.feature.link.href}
+                className="group inline-flex items-center gap-1.5 self-start rounded-sm font-agria-sans text-agria-sm font-medium text-agria-green-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink"
+              >
+                {panel.feature.link.label}
+                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </div>
