@@ -1,6 +1,7 @@
 const BACKGROUNDS = {
   white: 'bg-agria-white',
   offwhite: 'bg-agria-offwhite',
+  ink: 'bg-agria-ink',
 };
 
 // Spaziatura verticale: "normal" per sezioni piene, "compact" per sezioni con

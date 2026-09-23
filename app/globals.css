@@ -193,6 +193,75 @@ p {
   }
 }
 
+/* ---- Agria: libreria di interazioni (components/agria/motion, Prompt 09) ---- */
+
+/* HoverGroup: gli altri elementi del gruppo si attenuano. Solo con cursore. */
+.agria-hover-group > * {
+  transition: opacity 0.35s ease;
+}
+@media (hover: hover) {
+  .agria-hover-group:hover > *:not(:hover) {
+    opacity: 0.8;
+  }
+}
+
+/* ZoomImage: ingrandimento leggero dell'immagine, il contenitore resta fermo */
+@media (prefers-reduced-motion: no-preference) {
+  .agria-zoom-img {
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .agria-zoom:hover .agria-zoom-img,
+  .agria-zoom-trigger:hover .agria-zoom-img,
+  .agria-zoom-trigger:focus-within .agria-zoom-img {
+    transform: scale(1.05);
+  }
+}
+
+/* RotatingHeadline: cursore lampeggiante */
+.agria-caret {
+  display: inline-block;
+  width: 0.06em;
+  min-width: 2px;
+  height: 0.9em;
+  margin-left: 0.04em;
+  vertical-align: -0.08em;
+  background: currentColor;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .agria-caret {
+    animation: agria-caret 1.05s steps(1) infinite;
+  }
+}
+@keyframes agria-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* AutoTabs: barra di avanzamento a tempo */
+.agria-progress {
+  animation-name: agria-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes agria-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+/* senza JavaScript: tutti i pannelli visibili, nessuna scheda */
+@media (scripting: none) {
+  [data-autotabs] [role='tablist'] {
+    display: none;
+  }
+  [data-autotabs] [role='tabpanel'][hidden] {
+    display: block;
+  }
+}
+
 /* reveal allo scroll */
 .reveal {
   opacity: 0;

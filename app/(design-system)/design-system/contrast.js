@@ -15,6 +15,16 @@ const WHITE = [255, 255, 255];
 // Header: ink al 92% sopra contenuto bianco (caso peggiore durante lo scroll)
 const HEADER_OVER_WHITE = blend(INK, 0.92, WHITE);
 
+const GREEN = [79, 143, 87];
+const GREEN_BRIGHT = [122, 224, 152];
+const OFFWHITE = [246, 247, 244];
+// Punto peggiore delle sfumature (i due aloni sovrapposti al massimo)
+const GRADIENT_LIGHT = blend(GREEN_BRIGHT, 0.16, blend(GREEN, 0.12, OFFWHITE));
+const HIGHLIGHT_LIGHT = blend(GREEN_BRIGHT, 0.2, blend(GREEN, 0.14, WHITE));
+const GRADIENT_DARK = blend(GREEN, 0.22, blend(GREEN_BRIGHT, 0.16, INK));
+const HIGHLIGHT_DARK = blend(GREEN, 0.28, blend(GREEN_BRIGHT, 0.18, INK));
+const HIGHLIGHT_DARK_ITEM = blend(WHITE, 0.05, HIGHLIGHT_DARK);
+
 export const AGRIA_COLORS = {
   green: { hex: '#4F8F57', rgb: [79, 143, 87] },
   greenDark: { hex: '#3A6E44', rgb: [58, 110, 68] },
@@ -28,6 +38,16 @@ export const AGRIA_COLORS = {
   onDarkMuted: { hex: 'bianco 70% su ink', rgb: blend(WHITE, 0.7, INK) },
   headerOverWhite: { hex: `ink 92% su bianco (${toHex(HEADER_OVER_WHITE)})`, rgb: HEADER_OVER_WHITE },
   onDarkMutedOverWhite: { hex: 'bianco 70% su header', rgb: blend(WHITE, 0.7, HEADER_OVER_WHITE) },
+  greyTint: { hex: '#54595A (grey su superfici sfumate)', rgb: [84, 89, 85] },
+  gradientLight: { hex: `GradientSection chiara (${toHex(GRADIENT_LIGHT)})`, rgb: GRADIENT_LIGHT },
+  highlightLight: { hex: `HighlightCard chiara (${toHex(HIGHLIGHT_LIGHT)})`, rgb: HIGHLIGHT_LIGHT },
+  gradientDark: { hex: `GradientSection scura (${toHex(GRADIENT_DARK)})`, rgb: GRADIENT_DARK },
+  highlightDark: { hex: `HighlightCard scura (${toHex(HIGHLIGHT_DARK)})`, rgb: HIGHLIGHT_DARK },
+  highlightDarkItem: { hex: `card interna scura (${toHex(HIGHLIGHT_DARK_ITEM)})`, rgb: HIGHLIGHT_DARK_ITEM },
+  onDarkMutedGradient: { hex: 'bianco 70% su GradientSection scura', rgb: blend(WHITE, 0.7, GRADIENT_DARK) },
+  onDarkMutedHighlight: { hex: 'bianco 70% su card interna scura', rgb: blend(WHITE, 0.7, HIGHLIGHT_DARK_ITEM) },
+  greyDimmed: { hex: 'grey attenuato 80% (HoverGroup)', rgb: blend([107, 112, 108], 0.8, WHITE) },
+  brightFill: { hex: 'riempimento CTA bright (bianco 40% su green-bright)', rgb: blend(WHITE, 0.4, GREEN_BRIGHT) },
 };
 
 function channelLuminance(value) {
@@ -60,6 +80,24 @@ export const CONTRAST_ROWS = [
     fg: 'green',
     bg: 'white',
     usage: 'Non usato per testo — solo icone, bordi, accenti, gradiente hero',
+    usedForText: false,
+  },
+];
+
+export const INTERACTION_CONTRAST_ROWS = [
+  { fg: 'greyTint', bg: 'gradientLight', usage: 'Testo secondario su GradientSection chiara', usedForText: true },
+  { fg: 'greenDark', bg: 'gradientLight', usage: 'Etichette e link su GradientSection chiara', usedForText: true },
+  { fg: 'greyTint', bg: 'highlightLight', usage: 'Testo secondario su HighlightCard chiara', usedForText: true },
+  { fg: 'onDarkMutedGradient', bg: 'gradientDark', usage: 'Testo secondario su GradientSection scura', usedForText: true },
+  { fg: 'greenBright', bg: 'highlightDark', usage: 'Etichette su HighlightCard scura', usedForText: true },
+  { fg: 'onDarkMutedHighlight', bg: 'highlightDarkItem', usage: 'Testo nelle card interne scure', usedForText: true },
+  { fg: 'greenBright', bg: 'highlightDarkItem', usage: 'Etichetta di stato nelle card interne scure', usedForText: true },
+  { fg: 'white', bg: 'graphite', usage: 'CTA primaria a riempimento completato', usedForText: true },
+  { fg: 'ink', bg: 'brightFill', usage: 'CTA bright a riempimento completato', usedForText: true },
+  {
+    fg: 'greyDimmed',
+    bg: 'white',
+    usage: 'HoverGroup: elemento attenuato mentre il cursore è su un altro. Stato transitorio, solo con cursore, mai da tastiera',
     usedForText: false,
   },
 ];

@@ -9,6 +9,8 @@ export { default as Card } from './Card';
 export { default as Tabs } from './Tabs';
 export { default as HeroBackdrop } from './HeroBackdrop';
 export { default as Reveal } from './Reveal';
+export { default as GradientSection } from './GradientSection';
+export { default as HighlightCard } from './HighlightCard';
 export { default as Field } from './form/Field';
 export { default as Input } from './form/Input';
 export { default as Textarea } from './form/Textarea';

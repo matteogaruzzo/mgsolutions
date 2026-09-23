@@ -14,8 +14,17 @@ import {
   Textarea,
   Select,
   Checkbox,
+  GradientSection,
+  HighlightCard,
 } from '@/components/agria/ui';
-import { AGRIA_COLORS, CONTRAST_ROWS, DARK_CONTRAST_ROWS, contrastRatio } from './contrast';
+import { AutoTabs, HoverGroup, RotatingHeadline, ZoomImage } from '@/components/agria/motion';
+import {
+  AGRIA_COLORS,
+  CONTRAST_ROWS,
+  DARK_CONTRAST_ROWS,
+  INTERACTION_CONTRAST_ROWS,
+  contrastRatio,
+} from './contrast';
 
 const PREVIEW_ENABLED =
   process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DESIGN_PREVIEW === 'true';
@@ -41,6 +50,20 @@ const DARK_SWATCHES = [
   { key: 'greenBright', name: 'Agria Green Bright', token: 'agria-green-bright', use: 'Solo su fondo scuro: CTA, link, focus, accenti' },
   { key: 'white', name: 'On Dark', token: 'agria-on-dark', use: 'Testo principale su fondo scuro' },
   { key: 'onDarkMuted', name: 'On Dark Muted', token: 'agria-on-dark-muted', use: 'Testo secondario e voci di menu su fondo scuro (bianco al 70%)' },
+];
+
+const DEMO_PHRASES = ['la parte finale', 'in ciclo continuo', 'senza salti'];
+
+const AUTOTABS_DEMO = [
+  { label: 'Prima scheda', content: <Text muted>Contenuto di esempio della prima scheda.</Text> },
+  { label: 'Seconda scheda', content: <Text muted>Contenuto di esempio della seconda scheda.</Text> },
+  { label: 'Terza scheda', content: <Text muted>Contenuto di esempio della terza scheda.</Text> },
+];
+
+const HIGHLIGHT_DEMO = [
+  { title: 'Primo elemento', text: 'Testo breve di esempio.', meta: 'etichetta' },
+  { title: 'Secondo elemento', text: 'Testo breve di esempio.', meta: 'etichetta' },
+  { title: 'Terzo elemento', text: 'Testo breve di esempio.', meta: 'etichetta' },
 ];
 
 const TYPE_SCALE = [
@@ -304,6 +327,131 @@ export default function DesignSystemPage() {
           <Checkbox label="Ho letto e accetto l'informativa (testo di esempio)" />
         </Container>
       </Section>
+
+      {/* Interazioni */}
+      <Section background="white">
+        <Container className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Interazioni</Eyebrow>
+            <Heading level="h2">Libreria di interazioni</Heading>
+            <Text muted>
+              Standard del sito dal Prompt 09. Ogni animazione si ferma con prefers-reduced-motion e la
+              pagina resta leggibile senza JavaScript.
+            </Text>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              RotatingHeadline
+            </Text>
+            <RotatingHeadline
+              as="p"
+              className="font-agria-sans text-agria-h2 text-agria-graphite"
+              prefix="Un titolo che cambia "
+              phrases={DEMO_PHRASES}
+              suffix="."
+            />
+            <Text size="sm" muted>
+              La frase predefinita è nel markup per screen reader e motori di ricerca; l&apos;altezza è
+              riservata per la variante più lunga.
+            </Text>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              HoverGroup + ZoomImage
+            </Text>
+            <HoverGroup className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {['Prima card', 'Seconda card', 'Terza card'].map((title) => (
+                <div
+                  key={title}
+                  className="agria-zoom-trigger overflow-hidden rounded-agria-card border border-agria-border"
+                >
+                  <ZoomImage
+                    src="/images/agria/settori/agriturismo.jpg"
+                    alt="Casale in pietra con ulivi e piscina"
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="aspect-[4/3] rounded-none"
+                  />
+                  <div className="p-5">
+                    <Heading level="h3" as="p">
+                      {title}
+                    </Heading>
+                  </div>
+                </div>
+              ))}
+            </HoverGroup>
+            <Text size="sm" muted>
+              Cursore su una card: le altre si attenuano (opacità 0.8) e l&apos;immagine si ingrandisce
+              del 5% dentro il contenitore fermo.
+            </Text>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              CTA animata
+            </Text>
+            <div className="flex flex-wrap items-center gap-4 rounded-agria-card bg-agria-ink p-6">
+              <Button variant="bright">CTA su scuro</Button>
+              <Button variant="line">Secondaria su scuro</Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button variant="primary">CTA su chiaro</Button>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              AutoTabs
+            </Text>
+            <AutoTabs items={AUTOTABS_DEMO} label="Esempio di schede automatiche" duration={5000} />
+          </div>
+        </Container>
+      </Section>
+
+      <GradientSection variant="light">
+        <Container className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>GradientSection · chiara</Eyebrow>
+            <Heading level="h2">Sezione con sfumatura chiara</Heading>
+            <Text muted>
+              Verde tenue su off-white. Il grigio secondario è scurito localmente per restare sopra
+              4.5:1.
+            </Text>
+          </div>
+          <HighlightCard
+            tone="light"
+            eyebrow="HighlightCard · chiara"
+            title="Card grande con sfumatura"
+            text="Contiene tre card più piccole."
+            items={HIGHLIGHT_DEMO}
+            titleAs="p"
+          />
+        </Container>
+      </GradientSection>
+
+      <GradientSection variant="dark">
+        <Container className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <Eyebrow onDark>GradientSection · scura</Eyebrow>
+            <Heading level="h2" onDark>
+              Sezione con sfumatura scura
+            </Heading>
+            <Text muted onDark>
+              Ink con aloni green-bright e green.
+            </Text>
+          </div>
+          <HighlightCard
+            tone="dark"
+            eyebrow="HighlightCard · scura"
+            title="Card grande con sfumatura"
+            text="Contiene tre card più piccole."
+            items={HIGHLIGHT_DEMO}
+            titleAs="p"
+          />
+          <ContrastTable rows={INTERACTION_CONTRAST_ROWS} />
+        </Container>
+      </GradientSection>
 
       {/* Superfici scure */}
       <Section background="white">
