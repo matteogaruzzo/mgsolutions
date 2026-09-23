@@ -12,8 +12,8 @@ function toHex(rgb) {
 
 const INK = [8, 12, 10];
 const WHITE = [255, 255, 255];
-// Header: ink all'85% sopra contenuto bianco (caso peggiore durante lo scroll)
-const HEADER_OVER_WHITE = blend(INK, 0.85, WHITE);
+// Header: ink al 92% sopra contenuto bianco (caso peggiore durante lo scroll)
+const HEADER_OVER_WHITE = blend(INK, 0.92, WHITE);
 
 export const AGRIA_COLORS = {
   green: { hex: '#4F8F57', rgb: [79, 143, 87] },
@@ -26,7 +26,7 @@ export const AGRIA_COLORS = {
   ink: { hex: '#080C0A', rgb: INK },
   greenBright: { hex: '#7AE098', rgb: [122, 224, 152] },
   onDarkMuted: { hex: 'bianco 70% su ink', rgb: blend(WHITE, 0.7, INK) },
-  headerOverWhite: { hex: `ink 85% su bianco (${toHex(HEADER_OVER_WHITE)})`, rgb: HEADER_OVER_WHITE },
+  headerOverWhite: { hex: `ink 92% su bianco (${toHex(HEADER_OVER_WHITE)})`, rgb: HEADER_OVER_WHITE },
   onDarkMutedOverWhite: { hex: 'bianco 70% su header', rgb: blend(WHITE, 0.7, HEADER_OVER_WHITE) },
 };
 

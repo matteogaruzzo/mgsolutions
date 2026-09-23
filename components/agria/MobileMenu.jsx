@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from './ui';
 import { NAV_PANELS, NAV_DIRECT, CTA } from './nav-data';
 
 const FOCUSABLE = 'a[href], button:not([disabled])';
 
-export default function MobileMenu({ id, open, onClose, isActive }) {
+export default function MobileMenu({ id, open, top = 0, onClose, isActive }) {
   const [expanded, setExpanded] = useState(null);
   const containerRef = useRef(null);
 
@@ -59,27 +60,28 @@ export default function MobileMenu({ id, open, onClose, isActive }) {
       role="dialog"
       aria-modal="true"
       aria-label="Menu"
-      className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-agria-white pt-24 md:hidden"
+      style={{ top }}
+      className="fixed inset-x-0 bottom-0 z-40 flex flex-col overflow-y-auto border-t border-white/[0.08] bg-agria-ink pt-4 md:hidden"
     >
       <div className="flex flex-1 flex-col px-6 pb-10">
         <nav className="flex flex-col" aria-label="Navigazione mobile">
           {NAV_PANELS.map((panel) => {
             const panelActive = panel.items.some((item) => isActive(item.href));
             return (
-              <div key={panel.key} className="border-b border-agria-border">
+              <div key={panel.key} className="border-b border-white/10">
                 <button
                   type="button"
                   aria-expanded={expanded === panel.key}
                   aria-controls={`${id}-${panel.key}`}
                   onClick={() => setExpanded((v) => (v === panel.key ? null : panel.key))}
-                  className={`flex w-full items-center justify-between py-4 font-agria-sans text-agria-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark ${
-                    panelActive ? 'font-medium text-agria-graphite' : 'text-agria-graphite'
+                  className={`flex w-full items-center justify-between rounded-lg py-4 font-agria-sans text-agria-lg text-agria-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright ${
+                    panelActive ? 'font-medium' : ''
                   }`}
                 >
                   {panel.label}
                   <span
                     aria-hidden="true"
-                    className={`text-agria-grey transition-transform duration-150 motion-reduce:transition-none ${
+                    className={`text-agria-on-dark-muted transition-transform duration-150 motion-reduce:transition-none ${
                       expanded === panel.key ? 'rotate-180' : ''
                     }`}
                   >
@@ -94,12 +96,12 @@ export default function MobileMenu({ id, open, onClose, isActive }) {
                         href={item.href}
                         onClick={onClose}
                         aria-current={isActive(item.href) ? 'page' : undefined}
-                        className="rounded-xl px-3 py-3 hover:bg-agria-offwhite"
+                        className="rounded-xl px-3 py-3 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright"
                       >
-                        <span className="block font-agria-sans text-agria-body font-medium text-agria-graphite">
+                        <span className="block font-agria-sans text-agria-body font-medium text-agria-on-dark">
                           {item.title}
                         </span>
-                        <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-grey">
+                        <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-on-dark-muted">
                           {item.description}
                         </span>
                       </Link>
@@ -115,8 +117,8 @@ export default function MobileMenu({ id, open, onClose, isActive }) {
               href={item.href}
               onClick={onClose}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`border-b border-agria-border py-5 font-agria-sans text-agria-lg ${
-                isActive(item.href) ? 'font-medium text-agria-graphite' : 'text-agria-graphite'
+              className={`rounded-lg border-b border-white/10 py-5 font-agria-sans text-agria-lg text-agria-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright ${
+                isActive(item.href) ? 'font-medium' : ''
               }`}
             >
               {item.label}
@@ -124,13 +126,9 @@ export default function MobileMenu({ id, open, onClose, isActive }) {
           ))}
         </nav>
 
-        <Link
-          href={CTA.href}
-          onClick={onClose}
-          className="mt-8 flex items-center justify-center rounded-full bg-agria-green-dark px-6 py-3.5 font-agria-sans text-agria-sm font-medium text-agria-white transition-colors hover:bg-agria-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2"
-        >
+        <Button as={Link} href={CTA.href} onClick={onClose} variant="bright" className="mt-8 py-3.5">
           {CTA.label}
-        </Link>
+        </Button>
       </div>
     </div>
   );

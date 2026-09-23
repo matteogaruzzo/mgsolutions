@@ -3,29 +3,26 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import AnnouncementBar from './AnnouncementBar';
+import BrandLockup from './BrandLockup';
 import HeaderPanel from './HeaderPanel';
 import MobileMenu from './MobileMenu';
 import LanguageSwitcher from './LanguageSwitcher';
+import { Button } from './ui';
 import { NAV_PANELS, NAV_DIRECT, CTA } from './nav-data';
 
 const CLOSE_DELAY_MS = 150;
+
+const FOCUS_RING =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink';
 
 export default function Header() {
   const pathname = usePathname();
   const [openPanel, setOpenPanel] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [menuTop, setMenuTop] = useState(0);
   const headerRef = useRef(null);
   const closeTimer = useRef(null);
-
-  useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 8);
-    }
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -65,76 +62,85 @@ export default function Header() {
     closeTimer.current = setTimeout(() => setOpenPanel(null), CLOSE_DELAY_MS);
   }
 
+  function toggleMobile() {
+    // il menu mobile parte dal bordo inferiore dell'header, qualunque sia lo scroll
+    if (!mobileOpen && headerRef.current) {
+      setMenuTop(headerRef.current.getBoundingClientRect().bottom);
+    }
+    setMobileOpen((v) => !v);
+  }
+
   return (
-    <header ref={headerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <div
-        className={`flex w-full max-w-[960px] items-center justify-between gap-4 rounded-full border border-agria-border bg-agria-white/95 px-4 py-2.5 backdrop-blur transition-shadow duration-200 motion-reduce:transition-none sm:px-5 ${
-          scrolled ? 'shadow-md' : 'shadow-sm'
-        }`}
-      >
-        <Link href="/" className="flex shrink-0 items-center gap-2" onClick={() => setOpenPanel(null)}>
-          <img
-            src="/images/brand/agria-logo-black-centered.svg"
-            alt=""
-            width={28}
-            height={28}
-            className="h-7 w-7"
+    <>
+      <AnnouncementBar />
+      <header ref={headerRef} className="sticky top-0 z-50">
+        {/* fondo su un livello separato: backdrop-filter sull'header renderebbe
+            il menu mobile (position: fixed) relativo all'header invece che alla finestra */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 border-b border-white/[0.08] bg-agria-ink/[0.92] backdrop-blur-[16px]"
+        />
+        <div className="relative mx-auto flex max-w-[1220px] items-center gap-6 px-5 py-[13px] sm:px-10 lg:gap-8">
+          <BrandLockup
+            tone="dark"
+            wordmarkClassName="hidden md:inline"
+            onClick={() => setOpenPanel(null)}
           />
-          <span className="font-agria-sans text-[15px] font-medium tracking-[0.02em] text-agria-graphite">
-            AGRIA
-          </span>
-        </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Navigazione principale">
-          {NAV_PANELS.map((panel) => (
-            <HeaderPanel
-              key={panel.key}
-              panel={panel}
-              isOpen={openPanel === panel.key}
-              onOpen={() => handlePanelOpen(panel.key)}
-              onClose={handlePanelClose}
-              onToggle={() => setOpenPanel((v) => (v === panel.key ? null : panel.key))}
-              active={panel.items.some((item) => isActive(item.href))}
-            />
-          ))}
-          {NAV_DIRECT.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-3 py-2 font-agria-sans text-agria-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2 ${
-                isActive(item.href) ? 'font-medium text-agria-graphite' : 'text-agria-grey hover:text-agria-graphite'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className="mx-auto hidden items-center gap-1 md:flex lg:gap-3" aria-label="Navigazione principale">
+            {NAV_PANELS.map((panel) => (
+              <HeaderPanel
+                key={panel.key}
+                panel={panel}
+                isOpen={openPanel === panel.key}
+                onOpen={() => handlePanelOpen(panel.key)}
+                onClose={handlePanelClose}
+                onToggle={() => setOpenPanel((v) => (v === panel.key ? null : panel.key))}
+                active={panel.items.some((item) => isActive(item.href))}
+              />
+            ))}
+            {NAV_DIRECT.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={`rounded-full px-3 py-2 font-agria-sans text-[15px] transition-colors ${FOCUS_RING} ${
+                  isActive(item.href) ? 'font-medium text-agria-on-dark' : 'text-agria-on-dark-muted hover:text-agria-on-dark'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <LanguageSwitcher />
-          <Link
-            href={CTA.href}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-agria-green-dark px-5 py-2.5 font-agria-sans text-agria-sm font-medium text-agria-white transition-colors hover:bg-agria-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2"
+          <div className="hidden items-center gap-4 md:flex">
+            <LanguageSwitcher />
+            <Button as={Link} href={CTA.href} variant="bright" className="whitespace-nowrap px-[22px] text-[14.5px]">
+              {CTA.label}
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="agria-mobile-menu"
+            onClick={toggleMobile}
+            className={`ml-auto flex items-center justify-center rounded-full p-2.5 text-agria-on-dark md:hidden ${FOCUS_RING}`}
           >
-            {CTA.label}
-          </Link>
+            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
         </div>
 
-        <button
-          type="button"
-          aria-label={mobileOpen ? 'Chiudi menu' : 'Apri menu'}
-          aria-expanded={mobileOpen}
-          aria-controls="agria-mobile-menu"
-          onClick={() => setMobileOpen((v) => !v)}
-          className="flex items-center justify-center rounded-full p-2 text-agria-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2 md:hidden"
-        >
-          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-        </button>
-      </div>
-
-      <MobileMenu id="agria-mobile-menu" open={mobileOpen} onClose={() => setMobileOpen(false)} isActive={isActive} />
-    </header>
+        <MobileMenu
+          id="agria-mobile-menu"
+          open={mobileOpen}
+          top={menuTop}
+          onClose={() => setMobileOpen(false)}
+          isActive={isActive}
+        />
+      </header>
+    </>
   );
 }
 

@@ -30,9 +30,9 @@ export default function HeaderPanel({ panel, isOpen, onOpen, onClose, onToggle, 
         aria-expanded={isOpen}
         aria-controls={panelId}
         onClick={onToggle}
-        className={`flex items-center gap-1 rounded-full px-3 py-2 font-agria-sans text-agria-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2 ${
-          active ? 'font-medium text-agria-graphite' : 'text-agria-grey hover:text-agria-graphite'
-        }`}
+        className={`flex items-center gap-1 rounded-full px-3 py-2 font-agria-sans text-[15px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink ${
+          active || isOpen ? 'text-agria-on-dark' : 'text-agria-on-dark-muted hover:text-agria-on-dark'
+        } ${active ? 'font-medium' : ''}`}
       >
         {panel.label}
         <svg
@@ -52,18 +52,18 @@ export default function HeaderPanel({ panel, isOpen, onOpen, onClose, onToggle, 
           id={panelId}
           role="group"
           aria-label={panel.label}
-          className="absolute left-1/2 top-full z-10 mt-3 w-[320px] -translate-x-1/2 rounded-2xl border border-agria-border bg-agria-white p-2 shadow-lg"
+          className="absolute left-1/2 top-full z-10 mt-3 w-[320px] -translate-x-1/2 rounded-2xl border border-white/10 bg-agria-ink p-2 shadow-[0_24px_58px_rgb(0_0_0/0.45)]"
         >
           {panel.items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block rounded-xl px-4 py-3 transition-colors hover:bg-agria-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-inset"
+              className="block rounded-xl px-4 py-3 transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-inset"
             >
-              <span className="block font-agria-sans text-agria-sm font-medium text-agria-graphite">
+              <span className="block font-agria-sans text-agria-sm font-medium text-agria-on-dark">
                 {item.title}
               </span>
-              <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-grey">
+              <span className="mt-0.5 block font-agria-sans text-agria-sm text-agria-on-dark-muted">
                 {item.description}
               </span>
             </Link>

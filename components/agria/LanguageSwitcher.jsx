@@ -11,7 +11,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div
-      className="flex items-center gap-0.5 rounded-full border border-agria-border p-0.5"
+      className="flex items-center gap-0.5 rounded-full border border-white/20 p-0.5"
       role="group"
       aria-label="Lingua"
     >
@@ -20,10 +20,10 @@ export default function LanguageSwitcher() {
           key={locale}
           type="button"
           aria-pressed={locale === defaultLocale}
-          className={`rounded-full px-2.5 py-1 font-agria-mono text-[11px] uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2 ${
+          className={`rounded-full px-2.5 py-1 font-agria-mono text-[11px] uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink ${
             locale === defaultLocale
-              ? 'bg-agria-graphite text-agria-white'
-              : 'text-agria-grey hover:text-agria-graphite'
+              ? 'bg-agria-white text-agria-ink'
+              : 'text-agria-on-dark-muted hover:text-agria-on-dark'
           }`}
         >
           {locale}
