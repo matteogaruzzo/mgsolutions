@@ -23,6 +23,10 @@
   --agria-offwhite: 246 247 244;
   --agria-grey: 107 112 108;
   --agria-border: 228 232 227;
+
+  /* superfici scure (header, hero, chiusura): green-bright solo su ink */
+  --agria-ink: 8 12 10;
+  --agria-green-bright: 122 224 152;
 }
 
 * {

@@ -15,7 +15,7 @@ import {
   Select,
   Checkbox,
 } from '@/components/agria/ui';
-import { AGRIA_COLORS, CONTRAST_ROWS, contrastRatio } from './contrast';
+import { AGRIA_COLORS, CONTRAST_ROWS, DARK_CONTRAST_ROWS, contrastRatio } from './contrast';
 
 const PREVIEW_ENABLED =
   process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DESIGN_PREVIEW === 'true';
@@ -34,6 +34,13 @@ const COLOR_SWATCHES = [
   { key: 'offwhite', name: 'Off White', token: 'agria-offwhite', use: 'Sezioni alternate, superfici secondarie' },
   { key: 'grey', name: 'Grey', token: 'agria-grey', use: 'Testo secondario' },
   { key: 'border', name: 'Border', token: 'agria-border', use: 'Bordi, divisori' },
+];
+
+const DARK_SWATCHES = [
+  { key: 'ink', name: 'Ink', token: 'agria-ink', use: 'Fondo di header, barra annuncio, hero e chiusura' },
+  { key: 'greenBright', name: 'Agria Green Bright', token: 'agria-green-bright', use: 'Solo su fondo scuro: CTA, link, focus, accenti' },
+  { key: 'white', name: 'On Dark', token: 'agria-on-dark', use: 'Testo principale su fondo scuro' },
+  { key: 'onDarkMuted', name: 'On Dark Muted', token: 'agria-on-dark-muted', use: 'Testo secondario e voci di menu su fondo scuro (bianco al 70%)' },
 ];
 
 const TYPE_SCALE = [
@@ -298,6 +305,61 @@ export default function DesignSystemPage() {
         </Container>
       </Section>
 
+      {/* Superfici scure */}
+      <Section background="white">
+        <Container className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <Eyebrow>Token</Eyebrow>
+            <Heading level="h2">Superfici scure</Heading>
+            <Text muted>
+              Header, hero e chiusura usano un fondo quasi nero; il resto del sito resta bianco e
+              off-white. Il verde luminoso esiste solo qui: su fondo chiaro non raggiunge il contrasto
+              minimo e non va usato.
+            </Text>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {DARK_SWATCHES.map((swatch) => (
+              <div key={swatch.key} className="rounded-agria-card border border-agria-border bg-agria-white p-6">
+                <div
+                  className="mb-4 flex h-20 items-center justify-center rounded-xl bg-agria-ink"
+                  aria-hidden="true"
+                >
+                  <span
+                    className="h-10 w-10 rounded-full"
+                    style={{ backgroundColor: `rgb(${AGRIA_COLORS[swatch.key].rgb.join(' ')})` }}
+                  />
+                </div>
+                <Text as="p" size="sm" className="font-medium">
+                  {swatch.name}
+                </Text>
+                <Text as="p" size="sm" muted className="font-agria-mono">
+                  {swatch.token}
+                </Text>
+                <Text as="p" size="sm" muted className="mt-2">
+                  {swatch.use}
+                </Text>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-4 rounded-agria-card bg-agria-ink p-8 md:p-12">
+            <p className="font-agria-mono text-agria-label uppercase text-agria-green-bright">Etichetta su scuro</p>
+            <p className="font-agria-sans text-agria-h2 text-agria-on-dark">Testo principale su fondo scuro</p>
+            <p className="max-w-prose font-agria-sans text-agria-body text-agria-on-dark-muted">
+              Testo secondario al 70%, per paragrafi introduttivi e voci di navigazione.
+            </p>
+            <div>
+              <a
+                href="#"
+                className="inline-flex items-center rounded-full bg-agria-green-bright px-6 py-3 font-agria-sans text-agria-sm font-medium text-agria-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink"
+              >
+                Bottone su scuro
+              </a>
+            </div>
+          </div>
+          <ContrastTable rows={DARK_CONTRAST_ROWS} />
+        </Container>
+      </Section>
+
       {/* Contrasti */}
       <Section background="offwhite">
         <Container className="flex flex-col gap-6">
@@ -306,55 +368,61 @@ export default function DesignSystemPage() {
             <Heading level="h2">Contrasti calcolati (WCAG 2.1)</Heading>
             <Text muted>Ogni combinazione usata per testo raggiunge almeno 4.5:1.</Text>
           </div>
-          <div className="overflow-x-auto rounded-agria-card border border-agria-border bg-agria-white">
-            <table className="w-full min-w-[640px] border-collapse text-left">
-              <thead>
-                <tr className="border-b border-agria-border">
-                  <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
-                    Combinazione
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
-                    Rapporto
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
-                    AA normale (4.5:1)
-                  </th>
-                  <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
-                    Uso
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {CONTRAST_ROWS.map((row, index) => {
-                  const { ratio, label } = ratioLabel(row.fg, row.bg);
-                  const passes = ratio >= 4.5;
-                  return (
-                    <tr key={index} className="border-b border-agria-border last:border-none">
-                      <td className="px-6 py-4 font-agria-mono text-agria-sm text-agria-graphite">
-                        {AGRIA_COLORS[row.fg].hex} su {AGRIA_COLORS[row.bg].hex}
-                      </td>
-                      <td className="px-6 py-4 font-agria-mono text-agria-sm text-agria-graphite">{label}</td>
-                      <td className="px-6 py-4 text-agria-sm">
-                        {passes ? (
-                          <span className="text-agria-green-dark">Passa</span>
-                        ) : (
-                          <span className="text-red-600">Fallisce</span>
-                        )}
-                        {!row.usedForText && (
-                          <Text as="span" size="sm" muted className="ml-2">
-                            (non usato per testo)
-                          </Text>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-agria-sm text-agria-grey">{row.usage}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <ContrastTable rows={CONTRAST_ROWS} />
         </Container>
       </Section>
+    </div>
+  );
+}
+
+function ContrastTable({ rows }) {
+  return (
+    <div className="overflow-x-auto rounded-agria-card border border-agria-border bg-agria-white">
+      <table className="w-full min-w-[640px] border-collapse text-left">
+        <thead>
+          <tr className="border-b border-agria-border">
+            <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
+              Combinazione
+            </th>
+            <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
+              Rapporto
+            </th>
+            <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
+              AA normale (4.5:1)
+            </th>
+            <th scope="col" className="px-6 py-4 font-agria-sans text-agria-sm font-medium text-agria-graphite">
+              Uso
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => {
+            const { ratio, label } = ratioLabel(row.fg, row.bg);
+            const passes = ratio >= 4.5;
+            return (
+              <tr key={index} className="border-b border-agria-border last:border-none">
+                <td className="px-6 py-4 font-agria-mono text-agria-sm text-agria-graphite">
+                  {AGRIA_COLORS[row.fg].hex} su {AGRIA_COLORS[row.bg].hex}
+                </td>
+                <td className="px-6 py-4 font-agria-mono text-agria-sm text-agria-graphite">{label}</td>
+                <td className="px-6 py-4 text-agria-sm">
+                  {passes ? (
+                    <span className="text-agria-green-dark">Passa</span>
+                  ) : (
+                    <span className="text-red-600">Fallisce</span>
+                  )}
+                  {!row.usedForText && (
+                    <Text as="span" size="sm" muted className="ml-2">
+                      (non usato per testo)
+                    </Text>
+                  )}
+                </td>
+                <td className="px-6 py-4 text-agria-sm text-agria-grey">{row.usage}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

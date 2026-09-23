@@ -47,6 +47,11 @@ module.exports = {
           offwhite: 'rgb(var(--agria-offwhite) / <alpha-value>)',
           grey: 'rgb(var(--agria-grey) / <alpha-value>)',
           border: 'rgb(var(--agria-border) / <alpha-value>)',
+          // superfici scure: green-bright solo su ink, mai su fondo chiaro
+          ink: 'rgb(var(--agria-ink) / <alpha-value>)',
+          'green-bright': 'rgb(var(--agria-green-bright) / <alpha-value>)',
+          'on-dark': 'rgb(var(--agria-white) / <alpha-value>)',
+          'on-dark-muted': 'rgb(var(--agria-white) / 0.7)',
         },
       },
       fontFamily: {
