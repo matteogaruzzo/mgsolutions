@@ -8,6 +8,7 @@ export default function Text({
   as: Tag = 'p',
   size = 'body',
   muted = false,
+  measure = true,
   children,
   className = '',
   ...props
@@ -16,7 +17,7 @@ export default function Text({
     <Tag
       className={`font-agria-sans ${SIZES[size] ?? SIZES.body} ${
         muted ? 'text-agria-grey' : 'text-agria-graphite'
-      } ${className}`}
+      } ${measure ? 'max-w-prose' : ''} ${className}`}
       {...props}
     >
       {children}

@@ -73,7 +73,7 @@ export default function DesignSystemPage() {
         <Container className="relative flex flex-col gap-6">
           <Eyebrow>Documento interno</Eyebrow>
           <Heading level="display">Design System Agria</Heading>
-          <Text size="lg" muted className="max-w-2xl">
+          <Text size="lg" muted>
             Anteprima di token e componenti di base per il redesign. Pagina non indicizzata, non
             collegata dal sito, visibile solo in sviluppo o con variabile d&apos;ambiente esplicita.
           </Text>
@@ -82,7 +82,7 @@ export default function DesignSystemPage() {
 
       {/* Colori */}
       <Section background="offwhite">
-        <Container className="flex flex-col gap-10">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Token</Eyebrow>
             <Heading level="h2">Colori</Heading>
@@ -112,7 +112,7 @@ export default function DesignSystemPage() {
 
       {/* Tipografia */}
       <Section background="white">
-        <Container className="flex flex-col gap-10">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Token</Eyebrow>
             <Heading level="h2">Tipografia</Heading>
@@ -181,13 +181,28 @@ export default function DesignSystemPage() {
                 sezione
               </Text>
             </li>
+            <li>
+              <Text as="span" size="sm" muted>
+                Ritmo verticale interno: lo spazio fra blocchi dentro una sezione è ora{' '}
+                <span className="font-agria-mono">gap-6</span>, più vicino al{' '}
+                <span className="font-agria-mono">gap-3</span> fra etichetta, titolo e testo —
+                lo spazio fra sezioni diverse resta invariato
+              </Text>
+            </li>
+            <li>
+              <Text as="span" size="sm" muted>
+                Larghezza massima del testo (<span className="font-agria-mono">Text</span>):{' '}
+                <span className="font-agria-mono">max-w-prose</span> (65ch, ~600px) di default,
+                disattivabile con la prop <span className="font-agria-mono">measure=false</span>
+              </Text>
+            </li>
           </ul>
         </Container>
       </Section>
 
       {/* Bottoni e link */}
       <Section background="white">
-        <Container className="flex flex-col gap-8">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Componenti</Eyebrow>
             <Heading level="h2">Bottoni e link</Heading>
@@ -208,7 +223,7 @@ export default function DesignSystemPage() {
 
       {/* Card */}
       <Section background="offwhite">
-        <Container className="flex flex-col gap-8">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Componenti</Eyebrow>
             <Heading level="h2">Card</Heading>
@@ -229,7 +244,7 @@ export default function DesignSystemPage() {
 
       {/* Tabs */}
       <Section background="white">
-        <Container className="flex flex-col gap-8">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Componenti</Eyebrow>
             <Heading level="h2">Tabs</Heading>
@@ -241,7 +256,7 @@ export default function DesignSystemPage() {
 
       {/* HeroBackdrop */}
       <Section background="offwhite">
-        <Container className="flex flex-col gap-8">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Componenti</Eyebrow>
             <Heading level="h2">HeroBackdrop</Heading>
@@ -261,7 +276,7 @@ export default function DesignSystemPage() {
 
       {/* Campi form */}
       <Section background="white">
-        <Container className="flex flex-col gap-8">
+        <Container className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <Eyebrow>Componenti</Eyebrow>
             <Heading level="h2">Campi form</Heading>
