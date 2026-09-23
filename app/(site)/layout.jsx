@@ -1,7 +1,7 @@
 import '../globals.css';
 import { Poppins, Inter, IBM_Plex_Mono } from 'next/font/google';
 import Header from '@/components/agria/Header';
-import Footer from '@/components/Footer';
+import Footer from '@/components/agria/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
 import { OG_IMAGE, SITE_URL } from '@/lib/seo';
