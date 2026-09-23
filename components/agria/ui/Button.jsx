@@ -8,6 +8,7 @@ const VARIANTS = {
   ghost:
     'bg-transparent text-agria-graphite border border-agria-border hover:border-agria-graphite focus-visible:ring-agria-green-dark',
   // solo su superfici scure (agria-ink)
+  line: 'border border-white/30 bg-transparent text-agria-on-dark hover:border-white focus-visible:ring-agria-green-bright focus-visible:ring-offset-agria-ink',
   bright:
     'bg-agria-green-bright text-agria-ink hover:-translate-y-px hover:shadow-[0_8px_26px_rgb(var(--agria-green-bright)/0.28)] motion-reduce:hover:translate-y-0 focus-visible:ring-agria-green-bright focus-visible:ring-offset-agria-ink',
 };

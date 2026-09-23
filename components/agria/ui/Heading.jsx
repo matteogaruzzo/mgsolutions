@@ -1,7 +1,7 @@
 const LEVELS = {
   display: 'text-agria-display font-agria-sans font-light',
   h1: 'text-agria-h1 font-agria-sans font-light',
-  h2: 'text-agria-h2 font-agria-sans font-normal',
+  h2: 'text-agria-h2 font-agria-sans font-light',
   h3: 'text-agria-h3 font-agria-sans font-medium',
 };
 
@@ -14,10 +14,11 @@ const DEFAULT_TAG = {
   h3: 'h3',
 };
 
-export default function Heading({ level = 'h2', as, children, className = '', ...props }) {
+// onDark: su superfici scure (agria-ink) il titolo è bianco
+export default function Heading({ level = 'h2', as, onDark = false, children, className = '', ...props }) {
   const Tag = as || DEFAULT_TAG[level] || 'h2';
   return (
-    <Tag className={`${LEVELS[level] ?? LEVELS.h2} text-agria-graphite ${className}`} {...props}>
+    <Tag className={`${LEVELS[level] ?? LEVELS.h2} ${onDark ? 'text-agria-on-dark' : 'text-agria-graphite'} ${className}`} {...props}>
       {children}
     </Tag>
   );

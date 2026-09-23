@@ -68,10 +68,12 @@ module.exports = {
         // ---- Agria: scala tipografica fluida (clamp), pochi livelli ----
         'agria-display': ['clamp(2.75rem, 2rem + 3vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '300' }],
         'agria-h1': ['clamp(2.25rem, 1.75rem + 2.2vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '300' }],
-        'agria-h2': ['clamp(1.75rem, 1.5rem + 1.1vw, 2.5rem)', { lineHeight: '1.15', letterSpacing: '-0.01em', fontWeight: '400' }],
-        'agria-h3': ['clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem)', { lineHeight: '1.25', fontWeight: '500' }],
+        // h2 e h3 allineati alla concept v3 (docs/agria/concept/agria-concept-v3.html)
+        'agria-h2': ['clamp(1.95rem, 4vw, 3.05rem)', { lineHeight: '1.06', letterSpacing: '-0.025em', fontWeight: '300' }],
+        'agria-h3': ['clamp(1.15rem, 1.8vw, 1.45rem)', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '500' }],
         'agria-lg': ['1.25rem', { lineHeight: '1.6' }],
         'agria-body': ['1.0625rem', { lineHeight: '1.7' }],
+        'agria-md': ['0.96875rem', { lineHeight: '1.6' }],
         'agria-sm': ['0.875rem', { lineHeight: '1.5' }],
         'agria-label': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.12em' }],
       },

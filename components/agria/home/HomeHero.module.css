@@ -1,0 +1,147 @@
+/* Hero homepage: filari in prospettiva + strato dati.
+   Valori dalla concept v3 (docs/agria/concept/agria-concept-v3.html, blocco HERO).
+   Tutte le animazioni esistono solo con prefers-reduced-motion: no-preference. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: rgb(var(--agria-ink));
+  padding-block: clamp(64px, 9vw, 104px) clamp(150px, 20vw, 230px);
+}
+
+.content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+}
+
+.sky {
+  position: absolute;
+  inset: -5% -20% auto -20%;
+  height: 60%;
+  z-index: 1;
+  background: radial-gradient(42% 46% at 50% 0%, rgb(var(--agria-green-bright) / 0.2), transparent 72%);
+}
+
+.land {
+  position: absolute;
+  left: 50%;
+  bottom: -8vw;
+  width: 210%;
+  height: 58vh;
+  transform: translateX(-50%);
+  perspective: 820px;
+  perspective-origin: 50% 0;
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
+}
+
+.rows,
+.sweep {
+  position: absolute;
+  inset: 0;
+  transform: rotateX(70deg);
+  transform-origin: 50% 0;
+}
+
+.rows {
+  background:
+    repeating-linear-gradient(90deg, rgb(var(--agria-green-bright) / 0.34) 0 2px, transparent 2px 64px),
+    repeating-linear-gradient(0deg, rgb(var(--agria-green-bright) / 0.1) 0 1px, transparent 1px 90px);
+}
+
+.sweep {
+  background: linear-gradient(90deg, transparent 35%, rgb(var(--agria-green-bright) / 0.16) 50%, transparent 65%);
+}
+
+.chips {
+  position: absolute;
+  inset: auto 0 22%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 2vw, 26px);
+  padding-inline: 20px;
+  margin: 0;
+  list-style: none;
+}
+
+.chip {
+  font-family: var(--font-agria-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.82);
+  border: 1px solid rgb(var(--agria-green-bright) / 0.3);
+  background: rgb(255 255 255 / 0.06);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 8px 15px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sweep {
+    animation: sweep 11s linear infinite;
+  }
+
+  .chip {
+    animation: float 6s ease-in-out infinite;
+  }
+  .chip:nth-child(2) {
+    animation-delay: 1.2s;
+  }
+  .chip:nth-child(3) {
+    animation-delay: 2.4s;
+  }
+  .chip:nth-child(4) {
+    animation-delay: 3.6s;
+  }
+
+  /* ingresso dei testi: solo CSS, così il titolo (LCP) non aspetta JavaScript */
+  .enter {
+    animation: enter 0.75s ease both;
+  }
+  .enter:nth-child(2) {
+    animation-delay: 70ms;
+  }
+  .enter:nth-child(3) {
+    animation-delay: 140ms;
+  }
+  .enter:nth-child(4) {
+    animation-delay: 210ms;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: rotateX(70deg) translateX(-30%);
+  }
+  100% {
+    transform: rotateX(70deg) translateX(30%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -179,6 +179,20 @@ p {
   background-color: rgba(26, 26, 26, 0.35);
 }
 
+/* ---- Agria: apparizione allo scroll (components/agria/ui/Reveal.jsx) ----
+   nascosto solo con JS attivo e movimento non ridotto */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .agria-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .agria-reveal[data-shown] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* reveal allo scroll */
 .reveal {
   opacity: 0;
