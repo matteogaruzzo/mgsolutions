@@ -6,30 +6,54 @@ import DataSection from '@/components/agria/home/DataSection';
 import MethodSection from '@/components/agria/home/MethodSection';
 import ClaritySection from '@/components/agria/home/ClaritySection';
 import ClosingCta from '@/components/agria/home/ClosingCta';
-import { pageMetadata, webPageSchema, faqPageSchema } from '@/lib/seo';
-import { faqs } from '@/lib/data';
+import { site } from '@/lib/data';
+import { pageMetadata, webPageSchema, SITE_URL } from '@/lib/seo';
+
+const BRAND = 'Agria';
 
 const PAGE = {
-  title: 'Software e Siti Web per Cantine, Frantoi e Agriturismi',
+  title: 'Agria — sistemi digitali per hospitality, cantine e frantoi',
   description:
-    'Aumenta le vendite dirette con siti web, e-commerce, software CRM e AI per cantine, frantoi e agriturismi. Soluzioni su misura in tutta Italia.',
+    'Siti, e-commerce e automazioni per agriturismi, hotel, cantine e frantoi. Progettiamo sistemi digitali integrati con gli strumenti che già usate.',
   path: '/',
 };
 
 // La root page condivide il segmento con app/layout.jsx: il title.template
-// lì definito non si applica qui (stesso segmento, non un discendente), quindi
-// il <title> risulta esattamente PAGE.title, senza suffisso automatico.
-export const metadata = pageMetadata({
-  ...PAGE,
-  keywords: [
-    'web agency agroalimentare',
-    'e-commerce vino',
-    'automazione agribusiness',
-    'software per cantina',
-    'digitalizzazione Umbria',
-    'Matteo Garuzzo',
-  ],
-});
+// lì definito non si applica qui, quindi il <title> è esattamente PAGE.title.
+// pageMetadata aggiunge al titolo social il nome legacy (site.name): qui lo
+// sovrascriviamo. Nessuna immagine social finché non esiste un'immagine AGRIA:
+// l'openGraph della pagina sostituisce per intero quello del layout.
+const base = pageMetadata(PAGE);
+const { images: _ogImages, ...openGraph } = base.openGraph;
+const { images: _twitterImages, ...twitter } = base.twitter;
+
+export const metadata = {
+  ...base,
+  keywords: null,
+  openGraph: { ...openGraph, title: PAGE.title, siteName: BRAND },
+  twitter: { ...twitter, card: 'summary', title: PAGE.title },
+};
+
+// Dati di contatto e indirizzo invariati rispetto allo schema legacy; niente
+// founder né profili social personali.
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: BRAND,
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/brand/agria-logo-centered.svg`,
+  description: PAGE.description,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.province,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+};
 
 export default function Home() {
   return (
@@ -40,7 +64,7 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <HomeHero />
       <FactStrip />

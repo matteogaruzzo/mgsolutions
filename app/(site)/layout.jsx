@@ -67,26 +67,7 @@ export const metadata = {
   },
 };
 
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: SITE_URL,
-  logo: `${SITE_URL}/images/brand/mg-logo-mark.png`,
-  founder: { '@type': 'Person', name: site.founder },
-  description: site.positioning,
-  telephone: site.phone,
-  email: site.email,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    addressRegion: site.address.province,
-    postalCode: site.address.postalCode,
-    addressCountry: site.address.country,
-  },
-  sameAs: [site.social.linkedin, site.social.instagram],
-};
+// Lo schema Organization vive nella homepage (app/(site)/page.jsx), non qui.
 
 export default function RootLayout({ children }) {
   return (
@@ -96,10 +77,6 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
         <Header />
         <main>{children}</main>
         <Footer />
