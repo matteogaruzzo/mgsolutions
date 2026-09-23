@@ -1,9 +1,7 @@
 import '../globals.css';
 import { Poppins, Inter, IBM_Plex_Mono } from 'next/font/google';
-import Nav from '@/components/Nav';
+import Header from '@/components/agria/Header';
 import Footer from '@/components/Footer';
-import QuizFloatingButton from '@/components/QuizFloatingButton';
-import QuizPopup from '@/components/QuizPopup';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { site } from '@/lib/data';
 import { OG_IMAGE, SITE_URL } from '@/lib/seo';
@@ -102,11 +100,9 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <Nav />
+        <Header />
         <main>{children}</main>
         <Footer />
-        <QuizFloatingButton />
-        <QuizPopup />
         <CookieConsentBanner />
       </body>
     </html>
