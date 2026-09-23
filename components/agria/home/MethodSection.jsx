@@ -5,7 +5,7 @@ import SectionIntro from './SectionIntro';
 export default function MethodSection() {
   return (
     // scroll-mt: l'ancora "Come lavoriamo" non finisce sotto l'header sticky
-    <Section background="offwhite" id={method.id} className="scroll-mt-20" aria-labelledby="home-metodo-title">
+    <Section background="offwhite" spacing="compact" id={method.id} className="scroll-mt-20" aria-labelledby="home-metodo-title">
       <Container>
         <SectionIntro eyebrow={method.eyebrow} title={method.title} titleId="home-metodo-title" />
         <ol className="mt-8 grid grid-cols-1 gap-[18px] md:mt-12 md:grid-cols-3">

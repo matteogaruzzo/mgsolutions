@@ -9,7 +9,7 @@ const CARD =
 
 export default function SectorCards() {
   return (
-    <Section background="white" aria-labelledby="home-settori-title">
+    <Section background="white" spacingTop="compact" aria-labelledby="home-settori-title">
       <Container>
         <SectionIntro eyebrow={sectors.eyebrow} title={sectors.title} titleId="home-settori-title" />
         <ul className="mt-8 grid grid-cols-1 gap-[18px] md:mt-12 md:grid-cols-3">

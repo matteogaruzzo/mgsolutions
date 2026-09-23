@@ -12,17 +12,17 @@ export const NAV_PANELS = [
       {
         title: 'Digital Presence',
         href: '/servizi/digital-presence',
-        description: 'Siti e presenza digitale per aziende dell’agroalimentare.',
+        description: 'Siti e visibilità per hospitality, vino e olio.',
       },
       {
         title: 'Digital Commerce',
         href: '/servizi/digital-commerce',
-        description: 'Vendita online e integrazioni e-commerce per il settore.',
+        description: 'Vendita diretta, prenotazioni e pagamenti online.',
       },
       {
         title: 'Digital Automation',
         href: '/servizi/digital-automation',
-        description: 'Automazioni e integrazioni per i processi aziendali.',
+        description: 'Automazioni e integrazioni tra gli strumenti che usate.',
       },
     ],
   },

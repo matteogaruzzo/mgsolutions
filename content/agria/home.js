@@ -13,10 +13,11 @@ export const hero = {
 };
 
 export const facts = [
-  { value: '3', label: 'settori: hospitality, vino, olio' },
-  { value: 'IT · EN', label: "progetti pensati anche per l'estero" },
-  { value: 'Interno', label: 'sviluppo nostro, nessun subappalto' },
-  { value: 'Perugia', label: 'lavoriamo in tutta Italia' },
+  // kind: 'figure' per valori brevi o numerici, 'word' per parole (resi più piccoli)
+  { value: '3', label: 'settori: hospitality, vino, olio', kind: 'figure' },
+  { value: 'IT · EN', label: "progetti pensati anche per l'estero", kind: 'figure' },
+  { value: 'Interno', label: 'sviluppo nostro, nessun subappalto', kind: 'word' },
+  { value: 'Perugia', label: 'lavoriamo in tutta Italia', kind: 'word' },
 ];
 
 export const sectors = {
@@ -77,7 +78,11 @@ export const data = {
   title: 'I vostri strumenti raccolgono dati. Noi li rendiamo utili.',
   text: 'Prenotazioni, ordini, costi e personale vivono in sistemi diversi. Li colleghiamo e li mettiamo in relazione: ogni settimana sapete cosa sta succedendo e dove intervenire.',
   schemaLabel: 'Schema · non un prodotto in vendita',
-  rows: ['Prenotazioni dirette', 'Costo per camera occupata', 'Ore personale programmate'],
+  rows: [
+    { label: 'Prenotazioni dirette', status: 'in crescita' },
+    { label: 'Costo per camera occupata', status: 'da verificare' },
+    { label: 'Ore personale programmate', status: 'sopra la media' },
+  ],
 };
 
 export const method = {

@@ -27,11 +27,11 @@ export default function DataSection() {
             {data.schemaLabel}
           </figcaption>
           <div className="p-5">
-            <div aria-hidden="true" className="flex h-[122px] items-end gap-2">
+            <div aria-hidden="true" className="flex h-[122px] items-end gap-2 border-b border-agria-grey/40">
               {BARS.map((height, index) => (
                 <span
                   key={index}
-                  className="flex-1 rounded-t-md bg-gradient-to-b from-agria-green/85 to-agria-green/20"
+                  className="flex-1 rounded-t-md bg-gradient-to-b from-agria-green/85 to-agria-green/55"
                   style={{ height: `${height}%` }}
                 />
               ))}
@@ -39,11 +39,13 @@ export default function DataSection() {
             <ul className="mt-4 grid gap-2">
               {data.rows.map((row) => (
                 <li
-                  key={row}
+                  key={row.label}
                   className="flex items-center justify-between gap-4 rounded-xl border border-agria-border px-3 py-2.5 font-agria-sans text-agria-sm font-medium text-agria-graphite"
                 >
-                  {row}
-                  <span aria-hidden="true" className="h-1.5 w-10 shrink-0 rounded-full bg-agria-green/25" />
+                  {row.label}
+                  <span className="shrink-0 rounded-full bg-agria-green/[0.12] px-2.5 py-1 font-agria-mono text-[10.5px] uppercase tracking-[0.1em] text-agria-green-dark">
+                    {row.status}
+                  </span>
                 </li>
               ))}
             </ul>

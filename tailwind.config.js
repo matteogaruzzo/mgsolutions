@@ -84,6 +84,8 @@ module.exports = {
       spacing: {
         // ---- Agria: ritmo verticale fra sezioni, ~120-160px desktop, fluido su mobile ----
         'agria-section': 'clamp(4rem, 1.875rem + 9vw, 10rem)',
+        // compatta: sezioni con poco contenuto (fatti, metodo, chiusura), ~48-96px
+        'agria-section-compact': 'clamp(3rem, 1.875rem + 4.5vw, 6rem)',
       },
       maxWidth: {
         edge: '78rem',
