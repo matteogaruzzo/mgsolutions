@@ -1,0 +1,85 @@
+/* Scena dei filari (FieldScene.jsx). Colori e alone dalla concept v3, blocco HERO.
+   I livelli trasformati (alone, inclinazione, terreno, nodi) sono separati, così
+   il parallasse è una sola composizione: il terreno non viene mai ridisegnato. */
+
+.scene {
+  --field-ground: 46%; /* altezza del terreno rispetto al genitore */
+  --field-rows: 0.34;
+  --field-contours: 0.12;
+  --field-glow: 0.2;
+  --field-nodes: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* versione tenue, per fondi con testo sopra (footer) */
+.subtle {
+  --field-rows: 0.16;
+  --field-contours: 0.06;
+  --field-glow: 0.1;
+  --field-nodes: 0.5;
+}
+
+.glow {
+  position: absolute;
+  inset: -5% -20% auto -20%;
+  height: 60%;
+  background: radial-gradient(42% 46% at 50% 0%, rgb(var(--agria-green-bright) / var(--field-glow)), transparent 72%);
+  will-change: transform;
+}
+
+.ground {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: 0;
+  height: var(--field-ground);
+  perspective: 1400px;
+  /* sfuma all'orizzonte e sul bordo inferiore; la maschera resta ferma */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 82%, transparent);
+}
+
+.tilt {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 40%;
+  will-change: transform;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  will-change: transform;
+}
+
+.rows path {
+  fill: none;
+  stroke: rgb(var(--agria-green-bright) / var(--field-rows));
+  stroke-width: 1.3;
+}
+
+.contours path {
+  fill: none;
+  stroke: rgb(var(--agria-green-bright) / var(--field-contours));
+  stroke-width: 1;
+}
+
+.nodes {
+  opacity: var(--field-nodes);
+}
+
+.nodeCore {
+  stop-color: rgb(var(--agria-green-bright));
+}
+
+.nodeEdge {
+  stop-color: rgb(var(--agria-green-bright));
+  stop-opacity: 0;
+}

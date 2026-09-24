@@ -1,4 +1,4 @@
-/* Hero homepage: filari in prospettiva + strato dati.
+/* Hero homepage: scena dei filari (FieldScene) + strato dati.
    Valori dalla concept v3 (docs/agria/concept/agria-concept-v3.html, blocco HERO).
    Tutte le animazioni esistono solo con prefers-reduced-motion: no-preference. */
 
@@ -13,47 +13,6 @@
   position: relative;
   z-index: 4;
   text-align: center;
-}
-
-.sky {
-  position: absolute;
-  inset: -5% -20% auto -20%;
-  height: 60%;
-  z-index: 1;
-  background: radial-gradient(42% 46% at 50% 0%, rgb(var(--agria-green-bright) / 0.2), transparent 72%);
-}
-
-.land {
-  position: absolute;
-  left: 50%;
-  bottom: -8vw;
-  width: 210%;
-  height: 58vh;
-  transform: translateX(-50%);
-  perspective: 820px;
-  perspective-origin: 50% 0;
-  z-index: 2;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
-}
-
-.rows,
-.sweep {
-  position: absolute;
-  inset: 0;
-  transform: rotateX(70deg);
-  transform-origin: 50% 0;
-}
-
-.rows {
-  background:
-    repeating-linear-gradient(90deg, rgb(var(--agria-green-bright) / 0.34) 0 2px, transparent 2px 64px),
-    repeating-linear-gradient(0deg, rgb(var(--agria-green-bright) / 0.1) 0 1px, transparent 1px 90px);
-}
-
-.sweep {
-  background: linear-gradient(90deg, transparent 35%, rgb(var(--agria-green-bright) / 0.16) 50%, transparent 65%);
 }
 
 .chips {
@@ -84,10 +43,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .sweep {
-    animation: sweep 11s linear infinite;
-  }
-
   .chip {
     animation: float 6s ease-in-out infinite;
   }
@@ -113,15 +68,6 @@
   }
   .enter:nth-child(4) {
     animation-delay: 210ms;
-  }
-}
-
-@keyframes sweep {
-  0% {
-    transform: rotateX(70deg) translateX(-30%);
-  }
-  100% {
-    transform: rotateX(70deg) translateX(30%);
   }
 }
 

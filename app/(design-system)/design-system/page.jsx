@@ -17,7 +17,7 @@ import {
   GradientSection,
   HighlightCard,
 } from '@/components/agria/ui';
-import { AutoTabs, HoverGroup, RotatingHeadline, ZoomImage } from '@/components/agria/motion';
+import { AutoTabs, FieldScene, HoverGroup, RotatingHeadline, ZoomImage } from '@/components/agria/motion';
 import {
   AGRIA_COLORS,
   CONTRAST_ROWS,
@@ -419,6 +419,33 @@ export default function DesignSystemPage() {
               contenuto e ConciergeSlot, sotto header e banner cookie) e compare da md in su; si chiude
               con clic sul velo, clic esterno, Esc o uscendo con il cursore. Non blocca lo scorrimento e
               non riceve il focus. Qui è limitato al riquadro (<code>scope=&quot;container&quot;</code>).
+            </Text>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              FieldScene
+            </Text>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="relative h-[280px] overflow-hidden rounded-agria-card bg-agria-ink">
+                <FieldScene />
+                <p className="relative z-10 p-5 font-agria-mono text-agria-sm uppercase text-agria-on-dark-muted">
+                  variant=&quot;hero&quot;
+                </p>
+              </div>
+              <div className="relative h-[280px] overflow-hidden rounded-agria-card bg-agria-ink">
+                <FieldScene variant="subtle" interactive={false} />
+                <p className="relative z-10 p-5 font-agria-mono text-agria-sm uppercase text-agria-on-dark-muted">
+                  variant=&quot;subtle&quot; · interactive=&#123;false&#125;
+                </p>
+              </div>
+            </div>
+            <Text size="sm" muted>
+              Campo lavorato in prospettiva con colline leggere e nodi che scorrono lungo i filari. Con
+              cursore fine la scena si inclina (max 2–3°) con parallasse tra terreno, nodi e alone; su
+              touch restano i nodi lenti; con movimento ridotto è statica. Il terreno è SVG
+              nell&apos;HTML, un solo requestAnimationFrame fermo fuori schermo. La variante tenue è per
+              fondi con testo sopra (footer).
             </Text>
           </div>
         </Container>

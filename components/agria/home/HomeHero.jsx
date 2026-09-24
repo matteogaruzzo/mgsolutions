@@ -1,17 +1,13 @@
 import Link from 'next/link';
 import { Button, Container, Eyebrow, Heading, Text } from '@/components/agria/ui';
-import { RotatingHeadline } from '@/components/agria/motion';
+import { FieldScene, RotatingHeadline } from '@/components/agria/motion';
 import { hero } from '@/content/agria/home';
 import styles from './HomeHero.module.css';
 
 export default function HomeHero() {
   return (
     <section className={styles.hero} aria-labelledby="home-hero-title">
-      <div className={styles.sky} aria-hidden="true" />
-      <div className={styles.land} aria-hidden="true">
-        <div className={styles.rows} />
-        <div className={styles.sweep} />
-      </div>
+      <FieldScene />
       <ul className={styles.chips} aria-hidden="true">
         {hero.chips.map((chip) => (
           <li key={chip} className={styles.chip}>
