@@ -4,7 +4,7 @@
 // =====================================================================
 
 export const hero = {
-  eyebrow: 'Technology company · Hospitality · Vino · Olio',
+  eyebrow: 'Technology company · Hospitality · Cantine · Frantoi',
   title: 'Uno strato digitale sopra il vostro lavoro.',
   // titolo animato (Prompt 09): la prima variante è quella nell'HTML
   titlePrefix: 'Uno strato digitale sopra ',
@@ -18,7 +18,7 @@ export const hero = {
 
 export const facts = [
   // kind: 'figure' per valori brevi o numerici, 'word' per parole (resi più piccoli)
-  { value: '3', label: 'settori: hospitality, vino, olio', kind: 'figure' },
+  { value: '3', label: 'settori: hospitality, cantine, frantoi', kind: 'figure' },
   { value: 'IT · EN', label: "progetti pensati anche per l'estero", kind: 'figure' },
   { value: 'Interno', label: 'sviluppo nostro, nessun subappalto', kind: 'word' },
   { value: 'Perugia', label: 'lavoriamo in tutta Italia', kind: 'word' },
@@ -40,15 +40,15 @@ export const sectors = {
       text: 'Agriturismi, boutique hotel, relais, masserie. Prenotazioni diverse su portali, email e telefono, inserite due volte a mano. Commissioni che crescono mentre il canale diretto resta fermo.',
     },
     {
-      key: 'vino',
-      title: 'Vino',
-      href: '/settori/vino',
+      key: 'cantine',
+      title: 'Cantine',
+      href: '/settori/cantine',
       text: "Cantine e aziende vitivinicole. Degustazioni piene e nessun contatto raccolto. Vendita diretta marginale rispetto alla distribuzione, spedizioni e adempimenti fuori dall'e-commerce.",
     },
     {
-      key: 'olio',
-      title: 'Olio',
-      href: '/settori/olio',
+      key: 'frantoi',
+      title: 'Frantoi',
+      href: '/settori/frantoi',
       text: 'Frantoi e aziende olivicole. Ordini tra telefono, WhatsApp ed email, tutti da riscrivere. Listini diversi per privati, ristorazione e B2B, gestiti a memoria.',
     },
   ],
@@ -72,8 +72,8 @@ export const services = {
       },
     },
     {
-      key: 'vino',
-      label: 'Vino',
+      key: 'cantine',
+      label: 'Cantine',
       lines: {
         presence: "Il sito della cantina come strumento commerciale, anche per l'estero.",
         commerce: 'Vendita diretta online, degustazioni prenotabili, spedizioni gestite.',
@@ -81,8 +81,8 @@ export const services = {
       },
     },
     {
-      key: 'olio',
-      label: 'Olio',
+      key: 'frantoi',
+      label: 'Frantoi',
       lines: {
         presence: 'Il frantoio trovabile su Google e sui sistemi AI, con un sito che vende.',
         commerce: 'Listini per privati, ristorazione e B2B nello stesso e-commerce.',

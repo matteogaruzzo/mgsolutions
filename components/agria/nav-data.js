@@ -17,7 +17,7 @@ export const NAV_PANELS = [
       {
         title: 'Digital Presence',
         href: '/servizi/digital-presence',
-        description: 'Siti e visibilità per hospitality, vino e olio.',
+        description: 'Siti e visibilità per hospitality, cantine e frantoi.',
       },
       {
         title: 'Digital Commerce',
@@ -46,13 +46,13 @@ export const NAV_PANELS = [
         description: 'Agriturismi e strutture ricettive rurali.',
       },
       {
-        title: 'Vino',
-        href: '/settori/vino',
+        title: 'Cantine',
+        href: '/settori/cantine',
         description: 'Cantine e produttori vitivinicoli.',
       },
       {
-        title: 'Olio',
-        href: '/settori/olio',
+        title: 'Frantoi',
+        href: '/settori/frantoi',
         description: 'Frantoi e produttori di olio.',
       },
     ],

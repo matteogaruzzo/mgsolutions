@@ -20,11 +20,13 @@ Non è solo un cambio di dominio: è migrazione di dominio (matteogaruzzo.com �
 | Digital Commerce | /servizi/digital-commerce | /en/services/digital-commerce |
 | Digital Automation | /servizi/digital-automation | /en/services/digital-automation |
 | Hospitality | /settori/hospitality | /en/industries/hospitality |
-| Vino | /settori/vino | /en/industries/wine |
-| Olio | /settori/olio | /en/industries/olive-oil |
+| Cantine | /settori/cantine | /en/industries/wineries |
+| Frantoi | /settori/frantoi | /en/industries/olive-oil |
 | Azienda | /azienda | /en/company |
 | Conferma invio | /contatti/grazie | /en/contact/thank-you |
 | Versioni EN delle pagine core | /en, /en/services, /en/industries, /en/contact | — |
+
+**Storico — settori rinominati (Prompt 10, 24 settembre 2026).** Vino e Olio sono prodotti, non settori: diventano Cantine (EN: Wineries) e Frantoi (EN: Olive Oil Producers). Slug precedenti: /settori/vino → /settori/cantine, /settori/olio → /settori/frantoi, /en/industries/wine → /en/industries/wineries; /en/industries/olive-oil resta invariato. Le pagine vecchie non sono mai state pubblicate, quindi non serve nessun redirect; le destinazioni delle tabelle sotto sono già aggiornate.
 
 ## Pagine principali
 
@@ -71,8 +73,8 @@ Non è solo un cambio di dominio: è migrazione di dominio (matteogaruzzo.com �
 
 | URL attuale | Impr. / click | Azione | Destinazione |
 |---|---|---|---|
-| /settori/wine-viticulture | 3 / 0 | 301 | /settori/vino |
-| /settori/oleifici-food-tech | 21 / 1 | 301 | /settori/olio |
+| /settori/wine-viticulture | 3 / 0 | 301 | /settori/cantine |
+| /settori/oleifici-food-tech | 21 / 1 | 301 | /settori/frantoi |
 | /settori/wine-hospitality-agriturismi | 16 / 1 | 301 | /settori/hospitality |
 
 ## Software
@@ -83,7 +85,7 @@ Le pagine /software/* intercettano domanda reale ("gestionale agriturismo", "sof
 |---|---|---|---|---|
 | /software/hospitality | 311 / 1 | 34,5 | MERGE | /blog/software-per-agriturismi |
 | /software/vitivinicolo | 265 / 0 | 37,6 | MERGE | /blog/software-per-cantine |
-| /software/frantoi | 30 / 1 | 32,1 | 301 | /settori/olio |
+| /software/frantoi | 30 / 1 | 32,1 | 301 | /settori/frantoi |
 | /software | 58 / 0 | 45,2 | DELETE | — |
 | /software/pricing | 9 / 1 | — | DELETE | Oggi 301 → /software: aggiornare, niente catene |
 | /software/lead-sales | 4 / 0 | — | DELETE | Idem |
@@ -99,7 +101,7 @@ Richiesta di rimozione temporanea dall'indice inviata in Search Console il 22 se
 | URL attuale | Impr. | Azione | Destinazione |
 |---|---|---|---|
 | /portfolio | — | 301 | /settori |
-| /portfolio/tenuta-monteverdi | 25 | 301 | /settori/vino |
+| /portfolio/tenuta-monteverdi | 25 | 301 | /settori/cantine |
 | /portfolio/azienda-rossi | 4 | DELETE | — |
 | /portfolio/podere-la-vite | 4 | DELETE | — |
 | /portfolio/frantoi-san-lorenzo | 3 | DELETE | — |
@@ -148,7 +150,7 @@ Stesso slug, stesso intento di ricerca, contenuto riscritto nel tone of voice Ag
 | email-marketing-sequenze-automatiche-cantina-visitatori | 9 | 301 | /servizi/digital-automation |
 | agenti-ai-processo-commerciale | 9 | 301 | /servizi/digital-automation |
 | agente-ai-reparto-commerciale | 1 | 301 | /servizi/digital-automation |
-| software-frantoi-gestione-ordini-crm | 1 | 301 | /settori/olio |
+| software-frantoi-gestione-ordini-crm | 1 | 301 | /settori/frantoi |
 
 ### DELETE
 

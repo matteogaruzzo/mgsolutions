@@ -89,8 +89,8 @@ Legenda esito: **OK** = copertura e coerenza verificate; per lo stato HTTP "200"
 
 | URL | Fonti | HTTP | Redirect att. | Azione mappa | Destinazione | Esito |
 |---|---|---|---|---|---|---|
-| /settori/wine-viticulture | codice+sitemap+GSC | 200 | — | 301 | /settori/vino (nuova) | OK |
-| /settori/oleifici-food-tech | codice+sitemap+GSC | 200 | — | 301 | /settori/olio (nuova) | OK |
+| /settori/wine-viticulture | codice+sitemap+GSC | 200 | — | 301 | /settori/cantine (nuova) | OK |
+| /settori/oleifici-food-tech | codice+sitemap+GSC | 200 | — | 301 | /settori/frantoi (nuova) | OK |
 | /settori/wine-hospitality-agriturismi | codice+sitemap+GSC | 200 | — | 301 | /settori/hospitality (nuova) | OK |
 
 ### Software
@@ -99,7 +99,7 @@ Legenda esito: **OK** = copertura e coerenza verificate; per lo stato HTTP "200"
 |---|---|---|---|---|---|---|
 | /software/hospitality | codice+sitemap+GSC | 200 | — | MERGE | /blog/software-per-agriturismi | OK |
 | /software/vitivinicolo | codice+sitemap+GSC | 200 | — | MERGE | /blog/software-per-cantine | OK |
-| /software/frantoi | codice+sitemap+GSC | 200 | — | 301 | /settori/olio (nuova) | OK |
+| /software/frantoi | codice+sitemap+GSC | 200 | — | 301 | /settori/frantoi (nuova) | OK |
 | /software | codice+sitemap+GSC | 200 | — | DELETE | — | OK |
 | /software/pricing | redirect+GSC | **308→/software** | /software | DELETE | — | OK — mappa già prevede l'aggiornamento del redirect per evitare la catena |
 | /software/lead-sales | redirect+GSC | **308→/software** | /software | DELETE | — | OK — idem |
@@ -113,7 +113,7 @@ Legenda esito: **OK** = copertura e coerenza verificate; per lo stato HTTP "200"
 | URL | Fonti | HTTP | Redirect att. | Azione mappa | Destinazione | Esito |
 |---|---|---|---|---|---|---|
 | /portfolio | codice+sitemap+GSC | 200 | — | 301 | /settori | OK |
-| /portfolio/tenuta-monteverdi | codice+sitemap+GSC | 200 | — | 301 | /settori/vino | OK |
+| /portfolio/tenuta-monteverdi | codice+sitemap+GSC | 200 | — | 301 | /settori/cantine | OK |
 | /portfolio/azienda-rossi | codice+sitemap+GSC | 200 | — | DELETE | — | OK |
 | /portfolio/podere-la-vite | codice+sitemap+GSC | 200 | — | DELETE | — | OK |
 | /portfolio/frantoi-san-lorenzo | codice+sitemap+GSC | 200 | — | DELETE | — | OK |

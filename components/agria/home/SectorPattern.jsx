@@ -17,7 +17,7 @@ const PATTERNS = {
       </g>
     </>
   ),
-  vino: (
+  cantine: (
     <>
       <g stroke={STROKE} fill="none" strokeWidth="1.2">
         <path d="M0 170 L400 120" />
@@ -34,7 +34,7 @@ const PATTERNS = {
       </g>
     </>
   ),
-  olio: (
+  frantoi: (
     <>
       <g fill="rgb(var(--agria-green) / 0.3)">
         {[60, 140, 220, 300].map((cx) => (

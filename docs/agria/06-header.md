@@ -57,7 +57,7 @@
 Come previsto dal prompt (creazione nei Prompt 09/10), questi link **danno 404 in locale** oggi:
 
 - `/servizi/digital-presence`, `/servizi/digital-commerce`, `/servizi/digital-automation`
-- `/settori/hospitality`, `/settori/vino`, `/settori/olio`
+- `/settori/hospitality`, `/settori/cantine`, `/settori/frantoi`
 - `/azienda`
 
 Non sono state create pagine segnaposto, come richiesto.
