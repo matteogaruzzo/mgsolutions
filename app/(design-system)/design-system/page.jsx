@@ -25,6 +25,7 @@ import {
   INTERACTION_CONTRAST_ROWS,
   contrastRatio,
 } from './contrast';
+import FocusOverlayDemo from './FocusOverlayDemo';
 
 const PREVIEW_ENABLED =
   process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DESIGN_PREVIEW === 'true';
@@ -405,6 +406,20 @@ export default function DesignSystemPage() {
               AutoTabs
             </Text>
             <AutoTabs items={AUTOTABS_DEMO} label="Esempio di schede automatiche" duration={5000} />
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              FocusOverlay
+            </Text>
+            <FocusOverlayDemo />
+            <Text size="sm" muted>
+              Velo ink al 30% dietro ogni pannello aperto, con dissolvenza di 0,3 s (nessuna con
+              movimento ridotto). Nell&apos;header copre la finestra sotto la barra (z-index 45: sopra
+              contenuto e ConciergeSlot, sotto header e banner cookie) e compare da md in su; si chiude
+              con clic sul velo, clic esterno, Esc o uscendo con il cursore. Non blocca lo scorrimento e
+              non riceve il focus. Qui è limitato al riquadro (<code>scope=&quot;container&quot;</code>).
+            </Text>
           </div>
         </Container>
       </Section>

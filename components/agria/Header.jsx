@@ -8,6 +8,7 @@ import BrandLockup from './BrandLockup';
 import HeaderPanel from './HeaderPanel';
 import MobileMenu from './MobileMenu';
 import LanguageSwitcher from './LanguageSwitcher';
+import { FocusOverlay } from './motion';
 import { Button } from './ui';
 import { NAV_PANELS, NAV_DIRECT, CTA } from './nav-data';
 
@@ -73,6 +74,8 @@ export default function Header() {
   return (
     <>
       <AnnouncementBar />
+      {/* velo dietro i pannelli (z 45, sotto l'header); da md in su, dove esistono i pannelli */}
+      <FocusOverlay open={openPanel !== null} onClose={() => setOpenPanel(null)} className="hidden md:block" />
       <header ref={headerRef} className="sticky top-0 z-50">
         {/* fondo su un livello separato: backdrop-filter sull'header renderebbe
             il menu mobile (position: fixed) relativo all'header invece che alla finestra */}

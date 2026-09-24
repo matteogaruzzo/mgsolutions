@@ -4,7 +4,8 @@
 // intercetta i click (pointer-events: none). Per attivare il concierge:
 //   - montare il widget come figlio di questo componente (o via portal su
 //     #agria-concierge-root) e dare pointer-events: auto al solo widget;
-//   - z-index 40: sotto header (50) e menu mobile, sopra il contenuto;
+//   - z-index 40: sotto header (50), menu mobile e velo dei pannelli (45),
+//     sopra il contenuto;
 //   - il banner cookie occupa il fondo pagina finché non viene chiuso: il widget
 //     deve evitarne l'area o comparire dopo il consenso (lib/consent.js).
 // Vedi docs/agria/09-interazioni.md.
