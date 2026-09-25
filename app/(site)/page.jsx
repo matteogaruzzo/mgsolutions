@@ -1,10 +1,14 @@
 import HomeHero from '@/components/agria/home/HomeHero';
 import FactStrip from '@/components/agria/home/FactStrip';
-import SectorCards from '@/components/agria/home/SectorCards';
+import ProblemSwitch from '@/components/agria/home/ProblemSwitch';
 import ServiceCards from '@/components/agria/home/ServiceCards';
-import DataSection from '@/components/agria/home/DataSection';
+import SystemComposer from '@/components/agria/home/SystemComposer';
+import SectorCards from '@/components/agria/home/SectorCards';
+import SectorPreview from '@/components/agria/home/SectorPreview';
 import MethodSection from '@/components/agria/home/MethodSection';
 import ClaritySection from '@/components/agria/home/ClaritySection';
+import NewsSection from '@/components/agria/home/NewsSection';
+import TerritoryBand from '@/components/agria/home/TerritoryBand';
 import ClosingCta from '@/components/agria/home/ClosingCta';
 import { site } from '@/lib/data';
 import { pageMetadata, webPageSchema, SITE_URL } from '@/lib/seo';
@@ -66,13 +70,18 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
+      {/* problema → soluzione → per chi → prova → chi siamo → contatto (Prompt 11) */}
       <HomeHero />
       <FactStrip />
-      <SectorCards />
+      <ProblemSwitch />
       <ServiceCards />
-      <DataSection />
+      <SystemComposer />
+      <SectorCards />
+      <SectorPreview />
       <MethodSection />
       <ClaritySection />
+      <NewsSection />
+      <TerritoryBand />
       <ClosingCta />
     </>
   );

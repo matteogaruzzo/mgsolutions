@@ -8,13 +8,6 @@ export default function HomeHero() {
   return (
     <section className={styles.hero} aria-labelledby="home-hero-title">
       <FieldScene />
-      <ul className={styles.chips} aria-hidden="true">
-        {hero.chips.map((chip) => (
-          <li key={chip} className={styles.chip}>
-            {chip}
-          </li>
-        ))}
-      </ul>
 
       <Container className={styles.content}>
         <Eyebrow onDark className={styles.enter}>
@@ -41,6 +34,14 @@ export default function HomeHero() {
           </Button>
         </div>
       </Container>
+      {/* da md in su le pill fluttuano sul campo; su mobile scendono sotto le CTA */}
+      <ul className={styles.chips} aria-hidden="true">
+        {hero.chips.map((chip) => (
+          <li key={chip} className={styles.chip}>
+            {chip}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

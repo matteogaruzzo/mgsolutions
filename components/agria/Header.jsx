@@ -76,7 +76,8 @@ export default function Header() {
       <AnnouncementBar />
       {/* velo dietro i pannelli (z 45, sotto l'header); da md in su, dove esistono i pannelli */}
       <FocusOverlay open={openPanel !== null} onClose={() => setOpenPanel(null)} className="hidden md:block" />
-      <header ref={headerRef} className="sticky top-0 z-50">
+      {/* non fisso: scorre via con la pagina; z-50 lo tiene sopra il velo dei pannelli */}
+      <header ref={headerRef} className="relative z-50">
         {/* fondo su un livello separato: backdrop-filter sull'header renderebbe
             il menu mobile (position: fixed) relativo all'header invece che alla finestra */}
         <div

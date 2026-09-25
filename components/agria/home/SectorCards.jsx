@@ -10,7 +10,7 @@ const CARD =
 
 export default function SectorCards() {
   return (
-    <Section background="white" spacingTop="compact" aria-labelledby="home-settori-title">
+    <Section background="offwhite" aria-labelledby="home-settori-title">
       <Container>
         <SectionIntro eyebrow={sectors.eyebrow} title={sectors.title} titleId="home-settori-title" />
         {/* HoverGroup sugli li; Reveal dentro, così le due opacità non si sovrappongono */}

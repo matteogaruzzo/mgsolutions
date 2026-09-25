@@ -1,0 +1,115 @@
+/* Modulo "Cosa costruiamo" (SectorPreview.jsx): schede a pillola e dispositivo
+   inclinato in 3D che si raddrizza al passaggio del cursore o con il focus. */
+
+.tabs {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 999px;
+  background: rgb(var(--agria-offwhite));
+}
+
+.tab {
+  color: rgb(var(--agria-grey));
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.tab:hover {
+  color: rgb(var(--agria-graphite));
+}
+
+.tab[aria-selected='true'] {
+  background: rgb(var(--agria-graphite));
+  color: rgb(var(--agria-white));
+}
+
+/* senza JavaScript le schede non farebbero nulla: resta la prima anteprima */
+@media (scripting: none) {
+  .tabs {
+    display: none;
+  }
+}
+
+.stage {
+  perspective: 1800px;
+  /* il dispositivo inclinato non deve creare scorrimento orizzontale */
+  overflow-x: clip;
+  padding-block: 12px 28px;
+}
+
+.device {
+  max-width: 980px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 1.25rem;
+  background: rgb(var(--agria-white));
+  box-shadow:
+    0 2px 0 rgb(var(--agria-border)),
+    0 40px 80px -30px rgb(var(--agria-graphite) / 0.28);
+}
+
+/* barra del browser: tre punti e un campo indirizzo vuoto */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgb(var(--agria-border));
+  background: rgb(var(--agria-offwhite));
+}
+
+.bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgb(var(--agria-border));
+}
+
+.bar i {
+  flex: 1;
+  max-width: 260px;
+  height: 18px;
+  margin-left: 12px;
+  border-radius: 999px;
+  background: rgb(var(--agria-white));
+  border: 1px solid rgb(var(--agria-border));
+}
+
+.screen {
+  padding: clamp(20px, 4vw, 48px);
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgb(var(--agria-green) / 0.1), transparent 70%),
+    rgb(var(--agria-offwhite));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .device {
+    transform: rotateX(10deg) rotateY(-12deg) rotateZ(1deg);
+    transform-origin: 50% 60%;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .stage:hover .device,
+  .stage:focus-within .device {
+    transform: none;
+  }
+  .panel:not([hidden]) {
+    animation: panel-in 0.45s ease both;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

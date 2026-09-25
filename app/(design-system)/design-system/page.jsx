@@ -369,8 +369,8 @@ export default function DesignSystemPage() {
                   className="agria-zoom-trigger overflow-hidden rounded-agria-card border border-agria-border"
                 >
                   <ZoomImage
-                    src="/images/agria/settori/agriturismo.jpg"
-                    alt="Casale in pietra con ulivi e piscina"
+                    src="/images/agria/settori/hospitality.jpg"
+                    alt="Camera con letto matrimoniale e lampade accese sui comodini"
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className="aspect-[4/3] rounded-none"
                   />
