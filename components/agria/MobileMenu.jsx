@@ -106,6 +106,18 @@ export default function MobileMenu({ id, open, top = 0, onClose, isActive }) {
                         </span>
                       </Link>
                     ))}
+                    {/* indice della sezione (lo stesso link della card di evidenza su desktop) */}
+                    {panel.feature && (
+                      <Link
+                        href={panel.feature.link.href}
+                        onClick={onClose}
+                        aria-current={isActive(panel.feature.link.href) ? 'page' : undefined}
+                        className="flex items-center gap-1.5 rounded-xl px-3 py-3 font-agria-sans text-agria-sm font-medium text-agria-green-bright hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright"
+                      >
+                        {panel.feature.link.label}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>

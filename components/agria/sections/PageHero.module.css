@@ -1,0 +1,40 @@
+/* Hero compatto delle pagine interne (PageHero.jsx). Stessi valori dell'hero
+   della homepage, altezza ridotta; pill ferme, nel flusso del contenuto. */
+
+.hero {
+  /* spazio libero sotto il contenuto: il campo lo occupa, più 40 px di
+     sfumatura, così nessun testo cade sul bordo lontano dei filari (il più fitto) */
+  --hero-pad-bottom: clamp(150px, 16vw, 220px);
+  position: relative;
+  overflow: hidden;
+  background: rgb(var(--agria-ink));
+  padding-block: clamp(56px, 7vw, 96px) var(--hero-pad-bottom);
+}
+
+.content {
+  position: relative;
+  z-index: 4;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  font-family: var(--font-agria-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.82);
+  border: 1px solid rgb(var(--agria-green-bright) / 0.3);
+  background: rgb(255 255 255 / 0.06);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 8px 15px;
+}

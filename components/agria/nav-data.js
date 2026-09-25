@@ -11,7 +11,7 @@ export const NAV_PANELS = [
     // card di evidenza a destra del pannello (testi già approvati nella homepage)
     feature: {
       title: 'Prima capire, poi costruire.',
-      link: { label: 'Come lavoriamo', href: '/#come-lavoriamo' },
+      link: { label: 'Tutti i servizi', href: '/servizi' },
     },
     items: [
       {

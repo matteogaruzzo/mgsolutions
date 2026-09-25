@@ -69,6 +69,16 @@ export default function HeaderPanel({ panel, isOpen, onOpen, onClose, onToggle, 
                 </span>
               </Link>
             ))}
+            {/* sotto lg la card di evidenza è nascosta: il suo link resta qui (indice della sezione) */}
+            {panel.feature && (
+              <Link
+                href={panel.feature.link.href}
+                className="flex items-center gap-1.5 rounded-xl px-4 py-3 font-agria-sans text-agria-sm font-medium text-agria-green-bright transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-inset lg:hidden"
+              >
+                {panel.feature.link.label}
+                <span aria-hidden="true">→</span>
+              </Link>
+            )}
           </div>
 
           {/* card di evidenza: solo da lg, dove il pannello ha spazio per due colonne */}

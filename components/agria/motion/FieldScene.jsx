@@ -57,6 +57,7 @@ export default function FieldScene({
   malleable = true,
   lazy = false,
   className = '',
+  style,
 }) {
   const [ready, setReady] = useState(!lazy);
   const rootRef = useRef(null);
@@ -285,6 +286,7 @@ export default function FieldScene({
       ref={rootRef}
       aria-hidden="true"
       className={`${styles.scene} ${variant === 'subtle' ? styles.subtle : ''} ${className}`}
+      style={style}
     >
       <div ref={glowRef} className={styles.glow} />
       <div ref={groundRef} className={styles.ground}>

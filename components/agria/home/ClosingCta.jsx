@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { Button, Container, Heading, Reveal, Section, Text } from '@/components/agria/ui';
 import { closing } from '@/content/agria/home';
 
-export default function ClosingCta() {
+// CTA finale: blocco scuro su sezione bianca. Di default il copy della
+// homepage; le pagine servizi passano solo titolo e CTA (text={null}).
+export default function ClosingCta({ title = closing.title, text = closing.text, cta = closing.cta }) {
   return (
     <Section background="white" spacing="compact" aria-labelledby="home-chiusura-title">
       <Container>
@@ -17,13 +19,15 @@ export default function ClosingCta() {
           />
           <div className="relative flex flex-col items-center">
             <Heading level="h2" id="home-chiusura-title" onDark>
-              {closing.title}
+              {title}
             </Heading>
-            <Text onDark muted className="mx-auto mt-4">
-              {closing.text}
-            </Text>
-            <Button as={Link} href={closing.cta.href} variant="bright" className="mt-8">
-              {closing.cta.label}
+            {text && (
+              <Text onDark muted className="mx-auto mt-4">
+                {text}
+              </Text>
+            )}
+            <Button as={Link} href={cta.href} variant="bright" className="mt-8">
+              {cta.label}
             </Button>
           </div>
         </Reveal>
