@@ -441,11 +441,12 @@ export default function DesignSystemPage() {
               </div>
             </div>
             <Text size="sm" muted>
-              Campo lavorato in prospettiva con colline leggere e nodi che scorrono lungo i filari. Con
-              cursore fine la scena si inclina (max 2–3°) con parallasse tra terreno, nodi e alone; su
-              touch restano i nodi lenti; con movimento ridotto è statica. Il terreno è SVG
-              nell&apos;HTML, un solo requestAnimationFrame fermo fuori schermo. La variante tenue è per
-              fondi con testo sopra (footer).
+              Campo lavorato in prospettiva con colline leggere. Con cursore fine il terreno si abbassa
+              dove passa il cursore e torna piano poco dopo, con un piccolo rimbalzo (malleable); con
+              interactive la scena si inclina (max 2–3°) con parallasse tra terreno e alone. Touch,
+              movimento ridotto e assenza di JavaScript: scena statica. Il terreno è SVG nell&apos;HTML;
+              requestAnimationFrame solo durante il movimento. La variante tenue è per fondi con testo
+              sopra (footer).
             </Text>
           </div>
         </Container>

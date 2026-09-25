@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { reopenConsentBanner } from '@/lib/consent';
 import BrandLockup from './BrandLockup';
+import { FieldScene } from './motion';
 import { Container, Eyebrow } from './ui';
 import { NAV_PANELS } from './nav-data';
 
 const FISCAL = 'P.IVA IT04006460549';
 
 const LINK_CLASS =
-  'rounded font-agria-sans text-agria-sm text-agria-grey transition-colors hover:text-agria-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-dark focus-visible:ring-offset-2';
+  'rounded font-agria-sans text-agria-sm text-agria-on-dark-muted transition-colors hover:text-agria-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink';
 
 const panelLinks = (key) =>
   NAV_PANELS.find((panel) => panel.key === key).items.map(({ title, href }) => ({ label: title, href }));
@@ -44,12 +45,16 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-agria-border bg-agria-white">
-      <Container className="py-14 md:py-20">
+    // fondo scuro con la scena dei filari tenue: il campo si vede sotto il contenuto
+    <footer className="relative isolate overflow-hidden bg-agria-ink">
+      <FieldScene variant="subtle" interactive={false} lazy />
+      <Container className="relative z-10 pb-40 pt-14 md:pb-56 md:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
           {COLUMNS.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <Eyebrow as="h2">{column.title}</Eyebrow>
+              <Eyebrow as="h2" onDark>
+                {column.title}
+              </Eyebrow>
               <ul className="mt-4 flex flex-col gap-2.5">
                 {column.links.map((link) => (
                   <li key={link.href}>
@@ -64,9 +69,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-agria-border pt-8 md:flex-row md:items-center md:justify-between">
-          <BrandLockup tone="light" />
-          <p className="font-agria-sans text-agria-sm text-agria-grey">
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
+          <BrandLockup tone="dark" />
+          <p className="font-agria-sans text-agria-sm text-agria-on-dark-muted">
             © {new Date().getFullYear()} Agria System · {FISCAL}
           </p>
         </div>

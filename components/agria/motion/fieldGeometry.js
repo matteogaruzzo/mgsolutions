@@ -2,8 +2,10 @@
 // ondulato, visto dall'alto in prospettiva. I filari convergono con moderazione
 // (il bordo lontano resta largo, come un campo e non una strada) e le linee
 // trasversali rendono leggibili le colline.
-// Calcolata una sola volta a livello di modulo, identica su server e client:
-// l'SVG arriva già nell'HTML e la scena esiste anche senza JavaScript.
+// Il terreno è una griglia filari × campioni: le posizioni di base sono
+// calcolate una sola volta a livello di modulo, identiche su server e client
+// (l'SVG arriva già nell'HTML); la scena aggiunge sopra un avvallamento
+// `disp` (in unità di altezza, negativo = verso il basso) dove passa il cursore.
 
 export const VIEW = { width: 1600, height: 400 };
 
@@ -13,9 +15,12 @@ const FAR_Y = 30; // y del bordo lontano nel viewBox
 // orizzonte e focale ricavati dai due bordi: y = HORIZON + FOCAL / z
 const FOCAL = ((VIEW.height - FAR_Y) * Z_NEAR * Z_FAR) / (Z_FAR - Z_NEAR);
 const HORIZON = VIEW.height - FOCAL / Z_NEAR;
-const ROW_GAP = 64 / FOCAL; // 64 px tra i filari sul bordo vicino
 const ROWS_PER_SIDE = 46; // abbastanza per coprire la larghezza anche sul bordo lontano
-const SAMPLES = 18;
+export const ROW_GAP = 64 / FOCAL; // 64 px tra i filari sul bordo vicino
+export const ROWS = ROWS_PER_SIDE * 2 + 1;
+export const SAMPLES = 24;
+// linee trasversali: indici dei campioni in profondità (su filari alterni)
+const CONTOUR_SAMPLES = [1, 3, 5, 8, 11, 14, 17, 20];
 
 // Colline: ampiezza proporzionale alla distanza, quindi costante sullo
 // schermo (~23 px); circa due creste lungo la profondità.
@@ -24,61 +29,94 @@ function groundHeight(x, z) {
   return amp * (0.6 * Math.sin(3.8 * z + 0.9 * x + 0.4) + 0.4 * Math.sin(6.5 * z - 0.7 * x + 1.7));
 }
 
-// t: 0 = bordo vicino (fondo), 1 = bordo lontano
-export function project(x, t) {
-  const z = Z_NEAR + t * (Z_FAR - Z_NEAR);
-  const y = groundHeight(x, z);
-  return {
-    x: VIEW.width / 2 + (FOCAL * x) / z,
-    y: HORIZON + (FOCAL * (1 - y)) / z,
-    z,
-  };
+export const rowX = (i) => (i - ROWS_PER_SIDE) * ROW_GAP;
+// j: 0 = bordo vicino (fondo), SAMPLES - 1 = bordo lontano
+export const sampleZ = (j) => Z_NEAR + (j / (SAMPLES - 1)) * (Z_FAR - Z_NEAR);
+
+// posizioni di base sullo schermo (viewBox), indice = i * SAMPLES + j
+const BASE_X = new Float64Array(ROWS * SAMPLES);
+const BASE_Y = new Float64Array(ROWS * SAMPLES);
+const DEPTH = new Float64Array(ROWS * SAMPLES);
+for (let i = 0; i < ROWS; i++) {
+  for (let j = 0; j < SAMPLES; j++) {
+    const x = rowX(i);
+    const z = sampleZ(j);
+    const k = i * SAMPLES + j;
+    BASE_X[k] = VIEW.width / 2 + (FOCAL * x) / z;
+    BASE_Y[k] = HORIZON + (FOCAL * (1 - groundHeight(x, z))) / z;
+    DEPTH[k] = z;
+  }
 }
 
-function toPath(points) {
-  return points.map((p, i) => `${i ? 'L' : 'M'}${Math.round(p.x)} ${Math.round(p.y)}`).join('');
+// Il terreno cede: si abbassa (disp) e si allarga lateralmente dove si abbassa,
+// in proporzione alla pendenza dell'avvallamento tra i filari vicini. Senza lo
+// spostamento laterale l'avvallamento non si vedrebbe sui filari centrali,
+// quasi verticali sullo schermo.
+const SPREAD = 0.2;
+
+function screenPoint(k, disp) {
+  if (!disp) return [BASE_X[k], BASE_Y[k]];
+  const i = Math.floor(k / SAMPLES);
+  const left = i > 0 ? disp[k - SAMPLES] : disp[k];
+  const right = i < ROWS - 1 ? disp[k + SAMPLES] : disp[k];
+  const shift = (SPREAD * (right - left)) / (2 * ROW_GAP);
+  return [BASE_X[k] + (FOCAL * shift) / DEPTH[k], BASE_Y[k] - (FOCAL * disp[k]) / DEPTH[k]];
 }
 
-const ROW_XS = Array.from({ length: ROWS_PER_SIDE * 2 + 1 }, (_, i) => (i - ROWS_PER_SIDE) * ROW_GAP);
+// Tracciato compatto: primo punto assoluto, poi spostamenti relativi interi
+// ("l"); il segno meno fa da separatore, così l'HTML resta leggero.
+function pathOf(indices, disp) {
+  let d = '';
+  let px = 0;
+  let py = 0;
+  indices.forEach((k, n) => {
+    const [sx, sy] = screenPoint(k, disp);
+    const x = Math.round(sx);
+    const y = Math.round(sy);
+    if (n === 0) d = `M${x} ${y}l`;
+    else {
+      const dx = x - px;
+      const dy = y - py;
+      d += `${n > 1 && dx >= 0 ? ' ' : ''}${dx}${dy >= 0 ? ' ' : ''}${dy}`;
+    }
+    px = x;
+    py = y;
+  });
+  return d;
+}
 
-// filari: linee a x costante, dal bordo vicino a quello lontano
-export const ROW_PATHS = ROW_XS.map((x) =>
-  toPath(Array.from({ length: SAMPLES }, (_, i) => project(x, i / (SAMPLES - 1)))),
-);
+// Ogni filare è diviso in tratti di profondità: quando il cursore deforma il
+// terreno cambiano solo i tratti vicini, e il browser ridisegna solo quelli.
+const BAND_SAMPLES = 4;
+export const BANDS = Math.ceil((SAMPLES - 1) / BAND_SAMPLES);
+export const bandRange = (b) => [b * BAND_SAMPLES, Math.min((b + 1) * BAND_SAMPLES, SAMPLES - 1)];
 
-// linee trasversali tenui a distanza costante: disegnano il profilo delle colline
-export const CONTOUR_PATHS = [0.06, 0.16, 0.27, 0.38, 0.5, 0.62, 0.74, 0.86].map((t) =>
-  toPath(ROW_XS.filter((_, i) => i % 2 === 0).map((x) => project(x, t))),
-);
+// tratto b del filare i (i tratti condividono gli estremi, la linea è continua)
+export function rowPath(i, b, disp) {
+  const [j0, j1] = bandRange(b);
+  const indices = [];
+  for (let j = j0; j <= j1; j++) indices.push(i * SAMPLES + j);
+  return pathOf(indices, disp);
+}
 
-// Nodi: dati che viaggiano lungo i filari. row = indice del filare (0 = centro),
-// phase = posizione iniziale nel ciclo, period = secondi per percorrere il filare,
-// dir = 1 verso l'osservatore, -1 verso il fondo.
-export const NODES = [
-  { row: -2, phase: 0.1, period: 19, dir: 1 },
-  { row: 3, phase: 0.55, period: 23, dir: 1 },
-  { row: -6, phase: 0.35, period: 21, dir: -1 },
-  { row: 8, phase: 0.8, period: 25, dir: 1 },
-  { row: 0, phase: 0.62, period: 27, dir: -1 },
-  { row: -10, phase: 0.2, period: 24, dir: 1 },
-  { row: 5, phase: 0.05, period: 20, dir: -1 },
-  { row: -4, phase: 0.9, period: 22, dir: 1 },
-  { row: 12, phase: 0.45, period: 26, dir: 1 },
-];
+// linea trasversale c: a distanza costante, su filari alterni
+export function contourPath(c, disp) {
+  const j = CONTOUR_SAMPLES[c];
+  const indices = [];
+  for (let i = 0; i < ROWS; i += 2) indices.push(i * SAMPLES + j);
+  return pathOf(indices, disp);
+}
 
-// Posizione di un nodo al tempo `seconds`: coordinate nel viewBox, raggio
-// (più grande vicino all'osservatore) e opacità (sfuma alle due estremità).
-export function nodeAt(node, seconds) {
-  const cycle = (node.phase + seconds / node.period) % 1;
-  const t = node.dir === 1 ? 1 - cycle : cycle;
-  const p = project(node.row * ROW_GAP, t);
-  const r = Math.max(1.6, (0.016 * FOCAL) / p.z);
-  const fade = Math.min(1, t / 0.12, (1 - t) / 0.2);
-  // arrotondati: gli stessi valori vanno nell'HTML del server e nel client
-  return {
-    x: Math.round(p.x * 10) / 10,
-    y: Math.round(p.y * 10) / 10,
-    r: Math.round(r * 10) / 10,
-    opacity: Math.round(Math.max(0, fade) * 100) / 100,
-  };
+export const CONTOURS = CONTOUR_SAMPLES.length;
+// indice = i * BANDS + b
+export const ROW_PATHS = Array.from({ length: ROWS * BANDS }, (_, n) => rowPath(Math.floor(n / BANDS), n % BANDS, null));
+export const CONTOUR_PATHS = Array.from({ length: CONTOURS }, (_, c) => contourPath(c, null));
+
+// Punto del viewBox → coordinate sul terreno (x laterale, z distanza), sul
+// piano medio senza colline; null se il punto è fuori dal campo.
+export function toGround(vx, vy) {
+  if (vy <= HORIZON) return null;
+  const z = FOCAL / (vy - HORIZON);
+  if (z < Z_NEAR * 0.85 || z > Z_FAR) return null;
+  return { x: ((vx - VIEW.width / 2) * z) / FOCAL, z };
 }
