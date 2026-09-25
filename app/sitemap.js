@@ -11,6 +11,11 @@ export default function sitemap() {
     (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 })
   );
 
+  // pagine delle tre aree AGRIA (Prompt 12); l'indice /servizi è già in coreRoutes
+  const agriaServiceRoutes = ['/servizi/digital-presence', '/servizi/digital-commerce', '/servizi/digital-automation'].map(
+    (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 })
+  );
+
   const softwareSectorRoutes = ['/software/vitivinicolo', '/software/hospitality', '/software/frantoi'].map(
     (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 })
   );
@@ -88,6 +93,7 @@ export default function sitemap() {
   return [
     ...home,
     ...coreRoutes,
+    ...agriaServiceRoutes,
     ...softwareSectorRoutes,
     ...secondaryRoutes,
     ...utilityRoutes,

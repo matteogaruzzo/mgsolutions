@@ -1,7 +1,10 @@
 // su superfici scure l'etichetta usa green-bright (green-dark non raggiunge 4.5:1)
-export default function Eyebrow({ as: Tag = 'p', onDark = false, children, className = '' }) {
+export default function Eyebrow({ as: Tag = 'p', onDark = false, children, className = '', ...props }) {
   return (
-    <Tag className={`font-agria-mono text-agria-label uppercase ${onDark ? 'text-agria-green-bright' : 'text-agria-green-dark'} ${className}`}>
+    <Tag
+      className={`font-agria-mono text-agria-label uppercase ${onDark ? 'text-agria-green-bright' : 'text-agria-green-dark'} ${className}`}
+      {...props}
+    >
       {children}
     </Tag>
   );
