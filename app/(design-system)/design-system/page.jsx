@@ -26,6 +26,7 @@ import {
   contrastRatio,
 } from './contrast';
 import FocusOverlayDemo from './FocusOverlayDemo';
+import Icon, { ICON_NAMES } from '@/components/agria/icons/Icon';
 
 const PREVIEW_ENABLED =
   process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DESIGN_PREVIEW === 'true';
@@ -447,6 +448,28 @@ export default function DesignSystemPage() {
               movimento ridotto e assenza di JavaScript: scena statica. Il terreno è SVG nell&apos;HTML;
               requestAnimationFrame solo durante il movimento. La variante tenue è per fondi con testo
               sopra (footer).
+            </Text>
+          </div>
+
+          <div className="flex flex-col gap-3 border-t border-agria-border pt-8">
+            <Text as="p" size="sm" muted className="font-agria-mono uppercase">
+              Set di icone
+            </Text>
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+              {ICON_NAMES.map((name) => (
+                <li
+                  key={name}
+                  className="flex items-center gap-3 rounded-xl border border-agria-border px-3 py-3 text-agria-green-dark"
+                >
+                  <Icon name={name} />
+                  <span className="font-agria-mono text-[11px] text-agria-grey">{name}</span>
+                </li>
+              ))}
+            </ul>
+            <Text size="sm" muted>
+              20×20, tratto 1,5 px, colore corrente, terminali arrotondati. Definite una sola volta in
+              components/agria/icons/Icon.jsx e usate con &lt;Icon name=&quot;…&quot; /&gt;; decorative
+              (aria-hidden), il significato sta nel testo accanto. Nessuna emoji nel sito.
             </Text>
           </div>
         </Container>

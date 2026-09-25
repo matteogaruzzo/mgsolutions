@@ -1,0 +1,403 @@
+/* Template delle pagine area (Prompt 13). Tutte le transizioni esistono solo con
+   prefers-reduced-motion: no-preference; senza JavaScript pannelli e risposte
+   sono visibili (@media (scripting: none)). */
+
+/* ---------- Cosa costruiamo: elenco e anteprima ---------- */
+.selectorList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(var(--agria-border));
+}
+
+.selectorItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 8px;
+  border-bottom: 1px solid rgb(var(--agria-border));
+  text-align: left;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: rgb(var(--agria-grey));
+}
+
+.selectorItem[aria-selected='true'] {
+  color: rgb(var(--agria-graphite));
+}
+
+.selectorArrow {
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+.selectorItem[aria-selected='true'] .selectorArrow {
+  opacity: 1;
+  transform: none;
+  color: rgb(var(--agria-green-dark));
+}
+
+.previewStage {
+  min-width: 0;
+}
+
+.previewPanel {
+  overflow: hidden;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 1.25rem;
+  background: rgb(var(--agria-white));
+  box-shadow: 0 30px 60px -34px rgb(var(--agria-graphite) / 0.3);
+}
+
+.previewBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgb(var(--agria-border));
+  background: rgb(var(--agria-offwhite));
+}
+
+.previewBar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgb(var(--agria-border));
+}
+
+.previewBar i {
+  flex: 1;
+  max-width: 240px;
+  height: 18px;
+  margin-left: 12px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 999px;
+  background: rgb(var(--agria-white));
+}
+
+.previewImage {
+  position: relative;
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  border-radius: 0.9rem;
+}
+
+.previewBody {
+  padding: clamp(18px, 3vw, 32px);
+  background: rgb(var(--agria-offwhite));
+}
+
+/* senza JavaScript: elenco nascosto, tutte le anteprime una sotto l'altra */
+@media (scripting: none) {
+  .selectorRoot [role='tablist'] {
+    display: none;
+  }
+  .selectorRoot [role='tabpanel'][hidden] {
+    display: block;
+    margin-top: 24px;
+  }
+}
+
+/* ---------- AI: filigrana ---------- */
+.watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  transform: translate(-50%, -54%);
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: clamp(9rem, 30vw, 24rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: rgb(var(--agria-graphite) / 0.045);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Metodo: linea temporale ---------- */
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+  /* la linea che unisce i passi */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 7px;
+    height: 1px;
+    background: rgb(255 255 255 / 0.14);
+  }
+}
+
+.step {
+  position: relative;
+  padding: 28px 12px 16px 36px;
+  cursor: default;
+}
+
+@media (min-width: 768px) {
+  .step {
+    padding: 36px 12px 12px 0;
+  }
+}
+
+.stepDot {
+  position: absolute;
+  left: 8px;
+  top: 34px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgb(var(--agria-green-bright) / 0.6);
+  border-radius: 999px;
+  background: rgb(var(--agria-ink));
+}
+
+@media (min-width: 768px) {
+  .stepDot {
+    left: 0;
+    top: 0;
+  }
+}
+
+.step[data-active] .stepDot {
+  background: rgb(var(--agria-green-bright));
+  box-shadow: 0 0 0 5px rgb(var(--agria-green-bright) / 0.15);
+}
+
+.stepBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0.35;
+}
+
+.stepBody > * {
+  overflow: hidden;
+}
+
+.step[data-active] .stepBody,
+.step:focus-within .stepBody {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (scripting: none) {
+  .stepBody {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+/* ---------- Deliverable ---------- */
+.deliverables {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgb(var(--agria-border));
+}
+
+.deliverable {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 6px 16px;
+  padding: 18px 12px;
+  border-bottom: 1px solid rgb(var(--agria-border));
+  border-radius: 0.6rem;
+}
+
+@media (min-width: 640px) {
+  .deliverable {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+  }
+}
+
+.deliverable:hover {
+  background: rgb(var(--agria-offwhite));
+}
+
+.category {
+  grid-column: 2;
+  justify-self: start;
+  font-family: var(--font-agria-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--agria-green-dark));
+  border: 1px solid rgb(var(--agria-green) / 0.35);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+@media (min-width: 640px) {
+  .category {
+    grid-column: auto;
+    justify-self: end;
+  }
+}
+
+/* ---------- Verticali: schede a pillola ---------- */
+.segmented {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 999px;
+  background: rgb(var(--agria-white));
+}
+
+.segment {
+  color: rgb(var(--agria-grey));
+}
+
+.segment:hover {
+  color: rgb(var(--agria-graphite));
+}
+
+.segment[aria-selected='true'] {
+  background: rgb(var(--agria-graphite));
+  color: rgb(var(--agria-white));
+}
+
+/* nome del settore: per i lettori di schermo con le schede, visibile senza JavaScript */
+.panelTitle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (scripting: none) {
+  .verticalsRoot [role='tablist'] {
+    display: none;
+  }
+  .verticalsRoot [role='tabpanel'][hidden] {
+    display: block;
+  }
+  .panelTitle {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    margin-bottom: 16px;
+    font-family: var(--font-agria-mono), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--agria-green-dark));
+  }
+}
+
+/* ---------- FAQ ---------- */
+.faqIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: rgb(var(--agria-green-dark));
+}
+
+@media (scripting: none) {
+  .faqList [hidden] {
+    display: block;
+  }
+  .faqIcon {
+    display: none;
+  }
+}
+
+/* ---------- CTA fissa ---------- */
+.sticky {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+}
+
+@media (min-width: 640px) {
+  .sticky {
+    left: 24px;
+    bottom: 24px;
+  }
+}
+
+.sticky[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* ---------- transizioni ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .selectorItem {
+    transition: color 0.25s ease;
+  }
+  .selectorArrow {
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+  .previewPanel:not([hidden]) {
+    animation: preview-in 0.4s ease both;
+  }
+  .stepBody {
+    transition:
+      grid-template-rows 0.35s ease,
+      opacity 0.35s ease;
+  }
+  .stepDot {
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .deliverable {
+    transition: background-color 0.2s ease;
+  }
+  .segment {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+  .sticky {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
+  .sticky[data-visible] {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0s;
+  }
+}
+
+@keyframes preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

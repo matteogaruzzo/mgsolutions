@@ -5,10 +5,11 @@ import styles from './PageHero.module.css';
 
 // Hero compatto delle pagine interne: fondo scuro con la scena dei filari in
 // versione ridotta, etichetta, h1 (unico della pagina), sottotitolo e, se
-// presenti, CTA e pill. Allineato a sinistra; la scena resta nella parte bassa.
-export default function PageHero({ eyebrow, title, lead, cta, pills, titleId = 'page-title' }) {
+// presenti, una o due CTA e le pill. Allineato a sinistra; la scena resta
+// nella parte bassa.
+export default function PageHero({ eyebrow, title, lead, cta, secondaryCta, pills, titleId = 'page-title', id }) {
   return (
-    <section className={styles.hero} aria-labelledby={titleId}>
+    <section id={id} className={styles.hero} aria-labelledby={titleId}>
       <FieldScene style={{ '--field-ground': 'calc(var(--hero-pad-bottom) + 40px)' }} />
       <Container className={styles.content}>
         <Eyebrow onDark>{eyebrow}</Eyebrow>
@@ -20,11 +21,18 @@ export default function PageHero({ eyebrow, title, lead, cta, pills, titleId = '
             {lead}
           </Text>
         )}
-        {cta && (
-          <div className="mt-8">
-            <Button as={Link} href={cta.href} variant="bright">
-              {cta.label}
-            </Button>
+        {(cta || secondaryCta) && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {cta && (
+              <Button as={Link} href={cta.href} variant="bright">
+                {cta.label}
+              </Button>
+            )}
+            {secondaryCta && (
+              <Button href={secondaryCta.href} variant="line">
+                {secondaryCta.label}
+              </Button>
+            )}
           </div>
         )}
         {pills && pills.length > 0 && (
