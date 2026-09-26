@@ -24,6 +24,41 @@ import {
 import styles from './ContactForm.module.css';
 
 const ENDPOINT = '/api/contact';
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+const RECAPTCHA_ACTION = 'contact_form';
+
+// Carica reCAPTCHA v3 una sola volta (badge nascosto, avviso sotto il pulsante).
+let recaptchaLoading = null;
+function loadRecaptcha() {
+  if (!RECAPTCHA_KEY || typeof window === 'undefined') return Promise.resolve(null);
+  if (window.grecaptcha?.execute) return Promise.resolve(window.grecaptcha);
+  if (!recaptchaLoading) {
+    recaptchaLoading = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(RECAPTCHA_KEY)}`;
+      script.async = true;
+      script.onload = () => window.grecaptcha.ready(() => resolve(window.grecaptcha));
+      script.onerror = () => {
+        recaptchaLoading = null;
+        resolve(null);
+      };
+      document.head.appendChild(script);
+    });
+  }
+  return recaptchaLoading;
+}
+
+// Token appena generato (vale due minuti e un solo uso). Senza token il server
+// rifiuta la richiesta con il messaggio di verifica non riuscita.
+async function recaptchaToken() {
+  const timeout = new Promise((resolve) => setTimeout(() => resolve(''), 8000));
+  const token = (async () => {
+    const grecaptcha = await loadRecaptcha();
+    if (!grecaptcha) return '';
+    return grecaptcha.execute(RECAPTCHA_KEY, { action: RECAPTCHA_ACTION });
+  })().catch(() => '');
+  return Promise.race([token, timeout]);
+}
 const BOOKING_PATH = '/contatti/prenota';
 
 // Gruppo di scelte esclusive con radio nativi: frecce per cambiare scelta,
@@ -114,6 +149,11 @@ export default function ContactForm({ moduleLabels = {} }) {
         : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
   }, []);
 
+  // reCAPTCHA si carica con la pagina: il punteggio tiene conto della visita
+  useEffect(() => {
+    loadRecaptcha();
+  }, []);
+
   // arrivo dal configuratore della homepage: moduli scelti nel messaggio
   useEffect(() => {
     const ids = new URLSearchParams(window.location.search).getAll('moduli');
@@ -189,6 +229,7 @@ export default function ContactForm({ moduleLabels = {} }) {
     sendingRef.current = true;
     setStatus('sending');
     try {
+      const token = await recaptchaToken();
       const response = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -197,6 +238,7 @@ export default function ContactForm({ moduleLabels = {} }) {
           submissionId: submissionIdRef.current,
           pageUri: window.location.href,
           pageName: document.title,
+          recaptchaToken: token,
         }),
       });
       const data = await response.json().catch(() => ({}));
@@ -544,6 +586,17 @@ export default function ContactForm({ moduleLabels = {} }) {
             </Button>
           )}
         </div>
+        <p className={`${styles.recaptchaNote} ${styles.jsOnly}`}>
+          {copy.recaptcha.before}
+          <a href={copy.recaptcha.privacyHref} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>
+            {copy.recaptcha.privacy}
+          </a>
+          {copy.recaptcha.middle}
+          <a href={copy.recaptcha.termsHref} target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>
+            {copy.recaptcha.terms}
+          </a>
+          {copy.recaptcha.after}
+        </p>
       </form>
     </div>
   );

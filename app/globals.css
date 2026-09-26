@@ -262,6 +262,12 @@ p {
   }
 }
 
+/* reCAPTCHA v3 del modulo contatti: badge nascosto, sostituito dall'avviso
+   testuale sotto il pulsante di invio (consentito dalle FAQ di Google) */
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 /* reveal allo scroll */
 .reveal {
   opacity: 0;

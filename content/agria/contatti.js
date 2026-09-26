@@ -56,6 +56,16 @@ export const form = {
     edit: 'Modifica',
   },
   progress: (current, total) => `Passo ${current} di ${total}`,
+  // avviso richiesto da Google quando il badge reCAPTCHA è nascosto
+  recaptcha: {
+    before: 'Questo sito è protetto da reCAPTCHA: si applicano le ',
+    privacy: 'Norme sulla privacy',
+    privacyHref: 'https://policies.google.com/privacy',
+    middle: ' e i ',
+    terms: 'Termini di servizio',
+    termsHref: 'https://policies.google.com/terms',
+    after: ' di Google.',
+  },
   requiredNote: 'Tutti i campi sono obbligatori, salvo dove indicato.',
   errorSummary: 'Controlla i campi evidenziati.',
   sendError:

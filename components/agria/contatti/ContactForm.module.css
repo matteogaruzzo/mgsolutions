@@ -518,6 +518,15 @@ fieldset[data-invalid] .cardChoice:not([data-checked]) {
   border-radius: 999px;
 }
 
+/* reCAPTCHA v3: avviso testuale sotto il pulsante (badge nascosto in globals.css) */
+.recaptchaNote {
+  margin-top: 16px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgb(var(--agria-grey));
+}
+
 /* campo trappola per i bot */
 .trap {
   position: absolute;
