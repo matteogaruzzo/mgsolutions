@@ -16,6 +16,14 @@ export default function sitemap() {
     (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 })
   );
 
+  // pagina Azienda AGRIA (Prompt 14)
+  const agriaRoutes = ['/azienda'].map((path) => ({
+    url: `${base}${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
   const softwareSectorRoutes = ['/software/vitivinicolo', '/software/hospitality', '/software/frantoi'].map(
     (path) => ({ url: `${base}${path}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 })
   );
@@ -94,6 +102,7 @@ export default function sitemap() {
     ...home,
     ...coreRoutes,
     ...agriaServiceRoutes,
+    ...agriaRoutes,
     ...softwareSectorRoutes,
     ...secondaryRoutes,
     ...utilityRoutes,

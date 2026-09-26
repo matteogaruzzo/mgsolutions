@@ -1,0 +1,353 @@
+/* Pagina Azienda (Prompt 14): interazioni proprie della pagina. Tutte le
+   transizioni esistono solo con prefers-reduced-motion: no-preference; senza
+   JavaScript pannelli, schede e linea temporale sono interamente visibili
+   (@media (scripting: none)). */
+
+/* ---------- Principi: fisarmonica orizzontale ---------- */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 1.25rem;
+  background: rgb(var(--agria-white));
+  cursor: default;
+}
+
+.panel[data-active] {
+  border-color: rgb(var(--agria-green) / 0.45);
+  box-shadow: 0 18px 42px rgb(var(--agria-graphite) / 0.07);
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* titolo in verticale del pannello chiuso: solo da md */
+.panelSide {
+  display: none;
+}
+
+.panelMain {
+  min-width: 0;
+}
+
+/* il testo resta nel documento anche da chiuso: si apre in altezza */
+.panelBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.panelBody > * {
+  overflow: hidden;
+}
+
+.panel[data-active] .panelBody {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .accordion {
+    flex-direction: row;
+    gap: 12px;
+    height: clamp(400px, 42vw, 480px);
+  }
+
+  .panel {
+    flex: 1 1 0;
+    justify-content: space-between;
+    padding: 24px;
+  }
+
+  .panel[data-active] {
+    flex-grow: 2.6;
+  }
+
+  .panelSide {
+    display: block;
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    max-height: calc(100% - 104px);
+    overflow: hidden;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-agria-sans), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    color: rgb(var(--agria-graphite));
+  }
+
+  .panel[data-active] .panelSide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* titolo e testo del pannello aperto: compaiono quando il pannello si è
+     allargato. Da chiusi sono trasparenti, non cliccabili né selezionabili,
+     ma restano nell'albero di accessibilità (niente visibility: hidden) */
+  .panelMain {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .panel[data-active] .panelMain {
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .panelSide {
+    font-size: 1.125rem;
+  }
+}
+
+@media (scripting: none) {
+  .accordion {
+    flex-direction: column;
+    height: auto;
+  }
+  .panelSide {
+    display: none;
+  }
+  .panelMain,
+  .panelBody {
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+  }
+  .panelBody {
+    grid-template-rows: 1fr;
+  }
+}
+
+/* ---------- Team: ritratti con scheda che si apre ---------- */
+.person {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 1.5rem;
+  background: rgb(var(--agria-white));
+}
+
+.person:hover,
+.person:focus-within {
+  border-color: rgb(var(--agria-green) / 0.45);
+}
+
+/* iniziali su fondo tipografico, finché non c'è la foto */
+.initials {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgb(var(--agria-offwhite));
+}
+
+.initialsGhost {
+  position: absolute;
+  right: -4%;
+  bottom: -16%;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: clamp(11rem, 26vw, 17rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.07em;
+  color: rgb(var(--agria-graphite) / 0.05);
+  user-select: none;
+}
+
+.initialsMark {
+  position: relative;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: rgb(var(--agria-green-dark));
+}
+
+/* riga di dettaglio: nel documento sempre, visibile al passaggio o al focus */
+.personDetail {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.personDetail > * {
+  overflow: hidden;
+}
+
+.person:hover .personDetail,
+.person:focus-within .personDetail {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* senza cursore (touch) e senza JavaScript: sempre aperta */
+@media (hover: none), (scripting: none) {
+  .personDetail {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+/* ---------- Come si lavora con noi: linea temporale verticale ---------- */
+.timeline {
+  --progress: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* binario e riempimento: il riempimento cresce con lo scorrimento (--progress) */
+.timeline::before,
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  border-radius: 999px;
+}
+
+.timeline::before {
+  background: rgb(var(--agria-border));
+}
+
+.timeline::after {
+  background: rgb(var(--agria-green-dark));
+  transform: scaleY(var(--progress));
+  transform-origin: top;
+}
+
+.tstep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 999px;
+  background: rgb(var(--agria-white));
+  color: rgb(var(--agria-grey));
+}
+
+.tstep[data-lit] .marker {
+  border-color: rgb(var(--agria-green-dark));
+  background: rgb(var(--agria-green-dark));
+  color: rgb(var(--agria-white));
+  box-shadow: 0 0 0 6px rgb(var(--agria-green) / 0.14);
+}
+
+.tstepTitle {
+  color: rgb(var(--agria-grey));
+}
+
+.tstep[data-lit] .tstepTitle {
+  color: rgb(var(--agria-graphite));
+}
+
+@media (scripting: none) {
+  .timeline::after {
+    transform: none;
+  }
+  .marker {
+    border-color: rgb(var(--agria-green-dark));
+    background: rgb(var(--agria-green-dark));
+    color: rgb(var(--agria-white));
+  }
+  .tstepTitle {
+    color: rgb(var(--agria-graphite));
+  }
+}
+
+/* ---------- transizioni ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    transition:
+      flex-grow 0.55s cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .panelBody {
+    transition:
+      grid-template-rows 0.35s ease,
+      opacity 0.35s ease;
+  }
+  .panelSide {
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+  .panel:not([data-active]) .panelSide {
+    transition:
+      opacity 0.2s ease 0.3s,
+      visibility 0s linear 0.3s;
+  }
+  .panelMain {
+    transition: opacity 0.35s ease 0.18s;
+  }
+  .person {
+    transition: border-color 0.3s ease;
+  }
+  .personDetail {
+    transition:
+      grid-template-rows 0.35s ease,
+      opacity 0.35s ease;
+  }
+  .timeline::after {
+    transition: transform 0.25s ease-out;
+  }
+  .marker {
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+  .tstepTitle {
+    transition: color 0.35s ease;
+  }
+}
