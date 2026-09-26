@@ -85,7 +85,7 @@ Contenuti in `content/agria/azienda.js`, componenti in `components/agria/azienda
 | 8 | Dati aziendali | off-white | denominazione, indirizzo, P.IVA, email, telefono |
 | 9 | CTA finale | ink | CTA a riempimento |
 
-**Copy:** sezioni 3-9 riscritte (frasi dichiarative, affermazioni verificabili, nessuna promessa, nessuna metrica). Hero e posizionamento: tre proposte in attesa di scelta.
+**Copy:** riscritta per intero (frasi dichiarative, affermazioni verificabili, nessuna promessa, nessuna metrica). Hero e posizionamento dalla proposta A scelta fra tre: *L'infrastruttura digitale di chi produce e accoglie.* e *Tre settori. Nessuna eccezione.*
 
 **Accessibilità:** i pannelli chiusi della fisarmonica restano nell'albero di accessibilità (trasparenti, non cliccabili, mai `visibility: hidden`); senza JavaScript pannelli, schede e linea temporale sono tutti aperti; con movimento ridotto nessuna transizione e linea accesa subito.
 

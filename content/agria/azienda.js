@@ -1,5 +1,5 @@
 // =====================================================================
-//  PAGINA AZIENDA — copy approvato (Prompt 14, sezioni 3-9 riscritte). Modificare qui i testi,
+//  PAGINA AZIENDA — copy approvato (Prompt 14, riscritto: proposta A per hero e posizionamento). Modificare qui i testi,
 //  non nei componenti. Nessun testo va aggiunto senza approvazione.
 //  Ordine delle sezioni: app/(site)/azienda/page.jsx.
 //  icon: nome di un'icona del set (components/agria/icons/Icon.jsx).
@@ -19,8 +19,8 @@ export const meta = {
 // 1. Hero
 export const hero = {
   eyebrow: 'Azienda',
-  title: "Una technology company, non un'agenzia.",
-  lead: 'Agria System progetta e costruisce i sistemi digitali di agriturismi, hotel, cantine e frantoi. Lavoriamo su pochi settori, in profondità, e sviluppiamo internamente tutto quello che consegniamo.',
+  title: "L'infrastruttura digitale di chi produce e accoglie.",
+  lead: 'Agria System progetta, sviluppa e gestisce i sistemi digitali di agriturismi, hotel, cantine e frantoi. Siti, vendita diretta, automazioni e dati, costruiti internamente e di proprietà del cliente.',
   primary: CONTACT,
   secondary: { label: 'Vedi i servizi', href: '/servizi' },
 };
@@ -28,8 +28,8 @@ export const hero = {
 // 2. Posizionamento
 export const positioning = {
   eyebrow: 'Chi siamo',
-  title: 'Tre persone, tre mestieri, un solo sistema.',
-  text: "Nasciamo dall'esperienza sul campo con aziende agroalimentari e strutture ricettive. Abbiamo scelto di concentrarci su tre settori invece di accettare qualunque progetto, perché conoscere un mestiere cambia il risultato più di qualsiasi tecnologia.",
+  title: 'Tre settori. Nessuna eccezione.',
+  text: 'Lavoriamo solo con hospitality, cantine e frantoi. Conosciamo i loro strumenti, i loro canali di vendita e i loro processi. Per questo rifiutiamo i progetti fuori da questi settori.',
 };
 
 // 3. Principi: fisarmonica orizzontale (components/agria/azienda/PrinciplesAccordion.jsx)
