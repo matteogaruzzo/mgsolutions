@@ -4,7 +4,7 @@
       "key": "azienda/territorio",
       "destination": "azienda",
       "id": "w1rubslCFbM",
-      "src": "https://images.unsplash.com/photo-1783410839168-a8f71122fd71?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8aXRhbGlhbiUyMGNvdW50cnlzaWRlJTIwcm9sbGluZyUyMGhpbGxzfGVufDF8MHx8fDE3OTA0MTY2MzB8MA&ixlib=rb-4.1.0",
+      "src": "https://images.unsplash.com/photo-1783410839168-a8f71122fd71?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI4NjA3fA&ixlib=rb-4.1.0",
       "width": 4500,
       "height": 3000,
       "color": "#f3f3f3",
@@ -14,10 +14,10 @@
       "photographer": {
         "name": "Filippo Molinari",
         "username": "fmolinari00",
-        "profileUrl": "https://unsplash.com/@fmolinari00?utm_source=agria_system&utm_medium=referral"
+        "profileUrl": "https://unsplash.com/@fmolinari00?utm_source=agria_website&utm_medium=referral"
       },
-      "photoUrl": "https://unsplash.com/photos/rural-houses-and-trees-on-green-hills-w1rubslCFbM?utm_source=agria_system&utm_medium=referral",
-      "unsplashUrl": "https://unsplash.com/?utm_source=agria_system&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/rural-houses-and-trees-on-green-hills-w1rubslCFbM?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "italian countryside rolling hills",
       "date": "2026-09-26"
     },
@@ -25,7 +25,7 @@
       "key": "servizi/automation",
       "destination": "servizi",
       "id": "fuiexaKxlhk",
-      "src": "https://images.unsplash.com/photo-1599583623464-2a6193ef4fae?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8ZmFybWVyJTIwdXNpbmclMjB0YWJsZXQlMjBhdCUyMGRlc2t8ZW58MXwwfHx8MTc5MDQxNjYyOXww&ixlib=rb-4.1.0",
+      "src": "https://images.unsplash.com/photo-1599583623464-2a6193ef4fae?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI4NjA2fA&ixlib=rb-4.1.0",
       "width": 4826,
       "height": 2399,
       "color": "#262626",
@@ -35,10 +35,10 @@
       "photographer": {
         "name": "Tool., Inc",
         "username": "tool_inc",
-        "profileUrl": "https://unsplash.com/@tool_inc?utm_source=agria_system&utm_medium=referral"
+        "profileUrl": "https://unsplash.com/@tool_inc?utm_source=agria_website&utm_medium=referral"
       },
-      "photoUrl": "https://unsplash.com/photos/person-in-brown-and-black-plaid-long-sleeve-shirt-using-black-laptop-computer-fuiexaKxlhk?utm_source=agria_system&utm_medium=referral",
-      "unsplashUrl": "https://unsplash.com/?utm_source=agria_system&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/person-in-brown-and-black-plaid-long-sleeve-shirt-using-black-laptop-computer-fuiexaKxlhk?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "farmer using tablet at desk",
       "date": "2026-09-26"
     },
@@ -56,10 +56,10 @@
       "photographer": {
         "name": "Wander Fleur",
         "username": "wanderfleur",
-        "profileUrl": "https://unsplash.com/@wanderfleur?utm_source=agria_system&utm_medium=referral"
+        "profileUrl": "https://unsplash.com/@wanderfleur?utm_source=agria_website&utm_medium=referral"
       },
-      "photoUrl": "https://unsplash.com/photos/white-and-gray-floral-window-curtain-pdFLNMuMuzk?utm_source=agria_system&utm_medium=referral",
-      "unsplashUrl": "https://unsplash.com/?utm_source=agria_system&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/white-and-gray-floral-window-curtain-pdFLNMuMuzk?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "wine bottles shipping box",
       "date": "2026-09-26"
     },
@@ -67,7 +67,7 @@
       "key": "servizi/presence",
       "destination": "servizi",
       "id": "wOkEwfChQqM",
-      "src": "https://images.unsplash.com/photo-1724230758718-406bab979e67?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8cnVzdGljJTIwaG90ZWwlMjByZWNlcHRpb24lMjBuYXR1cmFsJTIwbGlnaHR8ZW58MXwwfHx8MTc5MDQxNjU5M3ww&ixlib=rb-4.1.0",
+      "src": "https://images.unsplash.com/photo-1724230758718-406bab979e67?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI4NjA2fA&ixlib=rb-4.1.0",
       "width": 6000,
       "height": 4000,
       "color": "#262626",
@@ -77,11 +77,53 @@
       "photographer": {
         "name": "Zoshua Colah",
         "username": "zoshuacolah",
-        "profileUrl": "https://unsplash.com/@zoshuacolah?utm_source=agria_system&utm_medium=referral"
+        "profileUrl": "https://unsplash.com/@zoshuacolah?utm_source=agria_website&utm_medium=referral"
       },
-      "photoUrl": "https://unsplash.com/photos/a-woman-is-standing-at-the-front-desk-of-a-restaurant-wOkEwfChQqM?utm_source=agria_system&utm_medium=referral",
-      "unsplashUrl": "https://unsplash.com/?utm_source=agria_system&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-woman-is-standing-at-the-front-desk-of-a-restaurant-wOkEwfChQqM?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "rustic hotel reception natural light",
+      "date": "2026-09-26"
+    },
+    "settori/cantine": {
+      "key": "settori/cantine",
+      "destination": "settori",
+      "id": "PUDQGDlM_V8",
+      "src": "https://images.unsplash.com/photo-1529060532150-a0c935a6d6e5?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8d2luZSUyMGNlbGxhciUyMG9hayUyMGJhcnJlbHN8ZW58MXwwfHx8MTc5MDQyODYwOXww&ixlib=rb-4.1.0",
+      "width": 5472,
+      "height": 3648,
+      "color": "#260c0c",
+      "alt": "Botti di legno allineate in una cantina",
+      "quality": 80,
+      "bytes": 143247,
+      "photographer": {
+        "name": "Daniel Vogel",
+        "username": "vogel11",
+        "profileUrl": "https://unsplash.com/@vogel11?utm_source=agria_website&utm_medium=referral"
+      },
+      "photoUrl": "https://unsplash.com/photos/round-photo-frame-lot-on-wall-PUDQGDlM_V8?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
+      "query": "wine cellar oak barrels",
+      "date": "2026-09-26"
+    },
+    "settori/hospitality": {
+      "key": "settori/hospitality",
+      "destination": "settori",
+      "id": "qegPEtazWCY",
+      "src": "https://images.unsplash.com/photo-1533554030380-20991a0f9c9e?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8aXRhbGlhbiUyMGZhcm1ob3VzZSUyMGd1ZXN0JTIwcm9vbXxlbnwxfDB8fHwxNzkwNDI4NjA3fDA&ixlib=rb-4.1.0",
+      "width": 5818,
+      "height": 3879,
+      "color": "#d9d9f3",
+      "alt": "Camera di una struttura ricettiva in campagna",
+      "quality": 80,
+      "bytes": 314426,
+      "photographer": {
+        "name": "Yanapi Senaud",
+        "username": "yaanapi",
+        "profileUrl": "https://unsplash.com/@yaanapi?utm_source=agria_website&utm_medium=referral"
+      },
+      "photoUrl": "https://unsplash.com/photos/gazebo-outside-white-painted-building-qegPEtazWCY?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
+      "query": "italian farmhouse guest room",
       "date": "2026-09-26"
     }
   },
