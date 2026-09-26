@@ -5,7 +5,7 @@
 //  icon: nome di un'icona del set (components/agria/icons/Icon.jsx).
 // =====================================================================
 
-import { agriaImage, agriaImageOr } from '@/lib/agria-images';
+import { agriaImage } from '@/lib/agria-images';
 
 const CONTACT = '/contatti';
 const WRITE = { label: 'Scrivici in due righe', href: CONTACT };
@@ -22,12 +22,8 @@ const CLOSING_TEXT =
 // accreditate, in attesa delle foto dedicate (vedi report 13).
 const tiles = (...pairs) => pairs.map(([title, text]) => ({ title, text }));
 
-// foto del settore Hospitality dalla pipeline (settori/hospitality); ripiego
-// sulla foto locale finché la voce non è nel manifest
-const HOSPITALITY_PHOTO = agriaImageOr('settori/hospitality', {
-  src: '/images/agria/settori/hospitality.jpg',
-  alt: 'Camera con letto matrimoniale e lampade accese sui comodini',
-});
+// foto del settore Hospitality dalla pipeline (settori/hospitality)
+const HOSPITALITY_PHOTO = agriaImage('settori/hospitality');
 
 export const SECTOR_LABELS = { hospitality: 'Hospitality', cantine: 'Cantine', frantoi: 'Frantoi' };
 

@@ -47,8 +47,9 @@
       "query": "italian farmhouse guest room",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Camera di una struttura ricettiva in campagna",
-      "exclude": []
+      "alt": "Gazebo in giardino davanti a un edificio bianco",
+      "exclude": [],
+      "id": "qegPEtazWCY"
     },
     {
       "key": "settori/cantine",
@@ -56,14 +57,15 @@
       "orientation": "landscape",
       "destination": "settori",
       "alt": "Botti di legno allineate in una cantina",
-      "exclude": []
+      "exclude": [],
+      "id": "PUDQGDlM_V8"
     },
     {
       "key": "settori/frantoi",
-      "query": "olive oil mill",
+      "query": "olive oil",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Olio d'oliva e olive appena raccolte",
+      "alt": "Olio d'oliva e olive",
       "exclude": []
     }
   ]
