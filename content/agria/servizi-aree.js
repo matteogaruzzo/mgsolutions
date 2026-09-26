@@ -5,7 +5,7 @@
 //  icon: nome di un'icona del set (components/agria/icons/Icon.jsx).
 // =====================================================================
 
-import { agriaImage } from '@/lib/agria-images';
+import { agriaImage, agriaImageOr } from '@/lib/agria-images';
 
 const CONTACT = '/contatti';
 const WRITE = { label: 'Scrivici in due righe', href: CONTACT };
@@ -21,6 +21,13 @@ const CLOSING_TEXT =
 // abbia una foto reale ogni tre o quattro sezioni; foto già nel repository e
 // accreditate, in attesa delle foto dedicate (vedi report 13).
 const tiles = (...pairs) => pairs.map(([title, text]) => ({ title, text }));
+
+// foto del settore Hospitality dalla pipeline (settori/hospitality); ripiego
+// sulla foto locale finché la voce non è nel manifest
+const HOSPITALITY_PHOTO = agriaImageOr('settori/hospitality', {
+  src: '/images/agria/settori/hospitality.jpg',
+  alt: 'Camera con letto matrimoniale e lampade accese sui comodini',
+});
 
 export const SECTOR_LABELS = { hospitality: 'Hospitality', cantine: 'Cantine', frantoi: 'Frantoi' };
 
@@ -69,7 +76,7 @@ export const serviceAreas = {
         {
           icon: 'calendar',
           title: 'Struttura ricettiva',
-          image: { src: '/images/agria/settori/hospitality.jpg', alt: 'Camera con letto matrimoniale e lampade accese sui comodini' },
+          image: HOSPITALITY_PHOTO,
           text: 'Disponibilità reali, esperienze e prenotazione diretta al centro del percorso.',
           tiles: tiles(
             ['Camere', 'disponibilità sincronizzata'],
@@ -350,7 +357,7 @@ export const serviceAreas = {
         {
           icon: 'calendar',
           title: 'Prenotazioni ed esperienze',
-          image: { src: '/images/agria/settori/hospitality.jpg', alt: 'Camera con letto matrimoniale e lampade accese sui comodini' },
+          image: HOSPITALITY_PHOTO,
           text: 'Camere, degustazioni e visite prenotabili e pagabili dal vostro sito.',
           tiles: tiles(
             ['Calendario', 'capienza e turni'],

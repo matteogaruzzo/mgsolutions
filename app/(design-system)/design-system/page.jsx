@@ -27,6 +27,13 @@ import {
 } from './contrast';
 import FocusOverlayDemo from './FocusOverlayDemo';
 import Icon, { ICON_NAMES } from '@/components/agria/icons/Icon';
+import { agriaImageOr } from '@/lib/agria-images';
+
+// foto d'esempio per ZoomImage: la stessa del settore Hospitality
+const DEMO_PHOTO = agriaImageOr('settori/hospitality', {
+  src: '/images/agria/settori/hospitality.jpg',
+  alt: 'Camera con letto matrimoniale e lampade accese sui comodini',
+});
 
 const PREVIEW_ENABLED =
   process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DESIGN_PREVIEW === 'true';
@@ -370,8 +377,9 @@ export default function DesignSystemPage() {
                   className="agria-zoom-trigger overflow-hidden rounded-agria-card border border-agria-border"
                 >
                   <ZoomImage
-                    src="/images/agria/settori/hospitality.jpg"
-                    alt="Camera con letto matrimoniale e lampade accese sui comodini"
+                    src={DEMO_PHOTO.src}
+                    alt={DEMO_PHOTO.alt}
+                    quality={DEMO_PHOTO.quality}
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className="aspect-[4/3] rounded-none"
                   />

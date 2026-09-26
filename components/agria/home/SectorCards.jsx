@@ -23,6 +23,7 @@ export default function SectorCards() {
                     <ZoomImage
                       src={sector.image.src}
                       alt={sector.image.alt}
+                      quality={sector.image.quality}
                       sizes="(min-width: 768px) 33vw, 100vw"
                       className="h-[168px] rounded-none"
                     />

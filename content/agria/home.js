@@ -4,6 +4,8 @@
 //  Ordine delle sezioni: app/(site)/page.jsx.
 // =====================================================================
 
+import { agriaImageOr } from '@/lib/agria-images';
+
 // 1. Hero
 export const hero = {
   eyebrow: 'Technology company · Hospitality · Cantine · Frantoi',
@@ -93,6 +95,9 @@ export const composer = {
 };
 
 // 6. Settori
+// Foto dalla pipeline Unsplash (settori/hospitality, settori/cantine,
+// settori/frantoi in scripts/images.config.json). Finché una voce non è nel
+// manifest resta la foto locale di ripiego, già accreditata.
 export const sectors = {
   eyebrow: 'Settori',
   title: 'Conosciamo tre mestieri, non tutti.',
@@ -102,32 +107,30 @@ export const sectors = {
       key: 'hospitality',
       title: 'Hospitality',
       href: '/settori/hospitality',
-      image: {
+      image: agriaImageOr('settori/hospitality', {
         src: '/images/agria/settori/hospitality.jpg',
         alt: 'Camera con letto matrimoniale e lampade accese sui comodini',
-      },
+      }),
       text: 'Agriturismi, boutique hotel, relais, masserie. Prenotazioni diverse su portali, email e telefono, inserite due volte a mano. Commissioni che crescono mentre il canale diretto resta fermo.',
     },
     {
       key: 'cantine',
       title: 'Cantine',
       href: '/settori/cantine',
-      // foto Unsplash già accreditata in /crediti-immagini (public/images/software/CREDITS.json)
-      image: {
+      image: agriaImageOr('settori/cantine', {
         src: '/images/software/sector-vitivinicolo-hero.jpg',
         alt: 'Botti di legno allineate in una cantina con volta in mattoni',
-      },
+      }),
       text: "Cantine e aziende vitivinicole. Degustazioni piene e nessun contatto raccolto. Vendita diretta marginale rispetto alla distribuzione, spedizioni e adempimenti fuori dall'e-commerce.",
     },
     {
       key: 'frantoi',
       title: 'Frantoi',
       href: '/settori/frantoi',
-      // foto Unsplash già accreditata in /crediti-immagini (public/images/software/CREDITS.json)
-      image: {
+      image: agriaImageOr('settori/frantoi', {
         src: '/images/software/sector-frantoi-hero.jpg',
         alt: "Olio appena estratto che scende da un beccuccio d'acciaio",
-      },
+      }),
       text: 'Frantoi e aziende olivicole. Ordini tra telefono, WhatsApp ed email, tutti da riscrivere. Listini diversi per privati, ristorazione e B2B, gestiti a memoria.',
     },
   ],

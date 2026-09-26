@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import AgriaImage from '@/components/agria/media/AgriaImage';
 import { useId, useRef, useState } from 'react';
 import { Container, Heading, Reveal, Section } from '@/components/agria/ui';
 import Icon from '@/components/agria/icons/Icon';
@@ -91,9 +91,10 @@ export default function BuildSelector({ id, title, items }) {
                 <div className={styles.previewBody}>
                   {item.image && (
                     <div className={`${styles.previewImage} mb-6`}>
-                      <Image
+                      <AgriaImage
                         src={item.image.src}
                         alt={item.image.alt}
+                        quality={item.image.quality}
                         fill
                         sizes="(min-width: 768px) 60vw, 100vw"
                         className="object-cover"
