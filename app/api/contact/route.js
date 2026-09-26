@@ -128,6 +128,7 @@ async function handleLead(lead, recaptchaToken, submissionId) {
   // passaggi non riusciti: se ce ne sono, al team arriva la segnalazione
   // (con tutti i dati della richiesta) al posto della notifica normale
   const problems = [];
+  let repeated = false;
 
   let contactId = null;
   try {
@@ -149,7 +150,8 @@ async function handleLead(lead, recaptchaToken, submissionId) {
       problems.push('azienda o associazione contatto-azienda');
     }
     try {
-      await createDeal(lead, { contactId, companyId, submissionId });
+      const deal = await createDeal(lead, { contactId, companyId, submissionId });
+      repeated = deal.reused;
     } catch (error) {
       report(error, submissionId, 'trattativa');
       problems.push('trattativa');
@@ -157,6 +159,8 @@ async function handleLead(lead, recaptchaToken, submissionId) {
   }
 
   if (problems.length) await alertTeam({ submissionId, stage: problems.join('; '), lead });
+  // invio ripetuto dello stesso modulo: trattativa riusata, nessuna seconda email
+  else if (repeated) log('info', 'team_notification_skipped', { submissionId, reason: 'repeated_submission' });
   else await notifyNewLead({ submissionId, lead });
   return { ok: true };
 }

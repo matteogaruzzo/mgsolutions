@@ -96,7 +96,7 @@ Proprietario di contatto, azienda e trattativa: **Alessandro Poponi, `37994989`*
 - **Nessun task** creato automaticamente.
 
 ### Notifica interna
-Dopo ogni richiesta completata, email via Resend ai destinatari di `TEAM_NOTIFICATION_EMAIL` (più indirizzi separati da virgola), indipendente dalla notifica nativa HubSpot, con rispondi-a sull'email del visitatore. Contenuto: nome e cognome, azienda, email, telefono, settore, servizio richiesto, tempistica, tipo di richiesta, messaggio. Nessun token, segreto o dato tecnico. Se un passaggio in HubSpot non riesce, al posto della notifica parte una segnalazione con gli stessi dati e il passaggio da completare a mano.
+Dopo ogni richiesta completata, email via Resend ai destinatari di `TEAM_NOTIFICATION_EMAIL` (più indirizzi separati da virgola), indipendente dalla notifica nativa HubSpot, con rispondi-a sull'email del visitatore. Contenuto: nome e cognome, azienda, email, telefono, settore, servizio richiesto, tempistica, tipo di richiesta, messaggio. Nessun token, segreto o dato tecnico. Se un passaggio in HubSpot non riesce, al posto della notifica parte una segnalazione con gli stessi dati e il passaggio da completare a mano. Un invio ripetuto dello stesso modulo, che riusa la trattativa, non manda una seconda email.
 
 ### Duplicati ed errori
 | Caso | Comportamento |
@@ -177,6 +177,13 @@ La documentazione ufficiale non è raggiungibile da questo ambiente: le verifich
 | Ink su green-bright (tappa attiva) | 12,13:1 |
 
 ---
+
+### Verifica di un invio reale
+`scripts/verify-contact-test.mjs` legge da HubSpot, in sola lettura e senza stampare il token, i record creati da un invio di prova e controlla contatto, proprietà del contatto, azienda, associazioni, trattative (numero, fase, proprietario, `fonte_lead_agria`, servizio):
+
+```
+node scripts/verify-contact-test.mjs --info=email-test-A --call=email-test-B
+```
 
 ## 7. Da confermare
 - Orari indicativi: *Lunedì-venerdì, 9:00-18:00*.
