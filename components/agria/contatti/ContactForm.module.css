@@ -1,0 +1,616 @@
+/* Modulo contatti a passi (Prompt 15). Transizioni solo con
+   prefers-reduced-motion: no-preference. Senza JavaScript: tre passi visibili
+   uno sotto l'altro, nessun pulsante di navigazione né di invio, avviso
+   <noscript> (@media (scripting: none)). */
+
+.card {
+  position: relative;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 28px;
+  background: rgb(var(--agria-white));
+  padding: clamp(20px, 4vw, 44px);
+  box-shadow: 0 30px 70px -40px rgb(var(--agria-graphite) / 0.25);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.progressText {
+  font-family: var(--font-agria-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--agria-green-dark));
+}
+
+/* ---------- barra dei passi ---------- */
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepperBar {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(var(--agria-border));
+  overflow: hidden;
+  position: relative;
+}
+
+.stepperBar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--agria-green-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.stepper li[data-state='done'] .stepperBar::after,
+.stepper li[data-state='current'] .stepperBar::after {
+  transform: scaleX(1);
+}
+
+.stepperLabel {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.8125rem;
+  color: rgb(var(--agria-grey));
+}
+
+.stepper li[data-state='current'] .stepperLabel,
+.stepper li[data-state='done'] .stepperLabel {
+  color: rgb(var(--agria-graphite));
+}
+
+/* ---------- riepilogo delle scelte fatte ---------- */
+.summary {
+  margin: 20px 0 0;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 16px;
+  background: rgb(var(--agria-offwhite));
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 12px;
+  padding: 12px 16px;
+}
+
+.summaryRow + .summaryRow {
+  border-top: 1px solid rgb(var(--agria-border));
+}
+
+.summaryLabel {
+  grid-column: 1;
+  font-family: var(--font-agria-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--agria-grey));
+}
+
+.summaryValue {
+  grid-column: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.9375rem;
+  color: rgb(var(--agria-graphite));
+}
+
+.summaryRow > dd:last-child {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.summaryEdit {
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgb(var(--agria-green-dark));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.summaryEdit:hover {
+  color: rgb(var(--agria-graphite));
+}
+
+.summaryEdit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--agria-offwhite)), 0 0 0 4px rgb(var(--agria-green-dark));
+}
+
+.requiredNote {
+  margin-top: 20px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.8125rem;
+  color: rgb(var(--agria-grey));
+}
+
+/* ---------- passi ---------- */
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+  margin: 24px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.stepTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+  padding: 0;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: rgb(var(--agria-graphite));
+  border-radius: 6px;
+}
+
+.stepTitle:focus-visible {
+  outline: 2px solid rgb(var(--agria-green-dark));
+  outline-offset: 4px;
+}
+
+.stepTitle:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* con JavaScript si vede solo il passo corrente */
+@media (scripting: enabled) {
+  .step:not([data-current]) {
+    display: none;
+  }
+}
+
+/* senza JavaScript: niente barra, riepilogo o pulsanti */
+@media (scripting: none) {
+  .jsOnly,
+  .actions {
+    display: none !important;
+  }
+  .step + .step {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgb(var(--agria-border));
+  }
+}
+
+.legend {
+  margin-bottom: 12px;
+  padding: 0;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(var(--agria-graphite));
+}
+
+.optional {
+  margin-left: 6px;
+  font-weight: 400;
+  color: rgb(var(--agria-grey));
+}
+
+/* ---------- scelte ---------- */
+.radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.cardChoiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pillGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .cardChoiceGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tileGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .optionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cardChoice,
+.tile,
+.pill,
+.option {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid rgb(var(--agria-border));
+  background: rgb(var(--agria-white));
+  color: rgb(var(--agria-graphite));
+}
+
+.cardChoice {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+}
+
+.tile,
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 16px;
+  padding: 14px 40px 14px 14px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.9375rem;
+}
+
+.pill .choiceText {
+  display: contents;
+}
+
+.tile .choiceLabel,
+.option .choiceLabel,
+.cardChoice .choiceLabel {
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.choiceText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.choiceDescription {
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: rgb(var(--agria-grey));
+}
+
+.choiceIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 10px;
+  background: rgb(var(--agria-offwhite));
+  color: rgb(var(--agria-green-dark));
+}
+
+.choiceCheck {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 999px;
+  color: transparent;
+}
+
+/* stati: passaggio, selezione, focus da tastiera, errore */
+.tile:hover,
+.pill:hover,
+.option:hover,
+.cardChoice:hover {
+  border-color: rgb(var(--agria-graphite) / 0.45);
+}
+
+.tile[data-checked],
+.option[data-checked],
+.cardChoice[data-checked] {
+  border-color: rgb(var(--agria-green-dark));
+  box-shadow: inset 0 0 0 1px rgb(var(--agria-green-dark));
+  background: rgb(var(--agria-green) / 0.06);
+}
+
+.pill[data-checked] {
+  border-color: rgb(var(--agria-graphite));
+  background: rgb(var(--agria-graphite));
+  color: rgb(var(--agria-white));
+}
+
+[data-checked] > .choiceCheck {
+  border-color: rgb(var(--agria-green-dark));
+  background: rgb(var(--agria-green-dark));
+  color: rgb(var(--agria-white));
+}
+
+[data-checked] > .choiceIcon {
+  border-color: rgb(var(--agria-green-dark) / 0.35);
+  background: rgb(var(--agria-white));
+}
+
+.tile:has(.radio:focus-visible),
+.pill:has(.radio:focus-visible),
+.option:has(.radio:focus-visible),
+.cardChoice:has(.radio:focus-visible) {
+  outline: 2px solid rgb(var(--agria-green-dark));
+  outline-offset: 2px;
+}
+
+fieldset[data-invalid] .tile:not([data-checked]),
+fieldset[data-invalid] .pill:not([data-checked]),
+fieldset[data-invalid] .option:not([data-checked]),
+fieldset[data-invalid] .cardChoice:not([data-checked]) {
+  border-color: rgb(220 38 38 / 0.6);
+}
+
+/* ---------- telefono ---------- */
+.phone {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 8px;
+}
+
+.prefix,
+.phoneInput {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgb(var(--agria-border));
+  border-radius: 0.75rem;
+  background: rgb(var(--agria-white));
+  padding: 12px 14px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 1.0625rem;
+  color: rgb(var(--agria-graphite));
+}
+
+.phoneInput[data-invalid] {
+  border-color: rgb(239 68 68);
+}
+
+.prefix:focus-visible,
+.phoneInput:focus-visible,
+.checkbox:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--agria-white)), 0 0 0 4px rgb(var(--agria-green-dark));
+}
+
+@media (max-width: 399px) {
+  .phone {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- consenso ---------- */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgb(var(--agria-graphite));
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 5px;
+  accent-color: rgb(var(--agria-green-dark));
+}
+
+.inlineLink {
+  color: rgb(var(--agria-green-dark));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  border-radius: 3px;
+}
+
+.inlineLink:hover {
+  color: rgb(var(--agria-graphite));
+}
+
+.inlineLink:focus-visible {
+  outline: 2px solid rgb(var(--agria-green-dark));
+  outline-offset: 2px;
+}
+
+/* ---------- messaggi e azioni ---------- */
+.error {
+  margin-top: 8px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.875rem;
+  color: rgb(185 28 28);
+}
+
+.feedback:empty {
+  display: none;
+}
+
+.feedback {
+  margin-top: 20px;
+}
+
+.noscript {
+  margin-top: 28px;
+  border: 1px solid rgb(var(--agria-border));
+  border-left: 3px solid rgb(var(--agria-green-dark));
+  border-radius: 12px;
+  background: rgb(var(--agria-offwhite));
+  padding: 14px 16px;
+  font-family: var(--font-agria-sans), sans-serif;
+  font-size: 0.9375rem;
+  color: rgb(var(--agria-graphite));
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgb(var(--agria-border));
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgb(255 255 255 / 0.35);
+  border-top-color: rgb(255 255 255);
+  border-radius: 999px;
+}
+
+/* campo trappola per i bot */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- invio riuscito ---------- */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(8px, 2vw, 24px) 0;
+}
+
+.success:focus {
+  outline: none;
+}
+
+.successIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgb(var(--agria-green-dark));
+  color: rgb(var(--agria-white));
+  box-shadow: 0 0 0 8px rgb(var(--agria-green) / 0.14);
+}
+
+/* ---------- transizioni ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  form[data-direction='forward'] .step[data-current] {
+    animation: step-forward 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  form[data-direction='back'] .step[data-current] {
+    animation: step-back 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .stepperBar::after {
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .tile,
+  .pill,
+  .option,
+  .cardChoice {
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease;
+  }
+  .choiceCheck {
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .spinner {
+    animation: spin 0.8s linear infinite;
+  }
+  .success {
+    animation: step-forward 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+@keyframes step-forward {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes step-back {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
