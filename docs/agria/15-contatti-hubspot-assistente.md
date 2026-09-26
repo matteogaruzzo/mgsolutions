@@ -3,7 +3,7 @@
 **Data:** 2026-09-26
 **Branch:** `agria/redesign`
 **Stato:** fasi A, B e C completate. Invio reale verso HubSpot verificato in locale.
-**Natura del lavoro:** pagina `/contatti` con modulo nativo a passi, pagina `/contatti/prenota`, integrazione HubSpot lato server con creazione della trattativa, assistente con risposte curate su tutte le pagine. Nessun widget, script, stile o iframe del modulo HubSpot nel frontend; nessun token nel frontend; `main` non è stato toccato.
+**Natura del lavoro:** pagina `/contatti` con modulo nativo a passi, integrazione HubSpot lato server con creazione della trattativa, assistente con risposte curate su tutte le pagine. Nessun widget, script, stile o iframe del modulo HubSpot nel frontend; nessun token nel frontend; `main` non è stato toccato.
 
 ---
 
@@ -40,12 +40,11 @@ Testi in `content/agria/contatti.js`, componenti in `components/agria/contatti/`
 - **Senza JavaScript:** i tre passi sono visibili uno sotto l'altro, i pulsanti non compaiono, un avviso rimanda a email e WhatsApp.
 
 ### Dopo l'invio
-- **Fissare una videocall** → `/contatti/prenota` (header, footer, branding Agria, fuori dall'indice): *Scegliete il momento che preferite* e la riga sul collegamento via email, calendario in un riquadro.
+- **Fissare una videocall** → il browser apre il calendario di Alessandro, `https://meetings-eu1.hubspot.com/alessandro-poponi`, dove il visitatore sceglie giorno e ora. La trattativa nasce in *Appuntamento da Fissare*; il passaggio ad *Appuntamento Fissato* dopo la prenotazione resta manuale.
 - **Ricevere maggiori informazioni** → il modulo lascia il posto a *Richiesta ricevuta* nello stesso riquadro.
 - **Conversione:** evento `generate_lead` in `window.dataLayer` (e `gtag`, se presente) con preferenza, settore e servizio; nessun dato personale. Pronto per GA4 via Google Tag Manager.
 
-### Calendario
-L'incorporamento documentato da HubSpot richiede il loro script (`MeetingsEmbedCode.js`), escluso dalle regole. Soluzione adottata: iframe della pagina di prenotazione con `?embed=true`, altezza fissa (760 px da tablet, 1180 px su mobile), **caricato solo con il consenso della categoria "calendario prenotazioni"** (imposta cookie di terze parti); collegamento diretto sempre visibile sotto il riquadro. Limiti: l'altezza non si adatta al contenuto e il sito non riceve l'evento di prenotazione confermata.
+La pagina intermedia `/contatti/prenota` con il calendario in un riquadro è stata rimossa dopo la prova reale: il calendario si apre direttamente, senza iframe né consenso cookie sul sito.
 
 ---
 
@@ -68,7 +67,8 @@ app/api/contact/route.js                                    │
   9. CRM: azienda per dominio affidabile o per nome (riusa o crea)
  10. associazione contatto-azienda
  11. trattativa con associazioni a contatto e azienda
-  → risposta: { ok, next: 'prenota' | 'grazie' } oppure { ok: false, message }
+  → notifica al team via Resend (o segnalazione, se un passaggio non riesce)
+  → risposta: { ok, next: 'calendario' | 'grazie' } oppure { ok: false, message }
 ```
 
 File: `lib/contact/config.js` (identificativi e costanti), `http.js` (timeout, ripetizione, registro), `guards.js` (limite per IP, doppio invio), `recaptcha.js`, `hubspot.js`, `notify.js` (segnalazione al team).
@@ -88,22 +88,28 @@ File: `lib/contact/config.js` (identificativi e costanti), `http.js` (timeout, r
 `legalConsentOptions.consent`: `consentToProcess: true`, testo esatto della casella, `communications: []` (nessun consenso di marketing). `context`: `pageUri`, `pageName`, `ipAddress`, `hutk` se presente.
 
 ### CRM
-- **Contatto:** `GET /crm/v3/objects/contacts/{email}?idProperty=email` → `PATCH` se esiste, altrimenti `POST`; un `409` (contatto appena creato dalla submission) viene risolto con l'ID esistente. Proprietà: email, nome, cognome, telefono, azienda.
-- **Azienda:** ricerca per dominio dell'email (esclusi i domini personali, es. gmail.com, libero.it) o per nome; se esiste si riusa, altrimenti si crea con `name`, `settore_agria` e `domain`.
+Proprietario di contatto, azienda e trattativa: **Alessandro Poponi, `37994989`**. Su un contatto o un'azienda già esistenti il proprietario si imposta solo se manca, per non riassegnare record di altri.
+- **Contatto:** `GET /crm/v3/objects/contacts/{email}?idProperty=email` → `PATCH` se esiste, altrimenti `POST`; un `409` (contatto appena creato dalla submission) porta all'aggiornamento del contatto esistente. Proprietà scritte via CRM, non solo dalla submission: email, nome, cognome, telefono, azienda, `servizio_di_interesse_sito`, `tempistica_progetto`, `tipo_richiesta_sito`, `message`, `hubspot_owner_id`.
+- **Azienda:** ricerca per dominio dell'email (esclusi i domini personali, es. gmail.com, libero.it) o per nome; se esiste si riusa, altrimenti si crea con `name`, `settore_agria`, `domain` e `hubspot_owner_id`.
 - **Associazione contatto-azienda:** `PUT /crm/v4/objects/contact/{id}/associations/default/company/{id}`.
-- **Trattativa:** `[AZIENDA] — Opportunità da qualificare`, pipeline `default`, fase `6062102776`, proprietario `37994989`, `fonte` = `Sito web`, `servizio_di_interesse` mappato (sito web → Digital Presence, E-commerce → Digital Commerce, AI → Digital Automation, Software → Software / Products, Non ancora definito → Non ancora definito). Associazioni nella creazione: contatto (tipo 3) e azienda principale (tipo 5).
+- **Trattativa:** `[AZIENDA] — Opportunità da qualificare`, pipeline `default`, `hubspot_owner_id` `37994989`, `fonte_lead_agria` = `Sito web`, `servizio_di_interesse` mappato (sito web → Digital Presence, E-commerce → Digital Commerce, AI → Digital Automation, Software → Software / Products, Non ancora definito → Non ancora definito). Fase secondo `tipo_richiesta_sito`: *Ricevere maggiori informazioni* → **Nuovo Lead `6062102776`**; *Fissare una videocall* → **Appuntamento da Fissare `6062103741`**. Associazioni nella creazione: contatto (tipo 3) e azienda principale (tipo 5).
+- **Nessun task** creato automaticamente.
+
+### Notifica interna
+Dopo ogni richiesta completata, email via Resend ai destinatari di `TEAM_NOTIFICATION_EMAIL` (più indirizzi separati da virgola), indipendente dalla notifica nativa HubSpot, con rispondi-a sull'email del visitatore. Contenuto: nome e cognome, azienda, email, telefono, settore, servizio richiesto, tempistica, tipo di richiesta, messaggio. Nessun token, segreto o dato tecnico. Se un passaggio in HubSpot non riesce, al posto della notifica parte una segnalazione con gli stessi dati e il passaggio da completare a mano.
 
 ### Duplicati ed errori
 | Caso | Comportamento |
 |---|---|
 | Doppio clic | Il browser blocca il secondo invio; il server riconosce lo stesso identificativo e restituisce la stessa risposta senza nuove chiamate |
-| Secondo invio su un'altra istanza | La trattativa con lo stesso nome creata negli ultimi 15 minuti viene riusata |
-| Errore temporaneo (rete, timeout 8 s, 429, 5xx) | Una sola ripetizione |
+| Invio ripetuto subito dopo (nuovo identificativo) | Prima di creare la trattativa si leggono le trattative associate al contatto (associazioni v4, subito aggiornate, non soggette al ritardo della ricerca): una trattativa aperta con lo stesso nome creata negli ultimi 15 minuti viene riusata |
+| Timeout o errore temporaneo nella creazione | Le creazioni (contatto, azienda, trattativa) non vengono ripetute alla cieca: prima si ricontrolla se il record esiste già, poi si ritenta una volta |
+| Errore temporaneo nelle letture e negli aggiornamenti (rete, timeout 8 s, 429, 5xx) | Una sola ripetizione |
 | Forms API: 404 su `api.hsforms.com` | Una ripetizione su `api-eu1.hsforms.com` |
 | Campo non presente nel modulo HubSpot | Una ripetizione senza quel campo, registrata |
-| Proprietà `fonte` o `servizio_di_interesse` inesistente | Trattativa creata senza, registrata |
+| Proprietà del contatto, dell'azienda o della trattativa rifiutata | Record salvato senza quella proprietà, registrato |
 | 403 ambito mancante | Registrati endpoint e ambiti richiesti; segnalazione al team |
-| Submission riuscita, trattativa o azienda fallite | Esito positivo per il visitatore; registro + email al team (Resend) con i dati della richiesta |
+| Submission riuscita, trattativa o azienda fallite | Esito positivo per il visitatore; segnalazione al team con i dati della richiesta |
 | Submission e contatto entrambi falliti | Errore al visitatore, con rimando a email e WhatsApp |
 | reCAPTCHA fallito | *Non siamo riusciti a verificare la richiesta. Riprova tra qualche istante.* L'esito non viene ricordato: si può riprovare |
 
@@ -119,7 +125,8 @@ File: `lib/contact/config.js` (identificativi e costanti), `http.js` (timeout, r
 | `RECAPTCHA_SECRET_KEY` | verifica reCAPTCHA, solo server | Sì |
 | `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA nel browser (pubblica per natura) | Sì |
 | `RECAPTCHA_MIN_SCORE` | soglia del punteggio | No, predefinita 0.5 |
-| `RESEND_API_KEY`, `TEAM_NOTIFICATION_EMAIL`, `RESEND_FROM_EMAIL` | segnalazione al team di una richiesta non completata nel CRM | Consigliate, già previste per il quiz |
+| `RESEND_API_KEY`, `RESEND_FROM_EMAIL` | notifica al team di ogni richiesta e segnalazione di quelle non completate | Sì, per la notifica interna |
+| `TEAM_NOTIFICATION_EMAIL` | destinatari della notifica, più indirizzi separati da virgola | Sì, per la notifica interna |
 
 Portale, modulo, pipeline, fase, proprietario, regione e mappature restano costanti in `lib/contact/config.js`: non sono segreti. Hostname reCAPTCHA ammessi: `agriasystem.com`, `www.agriasystem.com`, `localhost`.
 
@@ -133,10 +140,10 @@ La documentazione ufficiale non è raggiungibile da questo ambiente: le verifich
 2. **Search CRM:** il limite attuale è di 5 richieste al secondo (non 4); gli oggetti appena creati compaiono nella ricerca dopo qualche istante (per questo il doppio invio è gestito prima, in memoria).
 3. **Associations v4:** la guida mostra ora percorsi datati (`/crm/objects/2026-03/...`); i percorsi `/crm/v4/...` usati qui restano supportati fino a marzo 2027 secondo il changelog.
 4. **403:** gli ambiti mancanti arrivano in `errors[].context.requiredGranularScopes` (non più `requiredScopes`); il codice legge entrambi.
-5. **Proprietà `fonte`:** non esiste una proprietà standard con questo nome; il codice usa `fonte` e, se il portale non la ha, crea la trattativa senza e lo registra. Da confermare il nome interno.
+5. **Fonte della trattativa:** non esiste una proprietà standard; il portale usa la proprietà personalizzata `fonte_lead_agria` (confermata dopo la prova reale).
 6. **`settore_agria` e campi del modulo:** ogni campo inviato deve esistere nel modulo HubSpot (`FIELD_NOT_IN_FORM_DEFINITION`); il codice li invia come proprietà di contatto (0-1) e il nome azienda come azienda (0-2). Se il modulo li definisce diversamente, vengono scartati e registrati.
 7. **Modulo HubSpot con CAPTCHA attivo:** la submission via API fallirebbe (`FORM_HAS_RECAPTCHA_ENABLED`); il CAPTCHA del modulo HubSpot va lasciato disattivo, la protezione è reCAPTCHA v3 sul sito.
-8. **Fase e pipeline:** la fase `6062102776` deve appartenere alla pipeline `default`.
+8. **Fase e pipeline:** le fasi `6062102776` e `6062103741` appartengono alla pipeline `default`.
 
 ---
 
@@ -144,18 +151,19 @@ La documentazione ufficiale non è raggiungibile da questo ambiente: le verifich
 
 | Verifica | Esito |
 |---|---|
-| `npm run build` | Riuscito, **175 pagine** (`/contatti`, `/contatti/prenota`, `/api/contact` dinamico) |
+| `npm run build` | Riuscito, **174 pagine** (`/contatti`, `/api/contact` dinamico; `/contatti/prenota` rimossa) |
 | Token nel bundle | Build con token e chiave segreta di prova: nessuna traccia in `.next`; la chiave pubblica reCAPTCHA è solo nel codice della pagina contatti |
 | Segreti nei file tracciati | Nessuno; `.env.example` solo con i nomi |
-| HubSpot nel frontend | Nessuno script, stile, iframe o riferimento del modulo HubSpot; l'unico elemento HubSpot è il calendario nel riquadro di `/contatti/prenota` |
+| HubSpot nel frontend | Nessuno script, stile, iframe o riferimento del modulo HubSpot; l'unico riferimento è l'indirizzo del calendario di Alessandro, aperto dopo l'invio |
 | Invio completo (API simulate) | 20 scenari: invio informazioni e videocall, consenso mancante, valori non ammessi, lunghezze, trappola, reCAPTCHA con punteggio basso, action errata, hostname errato, token assente, doppio invio simultaneo e successivo, azienda riusata per dominio, host EU di riserva, campo rifiutato, proprietà rifiutata, 403, trattativa non creata, CRM irraggiungibile, tutto irraggiungibile, limite per IP |
 | Chiamate a HubSpot con reCAPTCHA fallito | Nessuna |
 | Doppio invio | Una sola trattativa |
 | Consenso privacy | Senza spunta nessuna richiesta parte (browser) e il server rifiuta |
 | Tastiera | Passi, card, pill, opzioni, prefisso, consenso, riepilogo e pausa delle tappe usabili da tastiera, focus visibile |
 | Senza JavaScript | Tre passi leggibili, avviso, domande apribili, tappe tutte accese |
-| Scorrimento orizzontale | Nessuno a 375, 768 e 1440 px su `/contatti` e `/contatti/prenota` |
+| Scorrimento orizzontale | Nessuno a 375, 768 e 1440 px su `/contatti` |
 | Console | Nessun errore |
+| Correzioni dopo la prova reale (API simulate) | 25 scenari: fasi per tipo di richiesta, proprietario su contatto, azienda e trattativa, `fonte_lead_agria`, proprietà del contatto via CRM, trattativa creata con risposta persa per timeout (una sola trattativa), invio ripetuto dello stesso modulo (una sola trattativa), proprietà del contatto rifiutata, notifica a due destinatari, segnalazione senza dati tecnici; dal browser, doppio clic con videocall: una trattativa in *Appuntamento da Fissare* e apertura del calendario |
 | Invio reale verso HubSpot | Riuscito il 26/09/2026 in locale (`npm run dev`, localhost:3001): richiesta ricevuta sul sito, notifica arrivata in HubSpot |
 
 ### Contrasti
@@ -173,11 +181,10 @@ La documentazione ufficiale non è raggiungibile da questo ambiente: le verifich
 ## 7. Da confermare
 - Orari indicativi: *Lunedì-venerdì, 9:00-18:00*.
 - Tempo di risposta nelle domande: *di norma entro un giorno lavorativo*.
-- Nome interno della proprietà "fonte" della trattativa.
 - Etichetta della categoria cookie "Calendario prenotazioni (Calendly)": da aggiornare con le pagine legali.
 
 ## 8. Note per le pagine legali
-L'informativa privacy e la cookie policy dovranno coprire: invio dei dati del modulo a HubSpot (contatto, azienda, trattativa), reCAPTCHA v3 di Google caricato sulla pagina contatti, calendario HubSpot nel riquadro di prenotazione (cookie di terze parti, categoria calendario), caricamento delle foto dal CDN di Unsplash.
+L'informativa privacy e la cookie policy dovranno coprire: invio dei dati del modulo a HubSpot (contatto, azienda, trattativa), reCAPTCHA v3 di Google caricato sulla pagina contatti, calendario di prenotazione HubSpot aperto dopo l'invio, caricamento delle foto dal CDN di Unsplash.
 
 ---
 

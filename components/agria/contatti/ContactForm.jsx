@@ -1,14 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react';
 import { Button, Input, Textarea } from '@/components/agria/ui';
 import Icon from '@/components/agria/icons/Icon';
 import { trackLead } from '@/lib/analytics';
 import { form as copy } from '@/content/agria/contatti';
 import {
-  BOOKING_PREFERENCE,
   EMPTY_VALUES,
   HONEYPOT,
   LIMITS,
@@ -59,7 +57,6 @@ async function recaptchaToken() {
   })().catch(() => '');
   return Promise.race([token, timeout]);
 }
-const BOOKING_PATH = '/contatti/prenota';
 
 // Gruppo di scelte esclusive con radio nativi: frecce per cambiare scelta,
 // Tab per uscire dal gruppo, nessun codice di tastiera da mantenere.
@@ -126,7 +123,6 @@ function ChoiceGroup({ id, name, legend, options, value, onChange, error, varian
 // moduleLabels: { id: etichetta } dei moduli del configuratore in homepage,
 // per precompilare il messaggio quando si arriva con ?moduli=.
 export default function ContactForm({ moduleLabels = {} }) {
-  const router = useRouter();
   const baseId = useId();
   const fid = (name) => `${baseId}-${name}`;
   const [step, setStep] = useState(0);
@@ -250,8 +246,9 @@ export default function ContactForm({ moduleLabels = {} }) {
         return;
       }
       trackLead({ preference: values.preferenza, sector: values.settore, service: values.servizio });
-      if (data.next === 'prenota' || values.preferenza === BOOKING_PREFERENCE) {
-        router.push(BOOKING_PATH);
+      if (data.next === 'calendario') {
+        // calendario di Alessandro: giorno e ora li sceglie il visitatore
+        window.location.assign(copy.meetingsUrl);
         return; // resta in "invio" fino al cambio pagina: nessun secondo invio
       }
       setStatus('done');

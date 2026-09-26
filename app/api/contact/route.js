@@ -12,7 +12,7 @@ import {
   submitForm,
   upsertContact,
 } from '@/lib/contact/hubspot';
-import { alertTeam } from '@/lib/contact/notify';
+import { alertTeam, notifyNewLead } from '@/lib/contact/notify';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -28,7 +28,8 @@ const CONSENT_TEXT = `${copy.labels.privacyBefore}${copy.labels.privacyLink}${co
 
 // Al frontend solo esito e destinazione, mai dettagli tecnici.
 const reply = (body, status = 200) => NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
-const destination = (lead) => (lead.preferenza === BOOKING_PREFERENCE ? 'prenota' : 'grazie');
+// 'calendario': il browser apre il calendario di Alessandro; 'grazie': messaggio nel riquadro
+const destination = (lead) => (lead.preferenza === BOOKING_PREFERENCE ? 'calendario' : 'grazie');
 
 // Percorso: validazione → antispam (trappola, limite per IP, reCAPTCHA v3) →
 // Forms API → contatto → azienda → associazione → trattativa con associazioni.
@@ -124,38 +125,40 @@ async function handleLead(lead, recaptchaToken, submissionId) {
     log('error', 'form_failed', { submissionId, status: error.status, reason: error.name });
   }
 
-  let contactId;
+  // passaggi non riusciti: se ce ne sono, al team arriva la segnalazione
+  // (con tutti i dati della richiesta) al posto della notifica normale
+  const problems = [];
+
+  let contactId = null;
   try {
     contactId = await upsertContact(lead, submissionId);
   } catch (error) {
     report(error, submissionId, 'contatto');
     if (!formOk) throw new Error('Né submission né contatto registrati');
-    await alertTeam({ submissionId, stage: 'contatto, azienda e trattativa', reason: describe(error), lead });
-    return { ok: true };
+    problems.push('contatto, azienda e trattativa');
   }
 
   // da qui la richiesta è registrata: ogni errore viene segnalato, non mostrato
   let companyId = null;
-  try {
-    companyId = await findOrCreateCompany(lead, submissionId);
-    await associateContactCompany(contactId, companyId, submissionId);
-  } catch (error) {
-    report(error, submissionId, 'azienda');
-    await alertTeam({ submissionId, stage: 'azienda o associazione contatto-azienda', reason: describe(error), lead });
+  if (contactId) {
+    try {
+      companyId = await findOrCreateCompany(lead, submissionId);
+      await associateContactCompany(contactId, companyId, submissionId);
+    } catch (error) {
+      report(error, submissionId, 'azienda');
+      problems.push('azienda o associazione contatto-azienda');
+    }
+    try {
+      await createDeal(lead, { contactId, companyId, submissionId });
+    } catch (error) {
+      report(error, submissionId, 'trattativa');
+      problems.push('trattativa');
+    }
   }
 
-  try {
-    await createDeal(lead, { contactId, companyId, submissionId });
-  } catch (error) {
-    report(error, submissionId, 'trattativa');
-    await alertTeam({ submissionId, stage: 'trattativa', reason: describe(error), lead });
-  }
+  if (problems.length) await alertTeam({ submissionId, stage: problems.join('; '), lead });
+  else await notifyNewLead({ submissionId, lead });
   return { ok: true };
-}
-
-function describe(error) {
-  if (error instanceof MissingScopeError) return `403, ambito mancante su ${error.endpoint}: ${error.scopes.join(', ') || 'non indicato'}`;
-  return error?.status ? `HTTP ${error.status} su ${error.endpoint}` : error?.message || 'errore';
 }
 
 function report(error, submissionId, stage) {

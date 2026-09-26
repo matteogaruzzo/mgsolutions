@@ -74,6 +74,8 @@ export const form = {
     'Per inviare il modulo serve JavaScript attivo nel browser. Potete comunque scriverci via email o WhatsApp: trovate i recapiti qui sotto.',
   // messaggio precompilato se si arriva dal configuratore della homepage (?moduli=)
   modulesNote: (labels) => `Moduli scelti in homepage: ${labels.join(', ')}.`,
+  // dopo l'invio con "Fissare una videocall" si apre il calendario di Alessandro
+  meetingsUrl: 'https://meetings-eu1.hubspot.com/alessandro-poponi',
   success: {
     title: 'Richiesta ricevuta',
     text: 'Grazie per averci contattato. Abbiamo ricevuto la tua richiesta e Alessandro del team Agria ti ricontatterà a breve.',
@@ -157,25 +159,4 @@ export const closing = {
     { label: 'Digital Automation', href: '/servizi/digital-automation' },
   ],
   all: { label: 'Tutti i servizi', href: '/servizi' },
-};
-
-// Pagina /contatti/prenota
-export const booking = {
-  meta: {
-    title: 'Prenota la videocall — Agria System',
-    description: 'Scegliete giorno e ora della videocall con Alessandro di Agria System.',
-    path: '/contatti/prenota',
-  },
-  eyebrow: 'Richiesta inviata',
-  title: 'Scegliete il momento che preferite',
-  text: 'Riceverete il collegamento alla videocall via email, subito dopo la conferma dell’appuntamento.',
-  url: 'https://meetings-eu1.hubspot.com/alessandro-poponi',
-  frameTitle: 'Calendario per prenotare la videocall',
-  consent: {
-    text: 'Il calendario è fornito da un servizio esterno, che può impostare i propri cookie. Caricandolo accettate i cookie della categoria calendario prenotazioni.',
-    button: 'Carica il calendario',
-    policy: 'Cookie Policy',
-  },
-  direct: 'Aprire il calendario in una nuova scheda',
-  back: { label: 'Torna ai contatti', href: '/contatti' },
 };
