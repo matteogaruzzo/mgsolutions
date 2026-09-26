@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import AgriaImage from '@/components/agria/media/AgriaImage';
 
 // Immagine in un contenitore con angoli arrotondati: al passaggio del cursore
 // l'immagine si ingrandisce leggermente, il contenitore resta fermo.
@@ -15,7 +15,7 @@ export default function ZoomImage({
 }) {
   return (
     <div className={`agria-zoom relative overflow-hidden rounded-agria-card ${className}`}>
-      <Image
+      <AgriaImage
         src={src}
         alt={alt}
         fill

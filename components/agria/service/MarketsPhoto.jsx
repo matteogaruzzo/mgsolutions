@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button, Container, Eyebrow, Heading, Reveal, Section, Text } from '@/components/agria/ui';
 import { ZoomImage } from '@/components/agria/motion';
+import PhotoCredit from '@/components/agria/media/PhotoCredit';
 
 // Fotografia e mercati: testo a sinistra, fotografia reale a destra con angoli
 // arrotondati e leggero ingrandimento al passaggio del cursore (ZoomImage).
@@ -20,7 +21,16 @@ export default function MarketsPhoto({ id, eyebrow, title, text, cta, image }) {
             {cta.label}
           </Button>
         </Reveal>
-        <ZoomImage src={image.src} alt={image.alt} sizes="(min-width: 768px) 50vw, 100vw" className="aspect-[4/3]" />
+        <figure className="m-0">
+          <ZoomImage
+            src={image.src}
+            alt={image.alt}
+            quality={image.quality}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="aspect-[4/3]"
+          />
+          <PhotoCredit credit={image.credit} className="mt-3" />
+        </figure>
       </Container>
     </Section>
   );

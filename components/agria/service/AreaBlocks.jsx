@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Container, Eyebrow, Reveal, Section, Text, TextLink } from '@/components/agria/ui';
 import { ZoomImage } from '@/components/agria/motion';
+import PhotoCredit from '@/components/agria/media/PhotoCredit';
 import IconBadge from './IconBadge';
 
 // Indice /servizi: un blocco a piena larghezza per area, con testo (etichetta,
@@ -39,12 +40,16 @@ export default function AreaBlocks({ areas, linkLabel }) {
               {linkLabel}
             </TextLink>
           </Reveal>
-          <ZoomImage
-            src={area.image.src}
-            alt={area.image.alt}
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className={`aspect-[4/3] ${flipped ? 'md:order-1' : ''}`}
-          />
+          <figure className={`m-0 ${flipped ? 'md:order-1' : ''}`}>
+            <ZoomImage
+              src={area.image.src}
+              alt={area.image.alt}
+              quality={area.image.quality}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="aspect-[4/3]"
+            />
+            <PhotoCredit credit={area.image.credit} className="mt-3" />
+          </figure>
         </Container>
       </Section>
     );

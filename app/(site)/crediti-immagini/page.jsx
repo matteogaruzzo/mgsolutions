@@ -2,6 +2,7 @@ import { pageMetadata, webPageSchema } from '@/lib/seo';
 import blogCredits from '@/public/images/blog/CREDITS.json';
 import softwareCredits from '@/public/images/software/CREDITS.json';
 import serviziCredits from '@/public/images/servizi/CREDITS.json';
+import { agriaImageCredits } from '@/lib/agria-images';
 
 const PAGE = {
   title: 'Crediti immagini',
@@ -14,7 +15,11 @@ export const metadata = {
   robots: { index: false, follow: true },
 };
 
-const allCredits = [...blogCredits, ...softwareCredits, ...serviziCredits].sort((a, b) =>
+// Tutto generato dai dati: CREDITS.json delle cartelle legacy e manifest della
+// pipeline AGRIA (content/agria/image-credits.json, scripts/fetch-images.mjs).
+const agriaCredits = agriaImageCredits().map((c) => ({ ...c, slug: `agria-${c.key}` }));
+
+const allCredits = [...blogCredits, ...softwareCredits, ...serviziCredits, ...agriaCredits].sort((a, b) =>
   a.photographer.localeCompare(b.photographer)
 );
 

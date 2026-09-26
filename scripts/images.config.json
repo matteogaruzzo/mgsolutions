@@ -1,0 +1,43 @@
+{
+  "_nota": "Richieste per scripts/fetch-images.mjs. Ogni voce: key (usata nel codice con agriaImage(key)), query (inglese, per la ricerca Unsplash), orientation, destination (cartella logica), alt (descrittivo e neutro, da rivedere dopo aver visto la foto). Facoltativi: exclude (ID Unsplash da scartare), id (ID Unsplash da usare senza ricerca).",
+  "utmSource": "agria_system",
+  "images": [
+    {
+      "key": "servizi/presence",
+      "query": "rustic hotel reception natural light",
+      "orientation": "landscape",
+      "destination": "servizi",
+      "alt": "Banco di accoglienza di una struttura ricettiva, con lampade e quadri alle pareti",
+      "exclude": []
+    },
+    {
+      "key": "servizi/commerce",
+      "query": "wine bottles shipping box",
+      "orientation": "landscape",
+      "destination": "servizi",
+      "alt": "Bottiglie avvolte nel pluriball dentro scatole di spedizione",
+      "exclude": [
+        "gthSas4oYC0"
+      ],
+      "id": "pdFLNMuMuzk"
+    },
+    {
+      "key": "servizi/automation",
+      "query": "farmer using tablet at desk",
+      "orientation": "landscape",
+      "destination": "servizi",
+      "alt": "Persona al lavoro su un tablet con penna, a una scrivania",
+      "exclude": [
+        "TOO1RFQEnQk"
+      ]
+    },
+    {
+      "key": "azienda/territorio",
+      "query": "italian countryside rolling hills",
+      "orientation": "landscape",
+      "destination": "azienda",
+      "alt": "Casolari su una collina erbosa, con alberi in fioritura",
+      "exclude": []
+    }
+  ]
+}

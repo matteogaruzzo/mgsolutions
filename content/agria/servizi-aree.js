@@ -5,6 +5,8 @@
 //  icon: nome di un'icona del set (components/agria/icons/Icon.jsx).
 // =====================================================================
 
+import { agriaImage } from '@/lib/agria-images';
+
 const CONTACT = '/contatti';
 const WRITE = { label: 'Scrivici in due righe', href: CONTACT };
 const METHOD = { label: 'Vedi il metodo', href: '#metodo' };
@@ -230,11 +232,7 @@ export const serviceAreas = {
       title: 'Made in Italy, leggibile anche fuori.',
       text: "Lavoriamo con aziende che vendono in Italia e all'estero. La versione inglese non è una traduzione automatica: è una versione pensata per chi compra da fuori, con riferimenti, formati e condizioni corretti.",
       cta: { label: 'Parlaci del vostro mercato', href: CONTACT },
-      // temporanea: presence.jpg non è in public/images/agria/servizi/ (vedi report 13)
-      image: {
-        src: '/images/agria/settori/hospitality.jpg',
-        alt: 'Camera con letto matrimoniale e lampade accese sui comodini',
-      },
+      image: agriaImage('servizi/presence'),
     },
     faq: [
       {
@@ -449,11 +447,7 @@ export const serviceAreas = {
       title: "Vendere fuori dall'Italia, senza improvvisare.",
       text: "Formati, lingue, costi di spedizione e condizioni cambiano da mercato a mercato. Progettiamo il negozio perché l'estero sia una possibilità concreta, non una promessa.",
       cta: { label: 'Parlaci dei vostri mercati', href: CONTACT },
-      // temporanea: commerce.jpg non è in public/images/agria/servizi/ (vedi report 13)
-      image: {
-        src: '/images/software/sector-vitivinicolo-hero.jpg',
-        alt: 'Botti di legno allineate in una cantina con volta in mattoni',
-      },
+      image: agriaImage('servizi/commerce'),
     },
     faq: [
       {
@@ -673,11 +667,7 @@ export const serviceAreas = {
       title: 'Automatizzare non significa spersonalizzare.',
       text: 'Il rapporto con il cliente resta vostro. Togliamo il lavoro che non aggiunge valore, così resta tempo per quello che ne aggiunge davvero.',
       cta: { label: 'Raccontaci una giornata tipo', href: CONTACT },
-      // temporanea: automation.jpg non è in public/images/agria/servizi/ (vedi report 13)
-      image: {
-        src: '/images/software/sector-frantoi-hero.jpg',
-        alt: "Olio appena estratto che scende da un beccuccio d'acciaio",
-      },
+      image: agriaImage('servizi/automation'),
     },
     faq: [
       {
