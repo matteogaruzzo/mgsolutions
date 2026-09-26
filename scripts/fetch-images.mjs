@@ -7,8 +7,10 @@
 //  il download viene registrato su `photo.links.download_location` e
 //  l'attribuzione (fotografo + Unsplash, con utm) è generata dal manifest.
 //
-//  Per ogni voce di scripts/images.config.json: cerca, sceglie il primo
-//  risultato orizzontale e adatto, registra il download, verifica il peso
+//  Per ogni voce di scripts/images.config.json: cerca (query, oppure queries
+//  provate in ordine), sceglie il primo risultato orizzontale e adatto (e, se
+//  la voce ha require, la cui descrizione Unsplash contiene almeno una di
+//  quelle parole), registra il download, verifica il peso
 //  della versione JPEG a 1600 px (sotto 500 KB, abbassando la qualità se
 //  serve) e scrive content/agria/image-credits.json.
 //
@@ -17,6 +19,7 @@
 //    node scripts/fetch-images.mjs --only=servizi/presence
 //    node scripts/fetch-images.mjs --force=servizi/presence   riseleziona
 //    node scripts/fetch-images.mjs --force                    riseleziona tutto
+//                         (le voci con id restano sulla stessa foto)
 //
 //  Richiede UNSPLASH_ACCESS_KEY in .env.local (mai committata).
 // =====================================================================
@@ -74,27 +77,39 @@ async function api(path) {
   return { data: await res.json(), remaining };
 }
 
+// descrizione della foto su Unsplash (testo alternativo, descrizione, tag),
+// usata per il filtro require e salvata nel manifest per verificare gli alt
+const describe = (photo) =>
+  [photo.alt_description, photo.description, ...(photo.tags || []).map((t) => t.title)].filter(Boolean).join(' · ');
+
 // primo risultato orizzontale e adatto: largo almeno WIDTH, non Unsplash+,
-// non escluso a mano nella configurazione
+// non escluso a mano nella configurazione, con una delle parole di require
 function suitable(photo, entry) {
   if ((entry.exclude || []).includes(photo.id)) return false;
   if (photo.premium || photo.plus || photo.sponsorship) return false;
   if (photo.width < WIDTH || photo.width / photo.height < 1.2) return false;
+  if (entry.require && entry.require.length) {
+    const text = describe(photo).toLowerCase();
+    if (!entry.require.some((word) => text.includes(word.toLowerCase()))) return false;
+  }
   return true;
 }
 
 async function choose(entry) {
-  if (entry.id) return (await api(`/photos/${entry.id}`)).data;
-  const params = new URLSearchParams({
-    query: entry.query,
-    orientation: entry.orientation || 'landscape',
-    per_page: '20',
-    content_filter: 'high',
-  });
-  const { data } = await api(`/search/photos?${params}`);
-  const photo = data.results.find((p) => suitable(p, entry));
-  if (!photo) throw new Error(`nessun risultato adatto per "${entry.query}"`);
-  return photo;
+  if (entry.id) return { photo: (await api(`/photos/${entry.id}`)).data, query: entry.query || null };
+  const queries = entry.queries || [entry.query];
+  for (const query of queries) {
+    const params = new URLSearchParams({
+      query,
+      orientation: entry.orientation || 'landscape',
+      per_page: '30',
+      content_filter: 'high',
+    });
+    const { data } = await api(`/search/photos?${params}`);
+    const photo = data.results.find((p) => suitable(p, entry));
+    if (photo) return { photo, query };
+  }
+  throw new Error(`nessun risultato adatto per ${queries.map((q) => `"${q}"`).join(', ')}`);
 }
 
 // peso della versione JPEG a WIDTH px: il caso peggiore (il sito chiede
@@ -130,7 +145,7 @@ for (const entry of config.images) {
     continue;
   }
   try {
-    const photo = await choose(entry);
+    const { photo, query } = await choose(entry);
     // registra il download (richiesto dalle API Guidelines quando si sceglie una foto)
     await api(photo.links.download_location.replace(API, ''));
     const raw = photo.urls.raw;
@@ -153,7 +168,8 @@ for (const entry of config.images) {
       },
       photoUrl: utm(photo.links.html, utmSource),
       unsplashUrl: utm('https://unsplash.com/', utmSource),
-      query: entry.query || null,
+      query,
+      unsplashDescription: describe(photo) || null,
       date: new Date().toISOString().slice(0, 10),
     };
     report.push({
@@ -161,6 +177,8 @@ for (const entry of config.images) {
       stato: forced ? 'riselezionata' : 'scaricata',
       foto: photo.id,
       fotografo: photo.user.name,
+      query: query || 'id fissato',
+      descrizione: describe(photo) || '—',
       dimensioni: `${photo.width}×${photo.height}`,
       peso: `${Math.round(size.bytes / 1024)} KB a ${WIDTH}px, qualità ${size.quality}${size.underLimit ? '' : ' — OLTRE 500 KB'}`,
     });

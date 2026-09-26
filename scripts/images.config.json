@@ -1,5 +1,5 @@
 {
-  "_nota": "Richieste per scripts/fetch-images.mjs. Ogni voce: key (usata nel codice con agriaImage(key)), query (inglese, per la ricerca Unsplash), orientation, destination (cartella logica), alt (descrittivo e neutro, da rivedere dopo aver visto la foto). Facoltativi: exclude (ID Unsplash da scartare), id (ID Unsplash da usare senza ricerca). Le voci con id restano sulla stessa foto anche con --force (che rigenera link e crediti). Gli alt delle voci nuove vanno rivisti dopo aver visto la foto.",
+  "_nota": "Richieste per scripts/fetch-images.mjs. Ogni voce: key (usata nel codice con agriaImage(key)), query oppure queries (inglese, provate in ordine), orientation, destination (cartella logica), alt (descrittivo e neutro, da verificare sulla descrizione Unsplash salvata nel manifest). Facoltativi: require (almeno una parola deve comparire nella descrizione Unsplash), exclude (ID da scartare), id (ID da usare senza ricerca: resta la stessa foto anche con --force).",
   "utmSource": "agria_website",
   "images": [
     {
@@ -35,12 +35,28 @@
     },
     {
       "key": "azienda/territorio",
-      "query": "italian countryside rolling hills",
       "orientation": "landscape",
       "destination": "azienda",
-      "alt": "Casolari su una collina erbosa, con alberi in fioritura",
-      "exclude": [],
-      "id": "w1rubslCFbM"
+      "alt": "Borgo collinare umbro con case in pietra",
+      "exclude": [
+        "w1rubslCFbM"
+      ],
+      "queries": [
+        "perugia italy",
+        "umbria hill town",
+        "italian medieval hill town"
+      ],
+      "require": [
+        "perugia",
+        "umbria",
+        "assisi",
+        "town",
+        "village",
+        "city",
+        "medieval",
+        "buildings",
+        "houses"
+      ]
     },
     {
       "key": "settori/hospitality",
@@ -62,11 +78,18 @@
     },
     {
       "key": "settori/frantoi",
-      "query": "olive oil",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Olio d'oliva e olive",
-      "exclude": []
+      "alt": "Olive e olio d'oliva",
+      "exclude": [],
+      "queries": [
+        "olive harvest",
+        "olive grove italy",
+        "olive oil bottles"
+      ],
+      "require": [
+        "olive"
+      ]
     }
   ]
 }

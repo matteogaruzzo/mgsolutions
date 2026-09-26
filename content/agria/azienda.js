@@ -1,5 +1,5 @@
 // =====================================================================
-//  PAGINA AZIENDA — copy approvato (Prompt 14). Modificare qui i testi,
+//  PAGINA AZIENDA — copy approvato (Prompt 14, sezioni 3-9 riscritte). Modificare qui i testi,
 //  non nei componenti. Nessun testo va aggiunto senza approvazione.
 //  Ordine delle sezioni: app/(site)/azienda/page.jsx.
 //  icon: nome di un'icona del set (components/agria/icons/Icon.jsx).
@@ -38,23 +38,23 @@ export const principles = {
   items: [
     {
       icon: 'code',
-      title: 'Sviluppiamo internamente',
-      text: 'Nessun subappalto. Chi progetta è la stessa persona che costruisce e che risponde quando qualcosa non funziona.',
+      title: 'Sviluppo interno',
+      text: 'Progettazione, sviluppo e manutenzione restano nello stesso team. Nessun subappalto: chi scrive il codice risponde del suo funzionamento.',
     },
     {
       icon: 'minus',
-      title: 'Diciamo di no',
-      text: "Se un progetto non cambia il modo in cui l'azienda lavora o vende, lo diciamo prima di iniziare.",
+      title: 'Progetti selezionati',
+      text: "Valutiamo ogni richiesta prima di accettarla. Se un progetto non cambia il modo in cui l'azienda lavora o vende, non lo prendiamo.",
     },
     {
       icon: 'sparkles',
-      title: "L'AI è un metodo, non un prodotto",
-      text: 'La usiamo per analizzare, strutturare e accelerare. Le decisioni e la responsabilità restano nostre.',
+      title: "L'AI come metodo",
+      text: 'La usiamo per analizzare, strutturare e verificare più in fretta. Le decisioni e la responsabilità tecnica restano nostre.',
     },
     {
       icon: 'key',
-      title: 'Quello che costruiamo è vostro',
-      text: 'Codice, contenuti, domini e dati restano di proprietà del cliente, senza vincoli tecnici.',
+      title: 'Proprietà del cliente',
+      text: 'Codice, contenuti, domini e dati appartengono al cliente. Nessun vincolo tecnico, nessuna licenza che lo leghi a noi.',
     },
   ],
 };
@@ -66,13 +66,13 @@ export const principles = {
 // verticale): si attivano qui quando esiste un set coerente.
 // linkedin: URL del profilo oppure null (nessun link inventato).
 export const team = {
-  label: 'Team',
+  label: 'Chi risponde dei progetti',
   linkLabel: 'LinkedIn',
   people: [
     {
       name: 'Matteo Garuzzo',
       role: 'Product e tecnologia',
-      detail: 'Architettura dei sistemi, sviluppo e direzione tecnica dei progetti.',
+      detail: 'Architettura dei sistemi e direzione tecnica. Risponde delle scelte tecnologiche di ogni progetto.',
       photo: null,
       // profilo già pubblicato nel sito legacy (content/site.js)
       linkedin: 'https://www.linkedin.com/in/matteogaruzzo',
@@ -80,14 +80,14 @@ export const team = {
     {
       name: 'Matteo De Pilla',
       role: 'Sviluppo e automazioni',
-      detail: 'Sviluppo web, e-commerce e automazioni applicate ai processi.',
+      detail: 'Sviluppo web, e-commerce e automazioni dei processi. Risponde di quello che va in produzione.',
       photo: null,
       linkedin: null,
     },
     {
       name: 'Alessandro Poponi',
       role: 'Relazioni e progetti',
-      detail: 'Primo contatto, analisi delle esigenze e gestione del rapporto con il cliente.',
+      detail: 'Primo contatto, analisi delle esigenze e rapporto con il cliente. Risponde di tempi e accordi.',
       photo: null,
       linkedin: null,
     },
@@ -97,42 +97,42 @@ export const team = {
 // 5. Ricerca e sviluppo
 export const research = {
   eyebrow: 'Ricerca e sviluppo',
-  title: 'Costruiamo anche prodotti nostri.',
-  text: 'Una parte del nostro lavoro è ricerca applicata: software proprietari che nascono dai problemi che vediamo in queste aziende. Ne parliamo quando saranno pronti, non prima.',
+  title: 'Una parte del lavoro è prodotto proprietario.',
+  text: 'Sviluppiamo software nostri a partire dai problemi ricorrenti di queste aziende. Li presentiamo quando sono in produzione, non prima.',
 };
 
 // 6. Territorio: foto della pipeline Unsplash (scripts/images.config.json → azienda/territorio)
 export const territory = {
   eyebrow: 'Dove lavoriamo',
-  title: 'Da Perugia, in tutta Italia e sui mercati esteri.',
-  text: "La sede è in Umbria, il lavoro no. Seguiamo progetti in tutta Italia e costruiamo versioni in inglese per le aziende che vendono all'estero.",
+  title: 'Sede a Perugia. Progetti in tutta Italia.',
+  text: "I progetti si seguono ovunque, in presenza o da remoto. Ogni sistema può nascere in italiano e in inglese, per le aziende che vendono all'estero.",
   address: 'Via Ponte Vecchio, 06135 Perugia',
   image: agriaImage('azienda/territorio'),
 };
 
 // 7. Come si lavora con noi: linea temporale verticale (components/agria/azienda/ProcessTimeline.jsx)
 export const howWeWork = {
-  title: 'Come si lavora con noi',
+  title: 'Come si inizia.',
   steps: [
     {
       icon: 'inbox',
       title: 'Primo contatto',
-      text: 'Ci scrivete o vi scriviamo. Capiamo se il vostro caso rientra in quello che sappiamo fare.',
+      text: 'Ci descrivete come lavorate oggi. Valutiamo se il caso rientra nei nostri settori e nelle nostre competenze.',
     },
     {
       icon: 'search',
       title: 'Analisi',
-      text: 'Guardiamo come lavorate oggi: strumenti, passaggi manuali, dove si perdono tempo e clienti.',
+      text: 'Studiamo strumenti, passaggi manuali e punti in cui si perdono tempo, dati e clienti.',
     },
     {
       icon: 'file-text',
       title: 'Proposta',
-      text: 'Ricevete ambito, tempi e investimento definiti su quel progetto, non un listino.',
+      text: 'Ricevete ambito, tempi e investimento definiti su quel progetto. Nessun listino, nessun pacchetto.',
     },
     {
       icon: 'layers',
       title: 'Progetto',
-      text: 'Sviluppo con consegne intermedie da approvare, poi misura e miglioramento.',
+      text: 'Sviluppo interno con consegne intermedie da approvare. Dopo il rilascio, misura e miglioramento.',
     },
   ],
 };
@@ -151,7 +151,7 @@ export const company = {
 
 // 9. CTA finale
 export const closing = {
-  title: 'Parliamo di quello che vi serve.',
-  text: 'Una prima analisi serve a capire se ha senso lavorare insieme.',
+  title: 'Valutiamo il vostro progetto.',
+  text: 'Una prima analisi stabilisce se ha senso lavorare insieme. Se non lo ha, ve lo diciamo.',
   cta: CONTACT,
 };
