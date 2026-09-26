@@ -4,6 +4,8 @@ import { AGRIA_BRAND, breadcrumbSchema, faqPageSchema, serviceSchema, webPageSch
 import Diagnosis from './Diagnosis';
 import BuildSelector from './BuildSelector';
 import AiSection from './AiSection';
+import SeoGeo from './SeoGeo';
+import IdentityBlock from './IdentityBlock';
 import MethodTimeline from './MethodTimeline';
 import Deliverables from './Deliverables';
 import Verticals from './Verticals';
@@ -19,7 +21,9 @@ const LINK_GROUPS = { services: 'Servizi', articles: 'Approfondimenti', index: '
 
 // Template delle pagine area (Prompt 13, concept v6): dieci sezioni con fondi
 // scuro · bianco · off-white · bianco · scuro · bianco · off-white · bianco ·
-// off-white · scuro, più la CTA fissa. Nessun contenuto qui: la pagina passa
+// off-white · scuro, più la CTA fissa. Sezioni facoltative (Prompt 14), solo se
+// l'area le definisce: area.seo dopo l'AI (sfumata) e area.identity prima delle
+// FAQ (bianca, con filetto). Nessun contenuto qui: la pagina passa
 // area (contenuti dell'area), others (le altre due: { name, meta.path }) e
 // sectorLabels (nomi delle schede dei verticali).
 export default function ServiceAreaPage({ area, others, sectorLabels }) {
@@ -76,6 +80,8 @@ export default function ServiceAreaPage({ area, others, sectorLabels }) {
       <BuildSelector id={id('costruiamo')} {...area.build} />
       {/* 4. AI · bianco */}
       <AiSection id={id('ai')} {...area.ai} />
+      {/* 4b. SEO e GEO · sfumato (facoltativa) */}
+      {area.seo && <SeoGeo id={id('seo-geo')} {...area.seo} />}
       {/* 5. Metodo · scuro (ancora del "Vedi il metodo") */}
       <MethodTimeline id={id('metodo-titolo')} anchor="metodo" {...area.method} />
       {/* 6. Deliverable · bianco */}
@@ -84,6 +90,8 @@ export default function ServiceAreaPage({ area, others, sectorLabels }) {
       <Verticals id={id('verticali')} title={area.verticals.title} sectors={area.verticals.sectors} labels={sectorLabels} />
       {/* 8. Fotografia e mercati · bianco */}
       <MarketsPhoto id={id('mercati')} {...area.markets} />
+      {/* 8b. Identità e digital experience · bianco (facoltativa) */}
+      {area.identity && <IdentityBlock id={id('identita')} {...area.identity} />}
       {/* 9. FAQ · off-white */}
       <FaqAccordion id={id('faq')} title={FAQ_TITLE} items={area.faq} cta={area.cta} />
       {/* 10. CTA finale · scuro */}

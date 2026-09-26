@@ -1,7 +1,7 @@
 import { Container, Heading, Reveal, Section, Text } from '@/components/agria/ui';
 import styles from './ServiceArea.module.css';
 
-// Deliverable: sei righe (numero, descrizione, categoria) con evidenziazione
+// Deliverable: righe (numero, descrizione, categoria) con evidenziazione
 // al passaggio del cursore. Elenco ordinato: nessuna intestazione di colonna
 // da inventare.
 export default function Deliverables({ id, title, intro, items }) {

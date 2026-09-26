@@ -131,6 +131,32 @@ export const serviceAreas = {
       ],
       cta: { label: 'Parliamo del vostro progetto', href: CONTACT },
     },
+    // Prompt 14: sezione dopo l'AI (solo Digital Presence)
+    seo: {
+      title: 'SEO e GEO',
+      items: [
+        {
+          icon: 'gauge',
+          title: 'SEO tecnica',
+          text: 'Struttura, indicizzazione, dati strutturati e velocità: le fondamenta senza cui nessun contenuto rende.',
+        },
+        {
+          icon: 'map-pin',
+          title: 'SEO locale',
+          text: 'Schede, mappe e contenuti di territorio, dove si decide la scelta di una struttura o di un produttore.',
+        },
+        {
+          icon: 'sparkles',
+          title: 'GEO, visibilità nei motori AI',
+          text: 'Contenuti e dati organizzati perché gli assistenti conversazionali vi citino con informazioni corrette.',
+        },
+        {
+          icon: 'chat',
+          title: 'Contenuti che rispondono',
+          text: 'Pagine costruite sulle domande reali di chi cerca, non sulle parole che usiamo tra noi.',
+        },
+      ],
+    },
     method: {
       title: 'Un metodo che unisce dati, design e sviluppo.',
       steps: [
@@ -233,6 +259,12 @@ export const serviceAreas = {
       text: "Lavoriamo con aziende che vendono in Italia e all'estero. La versione inglese non è una traduzione automatica: è una versione pensata per chi compra da fuori, con riferimenti, formati e condizioni corretti.",
       cta: { label: 'Parlaci del vostro mercato', href: CONTACT },
       image: agriaImage('servizi/presence'),
+    },
+    // Prompt 14: sezione prima delle FAQ (solo Digital Presence)
+    identity: {
+      eyebrow: 'Identità e digital experience',
+      title: "L'identità non è il logo. È come vi si riconosce.",
+      text: "Curiamo coerenza visiva, tono di voce e qualità dell'esperienza dentro il progetto: tipografia, fotografia, ritmo delle pagine, comportamento delle interazioni. Non vendiamo restyling di marchio a parte: lo trattiamo dove incide sul risultato.",
     },
     faq: [
       {
@@ -365,6 +397,11 @@ export const serviceAreas = {
           icon: 'download',
           title: 'Proprietà e portabilità',
           text: 'Catalogo, clienti e ordini restano dati vostri, esportabili in qualunque momento.',
+        },
+        {
+          icon: 'globe',
+          title: 'Schede trovabili',
+          text: 'Contenuti di prodotto scritti per essere trovati da Google e citati dai motori AI, anche in inglese.',
         },
       ],
       cta: { label: 'Parliamo del vostro shop', href: CONTACT },
@@ -605,6 +642,7 @@ export const serviceAreas = {
         { text: 'Gestione degli errori: cosa succede quando qualcosa non funziona', category: 'Affidabilità' },
         { text: 'Formazione al team sulle operazioni ricorrenti', category: 'Delivery' },
         { text: 'Report di collaudo sui casi reali, anche anomali', category: 'Delivery' },
+        { text: 'Registro delle automazioni attive, con responsabile e frequenza', category: 'Delivery' },
       ],
     },
     verticals: {
