@@ -52,20 +52,20 @@ Richiede `UNSPLASH_ACCESS_KEY` in `.env.local`. Dopo l'esecuzione: committare `c
 ### Foto nel manifest
 | Chiave | Foto | Fotografo | Uso | Alt |
 |---|---|---|---|---|
-| `servizi/presence` | `wOkEwfChQqM` | Zoshua Colah | Digital Presence, sezione mercati e indice | Banco di accoglienza di una struttura ricettiva |
-| `servizi/commerce` | `pdFLNMuMuzk` | Wander Fleur | Digital Commerce, sezione mercati e indice | Bottiglie nel pluriball dentro scatole di spedizione |
-| `servizi/automation` | `fuiexaKxlhk` | Tool., Inc | Digital Automation, sezione mercati e indice | Persona al lavoro a una scrivania |
-| `settori/hospitality` | `qegPEtazWCY` | Yanapi Senaud | Card Hospitality in homepage, anteprime Hospitality dei servizi | Gazebo in giardino davanti a un edificio bianco |
-| `settori/cantine` | `PUDQGDlM_V8` | Daniel Vogel | Card Cantine in homepage | Botti di legno allineate in una cantina |
-| `settori/frantoi` | da generare | — | Card Frantoi (oggi foto locale di ripiego) | Olive e olio d'oliva |
-| `azienda/territorio` | da riselezionare | — | Azienda, "Dove lavoriamo" | Borgo collinare umbro con case in pietra |
+| `servizi/presence` | `wOkEwfChQqM` | Zoshua Colah | Digital Presence, sezione mercati e indice | Banco di accoglienza di una struttura ricettiva, con lampade e quadri alle pareti |
+| `servizi/commerce` | `pdFLNMuMuzk` | Wander Fleur | Digital Commerce, sezione mercati e indice | Imballaggi con pluriball dentro scatole di cartone |
+| `servizi/automation` | `fuiexaKxlhk` | Tool., Inc | Digital Automation, sezione mercati e indice | Persona al lavoro su un computer portatile, a una scrivania |
+| `settori/hospitality` | `qegPEtazWCY` | Yanapi Senaud | Card Hospitality in homepage, anteprime Hospitality dei servizi | Gazebo nel giardino di una villa in Piemonte |
+| `settori/cantine` | `PUDQGDlM_V8` | Daniel Vogel | Card Cantine in homepage | Fondi di botti allineate in una cantina sotterranea |
+| `settori/frantoi` | `RD0iQoLCkPo` | John Cameron | Card Frantoi in homepage | Olive verdi raccolte, pronte per la molitura |
+| `azienda/territorio` | `zoJgZydvpRA` | Moira Nazzari | Azienda, "Dove lavoriamo" (query "perugia italy") | Veduta di un centro storico collinare con una torre dell'orologio |
 
-Gli alt delle voci nuove si verificano sulla `unsplashDescription` dopo il lancio.
+Tutti gli alt sono stati verificati sulla `unsplashDescription` del manifest e corretti dove non corrispondevano (automation, commerce, cantine, frantoi, hospitality, territorio). Tutte le foto hanno l'ID fissato.
 
 ### File locali
 - Eliminato `public/images/agria/settori/hospitality.jpg` (sostituito dalla pipeline).
 - I sette PNG in `public/images/sectors/` restano: li usano le pagine legacy settori, geo, contatti e prenota-call.
-- Quattro file non tracciati solo nella copia locale, non referenziati da alcuna pagina, da eliminare: `public/images/agria/settori/agriturismo.jpg`, `public/images/sectors/aleksandrs-karevs-_LCnNnM0cyc-unsplash.jpg`, `public/images/sectors/frames-for-your-heart-zSG-kd-L6vw-unsplash.jpg`, `public/images/servizi/presence.jpg`.
+- Eliminati dalla copia locale quattro file non tracciati e non referenziati: `public/images/agria/settori/agriturismo.jpg`, `public/images/sectors/aleksandrs-karevs-_LCnNnM0cyc-unsplash.jpg`, `public/images/sectors/frames-for-your-heart-zSG-kd-L6vw-unsplash.jpg`, `public/images/servizi/presence.jpg`.
 
 ---
 

@@ -16,7 +16,7 @@
       "query": "wine bottles shipping box",
       "orientation": "landscape",
       "destination": "servizi",
-      "alt": "Bottiglie avvolte nel pluriball dentro scatole di spedizione",
+      "alt": "Imballaggi con pluriball dentro scatole di cartone",
       "exclude": [
         "gthSas4oYC0"
       ],
@@ -27,7 +27,7 @@
       "query": "farmer using tablet at desk",
       "orientation": "landscape",
       "destination": "servizi",
-      "alt": "Persona al lavoro su un tablet con penna, a una scrivania",
+      "alt": "Persona al lavoro su un computer portatile, a una scrivania",
       "exclude": [
         "TOO1RFQEnQk"
       ],
@@ -37,7 +37,7 @@
       "key": "azienda/territorio",
       "orientation": "landscape",
       "destination": "azienda",
-      "alt": "Borgo collinare umbro con case in pietra",
+      "alt": "Veduta di un centro storico collinare con una torre dell'orologio",
       "exclude": [
         "w1rubslCFbM"
       ],
@@ -56,14 +56,15 @@
         "medieval",
         "buildings",
         "houses"
-      ]
+      ],
+      "id": "zoJgZydvpRA"
     },
     {
       "key": "settori/hospitality",
       "query": "italian farmhouse guest room",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Gazebo in giardino davanti a un edificio bianco",
+      "alt": "Gazebo nel giardino di una villa in Piemonte",
       "exclude": [],
       "id": "qegPEtazWCY"
     },
@@ -72,7 +73,7 @@
       "query": "wine cellar oak barrels",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Botti di legno allineate in una cantina",
+      "alt": "Fondi di botti allineate in una cantina sotterranea",
       "exclude": [],
       "id": "PUDQGDlM_V8"
     },
@@ -80,7 +81,7 @@
       "key": "settori/frantoi",
       "orientation": "landscape",
       "destination": "settori",
-      "alt": "Olive e olio d'oliva",
+      "alt": "Olive verdi raccolte, pronte per la molitura",
       "exclude": [],
       "queries": [
         "olive harvest",
@@ -89,7 +90,8 @@
       ],
       "require": [
         "olive"
-      ]
+      ],
+      "id": "RD0iQoLCkPo"
     }
   ]
 }

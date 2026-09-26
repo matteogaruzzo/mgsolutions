@@ -4,7 +4,7 @@
 //  Ordine delle sezioni: app/(site)/page.jsx.
 // =====================================================================
 
-import { agriaImage, agriaImageOr } from '@/lib/agria-images';
+import { agriaImage } from '@/lib/agria-images';
 
 // 1. Hero
 export const hero = {
@@ -96,7 +96,6 @@ export const composer = {
 
 // 6. Settori
 // Foto dalla pipeline Unsplash (settori/* in scripts/images.config.json).
-// Frantoi: foto locale di ripiego, già accreditata, finché la voce non è nel manifest.
 export const sectors = {
   eyebrow: 'Settori',
   title: 'Conosciamo tre mestieri, non tutti.',
@@ -120,10 +119,7 @@ export const sectors = {
       key: 'frantoi',
       title: 'Frantoi',
       href: '/settori/frantoi',
-      image: agriaImageOr('settori/frantoi', {
-        src: '/images/software/sector-frantoi-hero.jpg',
-        alt: "Olio appena estratto che scende da un beccuccio d'acciaio",
-      }),
+      image: agriaImage('settori/frantoi'),
       text: 'Frantoi e aziende olivicole. Ordini tra telefono, WhatsApp ed email, tutti da riscrivere. Listini diversi per privati, ristorazione e B2B, gestiti a memoria.',
     },
   ],
