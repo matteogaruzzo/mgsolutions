@@ -2,7 +2,7 @@
 
 **Data:** 2026-09-26
 **Branch:** `agria/redesign`
-**Stato:** fasi A, B e C completate. Invio reale verso HubSpot da verificare in locale.
+**Stato:** fasi A, B e C completate. Invio reale verso HubSpot verificato in locale.
 **Natura del lavoro:** pagina `/contatti` con modulo nativo a passi, pagina `/contatti/prenota`, integrazione HubSpot lato server con creazione della trattativa, assistente con risposte curate su tutte le pagine. Nessun widget, script, stile o iframe del modulo HubSpot nel frontend; nessun token nel frontend; `main` non è stato toccato.
 
 ---
@@ -156,7 +156,7 @@ La documentazione ufficiale non è raggiungibile da questo ambiente: le verifich
 | Senza JavaScript | Tre passi leggibili, avviso, domande apribili, tappe tutte accese |
 | Scorrimento orizzontale | Nessuno a 375, 768 e 1440 px su `/contatti` e `/contatti/prenota` |
 | Console | Nessun errore |
-| Invio reale verso HubSpot | Da eseguire in locale: questo ambiente non raggiunge HubSpot né Google |
+| Invio reale verso HubSpot | Riuscito il 26/09/2026 in locale (`npm run dev`, localhost:3001): richiesta ricevuta sul sito, notifica arrivata in HubSpot |
 
 ### Contrasti
 | Elemento | Rapporto |
