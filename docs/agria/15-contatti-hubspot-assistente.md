@@ -2,8 +2,8 @@
 
 **Data:** 2026-09-26
 **Branch:** `agria/redesign`
-**Stato:** fasi A e B completate; fase C (assistente) da fare.
-**Natura del lavoro:** pagina `/contatti` con modulo nativo a passi, pagina `/contatti/prenota`, integrazione HubSpot lato server con creazione della trattativa. Nessun widget, script, stile o iframe del modulo HubSpot nel frontend; nessun token nel frontend; `main` non è stato toccato.
+**Stato:** fasi A, B e C completate. Invio reale verso HubSpot da verificare in locale.
+**Natura del lavoro:** pagina `/contatti` con modulo nativo a passi, pagina `/contatti/prenota`, integrazione HubSpot lato server con creazione della trattativa, assistente con risposte curate su tutte le pagine. Nessun widget, script, stile o iframe del modulo HubSpot nel frontend; nessun token nel frontend; `main` non è stato toccato.
 
 ---
 
@@ -12,7 +12,8 @@
 | Commit | Contenuto |
 |---|---|
 | `1713cb7 feat(agria): pagina contatti con form nativo a passi` | Fase A |
-| `feat(agria): integrazione HubSpot lato server con creazione trattativa` | Fase B, con questo report |
+| `93bb99e feat(agria): integrazione HubSpot lato server con creazione trattativa` | Fase B, con la prima versione di questo report |
+| `feat(agria): assistente con risposte curate e passaggio a WhatsApp` | Fase C e report completo |
 
 ---
 
@@ -180,5 +181,65 @@ L'informativa privacy e la cookie policy dovranno coprire: invio dei dati del mo
 
 ---
 
-## 9. Fase C — assistente
-Da completare.
+## 9. Assistente
+
+File: `components/agria/assistant/Assistant.jsx` (interfaccia), `lib/assistant/match.js` (scelta della risposta), `content/agria/assistente.js` (**tutti i testi**). Montato nel punto di innesto `ConciergeSlot` del layout: presente su tutte le pagine.
+
+### Funzionamento
+- **Nessun modello AI e nessun servizio esterno.** La domanda viene normalizzata (minuscole, senza accenti né punteggiatura) e confrontata con le parole chiave di ogni risposta; vince quella con più corrispondenze, e le frasi lunghe pesano di più.
+- **Nessuna corrispondenza** → *Su questo non ho una risposta preparata, e preferisco non improvvisare.* e le due vie: **Scrivi su WhatsApp** (`+39 366 344 5417`, messaggio precompilato) e **Apri il form** (`/contatti`).
+- **Richiesta esplicita di una persona** (parlare con qualcuno, operatore, chiamare, WhatsApp, videocall…) → stesse due vie.
+- **Dati personali** (email o numero di telefono nel messaggio) → il messaggio non viene mostrato né conservato; l'assistente invita a usare il modulo.
+- **Dichiarato automatico:** sotto il nome, *Assistente automatico, non un operatore. Risposte preparate dal team.*, e nel primo messaggio.
+- **Nessuna registrazione:** la conversazione vive solo in memoria; nel browser si salva soltanto lo stato aperto/chiuso (`sessionStorage`).
+
+### Risposte curate
+| id | Suggerimento | Argomento |
+|---|---|---|
+| `chi-siete` | Chi siete? | technology company a Perugia, sviluppo interno |
+| `cosa-fate` | **Cosa fate esattamente?** | le tre aree, con link |
+| `settori` | **Lavorate col mio settore?** | hospitality, cantine, frantoi; altri settori valutati nella prima analisi |
+| `come-si-inizia` | Come si inizia? | prima analisi, ricontatto, proposta; senza costi né impegni |
+| `tempi` | **Quanto tempo serve?** | nessun tempo standard: si definisce nella proposta |
+| `costi` | Quanto costa? | nessun listino: investimento nella proposta |
+| `cosa-non-fate` | Cosa non fate? | lavori spot, gestionali non mantenuti, subappalti, pacchetti, social, grafica per la stampa |
+| `ai` | Usate l'intelligenza artificiale? | metodo di lavoro, applicazioni misurabili |
+| `dove` | Dove siete? | Via Ponte Vecchio, 06135 Perugia; tutta Italia; versioni in inglese |
+| `dati` | Come trattate i dati? | chat senza registrazione, dati del modulo solo per la risposta, proprietà del cliente |
+| `persona` | **Voglio parlare con qualcuno** | passaggio a WhatsApp e al modulo |
+| `saluto`, `grazie` | — | cortesia |
+
+In grassetto i quattro suggerimenti iniziali (`assistant.suggestions`); un suggerimento già usato sparisce.
+
+### Come modificarle
+In `content/agria/assistente.js`: cambiare `text` per il contenuto, `keywords` per le domande che la attivano (minuscole, senza accenti; un frammento come `prenotazion` copre prenotazione e prenotazioni; spazi ai bordi, come `' social '`, per una parola isolata), `links` per i rimandi, `handoff: true` per proporre WhatsApp e modulo. Una nuova risposta è un nuovo oggetto nell'elenco; un nuovo suggerimento iniziale è il suo `id` in `assistant.suggestions`. Nessun altro file da toccare.
+
+### Comportamento e accessibilità
+- Pulsante a pillola in basso a destra (*Domande?* da 768 px, solo icona da 48 px su mobile) con etichetta accessibile *Apri l'assistente* e `aria-expanded`.
+- Riquadro `role="dialog"` non modale con titolo; focus sul campo all'apertura, di nuovo sul campo dopo ogni domanda; **Esc** chiude e riporta il focus sul pulsante; risposte annunciate (`aria-live`); focus visibile su ogni controllo.
+- Chiuso di default; lo stato aperto o chiuso resta durante la navigazione e dopo un ricaricamento; seguire un link dell'assistente lo chiude, per lasciare libera la pagina.
+- Non compare mentre il banner dei cookie è aperto e si nasconde se viene riaperto.
+- Mobile: chiuso occupa 48×48 px; aperto, 343 px di larghezza e al massimo il 70% dell'altezza. Lo slot passa da `z-index` 40 a 35, così il menu mobile (40) lo copre invece di esserne coperto.
+- Senza JavaScript non compare; con movimento ridotto nessuna animazione.
+
+### Validazione dell'assistente
+| Verifica | Esito |
+|---|---|
+| Suggerimenti, domande libere, risposta mancante, dati personali | Corretti (20 domande di prova, tutte con la risposta attesa o con il passaggio a una persona) |
+| Dati personali salvati nel browser | Nessuno |
+| Tastiera | Apertura con Invio, focus sul campo, Esc chiude e riporta il focus |
+| Stato tra le pagine | Aperto ricordato, chiuso ricordato |
+| Banner cookie | Assistente nascosto finché il banner è aperto |
+| Menu mobile | Copre l'assistente |
+| Scorrimento orizzontale | Nessuno a 375, 768 e 1440 px |
+| Console | Nessun errore |
+
+### Contrasti
+| Elemento | Rapporto |
+|---|---|
+| Grafite su bianco (messaggi dell'assistente) | 18,9:1 |
+| Bianco su grafite (messaggi del visitatore) | 18,9:1 |
+| Bianco 72% su ink (avviso "assistente automatico") | 10,2:1 |
+| Bianco su green-dark (WhatsApp, invio) | 6,01:1 |
+| Green-dark su bianco (link) | 6,01:1 |
+| Segnaposto grigio su bianco | 5,05:1 |
