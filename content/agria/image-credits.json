@@ -3,22 +3,23 @@
     "azienda/territorio": {
       "key": "azienda/territorio",
       "destination": "azienda",
-      "id": "w1rubslCFbM",
-      "src": "https://images.unsplash.com/photo-1783410839168-a8f71122fd71?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI4NjA3fA&ixlib=rb-4.1.0",
-      "width": 4500,
-      "height": 3000,
-      "color": "#f3f3f3",
-      "alt": "Casolari su una collina erbosa, con alberi in fioritura",
+      "id": "zoJgZydvpRA",
+      "src": "https://images.unsplash.com/photo-1708674659582-0bdfcfd6380c?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8Mnx8cGVydWdpYSUyMGl0YWx5fGVufDF8MHx8fDE3OTA0Mjk3MjF8MA&ixlib=rb-4.1.0",
+      "width": 6960,
+      "height": 4640,
+      "color": "#d9d9c0",
+      "alt": "Borgo collinare umbro con case in pietra",
       "quality": 80,
-      "bytes": 417058,
+      "bytes": 329732,
       "photographer": {
-        "name": "Filippo Molinari",
-        "username": "fmolinari00",
-        "profileUrl": "https://unsplash.com/@fmolinari00?utm_source=agria_website&utm_medium=referral"
+        "name": "Moira Nazzari",
+        "username": "moiranazzari",
+        "profileUrl": "https://unsplash.com/@moiranazzari?utm_source=agria_website&utm_medium=referral"
       },
-      "photoUrl": "https://unsplash.com/photos/rural-houses-and-trees-on-green-hills-w1rubslCFbM?utm_source=agria_website&utm_medium=referral",
+      "photoUrl": "https://unsplash.com/photos/a-view-of-a-city-with-a-clock-tower-zoJgZydvpRA?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
-      "query": "italian countryside rolling hills",
+      "query": "perugia italy",
+      "unsplashDescription": "a view of a city with a clock tower",
       "date": "2026-09-26"
     },
     "servizi/automation": {
@@ -40,6 +41,7 @@
       "photoUrl": "https://unsplash.com/photos/person-in-brown-and-black-plaid-long-sleeve-shirt-using-black-laptop-computer-fuiexaKxlhk?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "farmer using tablet at desk",
+      "unsplashDescription": "person in brown and black plaid long sleeve shirt using black laptop computer · Our lead industrial designer creates concept art after a group brainstorm. · human · desk · brown · industrial design · computer · furniture · table · usa · keyboard · computer keyboard · electronics · monitor · screen · hardware · display · computer hardware · lcd screen · tablet computer",
       "date": "2026-09-26"
     },
     "servizi/commerce": {
@@ -61,6 +63,7 @@
       "photoUrl": "https://unsplash.com/photos/white-and-gray-floral-window-curtain-pdFLNMuMuzk?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "wine bottles shipping box",
+      "unsplashDescription": "white and gray floral window curtain · product · grey · box · packaging · wrap · pack · corrugated box · bubblewrap · philippines",
       "date": "2026-09-26"
     },
     "servizi/presence": {
@@ -82,13 +85,14 @@
       "photoUrl": "https://unsplash.com/photos/a-woman-is-standing-at-the-front-desk-of-a-restaurant-wOkEwfChQqM?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "rustic hotel reception natural light",
+      "unsplashDescription": "A woman is standing at the front desk of a restaurant · Hotel Reception at The Inn at Death Valley, California 190, Death Valley, CA, USA. · vintage · professional · usa · welcome · vacation · california · hospitality · classic · concierge · lobby · hotel interior · check in · wooden · death valley · motel · stylish · ent · inn · warm welcome · hotel interior design",
       "date": "2026-09-26"
     },
     "settori/cantine": {
       "key": "settori/cantine",
       "destination": "settori",
       "id": "PUDQGDlM_V8",
-      "src": "https://images.unsplash.com/photo-1529060532150-a0c935a6d6e5?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8d2luZSUyMGNlbGxhciUyMG9hayUyMGJhcnJlbHN8ZW58MXwwfHx8MTc5MDQyODYwOXww&ixlib=rb-4.1.0",
+      "src": "https://images.unsplash.com/photo-1529060532150-a0c935a6d6e5?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI5NzIyfA&ixlib=rb-4.1.0",
       "width": 5472,
       "height": 3648,
       "color": "#260c0c",
@@ -103,13 +107,36 @@
       "photoUrl": "https://unsplash.com/photos/round-photo-frame-lot-on-wall-PUDQGDlM_V8?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "wine cellar oak barrels",
+      "unsplashDescription": "round photo frame lot on wall · Fantastic Workplace · grey · wine · winery · underground · barrel · barrels · winemaker · switzerland",
+      "date": "2026-09-26"
+    },
+    "settori/frantoi": {
+      "key": "settori/frantoi",
+      "destination": "settori",
+      "id": "RD0iQoLCkPo",
+      "src": "https://images.unsplash.com/photo-1698775942613-3e9fc114b2a1?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8b2xpdmUlMjBoYXJ2ZXN0fGVufDF8MHx8fDE3OTA0Mjk3MjJ8MA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#40590c",
+      "alt": "Olive e olio d'oliva",
+      "quality": 80,
+      "bytes": 377220,
+      "photographer": {
+        "name": "John Cameron",
+        "username": "john_cameron",
+        "profileUrl": "https://unsplash.com/@john_cameron?utm_source=agria_website&utm_medium=referral"
+      },
+      "photoUrl": "https://unsplash.com/photos/a-pile-of-green-olives-and-olives-next-to-each-other-RD0iQoLCkPo?utm_source=agria_website&utm_medium=referral",
+      "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
+      "query": "olive harvest",
+      "unsplashDescription": "a pile of green olives and olives next to each other · Olives ready for milling into oil, October ‘23, Malaga",
       "date": "2026-09-26"
     },
     "settori/hospitality": {
       "key": "settori/hospitality",
       "destination": "settori",
       "id": "qegPEtazWCY",
-      "src": "https://images.unsplash.com/photo-1533554030380-20991a0f9c9e?ixid=M3wxMDgzMzUwfDB8MXxzZWFyY2h8MXx8aXRhbGlhbiUyMGZhcm1ob3VzZSUyMGd1ZXN0JTIwcm9vbXxlbnwxfDB8fHwxNzkwNDI4NjA3fDA&ixlib=rb-4.1.0",
+      "src": "https://images.unsplash.com/photo-1533554030380-20991a0f9c9e?ixid=M3wxMDgzMzUwfDB8MXxhbGx8fHx8fHx8fHwxNzkwNDI5NzIxfA&ixlib=rb-4.1.0",
       "width": 5818,
       "height": 3879,
       "color": "#d9d9f3",
@@ -124,6 +151,7 @@
       "photoUrl": "https://unsplash.com/photos/gazebo-outside-white-painted-building-qegPEtazWCY?utm_source=agria_website&utm_medium=referral",
       "unsplashUrl": "https://unsplash.com/?utm_source=agria_website&utm_medium=referral",
       "query": "italian farmhouse guest room",
+      "unsplashDescription": "gazebo outside white painted building · My girlfriend and I had a romantic trip to Piedmont in Italy – this was our favorite Hotel! · wallpaper · building · house · architecture · wedding · italy · design · brown · villa · hill · view · moody · dreamy · yard · italian · piedmont · piemonte · vacay",
       "date": "2026-09-26"
     }
   },
