@@ -14,6 +14,7 @@ const CLOSING_TEXT =
   'Una prima analisi serve a capire se ha senso lavorare insieme. Rispondiamo con una valutazione concreta, non con un preventivo generico.';
 
 // "Camere · disponibilità sincronizzata" → { title: 'Camere', text: 'disponibilità sincronizzata' }
+// build.items[].icon: icona della voce (usata anche nei blocchi dell'indice /servizi)
 // build.items[].image: fotografia dell'anteprima (sezione 3), perché la pagina
 // abbia una foto reale ogni tre o quattro sezioni; foto già nel repository e
 // accreditate, in attesa delle foto dedicate (vedi report 13).
@@ -64,6 +65,7 @@ export const serviceAreas = {
       title: 'Quattro impianti, uno standard unico.',
       items: [
         {
+          icon: 'calendar',
           title: 'Struttura ricettiva',
           image: { src: '/images/agria/settori/hospitality.jpg', alt: 'Camera con letto matrimoniale e lampade accese sui comodini' },
           text: 'Disponibilità reali, esperienze e prenotazione diretta al centro del percorso.',
@@ -74,12 +76,14 @@ export const serviceAreas = {
           ),
         },
         {
+          icon: 'tag',
           title: 'Cantina',
           image: { src: '/images/software/sector-vitivinicolo-hero.jpg', alt: 'Botti di legno allineate in una cantina con volta in mattoni' },
           text: "Etichette, territorio e visite collegati alla vendita diretta e all'export.",
           tiles: tiles(['Etichette', 'annate e formati'], ['Visite', 'calendario e capienza'], ['Export', 'schede in inglese']),
         },
         {
+          icon: 'sprout',
           title: 'Frantoio',
           image: { src: '/images/software/sector-frantoi-hero.jpg', alt: "Olio appena estratto che scende da un beccuccio d'acciaio" },
           text: 'Prodotto, campagna e listini distinti tra privati e professionali.',
@@ -90,6 +94,7 @@ export const serviceAreas = {
           ),
         },
         {
+          icon: 'globe',
           title: 'Presenza internazionale',
           image: { src: '/images/servizi/seo-geo-strategy-hero.jpg', alt: 'Strada bianca tra cipressi e vigneti al tramonto' },
           text: "Italiano e inglese in un'unica architettura, con contenuti adattati al mercato.",
@@ -306,12 +311,14 @@ export const serviceAreas = {
       title: 'Quattro impianti di vendita.',
       items: [
         {
+          icon: 'cart',
           title: 'E-commerce di prodotto',
           image: { src: '/images/software/sector-frantoi-hero.jpg', alt: "Olio appena estratto che scende da un beccuccio d'acciaio" },
           text: 'Catalogo, formati e disponibilità costruiti su come vendete davvero.',
           tiles: tiles(['Catalogo', 'formati e confezioni'], ['Pagamenti', 'metodi e sicurezza'], ['Spedizioni', 'corrieri e regole']),
         },
         {
+          icon: 'calendar',
           title: 'Prenotazioni ed esperienze',
           image: { src: '/images/agria/settori/hospitality.jpg', alt: 'Camera con letto matrimoniale e lampade accese sui comodini' },
           text: 'Camere, degustazioni e visite prenotabili e pagabili dal vostro sito.',
@@ -322,12 +329,14 @@ export const serviceAreas = {
           ),
         },
         {
+          icon: 'list',
           title: 'Listini professionali',
           image: { src: '/images/software/sector-vitivinicolo-hero.jpg', alt: 'Botti di legno allineate in una cantina con volta in mattoni' },
           text: 'Privati, ristorazione e rivenditori nello stesso sistema, con condizioni separate.',
           tiles: tiles(['Prezzi', 'per tipo di cliente'], ['Ordini minimi', 'regole per listino'], ['Accesso riservato', 'area B2B']),
         },
         {
+          icon: 'repeat',
           title: 'Riacquisto e fidelizzazione',
           image: { src: '/images/blog/ecommerce-vino-margini-vendita-diretta.jpg', alt: 'Scatole di cartone aperte, pronte per la spedizione' },
           text: 'Chi ha comprato una volta viene richiamato con un motivo, non con uno sconto.',
@@ -518,6 +527,7 @@ export const serviceAreas = {
       title: 'Quattro automazioni che cambiano la settimana.',
       items: [
         {
+          icon: 'inbox',
           title: 'Richieste in un unico flusso',
           image: { src: '/images/blog/pos-cassa-cantina-vendita-degustazione.jpg', alt: 'Mani su una cassa con schermo tattile e uno scontrino' },
           text: 'Moduli, email, telefono e portali confluiscono in un solo ingresso tracciato.',
@@ -528,18 +538,21 @@ export const serviceAreas = {
           ),
         },
         {
+          icon: 'link',
           title: 'Dati sincronizzati',
           image: { src: '/images/blog/pos-cassa-cantina-vendita-degustazione.jpg', alt: 'Mani su una cassa con schermo tattile e uno scontrino' },
           text: 'Anagrafiche, ordini e disponibilità allineati tra gli strumenti che usate.',
           tiles: tiles(['Anagrafica', 'una sola versione'], ['Ordini', 'stato aggiornato'], ['Disponibilità', 'sempre coerente']),
         },
         {
+          icon: 'file-text',
           title: 'Documenti trattati in automatico',
           image: { src: '/images/blog/bandi-incentivi-digitalizzazione-agroalimentare.jpg', alt: 'Persona che legge documenti stampati a una scrivania' },
           text: 'Fatture, ordini e allegati classificati ed estratti senza inserimento manuale.',
           tiles: tiles(['Classificazione', 'per tipo'], ['Estrazione', 'dati chiave'], ['Archivio', 'ricercabile']),
         },
         {
+          icon: 'chart',
           title: 'Report ricorrenti',
           image: { src: '/images/blog/bandi-incentivi-digitalizzazione-agroalimentare.jpg', alt: 'Persona che legge documenti stampati a una scrivania' },
           text: 'Lo stesso quadro ogni settimana, senza costruirlo.',

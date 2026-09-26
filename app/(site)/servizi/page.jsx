@@ -1,12 +1,14 @@
 import PageHero from '@/components/agria/sections/PageHero';
-import AreaCards from '@/components/agria/service/AreaCards';
-import MethodSection from '@/components/agria/home/MethodSection';
-import ClosingCta from '@/components/agria/home/ClosingCta';
-import { serviceClosing, servicesIndex } from '@/content/agria/servizi';
+import AreaBlocks from '@/components/agria/service/AreaBlocks';
+import GoalSelector from '@/components/agria/service/GoalSelector';
+import IndexSteps from '@/components/agria/service/IndexSteps';
+import FinalCta from '@/components/agria/service/FinalCta';
+import { areaSummary, servicesIndex } from '@/content/agria/servizi';
 import { agriaPageMetadata, breadcrumbSchema, webPageSchema } from '@/lib/seo';
 
-// Indice dei servizi AGRIA (Prompt 12): sostituisce l'indice legacy allo stesso
-// indirizzo. Le pagine legacy /servizi/[slug] restano (migration map: Prompt 14).
+// Indice dei servizi AGRIA (Prompt 13): struttura propria, non il template delle
+// pagine area. Fondi: scuro · bianco · off-white · bianco · off-white · bianco · scuro.
+// Le pagine legacy /servizi/[slug] restano (migration map: Prompt 14).
 const { meta } = servicesIndex;
 
 export const metadata = agriaPageMetadata(meta);
@@ -24,15 +26,34 @@ export default function ServiziPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema(BREADCRUMB)) }}
       />
+      {/* 1. Hero · scuro */}
       <PageHero
         eyebrow={servicesIndex.eyebrow}
         title={servicesIndex.title}
         lead={servicesIndex.lead}
+        cta={servicesIndex.cta}
         titleId="servizi-title"
       />
-      <AreaCards />
-      <MethodSection />
-      <ClosingCta title={serviceClosing.title} text={null} cta={serviceClosing.cta} />
+      {/* 2. Tre aree · bianco, off-white, bianco */}
+      <AreaBlocks areas={servicesIndex.areas} linkLabel={servicesIndex.linkLabel} />
+      {/* 3. Da dove si parte · off-white */}
+      <GoalSelector
+        id="servizi-obiettivo"
+        title={servicesIndex.goals.title}
+        goals={servicesIndex.goals.items}
+        areas={areaSummary}
+        linkLabel={servicesIndex.linkLabel}
+      />
+      {/* 4. Come lavoriamo · bianco */}
+      <IndexSteps id="servizi-metodo" {...servicesIndex.method} />
+      {/* 5. CTA finale · scuro */}
+      <FinalCta
+        id="servizi-cta-titolo"
+        sectionId="servizi-cta-finale"
+        title={servicesIndex.closing.title}
+        text={servicesIndex.closing.text}
+        primary={servicesIndex.closing.cta}
+      />
     </>
   );
 }

@@ -4,7 +4,7 @@ import { Button, Container, Eyebrow, Heading, Reveal, Section, Text } from '@/co
 const LINK =
   'rounded font-agria-sans text-agria-sm text-agria-on-dark-muted underline-offset-4 transition-colors hover:text-agria-on-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-agria-green-bright focus-visible:ring-offset-2 focus-visible:ring-offset-agria-ink';
 
-// CTA finale su fondo scuro con due CTA e, sotto, i rimandi interni:
+// CTA finale su fondo scuro con una o due CTA e, sotto, gli eventuali rimandi interni:
 // le altre aree con l'indice, e gli articoli del blog collegati.
 // links: [{ title, items: [{ label, href }] }]
 export default function FinalCta({ id, sectionId, title, text, primary, secondary, links = [] }) {
@@ -27,9 +27,11 @@ export default function FinalCta({ id, sectionId, title, text, primary, secondar
             <Button as={Link} href={primary.href} variant="bright">
               {primary.label}
             </Button>
-            <Button as={Link} href={secondary.href} variant="line">
-              {secondary.label}
-            </Button>
+            {secondary && (
+              <Button as={Link} href={secondary.href} variant="line">
+                {secondary.label}
+              </Button>
+            )}
           </div>
         </Reveal>
         {links.length > 0 && (

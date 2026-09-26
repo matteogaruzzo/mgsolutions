@@ -322,6 +322,54 @@
   }
 }
 
+/* ---------- Indice: selettore "Da dove si parte" ---------- */
+.goal {
+  border-color: rgb(var(--agria-border));
+  background: rgb(var(--agria-white));
+  color: rgb(var(--agria-graphite));
+}
+
+.goal:hover {
+  border-color: rgb(var(--agria-graphite));
+}
+
+.goal[aria-selected='true'] {
+  border-color: rgb(var(--agria-graphite));
+  background: rgb(var(--agria-graphite));
+  color: rgb(var(--agria-white));
+}
+
+/* obiettivo nella risposta: per i lettori di schermo con le pill, visibile senza JavaScript */
+.goalLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (scripting: none) {
+  .goalsRoot [role='tablist'] {
+    display: none;
+  }
+  .goalsRoot [role='tabpanel'][hidden] {
+    display: block;
+  }
+  .goalLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    margin-bottom: 12px;
+    font-family: var(--font-agria-sans), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(var(--agria-graphite));
+  }
+}
+
 /* ---------- CTA fissa ---------- */
 .sticky {
   position: fixed;
@@ -376,6 +424,15 @@
     transition:
       background-color 0.25s ease,
       color 0.25s ease;
+  }
+  .goal {
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+  .goalPanel:not([hidden]) {
+    animation: preview-in 0.4s ease both;
   }
   .sticky {
     transition:
